@@ -1,6 +1,7 @@
 import uvicorn
 from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
@@ -27,13 +28,26 @@ app = FastAPI(
     title=settings.PROJECT_NAME, version=settings.VERSION, debug=settings.DEBUG
 )
 
+# daftar origin yg diizinkan
+origins = [*]
+
+
 # tambahin limiter ke state
 app.state.limiter = limiter
-# register handler
 app.add_exception_handler(RateLimitExceeded, rate_limit_exceeded_handler)
+
+# error handler
 app.add_middleware(ErrorHandlerMiddleware)
 app.add_middleware(SlowAPIMiddleware)
 
+#CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,          # domain yang diizinkan akses
+    allow_credentials=True,         # kalau perlu cookie/authorization header
+    allow_methods=["*"],            # bolehkan semua HTTP method (GET, POST, dll)
+    allow_headers=["*"],
+)
 app.include_router(user_route.router)
 
 
