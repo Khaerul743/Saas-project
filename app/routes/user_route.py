@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from app.configs.database import get_db
 from app.configs.limiter import limiter
 from app.controllers import user_controller
+from app.dependencies.auth import get_current_user
 from app.models.user_model import UserCreate, UserOut
 from app.utils.response import success_response
 
@@ -22,5 +23,5 @@ def create_user(request: Request, user: UserCreate, db: Session = Depends(get_db
 
 @router.get("/", status_code=200)
 @limiter.limit("100/minute")
-def get_user(request: Request):
-    return {"response": "oke"}
+def get_user(request: Request, current_user: dict = Depends(get_current_user)):
+    return {"response": current_user}

@@ -29,7 +29,7 @@ app = FastAPI(
 )
 
 # daftar origin yg diizinkan
-origins = [*]
+origins = ["*"]
 
 
 # tambahin limiter ke state
@@ -40,12 +40,12 @@ app.add_exception_handler(RateLimitExceeded, rate_limit_exceeded_handler)
 app.add_middleware(ErrorHandlerMiddleware)
 app.add_middleware(SlowAPIMiddleware)
 
-#CORS
+# CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,          # domain yang diizinkan akses
-    allow_credentials=True,         # kalau perlu cookie/authorization header
-    allow_methods=["*"],            # bolehkan semua HTTP method (GET, POST, dll)
+    allow_origins=origins,  # domain yang diizinkan akses
+    allow_credentials=True,  # kalau perlu cookie/authorization header
+    allow_methods=["*"],  # bolehkan semua HTTP method (GET, POST, dll)
     allow_headers=["*"],
 )
 app.include_router(user_route.router)

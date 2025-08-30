@@ -9,5 +9,5 @@ from slowapi.util import get_remote_address
 # Definisikan limiter di sini
 limiter = Limiter(
     key_func=get_remote_address,
-    default_limits=["3/minute"],  # global default, bisa override per endpoint
+    default_limits=["100/minute"],  # global default, bisa override per endpoint
 )

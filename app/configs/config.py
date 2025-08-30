@@ -1,9 +1,4 @@
-import os
-
-from dotenv import load_dotenv
 from pydantic_settings import BaseSettings
-
-load_dotenv()
 
 
 class Settings(BaseSettings):
@@ -11,11 +6,15 @@ class Settings(BaseSettings):
     VERSION: str = "1.0.0"
     DEBUG: bool = True
 
-    DB_USER: str = os.environ.get("DB_USER")
-    DB_PASSWORD: str = os.environ.get("DB_PASSWORD")
-    DB_HOST: str = os.environ.get("DB_HOST")
-    DB_PORT: int = os.environ.get("DB_PORT")
-    DB_NAME: str = os.environ.get("DB_NAME")
+    DB_USER: str
+    DB_PASSWORD: str
+    DB_HOST: str
+    DB_PORT: int
+    DB_NAME: str
+
+    SECRET_KEY: str
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
 
     @property
     def DATABASE_URL(self) -> str:
@@ -24,5 +23,12 @@ class Settings(BaseSettings):
             f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
         )
 
+    class Config:
+        env_file = ".env"
+        env_file_encoding = "utf-8"
+
 
 settings = Settings()
+
+if __name__ == "__main__":
+    print(settings.DATABASE_URL)
