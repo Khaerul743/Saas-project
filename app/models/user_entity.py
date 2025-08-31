@@ -16,7 +16,7 @@ class User(Base):
     plan = sa.Column(
         sa.Enum("free", "normal", "pro"), nullable=False, server_default="free"
     )
-    company_name = sa.Column(sa.String(50), nullable=False)
+    company_name = sa.Column(sa.String(50), nullable=True)
     job_role = sa.Column(
         sa.Enum("AI engineer", "sales", "other"), nullable=False, server_default="other"
     )

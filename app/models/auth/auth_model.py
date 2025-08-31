@@ -15,3 +15,8 @@ class AuthOut(BaseModel):
     status: str
     message: str
     data: Dict[str, Any]
+
+
+class RegisterModel(AuthBase):
+    username: str
+    password: str
