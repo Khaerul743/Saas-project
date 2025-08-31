@@ -44,3 +44,8 @@ class UserResponseAPI(BaseModel):
     status: str
     message: str
     data: UserOut
+
+
+class UpdateDetail(BaseModel):
+    company_name: str
+    job_role: Literal["AI engineer", "sales", "other"]

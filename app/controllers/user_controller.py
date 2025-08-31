@@ -3,7 +3,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.models.user_entity import User
-from app.models.user_model import UserCreate, UserOut
+from app.models.user_model import UpdateDetail, UserCreate, UserOut
 from app.utils.hash import hash_password
 from app.utils.logger import get_logger
 
@@ -54,3 +54,23 @@ def create_user(db: Session, user: UserCreate) -> UserOut:
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Internal server error. Please try again later.",
         )
+
+
+def updateDetailHandler(db: Session, payload: UpdateDetail, user: dict):
+    get_user = db.query(User).filter(User.id == user.get("id")).first()
+    if not get_user:
+        logger.warning(f"User not found: {user.get('email')}")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
+        )
+    try:
+        get_user.company_name = payload.company_name
+        get_user.job_role = payload.job_role
+
+        db.commit()
+        db.refresh(get_user)
+        logger.info(f"{get_user.email} update detail information is successfully")
+        return get_user
+    except Exception as e:
+        logger.error(f"Unexpected error while update detail information {str(e)}")
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
