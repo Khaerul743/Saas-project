@@ -29,7 +29,7 @@ def create_user(db: Session, user: UserCreate) -> UserOut:
         password=hashed_password,
         plan=user.plan,
         company_name=user.company_name,
-        role=user.role,
+        job_role=user.job_role,
     )
 
     try:

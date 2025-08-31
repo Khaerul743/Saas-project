@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Literal, Optional
+from typing import Dict, Literal, Optional
 
 from pydantic import BaseModel, EmailStr
 
@@ -8,9 +8,9 @@ from pydantic import BaseModel, EmailStr
 class UserBase(BaseModel):
     name: str
     email: EmailStr
-    company_name: Optional[str] = None
+    company_name: str
     plan: Literal["free", "normal", "pro"] = "free"
-    role: Literal["AI engineer", "sales", "other"] = "other"
+    job_role: Literal["AI engineer", "sales", "other"] = "other"
     status: Literal["active", "non-active"] = "active"
 
 
@@ -24,7 +24,7 @@ class UserUpdate(BaseModel):
     name: Optional[str] = None
     company_name: Optional[str] = None
     plan: Optional[Literal["free", "normal", "pro"]] = None
-    role: Optional[Literal["AI engineer", "sales", "other"]] = None
+    job_role: Optional[Literal["AI engineer", "sales", "other"]] = None
     status: Optional[Literal["active", "non-active"]] = None
     password: Optional[str] = None
 
@@ -38,3 +38,9 @@ class UserOut(UserBase):
 
     class Config:
         orm_mode = True  # penting untuk baca dari SQLAlchemy object
+
+
+class UserResponseAPI(BaseModel):
+    status: str
+    message: str
+    data: UserOut

@@ -353,3 +353,88 @@ AttributeError: 'User' object has no attribute 'model_dump'
 2025-08-31 11:30:22,213 | WARNING | main | Validation error: [{'type': 'missing', 'loc': ('body', 'name'), 'msg': 'Field required', 'input': {'email': 'erul@gmail.com', 'password': '12345678'}}]
 2025-08-31 11:39:17,316 | WARNING | app.controllers.auth_controller | Invalid login attempt for email: erul@gmail.com
 2025-08-31 11:39:58,609 | WARNING | app.controllers.auth_controller | Invalid login attempt for email: erul@gmail.com
+2025-08-31 12:02:01,383 | ERROR | app.middlewares.error_handler | Unexpected error: 'UserCreate' object has no attribute 'role'
+Traceback (most recent call last):
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\.venv\Lib\site-packages\fastapi\routing.py", line 215, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\concurrency.py", line 38, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\anyio\to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2476, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 967, in run
+    result = context.run(func, *args)
+  File "D:\Saas_Project\.venv\Lib\site-packages\slowapi\extension.py", line 766, in sync_wrapper
+    response = func(*args, **kwargs)
+  File "D:\Saas_Project\app\routes\user_route.py", line 20, in create_user
+    new_user = user_controller.create_user(db, user)
+  File "D:\Saas_Project\app\controllers\user_controller.py", line 32, in create_user
+    role=user.role,
+         ^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\pydantic\main.py", line 991, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'UserCreate' object has no attribute 'role'
+2025-08-31 12:04:42,384 | ERROR | app.controllers.user_controller | IntegrityError while creating user: (pymysql.err.IntegrityError) (1048, "Column 'company_name' cannot be null")
+[SQL: INSERT INTO users (name, email, password, plan, company_name, job_role, last_login) VALUES (%(name)s, %(email)s, %(password)s, %(plan)s, %(company_name)s, %(job_role)s, %(last_login)s)]
+[parameters: {'name': 'khaerul', 'email': 'erull@gmail.com', 'password': '$2b$12$G1.CwwI7n90RmVBIJijZM.hxsAbsrjBaYucIExKYqWZFK2PELW.Iy', 'plan': 'free', 'company_name': None, 'job_role': 'other', 'last_login': None}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-08-31 12:06:06,964 | WARNING | main | Validation error: [{'type': 'missing', 'loc': ('body', 'company_name'), 'msg': 'Field required', 'input': {'name': 'khaerul', 'email': 'erull@gmail.com', 'password': '12345678'}}]
+2025-08-31 12:07:08,237 | INFO | app.controllers.user_controller | New user created: erull@gmail.com
+2025-08-31 12:28:40,638 | WARNING | app.controllers.user_controller | Register attempt with existing email: erull@gmail.com
+2025-08-31 12:29:27,882 | WARNING | app.middlewares.RBAC | hit this endpoint with role not assigned
+2025-08-31 12:31:26,152 | WARNING | app.dependencies.auth | Access attempt without token
+2025-08-31 12:32:00,990 | WARNING | app.dependencies.auth | Access attempt without token
+2025-08-31 12:32:38,206 | WARNING | app.middlewares.RBAC | Ppermission denied for role user

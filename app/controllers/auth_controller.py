@@ -24,7 +24,9 @@ def loginHandler(response: Response, db: Session, payload: AuthIn) -> User:
         )
 
     try:
-        access_token = create_access_token({"id": user.id, "email": user.email})
+        access_token = create_access_token(
+            {"id": user.id, "email": user.email, "role": user.role}
+        )
         response.set_cookie(
             key="access_token",
             value=access_token,

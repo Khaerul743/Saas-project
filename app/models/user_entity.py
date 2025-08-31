@@ -12,11 +12,12 @@ class User(Base):
     )
     email = sa.Column(sa.String(50), unique=True, index=True, nullable=False)
     password = sa.Column(sa.String(100), nullable=False)
+    role = sa.Column(sa.Enum("admin", "user"), nullable=False, server_default="user")
     plan = sa.Column(
         sa.Enum("free", "normal", "pro"), nullable=False, server_default="free"
     )
     company_name = sa.Column(sa.String(50), nullable=False)
-    role = sa.Column(
+    job_role = sa.Column(
         sa.Enum("AI engineer", "sales", "other"), nullable=False, server_default="other"
     )
     created_at = sa.Column(sa.DateTime(timezone=True), server_default=sa.func.now())
