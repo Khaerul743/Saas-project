@@ -3,10 +3,8 @@ from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
-from slowapi.util import get_remote_address
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.configs.config import settings
@@ -14,7 +12,7 @@ from app.configs.database import Base, engine
 from app.configs.limiter import limiter
 from app.middlewares.error_handler import ErrorHandlerMiddleware
 from app.middlewares.limiter_handler import rate_limit_exceeded_handler
-from app.routes import user_route
+from app.routes import auth_route, user_route
 from app.utils.logger import get_logger
 from app.utils.response import error_response
 
@@ -48,7 +46,10 @@ app.add_middleware(
     allow_methods=["*"],  # bolehkan semua HTTP method (GET, POST, dll)
     allow_headers=["*"],
 )
+
+# Routes
 app.include_router(user_route.router)
+app.include_router(auth_route.router)
 
 
 @app.get("/")

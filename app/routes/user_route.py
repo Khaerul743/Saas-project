@@ -21,7 +21,7 @@ def create_user(request: Request, user: UserCreate, db: Session = Depends(get_db
     return success_response("User created successfully", new_user)
 
 
-@router.get("/", status_code=200)
+@router.get("/me", status_code=200)
 @limiter.limit("100/minute")
 def get_user(request: Request, current_user: dict = Depends(get_current_user)):
     return {"response": current_user}
