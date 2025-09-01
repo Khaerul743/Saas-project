@@ -1,4 +1,5 @@
 import sqlalchemy as sa
+from sqlalchemy.orm import relationship
 
 from app.configs.database import Base
 
@@ -28,6 +29,9 @@ class User(Base):
     status = sa.Column(
         sa.Enum("active", "non-active"), nullable=False, server_default="active"
     )
+
+    # Relationship
+    agents = relationship("Agent", back_populates="user", cascade="all, delete-orphan")
 
     def __repr__(self):
         return f"<User email={self.email} role={self.role}>"

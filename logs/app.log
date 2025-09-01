@@ -592,3 +592,87 @@ AttributeError: 'dict' object has no attribute 'id'
 2025-09-01 13:34:09,844 | INFO | app.controllers.auth_controller | User khaerull@gmail.com login is successfully.
 2025-09-01 13:34:16,996 | INFO | app.controllers.user_controller | Update user plan is successfully. user email khaerull@gmail.com, plan normal
 2025-09-01 13:36:10,977 | INFO | app.controllers.user_controller | khaerull@gmail.com Get user profile is successfully
+2025-09-01 20:05:29,398 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-01 20:05:39,012 | WARNING | app.controllers.auth_controller | Invalid login attempt for email: khaerull@gmail.com
+2025-09-01 20:05:58,946 | WARNING | app.controllers.auth_controller | Invalid login attempt for email: khaerull@gmail.com
+2025-09-01 20:07:41,968 | INFO | app.controllers.auth_controller | New user registered with email: khaerul@gmail.com
+2025-09-01 20:07:51,526 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-01 20:08:05,115 | INFO | app.controllers.agent_controller | Agent 'customer service agent' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 1)
+2025-09-01 20:45:36,620 | INFO | app.controllers.agent_controller | Agent 'customer service agent' (ID: 1) updated successfully by user khaerul@gmail.com (user_id: 1)
+2025-09-01 21:08:07,809 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-01 21:08:22,259 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-01 21:10:33,710 | INFO | app.controllers.agent_controller | khaerul@gmail.com successfully retrieved all agents
+2025-09-01 21:11:17,769 | INFO | app.controllers.agent_controller | khaerul@gmail.com successfully retrieved all agents
+2025-09-01 21:18:57,456 | INFO | app.controllers.agent_controller | khaerul@gmail.com successfully retrieved all agents
+2025-09-01 21:18:57,463 | ERROR | app.middlewares.error_handler | Unexpected error: [TypeError('cannot convert dictionary update sequence element #0 to a sequence'), TypeError('vars() argument must have __dict__ attribute')]
+Traceback (most recent call last):
+  File "D:\Saas_Project\.venv\Lib\site-packages\fastapi\encoders.py", line 324, in jsonable_encoder
+    data = dict(obj)
+TypeError: cannot convert dictionary update sequence element #0 to a sequence
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\.venv\Lib\site-packages\fastapi\encoders.py", line 329, in jsonable_encoder
+    data = vars(obj)
+TypeError: vars() argument must have __dict__ attribute
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\fastapi\routing.py", line 328, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "D:\Saas_Project\.venv\Lib\site-packages\fastapi\routing.py", line 202, in serialize_response
+    return jsonable_encoder(response_content)
+  File "D:\Saas_Project\.venv\Lib\site-packages\fastapi\encoders.py", line 289, in jsonable_encoder
+    encoded_value = jsonable_encoder(
+        value,
+    ...<4 lines>...
+        sqlalchemy_safe=sqlalchemy_safe,
+    )
+  File "D:\Saas_Project\.venv\Lib\site-packages\fastapi\encoders.py", line 303, in jsonable_encoder
+    jsonable_encoder(
+    ~~~~~~~~~~~~~~~~^
+        item,
+        ^^^^^
+    ...<7 lines>...
+        sqlalchemy_safe=sqlalchemy_safe,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\.venv\Lib\site-packages\fastapi\encoders.py", line 332, in jsonable_encoder
+    raise ValueError(errors) from e
+ValueError: [TypeError('cannot convert dictionary update sequence element #0 to a sequence'), TypeError('vars() argument must have __dict__ attribute')]
+2025-09-01 21:28:14,315 | INFO | app.controllers.agent_controller | khaerul@gmail.com successfully retrieved all agents
