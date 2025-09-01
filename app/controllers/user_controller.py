@@ -10,6 +10,36 @@ from app.utils.logger import get_logger
 logger = get_logger(__name__)
 
 
+def get_all_users(db: Session, current_user: dict):
+    try:
+        users = db.query(User).all()
+        users = [
+            {
+                "username": user.name,
+                "email": user.email,
+                "role": user.role,
+                "job_role": user.job_role,
+                "company_name": user.company_name,
+                "plan": user.plan,
+                "status": user.status,
+                "created_at": user.created_at,
+                "updated_at": user.updated_at,
+                "last_login": user.last_login,
+            }
+            for user in users
+        ]
+        logger.info(
+            f"Get all users is successfully: admin email {current_user.get('email')}"
+        )
+        return users
+    except Exception as e:
+        logger.error(f"Unexpected error while getting all users: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Internal server error, please try again later",
+        )
+
+
 def get_user(db: Session, current_user: dict):
     user = db.query(User).filter(User.email == current_user.get("email")).first()
     if not user:

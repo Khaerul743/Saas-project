@@ -17,6 +17,15 @@ from app.utils.response import success_response
 router = APIRouter(prefix="/api/users", tags=["users"])
 
 
+@router.get("", status_code=status.HTTP_200_OK)
+def getAllUsers(
+    current_user: dict = Depends(role_required(["admin"])),
+    db: Session = Depends(get_db),
+):
+    users = user_controller.get_all_users(db, current_user)
+    return success_response("Get all users is successfully", users)
+
+
 @router.get("/profile", status_code=status.HTTP_200_OK)
 def getProfile(
     current_user: dict = Depends(role_required(["admin", "user"])),
