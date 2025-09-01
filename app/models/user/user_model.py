@@ -21,12 +21,12 @@ class UserCreate(UserBase):
 
 # Schema untuk update (optional fields)
 class UserUpdate(BaseModel):
-    name: Optional[str] = None
+    username: Optional[str] = None
     company_name: Optional[str] = None
-    plan: Optional[Literal["free", "normal", "pro"]] = None
+    # plan: Optional[Literal["free", "normal", "pro"]] = None
     job_role: Optional[Literal["AI engineer", "sales", "other"]] = None
-    status: Optional[Literal["active", "non-active"]] = None
-    password: Optional[str] = None
+    # status: Optional[Literal["active", "non-active"]] = None
+    # password: Optional[str] = None
 
 
 # Schema untuk response (ke client, tanpa password)

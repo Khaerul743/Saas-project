@@ -3,7 +3,7 @@ from fastapi import HTTPException, Response, status
 from sqlalchemy.orm import Session
 
 from app.models.auth.auth_model import AuthIn
-from app.models.user_entity import User
+from app.models.user.user_entity import User
 from app.utils.hash import hash_password, verify_password
 from app.utils.logger import get_logger
 from app.utils.security import create_access_token

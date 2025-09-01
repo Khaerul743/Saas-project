@@ -17,9 +17,10 @@ def role_required(allowed_roles: list[str]):
 
     def wrapper(user: dict = Depends(get_current_user)):
         user_role = user.get("role")
-        print(f"user role: {user_role}")
         if not user_role:
-            logger.warning("hit this endpoint with role not assigned")
+            logger.warning(
+                f"hit this endpoint with role not assigned: {user.get('email')}"
+            )
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN, detail="Role not assigned"
             )
