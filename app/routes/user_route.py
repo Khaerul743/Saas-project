@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Request, status
+from fastapi import APIRouter, Depends, Query, Request, status
 from sqlalchemy.orm import Session
 
 from app.configs.database import get_db
@@ -8,6 +8,7 @@ from app.dependencies.auth import get_current_user
 from app.middlewares.RBAC import role_required
 from app.models.user.user_model import (
     UpdateDetail,
+    UpdateUserPlan,
     UserCreate,
     UserResponseAPI,
     UserUpdate,
@@ -19,10 +20,12 @@ router = APIRouter(prefix="/api/users", tags=["users"])
 
 @router.get("", status_code=status.HTTP_200_OK)
 def getAllUsers(
+    page: int = Query(1, ge=1),
+    limit: int = Query(50, le=100),
     current_user: dict = Depends(role_required(["admin"])),
     db: Session = Depends(get_db),
 ):
-    users = user_controller.get_all_users(db, current_user)
+    users = user_controller.get_all_users(limit, page, db, current_user)
     return success_response("Get all users is successfully", users)
 
 
@@ -68,7 +71,21 @@ def updateUser(
             "email": user.email,
             "job_role": user.job_role,
             "company_name": user.company_name,
+            "plan": user.plan,
         },
+    )
+
+
+@router.put("/profile/plan/{user_id}", status_code=status.HTTP_200_OK)
+def updateUserPlan(
+    user_id: int,
+    payload: UpdateUserPlan,
+    current_user: dict = Depends(role_required(["admin"])),
+    db: Session = Depends(get_db),
+):
+    user = user_controller.update_user_plan(user_id, payload, current_user, db)
+    return success_response(
+        "user plan has been updated", {"email": user.email, "plan": user.plan}
     )
 
 
@@ -90,6 +107,16 @@ def updateDetail(
             "company_name": detail.company_name,
         },
     )
+
+
+@router.delete("/{user_id}")
+def delete_user(
+    user_id: int,
+    current_user: dict = Depends(role_required(["admin"])),
+    db: Session = Depends(get_db),
+):
+    response = user_controller.delete_user_handler(user_id, current_user, db)
+    return success_response(response.get("message"), None)
 
 
 @router.get("/me", status_code=200)

@@ -585,3 +585,10 @@ AttributeError: 'dict' object has no attribute 'id'
 2025-09-01 09:55:11,548 | ERROR | app.controllers.user_controller | Unexpected error while getting all users: 'User' object has no attribute 'get'
 2025-09-01 09:55:43,895 | INFO | app.controllers.user_controller | Get all users is successfully: admin email khaerull@gmail.com
 2025-09-01 09:59:11,853 | INFO | app.controllers.user_controller | Get all users is successfully: admin email khaerull@gmail.com
+2025-09-01 10:23:17,571 | WARNING | app.middlewares.RBAC | Permission denied for role user
+2025-09-01 10:24:25,478 | INFO | app.controllers.user_controller | User deleted successfully. ID: 1, Email: khaerul@gmail.com
+2025-09-01 10:25:18,436 | WARNING | app.middlewares.RBAC | Permission denied for role user: khaerull@gmail.com
+2025-09-01 13:33:33,262 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-01 13:34:09,844 | INFO | app.controllers.auth_controller | User khaerull@gmail.com login is successfully.
+2025-09-01 13:34:16,996 | INFO | app.controllers.user_controller | Update user plan is successfully. user email khaerull@gmail.com, plan normal
+2025-09-01 13:36:10,977 | INFO | app.controllers.user_controller | khaerull@gmail.com Get user profile is successfully

@@ -3,40 +3,59 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.models.user.user_entity import User
-from app.models.user.user_model import UpdateDetail, UserCreate, UserOut, UserUpdate
+from app.models.user.user_model import (
+    UpdateDetail,
+    UpdateUserPlan,
+    UserCreate,
+    UserOut,
+    UserUpdate,
+)
 from app.utils.hash import hash_password
 from app.utils.logger import get_logger
 
 logger = get_logger(__name__)
 
 
-def get_all_users(db: Session, current_user: dict):
+def get_all_users(limit, page, db: Session, current_user: dict):
     try:
-        users = db.query(User).all()
-        users = [
-            {
-                "username": user.name,
-                "email": user.email,
-                "role": user.role,
-                "job_role": user.job_role,
-                "company_name": user.company_name,
-                "plan": user.plan,
-                "status": user.status,
-                "created_at": user.created_at,
-                "updated_at": user.updated_at,
-                "last_login": user.last_login,
-            }
-            for user in users
-        ]
-        logger.info(
-            f"Get all users is successfully: admin email {current_user.get('email')}"
+        offset = (page - 1) * limit
+        users = (
+            db.query(
+                User.name.label("username"),
+                User.email,
+                User.role,
+                User.job_role,
+                User.company_name,
+                User.plan,
+                User.status,
+                User.created_at,
+                User.updated_at,
+                User.last_login,
+            )
+            .offset(offset)
+            .limit(limit)
+            .all()
         )
-        return users
+
+        total_users = db.query(User).count()
+        logger.info(
+            f"Admin {current_user.get('email')} retrieved {len(users)} users (page {page})."
+        )
+
+        return (
+            {
+                "page": page,
+                "limit": limit,
+                "total_users": total_users,
+                "data": users,
+            },
+        )
+
     except Exception as e:
-        logger.error(f"Unexpected error while getting all users: {str(e)}")
+        logger.error(f"Error while retrieving users: {str(e)}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Internal server error, please try again later",
+            detail="Internal server error, please try again later.",
         )
 
 
@@ -120,7 +139,15 @@ def updateDetailHandler(db: Session, payload: UpdateDetail, user: dict):
         db.refresh(get_user)
         logger.info(f"{get_user.email} update detail information is successfully")
         return get_user
+    except IntegrityError as e:
+        db.rollback()
+        logger.error(f"IntegrityError while update information user: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Internal server error. Please try again later.",
+        )
     except Exception as e:
+        db.rollback()
         logger.error(f"Unexpected error while update detail information {str(e)}")
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
@@ -142,9 +169,84 @@ def updateUserHandler(db: Session, payload: UserUpdate, user: dict):
         db.refresh(get_user)
         logger.info(f"{get_user.email} update profile is successfully")
         return get_user
+    except IntegrityError as e:
+        db.rollback()
+        logger.error(f"IntegrityError while updating user: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Internal server error. Please try again later.",
+        )
     except Exception as e:
+        db.rollback()
         logger.error(f"Unexpected error while updating user: {str(e)}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Internal server error, please try again later.",
+        )
+
+
+def update_user_plan(
+    user_id: int, payload: UpdateUserPlan, current_user: dict, db: Session
+):
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        logger.warning(f"Update user plan failed. User not found. ID: {user_id}")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
+        )
+
+    try:
+        user.plan = payload.plan
+        db.commit()
+        db.refresh(user)
+        logger.info(
+            f"Update user plan is successfully. user email {user.email}, plan {user.plan}"
+        )
+        return user
+    except IntegrityError as e:
+        db.rollback()
+        logger.error(f"IntegrityError while updating user plan: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Internal server error. Please try again later.",
+        )
+    except Exception as e:
+        db.rollback()
+        logger.error(f"Unexpected error while updating user plan: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Internal server error, please try again later.",
+        )
+
+
+def delete_user_handler(user_id: int, current_user: dict, db: Session):
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        logger.warning(f"Delete failed. User not found. ID: {user_id}")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="User not found."
+        )
+
+    try:
+        user_email = user.email
+        db.delete(user)
+        db.commit()
+
+        logger.info(f"User deleted successfully. ID: {user_id}, Email: {user_email}")
+        return {"message": f"User deleted successfully: {user_email}"}
+
+    except IntegrityError as e:
+        db.rollback()
+        logger.error(f"IntegrityError while deleting user {user_id}: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="User could not be deleted due to related records.",
+        )
+
+    except Exception as e:
+        db.rollback()
+        logger.error(f"Unexpected error while deleting user {user_id}: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="An unexpected error occurred. Please try again later.",
         )

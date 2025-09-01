@@ -49,3 +49,7 @@ class UserResponseAPI(BaseModel):
 class UpdateDetail(BaseModel):
     company_name: str
     job_role: Literal["AI engineer", "sales", "other"]
+
+
+class UpdateUserPlan(BaseModel):
+    plan: Literal["free", "normal", "pro"]
