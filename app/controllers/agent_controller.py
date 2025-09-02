@@ -1,6 +1,8 @@
+import os
+import shutil
 from typing import List
 
-from fastapi import HTTPException, status
+from fastapi import Form, HTTPException, UploadFile, status
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
@@ -290,6 +292,47 @@ def delete_agent(agent_id: int, current_user: dict, db: Session):
     except Exception as e:
         db.rollback()
         logger.error(f"Unexpected error while deleting agent: {str(e)}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Internal server error, please try again later",
+        )
+
+
+def document_store(file: UploadFile, agent_id: int, current_user: dict, db: Session):
+    try:
+        agent = (
+            db.query(Agent)
+            .filter(Agent.id == agent_id, Agent.user_id == current_user.get("id"))
+            .first()
+        )
+        if not agent:
+            logger.warning(
+                f"Agent not found: user {current_user.get('email')}, agent ID {agent_id}"
+            )
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail="Agent not found"
+            )
+        directory_path = f"documents/user_{current_user.get('id')}/agent_{agent_id}"
+        if not os.path.exists(directory_path):
+            os.makedirs(directory_path, exist_ok=True)
+
+        file_path = os.path.join(directory_path, file.filename)
+        with open(file_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+
+        logger.info(
+            f"Agent '{agent.name}' (ID: {agent.id}) document store successfully by user "
+            f"{current_user.get('email')}"
+        )
+        return {"message": "Add document is successfully"}
+    except HTTPException:
+        # Re-raise HTTP exceptions
+        raise
+
+    except Exception as e:
+        logger.error(
+            f"Unexpected error while store the document: {str(e)}", exc_info=True
+        )
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Internal server error, please try again later",

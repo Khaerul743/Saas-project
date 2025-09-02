@@ -676,3 +676,13 @@ Traceback (most recent call last):
     raise ValueError(errors) from e
 ValueError: [TypeError('cannot convert dictionary update sequence element #0 to a sequence'), TypeError('vars() argument must have __dict__ attribute')]
 2025-09-01 21:28:14,315 | INFO | app.controllers.agent_controller | khaerul@gmail.com successfully retrieved all agents
+2025-09-02 15:19:52,478 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-02 15:20:03,608 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-02 15:20:19,090 | WARNING | main | Validation error: [{'type': 'missing', 'loc': ('body', 'file'), 'msg': 'Field required', 'input': None}]
+2025-09-02 15:21:24,259 | WARNING | main | Validation error: [{'type': 'missing', 'loc': ('body', 'file'), 'msg': 'Field required', 'input': None}]
+2025-09-02 15:27:28,748 | WARNING | main | Validation error: [{'type': 'missing', 'loc': ('body', 'file'), 'msg': 'Field required', 'input': None}]
+2025-09-02 15:48:39,145 | WARNING | app.controllers.agent_controller | Agent not found: user khaerul@gmail.com, agent ID 2
+2025-09-02 15:48:46,739 | WARNING | app.controllers.agent_controller | Agent not found: user khaerul@gmail.com, agent ID 1
+2025-09-02 15:50:12,010 | INFO | app.controllers.agent_controller | Agent 'customer service agent' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 2)
+2025-09-02 15:50:33,205 | INFO | app.controllers.agent_controller | Agent 'customer service agent' (ID: 2) updated successfully by user khaerul@gmail.com
+2025-09-02 15:53:38,348 | INFO | app.controllers.agent_controller | Agent 'customer service agent' (ID: 2) updated successfully by user khaerul@gmail.com
