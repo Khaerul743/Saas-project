@@ -12,7 +12,7 @@ from app.configs.database import Base, engine
 from app.configs.limiter import limiter
 from app.middlewares.error_handler import ErrorHandlerMiddleware
 from app.middlewares.limiter_handler import rate_limit_exceeded_handler
-from app.routes import auth_route, user_route, agent_route
+from app.routes import agent_route, auth_route, document_route, user_route
 from app.utils.logger import get_logger
 from app.utils.response import error_response
 
@@ -51,6 +51,7 @@ app.add_middleware(
 app.include_router(user_route.router)
 app.include_router(auth_route.router)
 app.include_router(agent_route.router)
+app.include_router(document_route.router)
 
 
 @app.get("/")

@@ -686,3 +686,19 @@ ValueError: [TypeError('cannot convert dictionary update sequence element #0 to 
 2025-09-02 15:50:12,010 | INFO | app.controllers.agent_controller | Agent 'customer service agent' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 2)
 2025-09-02 15:50:33,205 | INFO | app.controllers.agent_controller | Agent 'customer service agent' (ID: 2) updated successfully by user khaerul@gmail.com
 2025-09-02 15:53:38,348 | INFO | app.controllers.agent_controller | Agent 'customer service agent' (ID: 2) updated successfully by user khaerul@gmail.com
+2025-09-02 21:20:09,328 | INFO | app.controllers.auth_controller | New user registered with email: khaerul@gmail.com
+2025-09-02 21:20:17,053 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-02 21:20:26,080 | INFO | app.controllers.agent_controller | Agent 'customer service agent' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 1)
+2025-09-02 21:21:55,492 | WARNING | main | Validation error: [{'type': 'missing', 'loc': ('body', 'file'), 'msg': 'Field required', 'input': None}]
+2025-09-02 21:25:09,001 | WARNING | main | Validation error: [{'type': 'missing', 'loc': ('body', 'file'), 'msg': 'Field required', 'input': None}]
+2025-09-02 21:25:47,227 | WARNING | app.controllers.document_controller | Agent not found: user khaerul@gmail.com, agent ID 3
+2025-09-02 21:26:23,410 | INFO | app.controllers.document_controller | Agent 'customer service agent' (ID: 1) document store successfully by user khaerul@gmail.com
+2025-09-02 21:27:37,144 | WARNING | app.controllers.document_controller | Document is exist: file name Roadmap_ Memulai Bisnis → Implementasi Crm_erp (end-to-end).pdf
+2025-09-02 21:27:53,657 | INFO | app.controllers.document_controller | Agent 'customer service agent' (ID: 1) document store successfully by user khaerul@gmail.com
+2025-09-02 21:28:36,639 | INFO | app.controllers.agent_controller | Agent 'customer service agent' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 2)
+2025-09-02 21:28:48,046 | WARNING | app.controllers.document_controller | Document is exist: file name AQUAMAJI AI .docx
+2025-09-02 21:32:07,820 | INFO | app.controllers.document_controller | Agent 'customer service agent' (ID: 2) document store successfully by user khaerul@gmail.com
+2025-09-03 10:24:38,010 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-03 10:27:37,453 | INFO | app.controllers.document_controller | Document 'Roadmap_ Memulai Bisnis → Implementasi Crm_erp (end-to-end).pdf' (ID: 1) deleted successfully by user khaerul@gmail.com
+2025-09-03 10:37:26,793 | INFO | app.controllers.document_controller | Retrieved 1 documents for agent 'customer service agent' (ID: 1) by user khaerul@gmail.com
+2025-09-03 10:38:38,779 | WARNING | app.controllers.document_controller | Agent not found: user khaerul@gmail.com, agent ID 5

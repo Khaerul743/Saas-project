@@ -8,7 +8,6 @@ from app.configs.limiter import limiter
 from app.controllers.agent_controller import (
     create_agent,
     delete_agent,
-    document_store,
     get_all_agents,
     update_agent,
 )
@@ -114,24 +113,6 @@ def deleteAgent(
 ):
     try:
         response = delete_agent(agent_id, current_user, db)
-        return success_response(response.get("message"))
-    except Exception as e:
-        # This will be handled by the global error handler middleware
-        raise
-
-
-@router.post("/documentStore", status_code=status.HTTP_201_CREATED)
-def documentStore(
-    file: UploadFile = File(...),
-    agent_id: int = Form(...),
-    current_user: dict = Depends(role_required(["admin", "user"])),
-    db: Session = Depends(get_db),
-):
-    try:
-        directory_path = "documents"
-        if not os.path.exists(directory_path):
-            os.makedirs(directory_path, exist_ok=True)
-        response = document_store(file, agent_id, current_user, db)
         return success_response(response.get("message"))
     except Exception as e:
         # This will be handled by the global error handler middleware
