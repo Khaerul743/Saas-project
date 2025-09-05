@@ -1,16 +1,20 @@
 import os
 import shutil
-from typing import List
+from typing import Dict, List
 
-from fastapi import Form, HTTPException, UploadFile, status
+from fastapi import BackgroundTasks, Form, HTTPException, UploadFile, status
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
+from starlette.concurrency import run_in_threadpool
 
+from app.AI import simple_RAG_agent as AI
 from app.models.agent.agent_entity import Agent
 from app.models.document.document_entity import Document
 from app.utils.logger import get_logger
 
 logger = get_logger(__name__)
+
+agents: Dict[str, AI.Agent] = {}
 
 
 def get_documents_by_agent(
@@ -56,8 +60,24 @@ def get_documents_by_agent(
         )
 
 
-def document_store(file: UploadFile, agent_id: int, current_user: dict, db: Session):
+async def document_store(
+    file: UploadFile,
+    agent_id: int,
+    current_user: dict,
+    db: Session,
+    background_tasks: BackgroundTasks = None,
+):
     try:
+        if file.content_type == "application/pdf":
+            content_type = "pdf"
+        elif file.content_type == "application/txt":
+            content_type = "txt"
+        else:
+            content_type = "docs"
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="File must be pdf or txt.",
+            )
         agent = (
             db.query(Agent)
             .filter(Agent.id == agent_id, Agent.user_id == current_user.get("id"))
@@ -89,19 +109,38 @@ def document_store(file: UploadFile, agent_id: int, current_user: dict, db: Sess
         with open(file_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
 
-        if file.content_type == "application/pdf":
-            content_type = "pdf"
-        elif file.content_type == "application/txt":
-            content_type = "txt"
-        else:
-            content_type = "docs"
         post_document = Document(
             agent_id=agent_id, file_name=file.filename, content_type=content_type
         )
-
         db.add(post_document)
         db.commit()
         db.refresh(post_document)
+        if not str(agent.id) in agents:
+            agents[str(agent.id)] = AI.Agent(
+                directory_path,
+                "chroma_db",
+                f"agent_{agent_id}",
+                model_llm=agent.model,
+            )
+
+        def init_agent():
+            agents[str(agent.id)].add_document(
+                file.filename,
+                content_type,
+                str(post_document.id),
+                db,
+                post_document,
+                f"{directory_path}/{file.filename}",
+            )
+            agents[str(agent.id)].execute(
+                {
+                    "user_message": "Tolong jelaskan secara singkat isi dari document tersebut"
+                },
+                "thread_123",
+            )
+
+        init_agent()
+        # background_tasks.add_task(init_agent)
         logger.info(
             f"Agent '{agent.name}' (ID: {agent.id}) document store successfully by user "
             f"{current_user.get('email')}"
@@ -148,6 +187,7 @@ def document_delete(document_id: int, agent_id: int, current_user: dict, db: Ses
             )
         directory_path = f"documents/user_{current_user.get('id')}/agent_{agent_id}"
         file_path = os.path.join(directory_path, document.file_name)
+        agents[str(current_user.get("id"))].delete_document(str(document.id))
         if os.path.exists(file_path):
             os.remove(file_path)
         db.delete(document)

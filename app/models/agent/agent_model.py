@@ -34,6 +34,7 @@ class GettingAllAgents(AgentBase):
 
 
 class AgentOut(AgentBase):
+    id: int
     status: Literal["active", "non-active"]
 
 

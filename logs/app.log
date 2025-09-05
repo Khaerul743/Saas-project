@@ -702,3 +702,532 @@ ValueError: [TypeError('cannot convert dictionary update sequence element #0 to 
 2025-09-03 10:27:37,453 | INFO | app.controllers.document_controller | Document 'Roadmap_ Memulai Bisnis → Implementasi Crm_erp (end-to-end).pdf' (ID: 1) deleted successfully by user khaerul@gmail.com
 2025-09-03 10:37:26,793 | INFO | app.controllers.document_controller | Retrieved 1 documents for agent 'customer service agent' (ID: 1) by user khaerul@gmail.com
 2025-09-03 10:38:38,779 | WARNING | app.controllers.document_controller | Agent not found: user khaerul@gmail.com, agent ID 5
+2025-09-03 11:29:48,858 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-03 11:29:58,050 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-03 11:30:36,083 | INFO | app.controllers.document_controller | Agent 'customer service agent' (ID: 2) document store successfully by user khaerul@gmail.com
+2025-09-03 11:41:41,301 | WARNING | app.controllers.document_controller | Document is exist: file name 1670422926LAPORAN_KEUANGAN.pdf
+2025-09-03 11:42:18,791 | INFO | app.controllers.document_controller | Retrieved 1 documents for agent 'customer service agent' (ID: 1) by user khaerul@gmail.com
+2025-09-03 11:42:26,955 | INFO | app.controllers.document_controller | Retrieved 2 documents for agent 'customer service agent' (ID: 2) by user khaerul@gmail.com
+2025-09-03 11:42:51,778 | INFO | app.controllers.document_controller | Document '1670422926LAPORAN_KEUANGAN.pdf' (ID: 4) deleted successfully by user khaerul@gmail.com
+2025-09-03 11:43:13,567 | INFO | app.controllers.document_controller | Agent 'customer service agent' (ID: 2) document store successfully by user khaerul@gmail.com
+2025-09-03 11:50:03,859 | INFO | app.controllers.document_controller | Document '1670422926LAPORAN_KEUANGAN.pdf' (ID: 5) deleted successfully by user khaerul@gmail.com
+2025-09-03 11:51:21,314 | INFO | app.controllers.document_controller | Agent 'customer service agent' (ID: 2) document store successfully by user khaerul@gmail.com
+2025-09-03 11:59:31,040 | INFO | app.controllers.document_controller | Document '1670422926LAPORAN_KEUANGAN.pdf' (ID: 6) deleted successfully by user khaerul@gmail.com
+2025-09-03 12:00:32,578 | INFO | app.controllers.document_controller | Agent 'customer service agent' (ID: 2) document store successfully by user khaerul@gmail.com
+2025-09-03 13:34:12,039 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-03 13:34:27,672 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-03 13:34:39,697 | WARNING | app.controllers.document_controller | Document not found: user khaerul@gmail.com, document ID 8, agent ID 2
+2025-09-03 13:34:48,531 | INFO | app.controllers.document_controller | Document '1670422926LAPORAN_KEUANGAN.pdf' (ID: 7) deleted successfully by user khaerul@gmail.com
+2025-09-03 13:35:50,858 | INFO | app.controllers.document_controller | Agent 'customer service agent' (ID: 2) document store successfully by user khaerul@gmail.com
+2025-09-03 16:29:21,826 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-03 16:29:38,096 | INFO | app.controllers.document_controller | Document '1670422926LAPORAN_KEUANGAN.pdf' (ID: 8) deleted successfully by user khaerul@gmail.com
+2025-09-03 16:29:56,592 | INFO | app.controllers.document_controller | Agent 'customer service agent' (ID: 2) document store successfully by user khaerul@gmail.com
+2025-09-03 16:32:53,320 | INFO | app.controllers.document_controller | Document '1670422926LAPORAN_KEUANGAN.pdf' (ID: 9) deleted successfully by user khaerul@gmail.com
+2025-09-03 16:33:37,966 | INFO | app.controllers.document_controller | Agent 'customer service agent' (ID: 2) document store successfully by user khaerul@gmail.com
+2025-09-03 16:42:36,528 | INFO | app.controllers.document_controller | Document '1670422926LAPORAN_KEUANGAN.pdf' (ID: 10) deleted successfully by user khaerul@gmail.com
+2025-09-03 16:42:42,926 | INFO | app.controllers.document_controller | Agent 'customer service agent' (ID: 2) document store successfully by user khaerul@gmail.com
+2025-09-03 21:37:39,728 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-03 21:37:54,384 | INFO | app.controllers.document_controller | Agent 'customer service agent' (ID: 2) document store successfully by user khaerul@gmail.com
+2025-09-03 21:38:09,783 | INFO | app.AI.document_store.RAG | Load single document is successfully: filename 1670422926LAPORAN_KEUANGAN.pdf
+2025-09-03 21:38:13,088 | INFO | app.AI.document_store.RAG | Add document is successfully: document ID 2
+2025-09-03 21:53:04,617 | INFO | app.controllers.document_controller | Agent 'customer service agent' (ID: 2) document store successfully by user khaerul@gmail.com
+2025-09-03 21:53:15,696 | INFO | app.AI.document_store.RAG | Load single document is successfully: filename 1670422926LAPORAN_KEUANGAN.pdf
+2025-09-03 21:53:19,052 | INFO | app.AI.document_store.RAG | Add document is successfully: document ID 13
+2025-09-03 21:53:56,446 | INFO | app.AI.document_store.RAG | Semua chunk dokumen dengan id 13 berhasil dihapus
+2025-09-03 21:53:56,463 | INFO | app.controllers.document_controller | Document '1670422926LAPORAN_KEUANGAN.pdf' (ID: 13) deleted successfully by user khaerul@gmail.com
+2025-09-04 19:23:40,687 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-04 19:23:57,247 | INFO | app.controllers.agent_controller | Agent 'customer service agent' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 3)
+2025-09-04 19:24:26,328 | INFO | app.controllers.document_controller | Agent 'customer service agent' (ID: 3) document store successfully by user khaerul@gmail.com
+2025-09-04 19:24:42,072 | INFO | app.AI.document_store.RAG | Load single document is successfully: filename 1670422926LAPORAN_KEUANGAN.pdf
+2025-09-04 19:24:48,290 | INFO | app.AI.document_store.RAG | Add document is successfully: document ID 14
+2025-09-04 19:26:16,890 | WARNING | app.controllers.document_controller | Document not found: user khaerul@gmail.com, document ID 14, agent ID 2
+2025-09-04 19:26:31,135 | INFO | app.AI.document_store.RAG | Semua chunk dokumen dengan id 14 berhasil dihapus
+2025-09-04 19:26:31,228 | INFO | app.controllers.document_controller | Document '1670422926LAPORAN_KEUANGAN.pdf' (ID: 14) deleted successfully by user khaerul@gmail.com
+2025-09-04 20:19:34,341 | WARNING | main | Validation error: [{'type': 'missing', 'loc': ('body', 'agent_data'), 'msg': 'Field required', 'input': None}]
+2025-09-04 20:30:43,566 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-04 20:30:54,451 | ERROR | app.middlewares.error_handler | Database error: When initializing mapper Mapper[Agent(agents)], expression 'Integration' failed to locate a name ('Integration'). If this is a class name, consider adding this relationship() to the <class 'app.models.agent.agent_entity.Agent'> class after both dependent classes have been defined.
+Traceback (most recent call last):
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\clsregistry.py", line 516, in _resolve_name
+    rval = d[token]
+           ~^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\util\_collections.py", line 345, in __missing__
+    self[key] = val = self.creator(key)
+                      ~~~~~~~~~~~~^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\clsregistry.py", line 484, in _access_cls
+    return self.fallback[key]
+           ~~~~~~~~~~~~~^^^^^
+KeyError: 'Integration'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\.venv\Lib\site-packages\fastapi\routing.py", line 215, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\concurrency.py", line 38, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\anyio\to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2476, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 967, in run
+    result = context.run(func, *args)
+  File "D:\Saas_Project\app\routes\auth_route.py", line 24, in login
+    user = loginHandler(response, db, payload)
+  File "D:\Saas_Project\app\controllers\auth_controller.py", line 49, in loginHandler
+    user = db.query(User).filter(User.email == payload.email).first()
+           ~~~~~~~~^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2955, in query
+    return self._query_cls(entities, self, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\query.py", line 276, in __init__
+    self._set_entities(entities)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\query.py", line 289, in _set_entities
+    coercions.expect(
+    ~~~~~~~~~~~~~~~~^
+        roles.ColumnsClauseRole,
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        post_inspect=True,
+        ^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\sql\coercions.py", line 388, in expect
+    insp._post_inspect
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 1338, in __get__
+    obj.__dict__[self.__name__] = result = self.fget(obj)
+                                           ~~~~~~~~~^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2724, in _post_inspect
+    self._check_configure()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2401, in _check_configure
+    _configure_registries({self.registry}, cascade=True)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 4218, in _configure_registries
+    _do_configure_registries(registries, cascade)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 4259, in _do_configure_registries
+    mapper._post_configure_properties()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2418, in _post_configure_properties
+    prop.init()
+    ~~~~~~~~~^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\interfaces.py", line 595, in init
+    self.do_init()
+    ~~~~~~~~~~~~^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\relationships.py", line 1655, in do_init
+    self._setup_entity()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\relationships.py", line 1865, in _setup_entity
+    self._clsregistry_resolve_name(argument)(),
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\clsregistry.py", line 520, in _resolve_name
+    self._raise_for_name(name, err)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\clsregistry.py", line 501, in _raise_for_name
+    raise exc.InvalidRequestError(
+    ...<5 lines>...
+    ) from err
+sqlalchemy.exc.InvalidRequestError: When initializing mapper Mapper[Agent(agents)], expression 'Integration' failed to locate a name ('Integration'). If this is a class name, consider adding this relationship() to the <class 'app.models.agent.agent_entity.Agent'> class after both dependent classes have been defined.
+2025-09-04 20:53:43,137 | ERROR | app.middlewares.error_handler | Database error: When initializing mapper Mapper[Agent(agents)], expression 'Integration' failed to locate a name ('Integration'). If this is a class name, consider adding this relationship() to the <class 'app.models.agent.agent_entity.Agent'> class after both dependent classes have been defined.
+Traceback (most recent call last):
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\clsregistry.py", line 516, in _resolve_name
+    rval = d[token]
+           ~^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\util\_collections.py", line 345, in __missing__
+    self[key] = val = self.creator(key)
+                      ~~~~~~~~~~~~^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\clsregistry.py", line 484, in _access_cls
+    return self.fallback[key]
+           ~~~~~~~~~~~~~^^^^^
+KeyError: 'Integration'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\.venv\Lib\site-packages\fastapi\routing.py", line 215, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\concurrency.py", line 38, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\anyio\to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2476, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 967, in run
+    result = context.run(func, *args)
+  File "D:\Saas_Project\app\routes\auth_route.py", line 24, in login
+    user = loginHandler(response, db, payload)
+  File "D:\Saas_Project\app\controllers\auth_controller.py", line 49, in loginHandler
+    user = db.query(User).filter(User.email == payload.email).first()
+           ~~~~~~~~^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2955, in query
+    return self._query_cls(entities, self, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\query.py", line 276, in __init__
+    self._set_entities(entities)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\query.py", line 289, in _set_entities
+    coercions.expect(
+    ~~~~~~~~~~~~~~~~^
+        roles.ColumnsClauseRole,
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        post_inspect=True,
+        ^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\sql\coercions.py", line 388, in expect
+    insp._post_inspect
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 1338, in __get__
+    obj.__dict__[self.__name__] = result = self.fget(obj)
+                                           ~~~~~~~~~^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2724, in _post_inspect
+    self._check_configure()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2401, in _check_configure
+    _configure_registries({self.registry}, cascade=True)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 4218, in _configure_registries
+    _do_configure_registries(registries, cascade)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 4259, in _do_configure_registries
+    mapper._post_configure_properties()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2418, in _post_configure_properties
+    prop.init()
+    ~~~~~~~~~^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\interfaces.py", line 595, in init
+    self.do_init()
+    ~~~~~~~~~~~~^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\relationships.py", line 1655, in do_init
+    self._setup_entity()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\relationships.py", line 1865, in _setup_entity
+    self._clsregistry_resolve_name(argument)(),
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\clsregistry.py", line 520, in _resolve_name
+    self._raise_for_name(name, err)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\sqlalchemy\orm\clsregistry.py", line 501, in _raise_for_name
+    raise exc.InvalidRequestError(
+    ...<5 lines>...
+    ) from err
+sqlalchemy.exc.InvalidRequestError: When initializing mapper Mapper[Agent(agents)], expression 'Integration' failed to locate a name ('Integration'). If this is a class name, consider adding this relationship() to the <class 'app.models.agent.agent_entity.Agent'> class after both dependent classes have been defined.
+2025-09-04 20:56:17,715 | WARNING | app.controllers.auth_controller | Invalid login attempt for email: khaerul@gmail.com
+2025-09-04 20:56:51,089 | INFO | app.controllers.auth_controller | New user registered with email: khaerul@gmail.com
+2025-09-04 20:56:57,247 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-04 20:57:46,491 | WARNING | main | Validation error: [{'type': 'missing', 'loc': ('body', 'agent_data'), 'msg': 'Field required', 'input': None}]
+2025-09-04 20:58:14,224 | ERROR | app.middlewares.error_handler | Unexpected error: 4 validation errors:
+  {'type': 'missing', 'loc': ('response', 'data', 'name'), 'msg': 'Field required', 'input': {}}
+  {'type': 'missing', 'loc': ('response', 'data', 'model'), 'msg': 'Field required', 'input': {}}
+  {'type': 'missing', 'loc': ('response', 'data', 'id'), 'msg': 'Field required', 'input': {}}
+  {'type': 'missing', 'loc': ('response', 'data', 'status'), 'msg': 'Field required', 'input': {}}
+Traceback (most recent call last):
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\fastapi\routing.py", line 328, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "D:\Saas_Project\.venv\Lib\site-packages\fastapi\routing.py", line 177, in serialize_response
+    raise ResponseValidationError(
+        errors=_normalize_errors(errors), body=response_content
+    )
+fastapi.exceptions.ResponseValidationError: 4 validation errors:
+  {'type': 'missing', 'loc': ('response', 'data', 'name'), 'msg': 'Field required', 'input': {}}
+  {'type': 'missing', 'loc': ('response', 'data', 'model'), 'msg': 'Field required', 'input': {}}
+  {'type': 'missing', 'loc': ('response', 'data', 'id'), 'msg': 'Field required', 'input': {}}
+  {'type': 'missing', 'loc': ('response', 'data', 'status'), 'msg': 'Field required', 'input': {}}
+
+2025-09-04 21:04:12,856 | INFO | app.controllers.agent_controller | Agent 'customer service agent' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 1)
+2025-09-04 21:08:40,764 | INFO | app.controllers.agent_controller | Agent 'customer service agent' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 2)
+2025-09-04 21:08:40,817 | ERROR | app.controllers.document_controller | Unexpected error while store the document: 'NoneType' object has no attribute 'add_task'
+Traceback (most recent call last):
+  File "D:\Saas_Project\app\controllers\document_controller.py", line 133, in document_store
+    background_tasks.add_task(init_agent)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'add_task'
+2025-09-04 21:11:40,188 | INFO | app.controllers.agent_controller | Agent 'customer service agent' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 3)
+2025-09-04 21:11:40,333 | ERROR | app.controllers.document_controller | Unexpected error while store the document: 'NoneType' object has no attribute 'add_task'
+Traceback (most recent call last):
+  File "D:\Saas_Project\app\controllers\document_controller.py", line 133, in document_store
+    background_tasks.add_task(init_agent)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'add_task'
+2025-09-04 21:19:16,976 | WARNING | app.controllers.document_controller | Agent not found: user khaerul@gmail.com, agent ID None
+2025-09-04 21:21:14,423 | ERROR | app.controllers.document_controller | Unexpected error while store the document: 'NoneType' object has no attribute 'add_task'
+Traceback (most recent call last):
+  File "D:\Saas_Project\app\controllers\document_controller.py", line 133, in document_store
+    background_tasks.add_task(init_agent)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'add_task'
+2025-09-04 21:27:57,108 | INFO | app.controllers.document_controller | Agent 'customer service agent' (ID: 5) document store successfully by user khaerul@gmail.com
+2025-09-04 21:27:57,116 | INFO | app.controllers.agent_controller | Agent 'customer service agent' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 5)
+2025-09-04 21:28:08,122 | WARNING | app.AI.document_store.RAG | Error while load single documents: filename AQUAMAJI AI .docx and filetype docs
+2025-09-04 21:28:08,123 | ERROR | app.AI.document_store.RAG | Error loading document 'AQUAMAJI AI .docx': 400: Type of document, must be pdf or txt.
+2025-09-05 11:12:48,407 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-05 11:13:18,515 | INFO | app.controllers.agent_controller | Agent 'customer service agent' (ID: 6) document store successfully by user khaerul@gmail.com
+2025-09-05 11:13:18,549 | INFO | app.controllers.agent_controller | Agent 'customer service agent' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 6)
+2025-09-05 11:17:54,874 | INFO | app.controllers.agent_controller | Agent 'customer service agent' (ID: 7) document store successfully by user khaerul@gmail.com
+2025-09-05 11:17:54,886 | INFO | app.controllers.agent_controller | Agent 'customer service agent' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 7)
+2025-09-05 11:18:10,025 | INFO | app.AI.document_store.RAG | Load single document is successfully: filename 1670422926LAPORAN_KEUANGAN.pdf
+2025-09-05 11:18:13,685 | INFO | app.AI.document_store.RAG | Add document is successfully: document ID 6
+2025-09-05 11:21:45,909 | INFO | app.controllers.agent_controller | Agent 'customer service agent' (ID: 8) document store successfully by user khaerul@gmail.com
+2025-09-05 11:21:45,913 | INFO | app.controllers.agent_controller | Agent 'customer service agent' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 8)
+2025-09-05 11:21:56,305 | WARNING | app.AI.document_store.RAG | Error while load single documents: filename AQUAMAJI AI .docx and filetype docs
+2025-09-05 11:21:56,306 | ERROR | app.AI.document_store.RAG | Error loading document 'AQUAMAJI AI .docx': 400: Type of document, must be pdf or txt.
+2025-09-05 11:31:40,550 | INFO | app.controllers.agent_controller | Agent 'customer service agent' (ID: 9) document store successfully by user khaerul@gmail.com
+2025-09-05 11:31:40,577 | INFO | app.controllers.agent_controller | Agent 'customer service agent' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 9)
+2025-09-05 11:31:54,280 | WARNING | app.AI.document_store.RAG | Error while load single documents: filename AQUAMAJI AI .docx and filetype docs
+2025-09-05 11:31:54,295 | ERROR | app.AI.document_store.RAG | Error loading document 'AQUAMAJI AI .docx': 400: Type of document, must be pdf or txt.
+2025-09-05 11:42:54,226 | INFO | app.controllers.agent_controller | Agent 'customer service agent' (ID: 10) document store successfully by user khaerul@gmail.com
+2025-09-05 11:42:54,266 | INFO | app.controllers.agent_controller | Agent 'customer service agent' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 10)
+2025-09-05 11:43:06,234 | WARNING | app.AI.document_store.RAG | Error while load single documents: filename AQUAMAJI AI .docx and filetype docs
+2025-09-05 11:43:06,235 | INFO | app.AI.document_store.RAG | File documents/user_1/agent_10/AQUAMAJI AI .docx berhasil dihapus.
+2025-09-05 11:43:06,245 | ERROR | app.AI.document_store.RAG | Error loading document 'AQUAMAJI AI .docx': 400: Type of document, must be pdf or txt.
+2025-09-05 11:46:29,745 | INFO | app.controllers.document_controller | Agent 'customer service agent' (ID: 10) document store successfully by user khaerul@gmail.com
+2025-09-05 11:51:16,166 | WARNING | app.controllers.document_controller | Document is exist: file name AQUAMAJI AI .docx
+2025-09-05 11:52:35,887 | INFO | app.controllers.document_controller | Agent 'customer service agent' (ID: 10) document store successfully by user khaerul@gmail.com
+2025-09-05 11:52:35,903 | WARNING | app.AI.document_store.RAG | Error while load single documents: filename AQUAMAJI AI .docx and filetype docs
+2025-09-05 11:52:35,913 | INFO | app.AI.document_store.RAG | File documents/user_1/agent_10/AQUAMAJI AI .docx berhasil dihapus.
+2025-09-05 11:52:35,940 | ERROR | app.AI.document_store.RAG | Error loading document 'AQUAMAJI AI .docx': 400: Type of document, must be pdf or txt.
+2025-09-05 11:53:20,501 | INFO | app.controllers.document_controller | Agent 'customer service agent' (ID: 10) document store successfully by user khaerul@gmail.com
+2025-09-05 11:53:20,513 | WARNING | app.AI.document_store.RAG | Error while load single documents: filename AQUAMAJI AI .docx and filetype docs
+2025-09-05 11:53:20,534 | INFO | app.AI.document_store.RAG | File documents/user_1/agent_10/AQUAMAJI AI .docx berhasil dihapus.
+2025-09-05 11:53:20,613 | ERROR | app.AI.document_store.RAG | Error loading document 'AQUAMAJI AI .docx': 400: Type of document, must be pdf or txt.
+2025-09-05 11:53:34,094 | INFO | app.controllers.document_controller | Agent 'customer service agent' (ID: 10) document store successfully by user khaerul@gmail.com
+2025-09-05 11:53:34,117 | WARNING | app.AI.document_store.RAG | Error while load single documents: filename AQUAMAJI AI .docx and filetype docs
+2025-09-05 11:53:34,118 | INFO | app.AI.document_store.RAG | File documents/user_1/agent_10/AQUAMAJI AI .docx berhasil dihapus.
+2025-09-05 11:53:34,128 | ERROR | app.AI.document_store.RAG | Error loading document 'AQUAMAJI AI .docx': 400: Type of document, must be pdf or txt.
+2025-09-05 11:55:45,322 | WARNING | app.AI.document_store.RAG | Error while load single documents: filename AQUAMAJI AI .docx and filetype docs
+2025-09-05 11:55:45,333 | INFO | app.AI.document_store.RAG | File documents/user_1/agent_10/AQUAMAJI AI .docx berhasil dihapus.
+2025-09-05 11:55:45,400 | ERROR | app.AI.document_store.RAG | Error loading document 'AQUAMAJI AI .docx': 400: Type of document, must be pdf or txt.
+2025-09-05 13:14:28,479 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-05 13:36:28,204 | WARNING | main | Validation error: [{'type': 'missing', 'loc': ('body', 'file'), 'msg': 'Field required', 'input': None}]
+2025-09-05 13:37:28,934 | INFO | app.controllers.agent_controller | Agent 'customer service agent' (ID: 12) document store successfully by user khaerul@gmail.com
+2025-09-05 13:37:28,940 | INFO | app.controllers.agent_controller | Agent 'customer service agent' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 12)
+2025-09-05 18:50:37,854 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-05 18:50:46,659 | INFO | app.controllers.agent_controller | khaerul@gmail.com successfully retrieved all agents
+2025-09-05 18:52:24,355 | WARNING | main | Validation error: [{'type': 'model_attributes_type', 'loc': ('body',), 'msg': 'Input should be a valid dictionary or object to extract fields from', 'input': b'{\n    "platform": "telegram",\n}'}]
+2025-09-05 18:52:24,392 | ERROR | app.middlewares.error_handler | Unexpected error: Object of type bytes is not JSON serializable
+Traceback (most recent call last):
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 59, in wrapped_app
+    response = await handler(conn, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\main.py", line 87, in validation_exception_handler
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+    ...<4 lines>...
+        },
+    )
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\responses.py", line 190, in __init__
+    super().__init__(content, status_code, headers, media_type, background)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\responses.py", line 47, in __init__
+    self.body = self.render(content)
+                ~~~~~~~~~~~^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\responses.py", line 193, in render
+    return json.dumps(
+           ~~~~~~~~~~^
+        content,
+        ^^^^^^^^
+    ...<3 lines>...
+        separators=(",", ":"),
+        ^^^^^^^^^^^^^^^^^^^^^^
+    ).encode("utf-8")
+    ^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+                    f'is not JSON serializable')
+TypeError: Object of type bytes is not JSON serializable
+2025-09-05 18:52:42,599 | INFO | app.controllers.integration_controller | Agent integration to platform telegram is successfuly: agent ID 12 and user ID 1
+2025-09-05 18:52:42,604 | ERROR | app.controllers.integration_controller | Unexpected error while store the document: BaseModel.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+  File "D:\Saas_Project\app\controllers\integration_controller.py", line 39, in create_integration
+    return IntegrationOut(new_integration)
+TypeError: BaseModel.__init__() takes 1 positional argument but 2 were given
+2025-09-05 18:56:09,103 | INFO | app.controllers.integration_controller | Agent integration to platform telegram is successfuly: agent ID 12 and user ID 1
+2025-09-05 18:56:09,112 | ERROR | app.controllers.integration_controller | Unexpected error while store the document: 1 validation error for IntegrationOut
+platform
+  Field required [type=missing, input_value={'agent_id': 12, 'platfro...(2025, 9, 5, 18, 56, 9)}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+Traceback (most recent call last):
+  File "D:\Saas_Project\app\controllers\integration_controller.py", line 39, in create_integration
+    return IntegrationOut(
+        agent_id=agent_id,
+    ...<2 lines>...
+        created_at=new_integration.created_at,
+    )
+  File "D:\Saas_Project\.venv\Lib\site-packages\pydantic\main.py", line 253, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for IntegrationOut
+platform
+  Field required [type=missing, input_value={'agent_id': 12, 'platfro...(2025, 9, 5, 18, 56, 9)}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+2025-09-05 19:00:06,634 | INFO | app.controllers.integration_controller | Agent integration to platform telegram is successfuly: agent ID 12 and user ID 1
+2025-09-05 19:21:10,600 | WARNING | app.controllers.auth_controller | Invalid login attempt for email: khaerul@gmail.com
+2025-09-05 19:21:22,609 | INFO | app.controllers.auth_controller | New user registered with email: khaerul@gmail.com
+2025-09-05 19:21:27,763 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-05 19:21:46,953 | INFO | app.controllers.agent_controller | Agent 'customer service agent' (ID: 1) document store successfully by user khaerul@gmail.com
+2025-09-05 19:21:46,958 | INFO | app.controllers.agent_controller | Agent 'customer service agent' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 1)
+2025-09-05 19:22:00,723 | INFO | app.controllers.integration_controller | Agent integration to platform telegram is successfuly: agent ID 1 and user ID 1

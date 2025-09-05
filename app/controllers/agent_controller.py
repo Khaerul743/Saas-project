@@ -1,10 +1,13 @@
 import os
+import shutil
 from typing import List
 
-from fastapi import Form, HTTPException, UploadFile, status
+from fastapi import BackgroundTasks, Form, HTTPException, UploadFile, status
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
+from app.AI import simple_RAG_agent as AI
+from app.controllers.document_controller import agents
 from app.models.agent.agent_entity import Agent
 from app.models.agent.agent_model import (
     AgentOut,
@@ -12,6 +15,7 @@ from app.models.agent.agent_model import (
     GettingAllAgents,
     UpdateAgent,
 )
+from app.models.document.document_entity import Document
 from app.models.user.user_entity import User
 from app.utils.logger import get_logger
 
@@ -70,7 +74,13 @@ def get_all_agents(db: Session, current_user: dict):
         )
 
 
-def create_agent(db: Session, agent_data: CreateAgent, current_user: dict) -> AgentOut:
+async def create_agent(
+    db: Session,
+    file,
+    agent_data: CreateAgent,
+    current_user: dict,
+    background_tasks: BackgroundTasks,
+) -> AgentOut:
     """
     Create a new agent for the authenticated user.
 
@@ -112,9 +122,92 @@ def create_agent(db: Session, agent_data: CreateAgent, current_user: dict) -> Ag
 
         # Add to database
         db.add(new_agent)
-        db.commit()
-        db.refresh(new_agent)
+        db.flush()
+        # agent = (
+        #     db.query(Agent)
+        #     .filter(Agent.id == new_agent.id, Agent.user_id == current_user.get("id"))
+        #     .first()
+        # )
+        # if not agent:
+        #     logger.warning(
+        #         f"Agent not found: user {current_user.get('email')}, agent ID {new_agent.id}"
+        #     )
+        #     raise HTTPException(
+        #         status_code=status.HTTP_404_NOT_FOUND, detail="Agent not found"
+        #     )
 
+        # document = (
+        #     db.query(Document).filter(Document.file_name == file.filename).first()
+        # )
+        # if document:
+        #     logger.warning(f"Document is exist: file name {file.filename}")
+        #     raise HTTPException(
+        #         status_code=status.HTTP_400_BAD_REQUEST, detail="Document is exist"
+        #     )
+        if file:
+            if file.content_type == "application/pdf":
+                content_type = "pdf"
+            elif file.content_type == "application/txt":
+                content_type = "txt"
+            else:
+                content_type = "docs"
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail="File type must be pdf or txt.",
+                )
+            directory_path = (
+                f"documents/user_{current_user.get('id')}/agent_{new_agent.id}"
+            )
+            if not os.path.exists(directory_path):
+                os.makedirs(directory_path, exist_ok=True)
+            # await document_store(file, new_agent.id, current_user, db, background_tasks)
+
+            file_path = os.path.join(directory_path, file.filename)
+            with open(file_path, "wb") as buffer:
+                shutil.copyfileobj(file.file, buffer)
+
+            post_document = Document(
+                agent_id=new_agent.id,
+                file_name=file.filename,
+                content_type=content_type,
+            )
+            db.add(post_document)
+            db.commit()
+            db.refresh(post_document)
+            db.refresh(new_agent)
+            if not str(new_agent.id) in agents:
+
+                def init_agent():
+                    agents[str(new_agent.id)] = AI.Agent(
+                        directory_path,
+                        "chroma_db",
+                        f"agent_{new_agent.id}",
+                        model_llm=new_agent.model,
+                    )
+                    agents[str(new_agent.id)].add_document(
+                        file.filename,
+                        content_type,
+                        str(post_document.id),
+                        db,
+                        post_document,
+                        f"{directory_path}/{file.filename}",
+                    )
+                    agents[str(new_agent.id)].execute(
+                        {
+                            "user_message": "Tolong jelaskan secara singkat isi dari document tersebut"
+                        },
+                        "thread_123",
+                    )
+
+                background_tasks.add_task(init_agent)
+        else:
+            db.commit()
+            db.refresh(new_agent)
+
+        logger.info(
+            f"Agent '{new_agent.name}' (ID: {new_agent.id}) document store successfully by user "
+            f"{current_user.get('email')}"
+        )
         # Log successful creation
         logger.info(
             f"Agent '{new_agent.name}' created successfully by user {current_user.get('email')} "

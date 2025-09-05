@@ -7,12 +7,13 @@ from langchain_core.messages.base import BaseMessage
 from langchain_openai import ChatOpenAI
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import END, START, StateGraph
+from langgraph.graph.state import CompiledStateGraph
 from langgraph.prebuilt import ToolNode
 
-from app.models import AgentState
-from app.prompts import AgentPromptControl
-from app.RAG import RAGSystem
-from app.tools import AgentTools
+from app.AI.document_store.RAG import RAGSystem
+from app.AI.simple_RAG_agent.models import AgentState
+from app.AI.simple_RAG_agent.prompts import AgentPromptControl
+from app.AI.simple_RAG_agent.tools import AgentTools
 
 load_dotenv()
 
@@ -23,11 +24,12 @@ class Workflow:
         directory_path: str,
         chromadb_path: str,
         collection_name: str,
+        model_llm: str,
         include_memory: bool = False,
     ):
         self.chromadb_path = chromadb_path
         self.collection_name = collection_name
-        self.llm_for_reasoning = ChatOpenAI(model="gpt-4o")
+        self.llm_for_reasoning = ChatOpenAI(model=model_llm)
         self.llm_for_explanation = ChatOpenAI(model="gpt-3.5-turbo")
         self.memory_provider = os.environ.get("MEMORY_PROVIDER")
         self.provider_host = os.environ.get("PROVIDER_HOST")
@@ -49,17 +51,18 @@ class Workflow:
         graph.add_node("main_agent", self._main_agent)
         graph.add_node("get_document", ToolNode(tools=[self.tools.get_document]))
         graph.add_node("answer_rag_question", self._agent_answer_rag_question)
-        graph.add_node("load_document", self._load_document)
-        graph.add_node("describe_document", self._agent_describe_document)
+        # graph.add_node("load_document", self._load_document)
+        # graph.add_node("describe_document", self._agent_describe_document)
 
-        graph.add_conditional_edges(
-            START,
-            self._checking_message_type,
-            {"describe_document": "load_document", "main_agent": "main_agent"},
-        )
-        graph.add_edge("load_document", "describe_document")
-        graph.add_edge("describe_document", END)
+        # graph.add_conditional_edges(
+        #     START,
+        #     self._checking_message_type,
+        #     {"describe_document": "load_document", "main_agent": "main_agent"},
+        # )
+        # graph.add_edge("load_document", "describe_document")
+        # graph.add_edge("describe_document", END)
 
+        graph.add_edge(START, "main_agent")
         graph.add_conditional_edges(
             "main_agent",
             self._should_continue,
@@ -77,33 +80,33 @@ class Workflow:
             return "describe_document"
         return "main_agent"
 
-    def _load_document(self, state: AgentState):
-        if not os.path.exists(self.directiory_path + "/"):
-            os.makedirs(self.directiory_path, exist_ok=True)
-        documents = self.rag.load_document(self.directiory_path)
-        self.rag.add_document(documents=documents)
+    # def _load_document(self, state: AgentState):
+    #     if not os.path.exists(self.directiory_path + "/"):
+    #         os.makedirs(self.directiory_path, exist_ok=True)
+    #     documents = self.rag.load_document(self.directiory_path)
+    #     self.rag.add_document(documents=documents)
 
-        get_single_docs = self.rag.load_one_document(
-            self.directiory_path, state.document_name, state.document_type
-        )
-        document = "".join([item.page_content for item in get_single_docs])
+    #     get_single_docs = self.rag.load_one_document(
+    #         self.directiory_path, state.document_name, state.document_type
+    #     )
+    #     document = "".join([item.page_content for item in get_single_docs])
 
-        if not os.path.exists(f"{self.directiory_path}/{state.document_name}"):
-            document = "not found."
+    #     if not os.path.exists(f"{self.directiory_path}/{state.document_name}"):
+    #         document = "not found."
 
-        return {"document_content": document}
+    #     return {"document_content": document}
 
-    def _agent_describe_document(self, state: AgentState):
-        prompt = self.prompts.agent_describe_document(
-            state.user_message, state.document_content
-        )
-        llm = self.llm_for_explanation
-        response = llm.invoke(prompt)
-        return {
-            "messages": state.messages + [response],
-            "response": response.content,
-            "is_include_document": False,
-        }
+    # def _agent_describe_document(self, state: AgentState):
+    #     prompt = self.prompts.agent_describe_document(
+    #         state.user_message, state.document_content
+    #     )
+    #     llm = self.llm_for_explanation
+    #     response = llm.invoke(prompt)
+    #     return {
+    #         "messages": state.messages + [response],
+    #         "response": response.content,
+    #         "is_include_document": False,
+    #     }
 
     def _formatted_message(self, messages):
         formatted = []

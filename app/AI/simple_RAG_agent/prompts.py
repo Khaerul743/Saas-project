@@ -3,7 +3,7 @@ from typing import Optional
 from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage, SystemMessage
 
-from app.memory import MemoryControl
+from app.AI.memory.memory import MemoryControl
 
 load_dotenv()
 

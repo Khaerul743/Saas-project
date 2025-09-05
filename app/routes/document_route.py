@@ -1,6 +1,15 @@
 import os
 
-from fastapi import APIRouter, Depends, File, Form, Request, UploadFile, status
+from fastapi import (
+    APIRouter,
+    BackgroundTasks,
+    Depends,
+    File,
+    Form,
+    Request,
+    UploadFile,
+    status,
+)
 from sqlalchemy.orm import Session
 
 from app.configs.database import get_db
@@ -28,11 +37,12 @@ def getAllDocumentByAgentId(
 
 
 @router.post("", status_code=status.HTTP_201_CREATED)
-def documentStore(
+async def documentStore(
     file: UploadFile = File(...),
     agent_id: int = Form(...),
     current_user: dict = Depends(role_required(["admin", "user"])),
     db: Session = Depends(get_db),
+    background_tasks: BackgroundTasks = None,
 ):
     try:
         print(file)
@@ -40,7 +50,9 @@ def documentStore(
         directory_path = "documents"
         if not os.path.exists(directory_path):
             os.makedirs(directory_path, exist_ok=True)
-        response = dc.document_store(file, agent_id, current_user, db)
+        response = await dc.document_store(
+            file, agent_id, current_user, db, background_tasks
+        )
         return success_response(
             "Store document is successfully",
             {"filename": response.file_name, "content_type": response.content_type},

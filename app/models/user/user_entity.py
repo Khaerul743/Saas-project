@@ -31,7 +31,12 @@ class User(Base):
     )
 
     # Relationship
-    agents = relationship("Agent", back_populates="user", cascade="all, delete-orphan")
+    agents = relationship(
+        "Agent",
+        back_populates="user",
+        cascade="all, delete-orphan",
+        passive_deletes=True,
+    )
 
     def __repr__(self):
         return f"<User email={self.email} role={self.role}>"

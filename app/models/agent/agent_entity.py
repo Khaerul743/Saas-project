@@ -8,7 +8,11 @@ class Agent(Base):
     __tablename__ = "agents"
 
     id = sa.Column(sa.Integer, primary_key=True, index=True, autoincrement=True)
-    user_id = sa.Column(sa.Integer, sa.ForeignKey("users.id"), nullable=False)
+    user_id = sa.Column(
+        sa.Integer,
+        sa.ForeignKey("users.id", ondelete="CASCADE", onupdate="CASCADE"),
+        nullable=False,
+    )
     name = sa.Column(
         sa.String(100),
         nullable=False,
@@ -58,7 +62,16 @@ class Agent(Base):
     user = relationship("User", back_populates="agents")
     # Relationship
     documents = relationship(
-        "Document", back_populates="agent", cascade="all, delete-orphan"
+        "Document",
+        back_populates="agent",
+        cascade="all, delete-orphan",
+        passive_deletes=True,
+    )
+    integrations = relationship(
+        "Integration",
+        back_populates="agent",
+        cascade="all, delete-orphan",
+        passive_deletes=True,
     )
 
     def __repr__(self):

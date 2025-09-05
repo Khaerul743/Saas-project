@@ -1,0 +1,14 @@
+from datetime import datetime
+from typing import Dict, Literal, Optional
+
+from pydantic import BaseModel
+
+
+class IntegrationBase(BaseModel):
+    platform: Literal["whatsapp", "telegram", "web"]
+    status: Literal["active", "non-active"] = "active"
+
+
+class IntegrationOut(IntegrationBase):
+    agent_id: int
+    created_at: datetime

@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     DB_HOST: str
     DB_PORT: int
     DB_NAME: str
+    OPENAI_API_KEY: str
 
     SECRET_KEY: str
     ALGORITHM: str = "HS256"

@@ -1,6 +1,17 @@
+import json
 import os
 
-from fastapi import APIRouter, Depends, File, Form, Query, Request, UploadFile, status
+from fastapi import (
+    APIRouter,
+    BackgroundTasks,
+    Depends,
+    File,
+    Form,
+    Query,
+    Request,
+    UploadFile,
+    status,
+)
 from sqlalchemy.orm import Session
 
 from app.configs.database import get_db
@@ -11,6 +22,7 @@ from app.controllers.agent_controller import (
     get_all_agents,
     update_agent,
 )
+from app.controllers.document_controller import document_store
 from app.middlewares.RBAC import role_required
 from app.models.agent.agent_model import CreateAgent, ResponseAPI, UpdateAgent
 from app.utils.response import success_response
@@ -33,13 +45,16 @@ def getAllAgent(
         raise
 
 
+# response_model=ResponseAPI,
 @router.post("", response_model=ResponseAPI, status_code=status.HTTP_201_CREATED)
 @limiter.limit("10/minute")
-def createAgent(
+async def createAgent(
     request: Request,
-    agent_data: CreateAgent,
+    file: UploadFile = None,
+    agent_data: str = Form(...),
     current_user: dict = Depends(role_required(["admin", "user"])),
     db: Session = Depends(get_db),
+    background_tasks: BackgroundTasks = None,
 ):
     """
     Create a new agent for the authenticated user.
@@ -54,9 +69,14 @@ def createAgent(
         ResponseAPI: Success response with created agent data
     """
     try:
-        # Create agent using controller
-        created_agent = create_agent(db, agent_data, current_user)
-
+        created_agent = await create_agent(
+            db,
+            file,
+            CreateAgent(**json.loads(agent_data)),
+            current_user,
+            background_tasks,
+        )
+        print(f"created_agent: {created_agent}")
         # Return success response
         return success_response(
             message="Agent created successfully", data=created_agent
