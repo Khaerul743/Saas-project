@@ -2979,3 +2979,85 @@ Traceback (most recent call last):
 AttributeError: 'MetaData' object has no attribute 'is_property'
 2025-09-08 12:14:50,880 | WARNING | app.dependencies.auth | Access attempt without token
 2025-09-08 12:15:02,206 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-08 19:25:20,549 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-08 19:44:39,389 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-08 19:47:13,668 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-08 20:02:32,492 | ERROR | app.middlewares.error_handler | Unexpected error: type object 'HistoryMessage' has no attribute 'agent_id'
+Traceback (most recent call last):
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\.venv\Lib\site-packages\fastapi\routing.py", line 215, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\starlette\concurrency.py", line 38, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\anyio\to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2476, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\Saas_Project\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 967, in run
+    result = context.run(func, *args)
+  File "D:\Saas_Project\app\routes\dashboard_route.py", line 48, in token_usage_trend
+    token_stats = dc.token_usage_trend(
+        current_user=current_user,
+    ...<3 lines>...
+        group_by=group_by,
+    )
+  File "D:\Saas_Project\app\controllers\dashboard_controller.py", line 137, in token_usage_trend
+    .join(Agent, Agent.id == HistoryMessage.agent_id)
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'HistoryMessage' has no attribute 'agent_id'
+2025-09-08 20:41:08,290 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-08 20:41:18,918 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-08 20:41:26,210 | WARNING | main | Validation error: [{'type': 'missing', 'loc': ('query', 'start_date'), 'msg': 'Field required', 'input': None}, {'type': 'missing', 'loc': ('query', 'end_date'), 'msg': 'Field required', 'input': None}]
+2025-09-08 20:42:04,339 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-08 00:00:00, total_periods=1
+2025-09-08 20:43:21,350 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-08 00:00:00, total_periods=1

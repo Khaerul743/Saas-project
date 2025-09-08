@@ -25,6 +25,7 @@ from app.models.user_agent.user_agent_entity import UserAgent  # noqa: F401
 from app.routes import (
     agent_route,
     auth_route,
+    dashboard_route,
     document_route,
     history_route,
     integration_route,
@@ -73,6 +74,7 @@ app.include_router(document_route.router)
 app.include_router(integration_route.router)
 app.include_router(platform_route.router)
 app.include_router(history_route.router)
+app.include_router(dashboard_route.router)
 
 
 @app.get("/")
