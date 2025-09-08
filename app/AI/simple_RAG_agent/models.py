@@ -13,6 +13,7 @@ class AgentState(BaseModel):
     document_name: Optional[str] = "none"
     document_content: Optional[str] = "none"
     document_type: Optional[str] = "none"
+    total_token: Optional[int] = 0
     # can_answer: bool = False
     reason: Optional[str] = "none"
     document_description: Optional[str] = "none"

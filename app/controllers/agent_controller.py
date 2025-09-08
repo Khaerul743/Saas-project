@@ -3,8 +3,9 @@ import shutil
 from typing import List
 
 from fastapi import BackgroundTasks, Form, HTTPException, UploadFile, status
-from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError, SQLAlchemyError
+from sqlalchemy.orm import Session, joinedload
+from sqlalchemy.orm.query import Query
 
 from app.AI import simple_RAG_agent as AI
 from app.controllers.document_controller import agents
@@ -16,62 +17,149 @@ from app.models.agent.agent_model import (
     UpdateAgent,
 )
 from app.models.document.document_entity import Document
+from app.models.history_message.history_entity import HistoryMessage
+from app.models.history_message.metadata_entity import Metadata
 from app.models.user.user_entity import User
+from app.models.user_agent.user_agent_entity import UserAgent
 from app.utils.logger import get_logger
 
 logger = get_logger(__name__)
 
 
 def get_all_agents(db: Session, current_user: dict):
-    # Get user from database to ensure user exists
     try:
+        # --- Validasi user ---
         user = db.query(User).filter(User.id == current_user.get("id")).first()
         if not user:
             logger.warning(
-                f"User not found for getting all agents: user_id {current_user.get('id')}"
+                f"User not found or not authenticated: user {current_user.get('email')}"
             )
             raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="User not found",
             )
-        agents = db.query(Agent).filter(Agent.user_id == current_user.get("id")).all()
 
-        agents = [
-            {
-                "avatar": agent.avatar,
-                "role": agent.role,
-                "status": agent.status,
-                "short_term_memory": agent.short_term_memory,
-                "tone": agent.tone,
-                "name": agent.name,
-                "model": agent.model,
-                "description": agent.description,
-                "base_prompt": agent.base_prompt,
-                "long_term_memory": agent.long_term_memory,
-                "created_at": agent.created_at,
-            }
-            for agent in agents
-        ]
-        logger.info(f"{current_user.get('email')} successfully retrieved all agents")
-        return agents
-    except IntegrityError as e:
-        logger.error(f"Database integrity error while getting agents: {str(e)}")
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Getting agents failed due to database constraint violation",
+        # --- Query agents dengan eager loading ---
+        agents = (
+            db.query(Agent)
+            .filter(Agent.user_id == user.id)
+            .options(
+                joinedload(Agent.user_agents)
+                .joinedload(UserAgent.history_messages)
+                .joinedload(HistoryMessage.message_metadata)
+            )
+            .all()
         )
+
+        if not agents:
+            logger.info(f"No agents found for user {current_user.get('email')}")
+            return []  # frontend dapet array kosong, bukan error
+
+        agents_summary = []
+
+        for agent in agents:
+            # Ambil semua history dari semua user_agents agent ini
+            all_histories = []
+            for ua in agent.user_agents:
+                all_histories.extend(ua.history_messages)
+
+            # Total percakapan
+            total_conversations = len(all_histories)
+
+            # Rata-rata response time
+            response_times = [
+                h.message_metadata.response_time
+                for h in all_histories
+                if h.message_metadata is not None
+            ]
+            avg_response_time = (
+                sum(response_times) / len(response_times) if response_times else 0
+            )
+
+            agents_summary.append(
+                {
+                    "avatar": agent.avatar,
+                    "name": agent.name,
+                    "model": agent.model,
+                    "status": agent.status,
+                    "description": agent.description,
+                    "total_conversations": total_conversations,
+                    "avg_response_time": round(avg_response_time, 2),
+                }
+            )
+
+        logger.info(
+            f"Successfully retrieved agents for user {current_user.get('email')}"
+        )
+        return agents_summary
 
     except HTTPException:
-        # Re-raise HTTP exceptions
+        # biarin lewat kalau memang sudah HTTPException
         raise
-    except Exception as e:
-        db.rollback()
-        logger.error(
-            f"Unexpected error while getting all agents: {str(e)}", exc_info=True
+    except SQLAlchemyError as e:
+        logger.error(f"Database error while getting agents: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Database error, please try again later",
         )
+    except Exception as e:
+        logger.error(f"Unexpected error while getting agents: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Internal server error, please try again later",
         )
+
+
+# def get_all_agents(db: Session, current_user: dict):
+#     # Get user from database to ensure user exists
+#     try:
+#         user = db.query(User).filter(User.id == current_user.get("id")).first()
+#         if not user:
+#             logger.warning(
+#                 f"User not found for getting all agents: user_id {current_user.get('id')}"
+#             )
+#             raise HTTPException(
+#                 status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
+#             )
+#         agents = db.query(Agent).filter(Agent.user_id == current_user.get("id")).all()
+
+#         agents = [
+#             {
+#                 "avatar": agent.avatar,
+#                 "role": agent.role,
+#                 "status": agent.status,
+#                 "short_term_memory": agent.short_term_memory,
+#                 "tone": agent.tone,
+#                 "name": agent.name,
+#                 "model": agent.model,
+#                 "description": agent.description,
+#                 "base_prompt": agent.base_prompt,
+#                 "long_term_memory": agent.long_term_memory,
+#                 "created_at": agent.created_at,
+#             }
+#             for agent in agents
+#         ]
+#         logger.info(f"{current_user.get('email')} successfully retrieved all agents")
+#         return agents
+#     except IntegrityError as e:
+#         logger.error(f"Database integrity error while getting agents: {str(e)}")
+#         raise HTTPException(
+#             status_code=status.HTTP_400_BAD_REQUEST,
+#             detail="Getting agents failed due to database constraint violation",
+#         )
+
+#     except HTTPException:
+#         # Re-raise HTTP exceptions
+#         raise
+#     except Exception as e:
+#         db.rollback()
+#         logger.error(
+#             f"Unexpected error while getting all agents: {str(e)}", exc_info=True
+#         )
+#         raise HTTPException(
+#             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+#             detail="Internal server error, please try again later",
+#         )
 
 
 async def create_agent(
@@ -144,6 +232,9 @@ async def create_agent(
         #     raise HTTPException(
         #         status_code=status.HTTP_400_BAD_REQUEST, detail="Document is exist"
         #     )
+        directory_path = f"documents/user_{current_user.get('id')}/agent_{new_agent.id}"
+        if not os.path.exists(directory_path):
+            os.makedirs(directory_path, exist_ok=True)
         if file:
             if file.content_type == "application/pdf":
                 content_type = "pdf"
@@ -155,11 +246,6 @@ async def create_agent(
                     status_code=status.HTTP_400_BAD_REQUEST,
                     detail="File type must be pdf or txt.",
                 )
-            directory_path = (
-                f"documents/user_{current_user.get('id')}/agent_{new_agent.id}"
-            )
-            if not os.path.exists(directory_path):
-                os.makedirs(directory_path, exist_ok=True)
             # await document_store(file, new_agent.id, current_user, db, background_tasks)
 
             file_path = os.path.join(directory_path, file.filename)
@@ -174,16 +260,21 @@ async def create_agent(
             db.add(post_document)
             db.commit()
             db.refresh(post_document)
+        else:
+            db.commit()
             db.refresh(new_agent)
-            if not str(new_agent.id) in agents:
 
-                def init_agent():
-                    agents[str(new_agent.id)] = AI.Agent(
-                        directory_path,
-                        "chroma_db",
-                        f"agent_{new_agent.id}",
-                        model_llm=new_agent.model,
-                    )
+        if not str(new_agent.id) in agents:
+
+            def init_agent():
+                agents[str(new_agent.id)] = AI.Agent(
+                    directory_path,
+                    "chroma_db",
+                    f"agent_{new_agent.id}",
+                    model_llm=new_agent.model,
+                    short_memory=agent_data.short_term_memory,
+                )
+                if file:
                     agents[str(new_agent.id)].add_document(
                         file.filename,
                         content_type,
@@ -192,17 +283,12 @@ async def create_agent(
                         post_document,
                         f"{directory_path}/{file.filename}",
                     )
-                    agents[str(new_agent.id)].execute(
-                        {
-                            "user_message": "Tolong jelaskan secara singkat isi dari document tersebut"
-                        },
-                        "thread_123",
-                    )
+                agents[str(new_agent.id)].execute(
+                    {"user_message": "hai"},
+                    "thread_123",
+                )
 
-                background_tasks.add_task(init_agent)
-        else:
-            db.commit()
-            db.refresh(new_agent)
+            background_tasks.add_task(init_agent)
 
         logger.info(
             f"Agent '{new_agent.name}' (ID: {new_agent.id}) document store successfully by user "
@@ -213,7 +299,7 @@ async def create_agent(
             f"Agent '{new_agent.name}' created successfully by user {current_user.get('email')} "
             f"(user_id: {user.id}, agent_id: {new_agent.id})"
         )
-
+        print(f"Agents: {agents}")
         # Return agent data in expected format
         return AgentOut(
             id=new_agent.id,

@@ -26,6 +26,7 @@ class Workflow:
         collection_name: str,
         model_llm: str,
         include_memory: bool = False,
+        short_memory: bool = False,
     ):
         self.chromadb_path = chromadb_path
         self.collection_name = collection_name
@@ -41,6 +42,7 @@ class Workflow:
             provider_port=self.provider_port,
         )
         self.memory = MemorySaver()
+        self.short_memory = short_memory
         self.tools = AgentTools(self.chromadb_path, self.collection_name)
         self.build = self._build_workflow()
         self.rag = RAGSystem(self.chromadb_path, self.collection_name)
@@ -124,9 +126,14 @@ class Workflow:
 
     def _main_agent(self, state: AgentState) -> Dict[str, Any]:
         prompt = self.prompts.main_agent(state.user_message)
-        messages = [prompt[0]] + state.messages + [prompt[1]]
+
+        all_previous_messages = []
+        if self.short_memory:
+            all_previous_messages = state.messages
+        messages = [prompt[0]] + all_previous_messages + [prompt[1]]
+        # print(messages)
         llm = self.llm_for_reasoning.bind_tools([self.tools.get_document])
-        response: BaseMessage = llm.invoke(messages)
+        response = llm.invoke(messages)
         if self.prompts.is_include_memory:
             message = [
                 HumanMessage(content=state.user_message),
@@ -135,14 +142,15 @@ class Workflow:
             formatted_message = self._formatted_message(message)
             print(formatted_message)
             self.prompts.memory.add_context(formatted_message, self.prompts.memory_id)
-
-        print(f"AI: {response.content}")
-        print(f"state: {state.messages} ")
+        total_tokens = response.usage_metadata["total_tokens"]
+        # print(f"AI: {response.content}")
+        # print(f"state: {state.messages} ")
         return {
             "messages": state.messages
             + [HumanMessage(content=state.user_message)]
             + [response],
             "response": response.content,
+            "total_token": state.total_token + total_tokens,
         }
 
     def _should_continue(self, state: AgentState):
@@ -158,8 +166,13 @@ class Workflow:
         )
         llm = self.llm_for_explanation
         response = llm.invoke([prompt[0]] + state.messages + [prompt[1]])
-        print(f"response: {response.content}")
-        return {"messages": state.messages + [response], "response": response.content}
+        total_tokens = response.usage_metadata["total_tokens"]
+        # print(f"response: {response.content}")
+        return {
+            "messages": state.messages + [response],
+            "response": response.content,
+            "total_token": state.total_token + total_tokens,
+        }
 
     def run(self, state: Dict, thread_id: str):
         return self.build.invoke(

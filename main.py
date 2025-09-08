@@ -14,16 +14,21 @@ from app.middlewares.error_handler import ErrorHandlerMiddleware
 from app.middlewares.limiter_handler import rate_limit_exceeded_handler
 from app.models.agent.agent_entity import Agent  # noqa: F401
 from app.models.document.document_entity import Document  # noqa: F401
+from app.models.history_message.history_entity import HistoryMessage  # noqa: F401
+from app.models.history_message.metadata_entity import Metadata  # noqa: F401
 from app.models.integration.integration_entity import Integration  # noqa: F401
 from app.models.platform.telegram_entity import Telegram  # noqa: F401
+from app.models.user.user_entity import User  # noqa: F401
+from app.models.user_agent.user_agent_entity import UserAgent  # noqa: F401
 
 # Ensure all model mappers are registered before metadata.create_all
-from app.models.user.user_entity import User  # noqa: F401
 from app.routes import (
     agent_route,
     auth_route,
     document_route,
+    history_route,
     integration_route,
+    platform_route,
     user_route,
 )
 from app.utils.logger import get_logger
@@ -66,6 +71,8 @@ app.include_router(auth_route.router)
 app.include_router(agent_route.router)
 app.include_router(document_route.router)
 app.include_router(integration_route.router)
+app.include_router(platform_route.router)
+app.include_router(history_route.router)
 
 
 @app.get("/")

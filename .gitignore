@@ -12,3 +12,6 @@ wheels/
 
 documents/
 documents
+
+test.py
+test_agent_endpoint.py

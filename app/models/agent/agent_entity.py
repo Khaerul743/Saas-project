@@ -74,5 +74,12 @@ class Agent(Base):
         passive_deletes=True,
     )
 
+    user_agents = relationship(
+        "UserAgent",
+        back_populates="agent",
+        cascade="all, delete-orphan",
+        passive_deletes=True,
+    )
+
     def __repr__(self):
         return f"<Agent name={self.name} user_id={self.user_id}>"

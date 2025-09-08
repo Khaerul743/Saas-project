@@ -1,4 +1,5 @@
 import os
+import time
 from typing import Any, Dict
 
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
@@ -14,19 +15,28 @@ class Agent:
         collection_name: str,
         model_llm: str,
         include_memory=False,
+        short_memory=False,
     ):
         self.directory_path = directory_path
+        self.llm_model = model_llm
         self.workflow = Workflow(
             directory_path=directory_path,
             chromadb_path=chromadb_path,
             collection_name=collection_name,
             include_memory=include_memory,
-            model_llm=model_llm,
+            model_llm=self.llm_model,
+            short_memory=short_memory,
         )
         self._history_messages = None
+        self.response_time = None
+        self.token_usage = None
 
     def execute(self, state: Dict, thread_id):
+        start_time = time.perf_counter()
         result = self.workflow.run(state=state, thread_id=thread_id)
+        end_time = time.perf_counter()
+        self.response_time = round(end_time - start_time, 2)
+        self.token_usage = result.get("total_token")
         self._history_messages = result["messages"]
         return result
 

@@ -9,6 +9,10 @@ class IntegrationBase(BaseModel):
     status: Literal["active", "non-active"] = "active"
 
 
+class CreateIntegration(IntegrationBase):
+    api_key: str
+
+
 class IntegrationOut(IntegrationBase):
     agent_id: int
     created_at: datetime

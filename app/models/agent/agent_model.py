@@ -22,7 +22,7 @@ class AgentBase(BaseModel):
 
 
 class CreateAgent(AgentBase):
-    short_term_memory: Optional[bool] = False
+    short_term_memory: bool = False
     long_term_memory: Optional[bool] = False
 
 
