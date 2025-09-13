@@ -20,6 +20,7 @@ from app.models.document.document_entity import Document
 from app.models.history_message.history_entity import HistoryMessage
 from app.models.history_message.metadata_entity import Metadata
 from app.models.integration.integration_entity import Integration
+from app.models.platform.api_entity import Api
 from app.models.user.user_entity import User
 from app.models.user_agent.user_agent_entity import UserAgent
 from app.utils.logger import get_logger
@@ -59,6 +60,8 @@ def get_all_agents(db: Session, current_user: dict):
                 .joinedload(HistoryMessage.message_metadata),
                 joinedload(Agent.integrations)
                 .joinedload(Integration.telegram),
+                joinedload(Agent.integrations)
+                .joinedload(Integration.api),
             )
             .all()
         )
@@ -106,6 +109,9 @@ def get_all_agents(db: Session, current_user: dict):
                     # Get API key from telegram integration if available
                     if active_integration.telegram:
                         api_key = active_integration.telegram.api_key
+                    # Get API key from api integration if available
+                    elif active_integration.api:
+                        api_key = active_integration.api.api_key
                 else:
                     # If no active integration, take the first one
                     first_integration = agent.integrations[0]
@@ -113,6 +119,9 @@ def get_all_agents(db: Session, current_user: dict):
                     # Get API key from telegram integration if available
                     if first_integration.telegram:
                         api_key = first_integration.telegram.api_key
+                    # Get API key from api integration if available
+                    elif first_integration.api:
+                        api_key = first_integration.api.api_key
 
             agents_summary.append(
                 {

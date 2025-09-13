@@ -16,3 +16,4 @@ documents
 chroma_db/
 test.py
 test_agent_endpoint.py
+logs/

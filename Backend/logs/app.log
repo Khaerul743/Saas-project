@@ -5741,3 +5741,5 @@ fastapi.exceptions.HTTPException: 400: Invalid API key.
 2025-09-13 13:53:06,262 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
 2025-09-13 13:54:11,868 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
 2025-09-13 14:07:11,268 | WARNING | main | Validation error: [{'type': 'missing', 'loc': ('body', 'api_key'), 'msg': 'Field required', 'input': {'platform': 'api'}}]
+2025-09-13 14:22:19,623 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-13 14:22:43,376 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
