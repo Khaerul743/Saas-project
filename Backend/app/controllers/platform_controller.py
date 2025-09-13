@@ -1,7 +1,3 @@
-import os
-
-import requests
-from dotenv import load_dotenv
 from fastapi import HTTPException, Response, status
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, joinedload
@@ -216,13 +212,14 @@ def api_handler(api_key: str, agent_id: int, data: dict, db: Session):
             "user_message": user_message,
             "response": agent_response.get("response", ""),
         }
+    except HTTPException:
+        db.rollback()
+        raise
+
     except Exception as e:
         logger.error(f"Unexpected error while sending api message: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_200_OK,
             detail="Internal server error, please try again later.",
         )
-    except HTTPException:
-        db.rollback()
-        raise
     

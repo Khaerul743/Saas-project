@@ -10,7 +10,7 @@ class IntegrationBase(BaseModel):
 
 
 class CreateIntegration(IntegrationBase):
-    api_key: str
+    api_key: Optional[str] = None
 
 
 class IntegrationOut(IntegrationBase):

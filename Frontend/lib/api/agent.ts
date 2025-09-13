@@ -42,7 +42,7 @@ export interface UpdateAgentRequest {
 
 export interface CreateIntegrationRequest {
   platform: string
-  api_key: string
+  api_key?: string
 }
 
 export class AgentService extends BaseApiService {

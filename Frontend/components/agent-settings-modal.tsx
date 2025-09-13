@@ -13,15 +13,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Textarea } from "@/components/ui/textarea"
 import { agentService, CreateAgentRequest, CreateIntegrationRequest } from "@/lib/api"; // Fixed import
 import {
-    Brain,
-    ChevronLeft,
-    ChevronRight,
-    Cpu,
-    Globe,
-    MessageCircle,
-    Phone,
-    Settings,
-    Upload
+  Brain,
+  ChevronLeft,
+  ChevronRight,
+  Code,
+  Cpu,
+  Globe,
+  MessageCircle,
+  Phone,
+  Settings,
+  Upload
 } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 
@@ -249,7 +250,7 @@ export function AgentSettingsModal({ agent, isOpen, onClose }: AgentSettingsModa
           return
         }
         
-        if (!formData.apiKey.trim()) {
+        if (formData.platform === "telegram" && !formData.apiKey.trim()) {
           alert('Please enter Telegram API key')
           return
         }
@@ -281,9 +282,14 @@ export function AgentSettingsModal({ agent, isOpen, onClose }: AgentSettingsModa
         console.log('Agent created:', agentResponse)
         
         // Step 2: Create integration
-        const integrationData: CreateIntegrationRequest = {
-          platform: formData.platform,
-          api_key: formData.apiKey
+        let integrationData: CreateIntegrationRequest
+        if (formData.platform === "api") {
+          integrationData = { platform: formData.platform }
+        } else {
+          integrationData = {
+            platform: formData.platform,
+            api_key: formData.apiKey
+          }
         }
         const integrationResponse = await agentService.createIntegration(
           agentResponse.data.id!,
@@ -571,6 +577,12 @@ export function AgentSettingsModal({ agent, isOpen, onClose }: AgentSettingsModa
                         Website
                       </div>
                     </SelectItem>
+                    <SelectItem value="api">
+                      <div className="flex items-center gap-2">
+                        <Code className="h-4 w-4" />
+                        API
+                      </div>
+                    </SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -586,6 +598,15 @@ export function AgentSettingsModal({ agent, isOpen, onClose }: AgentSettingsModa
                     placeholder="Enter your Telegram bot token" 
                   />
                   <p className="text-xs text-muted-foreground">Get your bot token from @BotFather on Telegram</p>
+                </div>
+              )}
+
+              {formData.platform === "api" && (
+                <div className="p-4 bg-muted/50 rounded-lg border border-dashed">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Code className="h-4 w-4" />
+                    <span>API integration selected. No additional configuration required.</span>
+                  </div>
                 </div>
               )}
             </CardContent>
