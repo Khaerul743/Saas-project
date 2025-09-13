@@ -17,10 +17,9 @@ from app.models.document.document_entity import Document  # noqa: F401
 from app.models.history_message.history_entity import HistoryMessage  # noqa: F401
 from app.models.history_message.metadata_entity import Metadata  # noqa: F401
 from app.models.integration.integration_entity import Integration  # noqa: F401
-from app.models.platform.telegram_entity import Telegram  # noqa: F401
+from app.models.platform.platform_entity import Platform  # noqa: F401
 from app.models.user.user_entity import User  # noqa: F401
 from app.models.user_agent.user_agent_entity import UserAgent  # noqa: F401
-from app.models.platform.api_entity import Api  # noqa: F401
 from app.models.user.api_key_entity import ApiKey  # noqa: F401
 
 # Ensure all model mappers are registered before metadata.create_all

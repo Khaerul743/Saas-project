@@ -5743,3 +5743,168 @@ fastapi.exceptions.HTTPException: 400: Invalid API key.
 2025-09-13 14:07:11,268 | WARNING | main | Validation error: [{'type': 'missing', 'loc': ('body', 'api_key'), 'msg': 'Field required', 'input': {'platform': 'api'}}]
 2025-09-13 14:22:19,623 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
 2025-09-13 14:22:43,376 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 14:45:57,096 | INFO | app.controllers.auth_controller | New user registered with email: khaerul@gmail.com
+2025-09-13 14:46:02,861 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-13 14:46:32,432 | INFO | app.controllers.agent_controller | Agent 'ketiga' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 1)
+2025-09-13 14:46:49,405 | ERROR | app.controllers.integration_controller | Unexpected error while store the document: 'str' object has no attribute '_sa_instance_state'
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\controllers\integration_controller.py", line 37, in create_integration
+    new_integration = Integration(
+        agent_id=agent_id, platform=payload.platform, status=payload.status
+    )
+  File "<string>", line 4, in __init__
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 2182, in _declarative_constructor
+    setattr(self, k, kwargs[k])
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\attributes.py", line 540, in __set__
+    self.impl.set(
+    ~~~~~~~~~~~~~^
+        instance_state(instance), instance_dict(instance), value, None
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\attributes.py", line 1477, in set
+    value = self.fire_replace_event(state, dict_, value, old, initiator)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\attributes.py", line 1516, in fire_replace_event
+    value = fn(
+        state, value, previous, initiator or self._replace_token
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\attributes.py", line 2171, in emit_backref_from_scalar_set_event
+    instance_state(child),
+    ~~~~~~~~~~~~~~^^^^^^^
+AttributeError: 'str' object has no attribute '_sa_instance_state'
+2025-09-13 14:54:47,980 | ERROR | app.middlewares.error_handler | Database error: back_populates on relationship 'Platform.integration' refers to attribute 'Integration.platform' that is not a relationship.  The back_populates parameter should refer to the name of a relationship on the target class.
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 215, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\concurrency.py", line 38, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2476, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 967, in run
+    result = context.run(func, *args)
+  File "D:\Saas_Project\Backend\app\routes\auth_route.py", line 15, in register
+    user = registerHandler(db, payload)
+  File "D:\Saas_Project\Backend\app\controllers\auth_controller.py", line 22, in registerHandler
+    user = db.query(User).filter(User.email == payload.email).first()
+           ~~~~~~~~^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2955, in query
+    return self._query_cls(entities, self, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\query.py", line 276, in __init__
+    self._set_entities(entities)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\query.py", line 289, in _set_entities
+    coercions.expect(
+    ~~~~~~~~~~~~~~~~^
+        roles.ColumnsClauseRole,
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        post_inspect=True,
+        ^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\sql\coercions.py", line 388, in expect
+    insp._post_inspect
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 1338, in __get__
+    obj.__dict__[self.__name__] = result = self.fget(obj)
+                                           ~~~~~~~~~^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2724, in _post_inspect
+    self._check_configure()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2401, in _check_configure
+    _configure_registries({self.registry}, cascade=True)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 4218, in _configure_registries
+    _do_configure_registries(registries, cascade)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 4259, in _do_configure_registries
+    mapper._post_configure_properties()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2418, in _post_configure_properties
+    prop.init()
+    ~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\interfaces.py", line 595, in init
+    self.do_init()
+    ~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\relationships.py", line 1660, in do_init
+    self._generate_backref()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\relationships.py", line 2144, in _generate_backref
+    self._add_reverse_property(self.back_populates)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\relationships.py", line 1593, in _add_reverse_property
+    raise sa_exc.InvalidRequestError(
+    ...<4 lines>...
+    )
+sqlalchemy.exc.InvalidRequestError: back_populates on relationship 'Platform.integration' refers to attribute 'Integration.platform' that is not a relationship.  The back_populates parameter should refer to the name of a relationship on the target class.
+2025-09-13 14:57:53,752 | INFO | app.controllers.auth_controller | New user registered with email: khaerul@gmail.com
+2025-09-13 14:58:03,832 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-13 14:58:30,260 | INFO | app.controllers.agent_controller | Agent 'ketiga' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 1)
+2025-09-13 14:58:41,562 | INFO | app.controllers.integration_controller | Agent integration to platform api is successfuly: agent ID 1 and user ID 1
+2025-09-13 14:58:58,111 | INFO | app.controllers.integration_controller | Successfully fetched all integrations: Agent ID 1 and user khaerul@gmail.com
+2025-09-13 14:59:09,560 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com

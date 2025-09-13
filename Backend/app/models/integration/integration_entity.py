@@ -21,17 +21,9 @@ class Integration(Base):
     # Integration -> Agent
     agent = relationship("Agent", back_populates="integrations")
 
-    # Integration -> Telegram (One-to-One)
-    telegram = relationship(
-        "Telegram",
-        back_populates="integration",
-        uselist=False,
-        cascade="all, delete-orphan",
-        passive_deletes=True,
-    )
-    # Integration -> Api (One-to-One)
-    api = relationship(
-        "Api",
+    # Integration -> Platform (One-to-One)
+    platform_config = relationship(
+        "Platform",
         back_populates="integration",
         uselist=False,
         cascade="all, delete-orphan",

@@ -10,12 +10,11 @@ from sqlalchemy.orm import Session, joinedload
 from app.models.agent.agent_entity import Agent
 from app.models.integration.integration_entity import Integration
 from app.models.integration.integration_model import CreateIntegration, IntegrationOut
-from app.models.platform.telegram_entity import Telegram
+from app.models.platform.platform_entity import Platform
 from app.services.telegram import set_webhook
 from app.utils.logger import get_logger
 from app.utils.validation_utils import validate_agent_exists_and_owned
 from app.utils.agent_utils import generate_api_key, validate_api_key
-from app.models.platform.api_entity import Api
 load_dotenv()
 logger = get_logger(__name__)
 
@@ -44,10 +43,12 @@ async def create_integration(
 
         if payload.platform == "telegram":
             integration_id = new_integration.id
-            telegram_integration = Telegram(
-                integration_id=integration_id, api_key=payload.api_key
+            platform_integration = Platform(
+                integration_id=integration_id, 
+                platform_type="telegram",
+                api_key=payload.api_key
             )
-            db.add(telegram_integration)
+            db.add(platform_integration)
             db.flush()
             webhook = await set_webhook(payload.api_key, integration_id)
             if not webhook.get("status"):
@@ -58,10 +59,12 @@ async def create_integration(
         
         if payload.platform == "api":
             api_key = generate_api_key(db, current_user.get("id"), agent_id)
-            api_integration = Api(
-                integration_id=new_integration.id, api_key=api_key
+            platform_integration = Platform(
+                integration_id=new_integration.id, 
+                platform_type="api",
+                api_key=api_key
             )
-            db.add(api_integration)
+            db.add(platform_integration)
             db.flush()
 
         db.commit()

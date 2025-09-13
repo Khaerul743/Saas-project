@@ -6,7 +6,7 @@ from app.controllers.document_controller import agents
 from app.models.history_message.history_entity import HistoryMessage
 from app.models.history_message.metadata_entity import Metadata
 from app.models.integration.integration_entity import Integration
-from app.models.platform.telegram_entity import Telegram
+from app.models.platform.platform_entity import Platform
 from app.models.user_agent.user_agent_entity import UserAgent
 from app.services.telegram import send_message
 from app.utils.logger import get_logger
@@ -31,9 +31,9 @@ async def telegram_handler(data: dict, db: Session):
 
     try:
         platform = (
-            db.query(Telegram)
-            .options(joinedload(Telegram.integration))  # eager load Integration
-            .filter(Telegram.integration_id == telegram_id)
+            db.query(Platform)
+            .options(joinedload(Platform.integration))  # eager load Integration
+            .filter(Platform.integration_id == telegram_id, Platform.platform_type == "telegram")
             .first()
         )
 
