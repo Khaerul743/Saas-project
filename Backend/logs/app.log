@@ -5908,3 +5908,350 @@ sqlalchemy.exc.InvalidRequestError: back_populates on relationship 'Platform.int
 2025-09-13 14:58:41,562 | INFO | app.controllers.integration_controller | Agent integration to platform api is successfuly: agent ID 1 and user ID 1
 2025-09-13 14:58:58,111 | INFO | app.controllers.integration_controller | Successfully fetched all integrations: Agent ID 1 and user khaerul@gmail.com
 2025-09-13 14:59:09,560 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 16:31:26,425 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-13 16:31:28,526 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-13 16:31:31,831 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=0
+2025-09-13 16:31:32,298 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 16:31:32,331 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=0
+2025-09-13 16:31:32,490 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 16:31:47,376 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 16:31:47,526 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 16:31:56,262 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 0 user agents for user_id=1
+2025-09-13 16:31:56,429 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 0 user agents for user_id=1
+2025-09-13 16:32:03,316 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 16:32:03,446 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 16:32:10,512 | INFO | app.controllers.agent_controller | No agents found for user khaerul@gmail.com
+2025-09-13 16:32:10,684 | INFO | app.controllers.agent_controller | No agents found for user khaerul@gmail.com
+2025-09-13 16:32:12,780 | INFO | app.controllers.agent_controller | No agents found for user khaerul@gmail.com
+2025-09-13 16:32:12,908 | INFO | app.controllers.agent_controller | No agents found for user khaerul@gmail.com
+2025-09-13 16:34:29,359 | INFO | app.controllers.agent_controller | Agent 'Khaerul's Team' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 2)
+2025-09-13 16:34:29,783 | INFO | app.controllers.integration_controller | Agent integration to platform api is successfuly: agent ID 2 and user ID 1
+2025-09-13 16:34:34,784 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 0 user agents for user_id=1
+2025-09-13 16:34:34,944 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 0 user agents for user_id=1
+2025-09-13 16:34:38,226 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 16:34:38,348 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=0
+2025-09-13 16:34:38,512 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 16:34:38,612 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=0
+2025-09-13 16:34:41,167 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 16:34:41,296 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 16:34:42,914 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 16:34:42,925 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=0
+2025-09-13 16:34:43,190 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 16:34:43,374 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=0
+2025-09-13 16:34:43,704 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 16:34:43,825 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 16:50:54,108 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-13 16:50:54,111 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-13 16:50:54,574 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-13 16:50:54,574 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-13 16:51:04,684 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-13 16:51:04,883 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-13 16:51:37,748 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-13 16:51:38,093 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-13 16:51:45,654 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-13 16:51:46,211 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-13 16:51:58,048 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=0
+2025-09-13 16:51:58,307 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 16:51:59,240 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 16:51:59,247 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=0
+2025-09-13 16:52:02,497 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 16:52:02,744 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 17:03:53,293 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-13 17:03:54,529 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-13 17:04:15,382 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-13 17:04:15,709 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-13 17:04:20,079 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 17:04:20,089 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=0
+2025-09-13 17:04:20,777 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=0
+2025-09-13 17:04:20,789 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 17:04:24,973 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 17:04:25,348 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 17:06:00,469 | INFO | app.controllers.agent_controller | Agent 'Khaerul's Team' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 3)
+2025-09-13 17:06:01,046 | INFO | app.controllers.integration_controller | Agent integration to platform api is successfuly: agent ID 3 and user ID 1
+2025-09-13 17:06:08,221 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 17:06:08,226 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=0
+2025-09-13 17:06:08,553 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 17:06:08,870 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 17:06:08,875 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=0
+2025-09-13 17:06:08,888 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 17:07:28,876 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=1
+2025-09-13 17:07:28,888 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 17:07:29,271 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=1
+2025-09-13 17:07:29,273 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 17:08:08,353 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 17:08:08,578 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 17:08:21,479 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 17:08:21,518 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-13 17:08:22,120 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 17:08:22,108 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-13 17:08:53,273 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-13 17:11:17,453 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-13 17:11:17,467 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 17:11:17,605 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-13 17:11:17,699 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 17:13:50,917 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 17:13:51,300 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 17:13:59,267 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=1
+2025-09-13 17:13:59,304 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 17:13:59,818 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 17:13:59,857 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=1
+2025-09-13 17:14:21,306 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 17:14:21,555 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 19:53:24,017 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-13 19:53:24,029 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-13 19:53:24,165 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-13 19:53:24,165 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-13 19:53:35,797 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-13 19:53:36,188 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-13 19:54:01,954 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-13 19:54:02,133 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-13 19:54:05,368 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 19:54:05,521 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=1
+2025-09-13 19:54:06,077 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 19:54:06,078 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=1
+2025-09-13 19:55:28,324 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 19:55:29,210 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 19:55:41,378 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 19:55:41,764 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 19:56:18,447 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 19:56:18,698 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=1
+2025-09-13 19:56:18,781 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 19:56:19,011 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=1
+2025-09-13 19:56:30,266 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 19:56:30,451 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 19:56:30,821 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 19:56:30,971 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 20:04:27,796 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 20:04:28,049 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-13 20:04:28,311 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 20:04:29,418 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-13 20:06:03,307 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 20:06:03,573 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=1
+2025-09-13 20:06:03,852 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 20:06:03,872 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=1
+2025-09-13 20:06:23,699 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 20:06:24,118 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 20:06:26,461 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 20:06:26,504 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=1
+2025-09-13 20:06:27,042 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 20:06:28,158 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=1
+2025-09-13 20:06:29,550 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 20:06:30,187 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 20:10:44,138 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-13 20:10:44,160 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 20:10:44,284 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-13 20:10:44,300 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 20:13:25,147 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 20:13:25,215 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-13 20:13:25,559 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 20:13:26,204 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-13 20:14:11,982 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=1
+2025-09-13 20:14:12,001 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 20:14:12,213 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 20:14:12,364 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=1
+2025-09-13 20:14:26,890 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 20:14:27,347 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 20:14:28,183 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 20:14:28,609 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 20:19:41,816 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-13 20:19:41,814 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 20:19:43,093 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 20:19:43,079 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-13 20:19:58,079 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-13 20:19:58,097 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 20:19:58,852 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-13 20:19:58,896 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 20:21:00,401 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 20:21:00,435 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=1
+2025-09-13 20:21:00,864 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 20:21:01,107 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=1
+2025-09-13 20:21:16,950 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 20:21:17,183 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 20:21:21,256 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=1
+2025-09-13 20:21:21,295 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 20:21:21,638 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=1
+2025-09-13 20:21:21,743 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 20:22:57,796 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 20:22:58,088 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 20:23:19,382 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=1
+2025-09-13 20:23:19,556 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 20:23:19,965 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-07 00:00:00 to=2025-09-14 00:00:00, total_periods=1
+2025-09-13 20:23:19,979 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-13 20:23:33,201 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 20:23:33,505 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 20:23:35,535 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 20:23:35,662 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-13 20:24:29,748 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 20:24:29,948 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 20:33:40,918 | INFO | app.controllers.agent_controller | Agent 'Khaerul's Team' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 4)
+2025-09-13 20:33:42,633 | INFO | app.services.telegram | Set webhook is successfully: {'ok': True, 'result': True, 'description': 'Webhook was set'}
+2025-09-13 20:33:42,679 | INFO | app.controllers.integration_controller | Agent integration to platform telegram is successfuly: agent ID 4 and user ID 1
+2025-09-13 20:33:55,575 | INFO | app.services.telegram | Message sent successfully: {'ok': True, 'result': {'message_id': 49, 'from': {'id': 8252253794, 'is_bot': True, 'first_name': 'Testing_bot', 'username': 'Code_igniter_bot'}, 'chat': {'id': 5590214375, 'first_name': 'Khaerul', 'last_name': 'Lutfi', 'type': 'private'}, 'date': 1757770187, 'text': 'Selamat pagi! Ada yang bisa saya bantu hari ini?'}}
+2025-09-13 20:35:23,068 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 2 user agents for user_id=1
+2025-09-13 20:35:23,206 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 2 user agents for user_id=1
+2025-09-13 20:35:24,217 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 20:35:24,365 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-13 20:35:42,886 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-13 20:35:54,007 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-13 20:36:01,823 | INFO | app.services.telegram | Set webhook is successfully: {'ok': True, 'result': True, 'description': 'Webhook was set'}
+2025-09-13 20:36:01,995 | INFO | app.controllers.integration_controller | Agent integration to platform telegram is successfuly: agent ID 4 and user ID 1
+2025-09-13 20:36:16,481 | INFO | app.services.telegram | Message sent successfully: {'ok': True, 'result': {'message_id': 51, 'from': {'id': 8252253794, 'is_bot': True, 'first_name': 'Testing_bot', 'username': 'Code_igniter_bot'}, 'chat': {'id': 5590214375, 'first_name': 'Khaerul', 'last_name': 'Lutfi', 'type': 'private'}, 'date': 1757770328, 'text': 'Selamat pagi! Ada yang bisa saya bantu hari ini?'}}
+2025-09-13 20:36:26,499 | INFO | app.services.telegram | Message sent successfully: {'ok': True, 'result': {'message_id': 486, 'from': {'id': 7581525342, 'is_bot': True, 'first_name': 'My_notifier_bot', 'username': 'Agent200601_bot'}, 'chat': {'id': 5590214375, 'first_name': 'Khaerul', 'last_name': 'Lutfi', 'type': 'private'}, 'date': 1757770338, 'text': 'Selamat pagi! Ada yang bisa saya bantu?'}}
+2025-09-13 21:18:12,268 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-13 21:18:41,790 | INFO | app.controllers.agent_controller | Agent 'ketiga' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 5)
+2025-09-13 21:19:01,118 | INFO | app.services.telegram | Set webhook is successfully: {'ok': True, 'result': True, 'description': 'Webhook was set'}
+2025-09-13 21:19:01,130 | INFO | app.controllers.integration_controller | Agent integration to platform telegram is successfuly: agent ID 5 and user ID 1
+2025-09-13 21:21:10,366 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-13 21:21:33,866 | INFO | app.controllers.agent_controller | Agent 'ketiga' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 6)
+2025-09-13 21:21:42,994 | INFO | app.services.telegram | Set webhook is successfully: {'ok': True, 'result': True, 'description': 'Webhook was set'}
+2025-09-13 21:21:43,007 | INFO | app.controllers.integration_controller | Agent integration to platform telegram is successfuly: agent ID 6 and user ID 1
+2025-09-13 21:21:46,782 | INFO | app.services.telegram | Message sent successfully: {'ok': True, 'result': {'message_id': 53, 'from': {'id': 8252253794, 'is_bot': True, 'first_name': 'Testing_bot', 'username': 'Code_igniter_bot'}, 'chat': {'id': 5590214375, 'first_name': 'Khaerul', 'last_name': 'Lutfi', 'type': 'private'}, 'date': 1757773058, 'text': 'Selamat pagi! Ada yang dapat saya bantu hari ini?'}}
+2025-09-13 21:21:54,065 | INFO | app.services.telegram | Message sent successfully: {'ok': True, 'result': {'message_id': 55, 'from': {'id': 8252253794, 'is_bot': True, 'first_name': 'Testing_bot', 'username': 'Code_igniter_bot'}, 'chat': {'id': 5590214375, 'first_name': 'Khaerul', 'last_name': 'Lutfi', 'type': 'private'}, 'date': 1757773066, 'text': 'Selamat pagi! Apakah ada yang bisa saya bantu hari ini?'}}
+2025-09-13 21:31:03,879 | INFO | app.controllers.agent_controller | Agent 'ketiga' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 7)
+2025-09-13 21:31:16,873 | INFO | app.services.telegram | Set webhook is successfully: {'ok': True, 'result': True, 'description': 'Webhook was set'}
+2025-09-13 21:31:16,884 | INFO | app.controllers.integration_controller | Agent integration to platform telegram is successfuly: agent ID 7 and user ID 1
+2025-09-13 21:31:30,070 | INFO | app.services.telegram | Message sent successfully: {'ok': True, 'result': {'message_id': 57, 'from': {'id': 8252253794, 'is_bot': True, 'first_name': 'Testing_bot', 'username': 'Code_igniter_bot'}, 'chat': {'id': 5590214375, 'first_name': 'Khaerul', 'last_name': 'Lutfi', 'type': 'private'}, 'date': 1757773642, 'text': 'Selamat pagi! Ada yang bisa saya bantu hari ini?'}}
+2025-09-13 21:32:11,010 | INFO | app.controllers.integration_controller | Successfully fetched all integrations: Agent ID 7 and user khaerul@gmail.com
+2025-09-13 21:32:18,908 | INFO | app.services.telegram | Message sent successfully: {'ok': True, 'result': {'message_id': 59, 'from': {'id': 8252253794, 'is_bot': True, 'first_name': 'Testing_bot', 'username': 'Code_igniter_bot'}, 'chat': {'id': 5590214375, 'first_name': 'Khaerul', 'last_name': 'Lutfi', 'type': 'private'}, 'date': 1757773690, 'text': 'Selamat pagi! Ada yang bisa saya bantu?'}}
+2025-09-13 21:35:32,991 | INFO | app.controllers.agent_controller | Agent 'ketiga' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 8)
+2025-09-13 21:35:42,795 | INFO | app.services.telegram | Set webhook is successfully: {'ok': True, 'result': True, 'description': 'Webhook was set'}
+2025-09-13 21:35:42,808 | INFO | app.controllers.integration_controller | Agent integration to platform telegram is successfuly: agent ID 8 and user ID 1
+2025-09-13 21:35:51,904 | INFO | app.services.telegram | Message sent successfully: {'ok': True, 'result': {'message_id': 61, 'from': {'id': 8252253794, 'is_bot': True, 'first_name': 'Testing_bot', 'username': 'Code_igniter_bot'}, 'chat': {'id': 5590214375, 'first_name': 'Khaerul', 'last_name': 'Lutfi', 'type': 'private'}, 'date': 1757773903, 'text': 'Selamat pagi! Ada yang bisa saya bantu?'}}
+2025-09-13 21:36:23,679 | ERROR | app.middlewares.error_handler | Unexpected error: [TypeError("'coroutine' object is not iterable"), TypeError('vars() argument must have __dict__ attribute')]
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\encoders.py", line 324, in jsonable_encoder
+    data = dict(obj)
+TypeError: 'coroutine' object is not iterable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\encoders.py", line 329, in jsonable_encoder
+    data = vars(obj)
+TypeError: vars() argument must have __dict__ attribute
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 328, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 202, in serialize_response
+    return jsonable_encoder(response_content)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\encoders.py", line 289, in jsonable_encoder
+    encoded_value = jsonable_encoder(
+        value,
+    ...<4 lines>...
+        sqlalchemy_safe=sqlalchemy_safe,
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\encoders.py", line 332, in jsonable_encoder
+    raise ValueError(errors) from e
+ValueError: [TypeError("'coroutine' object is not iterable"), TypeError('vars() argument must have __dict__ attribute')]
+2025-09-13 21:38:14,461 | INFO | app.controllers.agent_controller | Agent 'ketiga' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 9)
+2025-09-13 21:38:25,075 | INFO | app.services.telegram | Set webhook is successfully: {'ok': True, 'result': True, 'description': 'Webhook was set'}
+2025-09-13 21:38:25,095 | INFO | app.controllers.integration_controller | Agent integration to platform telegram is successfuly: agent ID 9 and user ID 1
+2025-09-14 10:09:22,957 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-14 10:10:08,299 | INFO | app.controllers.agent_controller | Agent 'ketiga' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 10)
+2025-09-14 10:10:36,838 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-14 10:10:52,194 | INFO | app.services.telegram | Set webhook is successfully: {'ok': True, 'result': True, 'description': 'Webhook was set'}
+2025-09-14 10:10:53,318 | INFO | app.controllers.integration_controller | Agent integration to platform telegram is successfuly: agent ID 10 and user ID 1
+2025-09-14 10:11:27,816 | INFO | app.services.telegram | Message sent successfully: {'ok': True, 'result': {'message_id': 63, 'from': {'id': 8252253794, 'is_bot': True, 'first_name': 'Testing_bot', 'username': 'Code_igniter_bot'}, 'chat': {'id': 5590214375, 'first_name': 'Khaerul', 'last_name': 'Lutfi', 'type': 'private'}, 'date': 1757819239, 'text': 'Selamat petang. Ada yang bisa saya bantu?'}}
+2025-09-14 10:11:55,796 | ERROR | app.services.telegram | HTTP error occurred: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Basic Constraints of CA cert not marked critical (_ssl.c:1028)')]
+2025-09-14 10:11:56,481 | INFO | app.services.telegram | Set webhook is successfully: {'ok': True, 'result': True, 'description': 'Webhook was set'}
+2025-09-14 10:11:56,540 | INFO | app.controllers.integration_controller | Integration updated: agent ID 10, platform telegram and user khaerul@gmail.com
+2025-09-14 10:12:00,840 | INFO | app.services.telegram | Message sent successfully: {'ok': True, 'result': {'message_id': 488, 'from': {'id': 7581525342, 'is_bot': True, 'first_name': 'My_notifier_bot', 'username': 'Agent200601_bot'}, 'chat': {'id': 5590214375, 'first_name': 'Khaerul', 'last_name': 'Lutfi', 'type': 'private'}, 'date': 1757819272, 'text': 'Selamat pagi! Apakah ada yang bisa saya bantu hari ini?'}}
+2025-09-14 10:12:07,980 | INFO | app.services.telegram | Message sent successfully: {'ok': True, 'result': {'message_id': 489, 'from': {'id': 7581525342, 'is_bot': True, 'first_name': 'My_notifier_bot', 'username': 'Agent200601_bot'}, 'chat': {'id': 5590214375, 'first_name': 'Khaerul', 'last_name': 'Lutfi', 'type': 'private'}, 'date': 1757819280, 'text': 'Selamat pagi! Ada yang bisa saya bantu?'}}
+2025-09-14 10:12:21,487 | INFO | app.services.telegram | Message sent successfully: {'ok': True, 'result': {'message_id': 490, 'from': {'id': 7581525342, 'is_bot': True, 'first_name': 'My_notifier_bot', 'username': 'Agent200601_bot'}, 'chat': {'id': 5590214375, 'first_name': 'Khaerul', 'last_name': 'Lutfi', 'type': 'private'}, 'date': 1757819293, 'text': 'Maaf, saya tidak mengerti maksud dari emoji yang Anda gunakan. Apakah ada pertanyaan atau informasi yang bisa saya bantu?'}}
+2025-09-14 10:12:44,838 | INFO | app.services.telegram | Message sent successfully: {'ok': True, 'result': {'message_id': 492, 'from': {'id': 7581525342, 'is_bot': True, 'first_name': 'My_notifier_bot', 'username': 'Agent200601_bot'}, 'chat': {'id': 5590214375, 'first_name': 'Khaerul', 'last_name': 'Lutfi', 'type': 'private'}, 'date': 1757819316, 'text': 'Selamat pagi! Apakah ada yang bisa saya bantu hari ini?'}}
+2025-09-14 10:12:52,004 | INFO | app.services.telegram | Message sent successfully: {'ok': True, 'result': {'message_id': 493, 'from': {'id': 7581525342, 'is_bot': True, 'first_name': 'My_notifier_bot', 'username': 'Agent200601_bot'}, 'chat': {'id': 5590214375, 'first_name': 'Khaerul', 'last_name': 'Lutfi', 'type': 'private'}, 'date': 1757819324, 'text': 'Selamat pagi. Ada yang bisa saya bantu?'}}
+2025-09-14 10:21:38,379 | INFO | app.controllers.agent_controller | Agent 'ketiga' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 11)
+2025-09-14 10:21:50,107 | INFO | app.services.telegram | Set webhook is successfully: {'ok': True, 'result': True, 'description': 'Webhook was set'}
+2025-09-14 10:21:50,141 | INFO | app.controllers.integration_controller | Agent integration to platform telegram is successfuly: agent ID 11 and user ID 1
+2025-09-14 10:21:52,334 | INFO | app.services.telegram | Message sent successfully: {'ok': True, 'result': {'message_id': 68, 'from': {'id': 8252253794, 'is_bot': True, 'first_name': 'Testing_bot', 'username': 'Code_igniter_bot'}, 'chat': {'id': 5590214375, 'first_name': 'Khaerul', 'last_name': 'Lutfi', 'type': 'private'}, 'date': 1757819864, 'text': 'Selamat pagi! Ada yang bisa saya bantu?'}}
+2025-09-14 10:22:43,159 | ERROR | app.services.telegram | HTTP error occurred: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Basic Constraints of CA cert not marked critical (_ssl.c:1028)')]
+2025-09-14 10:22:43,888 | INFO | app.services.telegram | Set webhook is successfully: {'ok': True, 'result': True, 'description': 'Webhook was set'}
+2025-09-14 10:22:43,910 | INFO | app.controllers.integration_controller | Integration updated: agent ID 11, platform telegram and user khaerul@gmail.com
+2025-09-14 10:24:55,767 | INFO | app.controllers.agent_controller | Agent 'ketiga' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 12)
+2025-09-14 10:25:17,107 | INFO | app.services.telegram | Set webhook is successfully: {'ok': True, 'result': True, 'description': 'Webhook was set'}
+2025-09-14 10:25:17,121 | INFO | app.controllers.integration_controller | Agent integration to platform telegram is successfuly: agent ID 12 and user ID 1
+2025-09-14 10:25:30,584 | INFO | app.services.telegram | Message sent successfully: {'ok': True, 'result': {'message_id': 70, 'from': {'id': 8252253794, 'is_bot': True, 'first_name': 'Testing_bot', 'username': 'Code_igniter_bot'}, 'chat': {'id': 5590214375, 'first_name': 'Khaerul', 'last_name': 'Lutfi', 'type': 'private'}, 'date': 1757820082, 'text': 'Waalaikumsalam. Ada yang bisa saya bantu?'}}
+2025-09-14 10:25:47,639 | INFO | app.services.telegram | Delete webhook is successfully: {'ok': True, 'result': True, 'description': 'Webhook was deleted'}
+2025-09-14 10:25:48,558 | INFO | app.services.telegram | Set webhook is successfully: {'ok': True, 'result': True, 'description': 'Webhook was set'}
+2025-09-14 10:25:48,584 | INFO | app.controllers.integration_controller | Integration updated: agent ID 12, platform telegram and user khaerul@gmail.com
+2025-09-14 10:26:11,495 | INFO | app.services.telegram | Message sent successfully: {'ok': True, 'result': {'message_id': 495, 'from': {'id': 7581525342, 'is_bot': True, 'first_name': 'My_notifier_bot', 'username': 'Agent200601_bot'}, 'chat': {'id': 5590214375, 'first_name': 'Khaerul', 'last_name': 'Lutfi', 'type': 'private'}, 'date': 1757820123, 'text': 'Waalaikumsalam. Ada yang bisa saya bantu?'}}
+2025-09-14 10:43:29,577 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-14 10:43:29,756 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-14 10:43:48,371 | WARNING | app.controllers.auth_controller | Email not found: khaerullutfi@gmail.com
+2025-09-14 10:43:54,718 | WARNING | app.controllers.auth_controller | Email not found: khaerullutfi@gmail.com
+2025-09-14 10:44:23,729 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-14 10:44:23,907 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-14 10:44:53,040 | WARNING | app.controllers.auth_controller | Email not found: khaerullutfi@gmail.com
+2025-09-14 10:45:34,672 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-14 10:45:34,978 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-14 10:45:37,926 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-08 00:00:00 to=2025-09-15 00:00:00, total_periods=2
+2025-09-14 10:45:38,204 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-14 10:45:38,351 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-08 00:00:00 to=2025-09-15 00:00:00, total_periods=2
+2025-09-14 10:45:38,432 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-14 10:46:04,636 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-14 10:46:05,741 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-14 10:47:20,462 | INFO | app.controllers.agent_controller | Agent 'Khaerul's Team' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 13)
+2025-09-14 10:47:22,376 | INFO | app.services.telegram | Set webhook is successfully: {'ok': True, 'result': True, 'description': 'Webhook was set'}
+2025-09-14 10:47:22,387 | INFO | app.controllers.integration_controller | Agent integration to platform telegram is successfuly: agent ID 13 and user ID 1
+2025-09-14 10:47:40,602 | INFO | app.services.telegram | Message sent successfully: {'ok': True, 'result': {'message_id': 497, 'from': {'id': 7581525342, 'is_bot': True, 'first_name': 'My_notifier_bot', 'username': 'Agent200601_bot'}, 'chat': {'id': 5590214375, 'first_name': 'Khaerul', 'last_name': 'Lutfi', 'type': 'private'}, 'date': 1757821412, 'text': 'Waalaikumsalam. Ada yang bisa saya bantu?'}}
+2025-09-14 10:48:50,753 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-08 00:00:00 to=2025-09-15 00:00:00, total_periods=2
+2025-09-14 10:48:50,759 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-14 10:48:51,194 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-08 00:00:00 to=2025-09-15 00:00:00, total_periods=2
+2025-09-14 10:48:51,364 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-14 10:48:54,258 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-14 10:48:54,432 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-14 10:48:57,204 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-08 00:00:00 to=2025-09-15 00:00:00, total_periods=2
+2025-09-14 10:48:57,211 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-14 10:48:57,564 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-08 00:00:00 to=2025-09-15 00:00:00, total_periods=2
+2025-09-14 10:48:57,579 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-14 10:49:01,020 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-14 10:49:01,157 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-14 10:50:17,852 | INFO | app.controllers.agent_controller | Agent 'Khaerul's Team' (ID: 13) updated successfully by user khaerul@gmail.com (user_id: 1)
+2025-09-14 10:50:18,767 | INFO | app.services.telegram | Delete webhook is successfully: {'ok': True, 'result': True, 'description': 'Webhook was deleted'}
+2025-09-14 10:50:19,491 | INFO | app.services.telegram | Set webhook is successfully: {'ok': True, 'result': True, 'description': 'Webhook was set'}
+2025-09-14 10:50:19,527 | INFO | app.controllers.integration_controller | Integration updated: agent ID 13, platform telegram and user khaerul@gmail.com
+2025-09-14 10:50:22,631 | INFO | app.services.telegram | Message sent successfully: {'ok': True, 'result': {'message_id': 72, 'from': {'id': 8252253794, 'is_bot': True, 'first_name': 'Testing_bot', 'username': 'Code_igniter_bot'}, 'chat': {'id': 5590214375, 'first_name': 'Khaerul', 'last_name': 'Lutfi', 'type': 'private'}, 'date': 1757821574, 'text': 'Waalaikumsalam. Ada yang bisa saya bantu?'}}
+2025-09-14 10:50:38,677 | INFO | app.services.telegram | Message sent successfully: {'ok': True, 'result': {'message_id': 74, 'from': {'id': 8252253794, 'is_bot': True, 'first_name': 'Testing_bot', 'username': 'Code_igniter_bot'}, 'chat': {'id': 5590214375, 'first_name': 'Khaerul', 'last_name': 'Lutfi', 'type': 'private'}, 'date': 1757821590, 'text': 'Selamat pagi! Ada yang bisa saya bantu hari ini?'}}
+2025-09-14 10:53:11,108 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-08 00:00:00 to=2025-09-15 00:00:00, total_periods=2
+2025-09-14 10:53:11,125 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-14 10:53:12,005 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-08 00:00:00 to=2025-09-15 00:00:00, total_periods=2
+2025-09-14 10:53:12,051 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-14 10:54:16,613 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-14 10:54:16,941 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com

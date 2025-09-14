@@ -12,7 +12,10 @@ class IntegrationBase(BaseModel):
 class CreateIntegration(IntegrationBase):
     api_key: Optional[str] = None
 
-
+class UpdateIntegration(BaseModel):
+    platform: Literal["whatsapp", "telegram", "api"]
+    api_key: str
+    
 class IntegrationOut(IntegrationBase):
     agent_id: int
     created_at: datetime

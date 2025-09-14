@@ -6,7 +6,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { Bot, Cpu, Edit, Globe, MessageCircle, MessageSquare, MoreHorizontal, Phone, Trash2 } from "lucide-react"
+import { Bot, Cpu, Edit, Eye, Globe, MessageCircle, MessageSquare, MoreHorizontal, Phone, Trash2 } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 
 interface Agent {
@@ -30,6 +30,7 @@ interface AgentCardProps {
   agent: Agent
   onEdit: () => void
   onDelete: () => void
+  onDetail: () => void
 }
 
 const platformIcons = {
@@ -38,7 +39,7 @@ const platformIcons = {
   telegram: MessageCircle,
 }
 
-export function AgentCard({ agent, onEdit, onDelete }: AgentCardProps) {
+export function AgentCard({ agent, onEdit, onDelete, onDetail }: AgentCardProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
@@ -97,6 +98,17 @@ export function AgentCard({ agent, onEdit, onDelete }: AgentCardProps) {
             
             {isDropdownOpen && (
               <div className="absolute right-0 top-8 z-[9999] bg-background border border-border rounded-md shadow-lg min-w-[120px]">
+                <div 
+                  className="flex items-center px-3 py-2 hover:bg-primary/10 cursor-pointer text-sm"
+                  onClick={() => {
+                    console.log('Detail clicked')
+                    setIsDropdownOpen(false)
+                    onDetail()
+                  }}
+                >
+                <Eye className="h-4 w-4 mr-2" />
+                Detail
+                </div>
                 <div 
                   className="flex items-center px-3 py-2 hover:bg-primary/10 cursor-pointer text-sm"
                   onClick={() => {

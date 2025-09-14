@@ -11,18 +11,18 @@ import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Textarea } from "@/components/ui/textarea"
-import { agentService, CreateAgentRequest, CreateIntegrationRequest } from "@/lib/api"; // Fixed import
+import { agentService, CreateAgentRequest, CreateIntegrationRequest, UpdateIntegrationRequest } from "@/lib/api"; // Fixed import
 import {
-  Brain,
-  ChevronLeft,
-  ChevronRight,
-  Code,
-  Cpu,
-  Globe,
-  MessageCircle,
-  Phone,
-  Settings,
-  Upload
+    Brain,
+    ChevronLeft,
+    ChevronRight,
+    Code,
+    Cpu,
+    Globe,
+    MessageCircle,
+    Phone,
+    Settings,
+    Upload
 } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 
@@ -239,6 +239,18 @@ export function AgentSettingsModal({ agent, isOpen, onClose }: AgentSettingsModa
         console.log('Updating agent with data:', updateData)
         const updateResponse = await agentService.updateAgent(agent.id!, updateData)
         console.log('Agent updated:', updateResponse)
+        
+        // If platform is telegram and API key has changed, update integration
+        if (agent.platform === "telegram" && formData.apiKey !== agent.api_key) {
+          const integrationData: UpdateIntegrationRequest = {
+            platform: "telegram",
+            api_key: formData.apiKey
+          }
+          
+          console.log('Updating integration with data:', integrationData)
+          const integrationResponse = await agentService.updateIntegration(agent.id!, integrationData)
+          console.log('Integration updated:', integrationResponse)
+        }
         
         alert('Agent updated successfully!')
         onClose()
@@ -965,42 +977,18 @@ export function AgentSettingsModal({ agent, isOpen, onClose }: AgentSettingsModa
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="platform">Select Platform</Label>
-                      <Select 
-                        value={formData.platform} 
-                        onValueChange={(value) => {
-                          setFormData(prev => ({ ...prev, platform: value }))
-                          setSelectedPlatform(value)
-                        }}
-                      >
-                        <SelectTrigger>
-                          <SelectValue placeholder="Choose a platform" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="telegram">
-                            <div className="flex items-center gap-2">
-                              <MessageCircle className="h-4 w-4" />
-                              Telegram
-                            </div>
-                          </SelectItem>
-                          <SelectItem value="whatsapp">
-                            <div className="flex items-center gap-2">
-                              <Phone className="h-4 w-4" />
-                              WhatsApp
-                            </div>
-                          </SelectItem>
-                          <SelectItem value="website">
-                            <div className="flex items-center gap-2">
-                              <Globe className="h-4 w-4" />
-                              Website
-                            </div>
-                          </SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
+                    {/* Show API platform info if agent platform is API */}
+                    {agent?.platform === "api" && (
+                      <div className="p-4 bg-muted/50 rounded-lg border border-dashed">
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <Code className="h-4 w-4" />
+                          <span>API integration. Platform cannot be changed.</span>
+                        </div>
+                      </div>
+                    )}
 
-                    {formData.platform === "telegram" && (
+                    {/* Show API key field for Telegram platform */}
+                    {agent?.platform === "telegram" && (
                       <div className="space-y-2">
                         <Label htmlFor="telegram-api-key">Telegram Bot API Key</Label>
                         <Input 

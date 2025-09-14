@@ -45,6 +45,11 @@ export interface CreateIntegrationRequest {
   api_key?: string
 }
 
+export interface UpdateIntegrationRequest {
+  platform: string
+  api_key: string
+}
+
 export class AgentService extends BaseApiService {
   async getAgents(): Promise<ApiResponse<Agent[]>> {
     return this.get<Agent[]>('/agents')
@@ -104,6 +109,10 @@ export class AgentService extends BaseApiService {
 
   async createIntegration(agentId: number, integrationData: CreateIntegrationRequest): Promise<ApiResponse> {
     return this.post(`/integrations/${agentId}`, integrationData)
+  }
+
+  async updateIntegration(agentId: number, integrationData: UpdateIntegrationRequest): Promise<ApiResponse> {
+    return this.put(`/integrations/${agentId}`, integrationData)
   }
 
   async updateAgent(agentId: number, agentData: UpdateAgentRequest): Promise<ApiResponse<Agent>> {

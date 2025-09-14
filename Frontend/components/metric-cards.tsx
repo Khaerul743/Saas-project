@@ -60,7 +60,7 @@ function MetricCard({ title, value, subtitle, icon, trend, chartData, color = "p
   const colors = getColorClasses(color)
 
   return (
-    <Card className={`relative overflow-hidden border-l-4 ${colors.border}`}>
+    <Card className="relative overflow-hidden">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-sm font-medium">{title}</CardTitle>
         <div className={`p-3 rounded-full ${colors.light}`}>

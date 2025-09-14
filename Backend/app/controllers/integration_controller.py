@@ -15,8 +15,47 @@ from app.services.telegram import set_webhook
 from app.utils.logger import get_logger
 from app.utils.validation_utils import validate_agent_exists_and_owned
 from app.utils.agent_utils import generate_api_key, validate_api_key
+from app.services.telegram import delete_webhook
+from app.models.integration.integration_model import UpdateIntegration
 load_dotenv()
 logger = get_logger(__name__)
+
+def get_api_key_by_agent_id(agent_id: int, platform: str, db: Session) -> str:
+    """
+    Get api_key from integration platform using agent_id and platform type
+    
+    Args:
+        agent_id: The agent ID
+        platform: The platform type (telegram, api, etc.)
+        db: Database session
+        
+    Returns:
+        str: The api_key from the platform
+        
+    Raises:
+        HTTPException: If integration not found
+    """
+    integration = (
+        db.query(Integration)
+        .join(Platform, Integration.id == Platform.integration_id)
+        .filter(
+            Integration.agent_id == agent_id,
+            Integration.platform == platform
+        )
+        .options(joinedload(Integration.platform_config))
+        .first()
+    )
+    
+    if not integration:
+        logger.warning(
+            f"Integration not found: agent ID {agent_id} with platform {platform}"
+        )
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Integration not found",
+        )
+    
+    return integration.platform_config.api_key
 
 async def create_integration(
     agent_id: int, payload: CreateIntegration, current_user: dict, db: Session
@@ -150,8 +189,66 @@ def get_all_integrations(agent_id: int, current_user: dict, db: Session):
             detail="Internal server error, please try again later",
         )
 
+async def update_integration(agent_id: int, payload: UpdateIntegration, current_user: dict, db: Session):
+    try:
+        new_api_key = payload.api_key
+        agent = validate_agent_exists_and_owned(db, agent_id, current_user.get("id"), current_user.get('email'))
+        
+        # Get the current api_key using helper function
+        old_api_key = get_api_key_by_agent_id(agent_id, payload.platform, db)
+        
+        # Relational query to fetch integration with platform data using agent_id
+        integration = (
+            db.query(Integration)
+            .join(Platform, Integration.id == Platform.integration_id)
+            .filter(
+                Integration.agent_id == agent_id,
+                Integration.platform == payload.platform
+            )
+            .options(joinedload(Integration.platform_config))
+            .first()
+        )
 
-def delete_integration(
+        if payload.platform == "telegram":
+            await delete_webhook(old_api_key)
+            webhook_result = await set_webhook(new_api_key, integration.id)
+            if not webhook_result.get("status"):
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail=webhook_result.get("response"),
+                )
+        elif payload.platform == "api":
+            # For API platform, just update the api_key
+            pass
+        else:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Platform not supported",
+            )
+        
+        # Update the api_key in platform
+        integration.platform_config.api_key = new_api_key
+
+        db.commit()
+        db.refresh(integration)
+        logger.info(
+            f"Integration updated: agent ID {agent_id}, platform {payload.platform} and user {current_user.get('email')}"
+        )
+        return integration
+    except HTTPException:
+        db.rollback()
+        raise
+    except Exception as e:
+        db.rollback()
+        logger.error(
+            f"Unexpected error while updating integration: {str(e)}", exc_info=True
+        )
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Internal server error, please try again later",
+        )
+
+async def delete_integration(
     agent_id: int, integration_id: int, current_user: dict, db: Session
 ):
     try:
@@ -181,6 +278,8 @@ def delete_integration(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail="Integration not found",
             )
+        if integration.platform == "telegram":
+            await delete_webhook(integration.platform_integration.api_key)
         db.delete(integration)
         db.commit()
         logger.info(

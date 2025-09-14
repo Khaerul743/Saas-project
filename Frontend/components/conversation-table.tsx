@@ -4,8 +4,8 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { type Conversation } from "@/lib/types/conversation"
-import { Eye, Globe, MessageCircle, Phone } from "lucide-react"
+import { Conversation } from "@/lib/types/conversation"
+import { Bot, Code, Eye, Globe, MessageCircle, Phone } from "lucide-react"
 
 interface ConversationTableProps {
   conversations: Conversation[]
@@ -14,11 +14,13 @@ interface ConversationTableProps {
 
 const platformIcons = {
   web: Globe,
+  website: Globe,
   whatsapp: Phone,
   telegram: MessageCircle,
+  api: Code,
 }
 
-export function ConversationTable({ conversations, onViewConversation }: ConversationTableProps) {
+function ConversationTable({ conversations, onViewConversation }: ConversationTableProps) {
   return (
     <Card>
       <CardHeader>
@@ -37,7 +39,7 @@ export function ConversationTable({ conversations, onViewConversation }: Convers
           </TableHeader>
           <TableBody>
             {conversations.map((conversation) => {
-              const PlatformIcon = platformIcons[conversation.platform as keyof typeof platformIcons]
+              const PlatformIcon = platformIcons[conversation.platform as keyof typeof platformIcons] || Bot
               return (
                 <TableRow key={conversation.id} className="hover:bg-muted/50">
                   <TableCell>
@@ -83,3 +85,6 @@ export function ConversationTable({ conversations, onViewConversation }: Convers
     </Card>
   )
 }
+
+export { ConversationTable }
+

@@ -11,7 +11,8 @@ export type {
     Agent,
     CreateAgentRequest,
     CreateIntegrationRequest,
-    UpdateAgentRequest
+    UpdateAgentRequest,
+    UpdateIntegrationRequest
 } from './agent'
 export type { LoginRequest, RegisterRequest, User } from './auth'
 export type {

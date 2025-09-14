@@ -18,6 +18,8 @@ from app.controllers import integration_controller as ic
 from app.middlewares.RBAC import role_required
 from app.models.integration.integration_model import CreateIntegration
 from app.utils.response import success_response
+from app.models.integration.integration_model import UpdateIntegration
+
 
 router = APIRouter(prefix="/api/integrations", tags=["integrations"])
 
@@ -52,6 +54,14 @@ async def createIntegration(
     except Exception as e:
         raise
 
+
+@router.put("/{agent_id}", status_code=status.HTTP_200_OK)
+async def updateIntegration(agent_id:int,payload: UpdateIntegration, current_user: dict = Depends(role_required(["admin", "user"])), db: Session = Depends(get_db)):
+    try:
+        updated_integration = await ic.update_integration(agent_id, payload, current_user, db)
+        return success_response("Integration is successfully", updated_integration)
+    except:
+        raise
 
 @router.delete("/{integration_id}", status_code=status.HTTP_200_OK)
 def deleteIntegration(

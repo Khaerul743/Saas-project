@@ -226,10 +226,10 @@ export function ConversationDetailModal({ conversation, isOpen, onClose }: Conve
           <div className="xl:flex-1 xl:max-w-sm border-t xl:border-t-0 xl:border-l bg-muted/20 flex flex-col min-h-0">
             <div className="p-3 sm:p-4 space-y-3 sm:space-y-4 flex-1 overflow-y-auto">
               {/* Performance Overview */}
-              <Card className="border-l-4 border-l-primary">
+              <Card className="shadow-none">
                 <CardHeader className="pb-2 sm:pb-3">
                   <CardTitle className="text-sm sm:text-base flex items-center">
-                    <BarChart3 className="h-4 w-4 mr-2 text-primary flex-shrink-0" />
+                    <BarChart3 className="h-4 w-4 mr-2 text-blue-500/70 flex-shrink-0" />
                     <span className="truncate">Performance Overview</span>
                   </CardTitle>
                 </CardHeader>
@@ -238,10 +238,10 @@ export function ConversationDetailModal({ conversation, isOpen, onClose }: Conve
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2 min-w-0">
-                        <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
+                        <CheckCircle className="h-4 w-4 text-green-500/70 flex-shrink-0" />
                         <span className="text-xs sm:text-sm font-medium truncate">Success Rate</span>
                       </div>
-                      <span className="text-xs sm:text-sm font-bold text-green-600 flex-shrink-0">
+                      <span className="text-xs sm:text-sm font-bold text-green-500/80 flex-shrink-0">
                         {successRate.toFixed(1)}%
                       </span>
                     </div>
@@ -252,16 +252,16 @@ export function ConversationDetailModal({ conversation, isOpen, onClose }: Conve
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2 min-w-0">
-                        <Timer className="h-4 w-4 text-blue-600 flex-shrink-0" />
+                        <Timer className="h-4 w-4 text-blue-500/70 flex-shrink-0" />
                         <span className="text-xs sm:text-sm font-medium truncate">Avg Response</span>
                       </div>
-                      <span className="text-xs sm:text-sm font-bold text-blue-600 flex-shrink-0">
+                      <span className="text-xs sm:text-sm font-bold text-blue-500/80 flex-shrink-0">
                         {avgResponseTime.toFixed(1)}s
                       </span>
                     </div>
                     <div className="h-2 bg-muted rounded-full overflow-hidden">
                       <div 
-                        className="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full transition-all duration-300"
+                        className="h-full bg-blue-500/50 rounded-full transition-all duration-300"
                         style={{ width: `${Math.min(100, (avgResponseTime / 5) * 100)}%` }}
                       />
                     </div>
@@ -271,16 +271,16 @@ export function ConversationDetailModal({ conversation, isOpen, onClose }: Conve
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2 min-w-0">
-                        <Zap className="h-4 w-4 text-orange-600 flex-shrink-0" />
+                        <Zap className="h-4 w-4 text-orange-500/70 flex-shrink-0" />
                         <span className="text-xs sm:text-sm font-medium truncate">Token Usage</span>
                       </div>
-                      <span className="text-xs sm:text-sm font-bold text-orange-600 flex-shrink-0">
+                      <span className="text-xs sm:text-sm font-bold text-orange-500/80 flex-shrink-0">
                         {tokenUsage.toLocaleString()}
                       </span>
                     </div>
                     <div className="h-2 bg-muted rounded-full overflow-hidden">
                       <div 
-                        className="h-full bg-gradient-to-r from-orange-500 to-orange-600 rounded-full transition-all duration-300"
+                        className="h-full bg-orange-500/50 rounded-full transition-all duration-300"
                         style={{ width: `${Math.min(100, (tokenUsage / 10000) * 100)}%` }}
                       />
                     </div>
@@ -289,40 +289,40 @@ export function ConversationDetailModal({ conversation, isOpen, onClose }: Conve
               </Card>
 
               {/* Conversation Stats */}
-              <Card className="border-l-4 border-l-emerald-500">
+              <Card className="shadow-none">
                 <CardHeader className="pb-2 sm:pb-3">
                   <CardTitle className="text-sm sm:text-base flex items-center">
-                    <Activity className="h-4 w-4 mr-2 text-emerald-600 flex-shrink-0" />
+                    <Activity className="h-4 w-4 mr-2 text-emerald-500/70 flex-shrink-0" />
                     <span className="truncate">Conversation Stats</span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2 sm:space-y-3">
-                  <div className="flex items-center justify-between p-2 sm:p-3 bg-emerald-50 rounded-lg">
+                  <div className="flex items-center justify-between p-2 sm:p-3 bg-emerald-500/5 rounded-lg">
                     <div className="flex items-center space-x-2 min-w-0">
-                      <MessageCircle className="h-4 w-4 text-emerald-600 flex-shrink-0" />
+                      <MessageCircle className="h-4 w-4 text-emerald-500/70 flex-shrink-0" />
                       <span className="text-xs sm:text-sm font-medium truncate">Total Messages</span>
                     </div>
-                    <span className="text-base sm:text-lg font-bold text-emerald-600 flex-shrink-0">
+                    <span className="text-base sm:text-lg font-bold text-emerald-500/80 flex-shrink-0">
                       {totalMessages}
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between p-2 sm:p-3 bg-blue-50 rounded-lg">
+                  <div className="flex items-center justify-between p-2 sm:p-3 bg-blue-500/5 rounded-lg">
                     <div className="flex items-center space-x-2 min-w-0">
-                      <User className="h-4 w-4 text-blue-600 flex-shrink-0" />
+                      <User className="h-4 w-4 text-blue-500/70 flex-shrink-0" />
                       <span className="text-xs sm:text-sm font-medium truncate">User Messages</span>
                     </div>
-                    <span className="text-base sm:text-lg font-bold text-blue-600 flex-shrink-0">
+                    <span className="text-base sm:text-lg font-bold text-blue-500/80 flex-shrink-0">
                       {Math.ceil(totalMessages / 2)}
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between p-2 sm:p-3 bg-purple-50 rounded-lg">
+                  <div className="flex items-center justify-between p-2 sm:p-3 bg-purple-500/5 rounded-lg">
                     <div className="flex items-center space-x-2 min-w-0">
-                      <Bot className="h-4 w-4 text-purple-600 flex-shrink-0" />
+                      <Bot className="h-4 w-4 text-purple-500/70 flex-shrink-0" />
                       <span className="text-xs sm:text-sm font-medium truncate">AI Responses</span>
                     </div>
-                    <span className="text-base sm:text-lg font-bold text-purple-600 flex-shrink-0">
+                    <span className="text-base sm:text-lg font-bold text-purple-500/80 flex-shrink-0">
                       {Math.floor(totalMessages / 2)}
                     </span>
                   </div>
@@ -331,10 +331,10 @@ export function ConversationDetailModal({ conversation, isOpen, onClose }: Conve
 
               {/* Model Information */}
               {messages.length > 0 && messages[0].metadata.model && (
-                <Card className="border-l-4 border-l-purple-500">
+                <Card className="shadow-none">
                   <CardHeader className="pb-2 sm:pb-3">
                     <CardTitle className="text-sm sm:text-base flex items-center">
-                      <Settings className="h-4 w-4 mr-2 text-purple-600 flex-shrink-0" />
+                      <Settings className="h-4 w-4 mr-2 text-purple-500/70 flex-shrink-0" />
                       <span className="truncate">Model Info</span>
                     </CardTitle>
                   </CardHeader>
@@ -348,7 +348,7 @@ export function ConversationDetailModal({ conversation, isOpen, onClose }: Conve
                       </div>
                       <div className="flex items-center justify-between">
                         <span className="text-xs sm:text-sm text-muted-foreground truncate">Platform</span>
-                        <Badge variant="secondary" className="text-xs flex-shrink-0">
+                        <Badge variant="outline" className="text-xs flex-shrink-0">
                           {conversation.platform}
                         </Badge>
                       </div>

@@ -1,6 +1,7 @@
 "use client"
 
 import { AgentCard } from "@/components/agent-card"
+import { AgentDetailModal } from "@/components/agent-detail-modal"
 import { AgentSettingsModal } from "@/components/agent-settings-modal"
 import { DashboardLayout } from "@/components/dashboard-layout"
 import { Button } from "@/components/ui/button"
@@ -32,6 +33,7 @@ export default function AgentsPage() {
   const [error, setError] = useState<string>("")
   const [selectedAgent, setSelectedAgent] = useState<Agent | null>(null)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+  const [isDetailOpen, setIsDetailOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
 
   useEffect(() => {
@@ -65,6 +67,11 @@ export default function AgentsPage() {
   const handleEditAgent = (agent: Agent) => {
     setSelectedAgent(agent)
     setIsSettingsOpen(true)
+  }
+
+  const handleDetailAgent = (agent: Agent) => {
+    setSelectedAgent(agent)
+    setIsDetailOpen(true)
   }
 
   const handleDuplicateAgent = (agent: Agent) => {
@@ -189,6 +196,7 @@ export default function AgentsPage() {
               agent={agent}
               onEdit={() => handleEditAgent(agent)}
               onDelete={() => handleDeleteAgent(agent.id || index)}
+              onDetail={() => handleDetailAgent(agent)}
             />
           ))}
         </div>
@@ -199,6 +207,16 @@ export default function AgentsPage() {
           isOpen={isSettingsOpen}
           onClose={() => {
             setIsSettingsOpen(false)
+            setSelectedAgent(null)
+          }}
+        />
+
+        {/* Agent Detail Modal */}
+        <AgentDetailModal
+          agent={selectedAgent}
+          isOpen={isDetailOpen}
+          onClose={() => {
+            setIsDetailOpen(false)
             setSelectedAgent(null)
           }}
         />
