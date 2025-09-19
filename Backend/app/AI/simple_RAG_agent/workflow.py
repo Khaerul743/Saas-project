@@ -177,6 +177,7 @@ class Workflow:
             "response": response.content,
             "total_token": state.total_token + total_tokens,
         }
+    
 
     def run(self, state: Dict, thread_id: str):
         return self.build.invoke(

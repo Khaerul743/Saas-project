@@ -220,7 +220,7 @@ class RAGSystem:
             self.client = chromadb.PersistentClient(chroma_directiory)
             self.collection = self.client.get_or_create_collection(name=collection_name)
         except Exception as e:
-            logging.error(f"Failed to initialize ChromaDB client or collection: {e}")
+            # logging.error(f"Failed to initialize ChromaDB client or collection: {e}")
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail="Internal server error, please try again",
@@ -233,7 +233,7 @@ class RAGSystem:
                 chunk_size=1000, chunk_overlap=200, length_function=len
             )
         except Exception as e:
-            logger.error(f"Failed to initialize embeddings or LLM: {e}")
+            # logger.error(f"Failed to initialize embeddings or LLM: {e}")
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail="Internal server error, please try again",
@@ -244,11 +244,30 @@ class RAGSystem:
         directory_path: str,
         file_name: str,
         file_type: str,
-        db,
-        document,
-        file_path,
     ) -> List[Document]:
+        """
+        Load a single document from the specified directory.
+        
+        Args:
+            directory_path: Path to the directory containing the document
+            file_name: Name of the file to load
+            file_type: Type of the file ('txt' or 'pdf')
+            
+        Returns:
+            List[Document]: List of loaded documents
+            
+        Raises:
+            HTTPException: If file type is not supported or loading fails
+        """
         try:
+            # Validate file type
+            if file_type not in ["txt", "pdf"]:
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"Unsupported file type: {file_type}. Only 'txt' and 'pdf' are supported."
+                )
+            
+            # Create appropriate loader based on file type
             if file_type == "txt":
                 loader = DirectoryLoader(
                     directory_path, glob=f"{file_name}", loader_cls=TextLoader
@@ -257,31 +276,27 @@ class RAGSystem:
                 loader = DirectoryLoader(
                     directory_path, glob=f"{file_name}", loader_cls=PyPDFLoader
                 )
-            else:
-                logger.warning(
-                    f"Error while load single documents: filename {file_name} and filetype {file_type}"
-                )
-                # Hapus file fisik jika ada
-                try:
-                    if os.path.exists(file_path):
-                        os.remove(file_path)
-                        logger.info(f"File {file_path} berhasil dihapus.")
-                except Exception as file_err:
-                    logger.error(f"Gagal menghapus file {file_path}: {file_err}")
-                db.delete(document)
-                db.commit()
-                raise HTTPException(
-                    status_code=status.HTTP_400_BAD_REQUEST,
-                    detail="Type of document, must be pdf or txt.",
-                )
+            
+            # Load documents
             documents: List[Document] = loader.load()
-            logger.info(f"Load single document is successfully: filename {file_name}")
+            
+            if not documents:
+                raise HTTPException(
+                    status_code=404,
+                    detail=f"Document '{file_name}' not found or could not be loaded."
+                )
+            
+            logger.info(f"Successfully loaded document: {file_name}")
             return documents
+            
+        except HTTPException:
+            # Re-raise HTTP exceptions as they are already properly formatted
+            raise
         except Exception as e:
-            logger.error(f"Error loading document '{file_name}': {e}")
+            logger.error(f"Error loading document '{file_name}': {str(e)}")
             raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail="Internal server error, please try again",
+                status_code=500,
+                detail=f"Failed to load document '{file_name}': {str(e)}"
             )
 
     def load_documents(self, directory: str) -> List[Document]:
@@ -316,7 +331,7 @@ class RAGSystem:
 
             return list(doc_ids)
         except Exception as e:
-            logger.error(f"Error listing documents: {e}")
+            # logger.error(f"Error listing documents: {e}")
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail="Internal server error, please try again",
@@ -333,7 +348,7 @@ class RAGSystem:
         """
         try:
             if not documents:
-                logger.warning(f"Document not found: document_id {doc_id}")
+                # logger.warning(f"Document not found: document_id {doc_id}")
                 raise HTTPException(
                     status_code=status.HTTP_404_NOT_FOUND, detail="Document not found"
                 )
@@ -356,11 +371,11 @@ class RAGSystem:
                 embeddings=embeddings,
                 metadatas=[{**doc.metadata, "doc_id": doc_id} for doc in splits],
             )
-            logger.info(f"Add document is successfully: document ID {doc_id}")
+            # logger.info(f"Add document is successfully: document ID {doc_id}")
             return chunk_ids
 
         except Exception as e:
-            logger.error(f"Error adding documents: {e}")
+            # logger.error(f"Error adding documents: {e}")
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail="Internal server error, please try again",
@@ -372,10 +387,10 @@ class RAGSystem:
         """
         try:
             self.collection.delete(where={"doc_id": doc_id})
-            logger.info(f"Semua chunk dokumen dengan id {doc_id} berhasil dihapus")
+            # logger.info(f"Semua chunk dokumen dengan id {doc_id} berhasil dihapus")
             return {"result": f"Delete document is successfully: document ID {doc_id}"}
         except Exception as e:
-            logger.error(f"Error deleting document {doc_id}: {e}")
+            # logger.error(f"Error deleting document {doc_id}: {e}")
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail="Internal server error, please try again later",
@@ -392,7 +407,7 @@ class RAGSystem:
             )
             return vectorstore.as_retriever()
         except Exception as e:
-            logger.error(f"Error getting retriever: {e}")
+            # logger.error(f"Error getting retriever: {e}")
             raise RuntimeError("Gagal mengambil retriever") from e
 
     def ask(self, query: str):
@@ -441,7 +456,7 @@ class RAGSystem:
 
             return "\n".join(output_lines).strip()
         except Exception as e:
-            logger.error(f"Error performing similarity search: {e}")
+            # logger.error(f"Error performing similarity search: {e}")
             raise RuntimeError("Gagal melakukan similarity search di ChromaDB") from e
 
 

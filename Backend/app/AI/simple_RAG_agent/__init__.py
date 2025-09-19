@@ -5,6 +5,9 @@ from typing import Any, Dict
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 
 from app.AI.simple_RAG_agent.workflow import Workflow
+from app.utils.logger import get_logger
+
+logger = get_logger(__name__)
 
 
 class Agent:
@@ -24,7 +27,7 @@ class Agent:
         self.base_prompt = base_prompt
         self.tone = tone
         self.short_memory = short_memory
-        self.short_memory = short_memory
+        # self.short_memory = short_memory
         self.workflow = Workflow(
             directory_path=directory_path,
             chromadb_path=chromadb_path,
@@ -49,19 +52,54 @@ class Agent:
         return result
 
     def add_document(
-        self, file_name: str, file_type: str, document_id: str, db, document, file_path
+        self, file_name: str, file_type: str, document_id: str
     ):
-        if not os.path.exists(self.directory_path + "/"):
-            os.makedirs(self.directory_path, exist_ok=True)
-        documents = self.workflow.rag.load_single_document(
-            self.directory_path, file_name, file_type, db, document, file_path
-        )
-        self.workflow.rag.add_documents(documents, document_id)
+        """
+        Add a document to the RAG system.
+        
+        Args:
+            file_name: Name of the file to add
+            file_type: Type of the file ('txt' or 'pdf')
+            document_id: Unique identifier for the document
+            
+        Raises:
+            HTTPException: If document loading or addition fails
+        """
+        try:
+            # Ensure directory exists
+            if not os.path.exists(self.directory_path + "/"):
+                os.makedirs(self.directory_path, exist_ok=True)
+            
+            # Load document using RAG system
+            documents = self.workflow.rag.load_single_document(
+                self.directory_path, file_name, file_type
+            )
+            
+            # Add documents to the RAG system
+            self.workflow.rag.add_documents(documents, document_id)
+            
+            logger.info(f"Successfully added document '{file_name}' with ID '{document_id}'")
+            
+        except Exception as e:
+            logger.error(f"Failed to add document '{file_name}': {str(e)}")
+            # Re-raise with more context
+            raise Exception(f"Failed to add document '{file_name}' to RAG system: {str(e)}") from e
 
     def delete_document(self, document_id: str):
+        """
+        Delete a document from the RAG system.
+        
+        Args:
+            document_id: Unique identifier of the document to delete
+            
+        Raises:
+            Exception: If document deletion fails
+        """
         try:
             self.workflow.rag.delete_document(document_id)
+            logger.info(f"Successfully deleted document with ID '{document_id}'")
         except Exception as e:
+            logger.error(f"Failed to delete document '{document_id}': {str(e)}")
             raise
 
     def update_base_prompt(self, new_base_prompt: str):

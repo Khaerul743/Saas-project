@@ -1,3 +1,5 @@
+
+
 def get_tone(tone: str):
     """
     Returns personality and communication style prompts based on the selected tone.

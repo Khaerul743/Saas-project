@@ -229,26 +229,46 @@ async def create_agent(
             # file_path = os.path.join(directory_path, file.filename)
             # with open(file_path, "wb") as buffer:
             #     shutil.copyfileobj(file.file, buffer)
+            # Write file to disk first
             content_type = write_document(file, directory_path)
-            post_document = Document(
-                agent_id=new_agent.id,
-                file_name=file.filename,
-                content_type=content_type,
-            )
+            file_path = os.path.join(directory_path, file.filename)
+            
+            try:
+                # Create document record in database
+                post_document = Document(
+                    agent_id=new_agent.id,
+                    file_name=file.filename,
+                    content_type=content_type,
+                )
 
-            db.add(post_document)
-            db.flush()
-            agents[str(new_agent.id)].add_document(
-                file.filename,
-                content_type,
-                str(post_document.id),
-                db,
-                post_document,
-                f"{directory_path}/{file.filename}",
-            )
+                db.add(post_document)
+                db.flush()
+                
+                # Try to add document to RAG system
+                agents[str(new_agent.id)].add_document(
+                    file.filename,
+                    content_type,
+                    str(post_document.id),
+                )
 
-            db.commit()
-            db.refresh(post_document)
+                # If everything succeeds, commit the transaction
+                db.commit()
+                db.refresh(post_document)
+                
+            except Exception as e:
+                # Rollback database transaction
+                db.rollback()
+                
+                # Remove physical file if it exists
+                try:
+                    if os.path.exists(file_path):
+                        os.remove(file_path)
+                        logger.info(f"Rollback: Removed file {file_path} due to error")
+                except Exception as file_err:
+                    logger.error(f"Failed to remove file {file_path} during rollback: {file_err}")
+                
+                # Re-raise the original exception
+                raise e
 
             logger.info(
                 f"Agent '{new_agent.name}' (ID: {new_agent.id}) document store successfully by user "

@@ -26,11 +26,13 @@ from app.models.user.api_key_entity import ApiKey  # noqa: F401
 from app.routes import (
     agent_route,
     auth_route,
+    customer_service_route,
     dashboard_route,
     document_route,
     history_route,
     integration_route,
     platform_route,
+    simple_rag_route,
     user_route,
 )
 from app.utils.logger import get_logger
@@ -77,7 +79,9 @@ app.add_exception_handler(RateLimitExceeded, rate_limit_exceeded_handler)
 # Routes
 app.include_router(user_route.router)
 app.include_router(auth_route.router)
-app.include_router(agent_route.router)
+app.include_router(agent_route.router)  # General agent routes (get all, etc.)
+app.include_router(simple_rag_route.router)  # Simple RAG Agent specific routes
+app.include_router(customer_service_route.router)  # Customer Service Agent specific routes
 app.include_router(document_route.router)
 app.include_router(integration_route.router)
 app.include_router(platform_route.router)

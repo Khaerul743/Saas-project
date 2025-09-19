@@ -17,7 +17,6 @@ from sqlalchemy.orm import Session
 from app.configs.database import get_db
 from app.configs.limiter import limiter
 from app.controllers.agent_controller import (
-    create_agent,
     delete_agent,
     get_all_user_agent,
     get_all_agents,
@@ -46,46 +45,9 @@ def getAllAgent(
         raise
 
 
-# response_model=ResponseAPI,
-@router.post("", response_model=ResponseAPI, status_code=status.HTTP_201_CREATED)
-@limiter.limit("10/minute")
-async def createAgent(
-    request: Request,
-    file: UploadFile = None,
-    agent_data: str = Form(...),
-    current_user: dict = Depends(role_required(["admin", "user"])),
-    db: Session = Depends(get_db),
-    background_tasks: BackgroundTasks = None,
-):
-    """
-    Create a new agent for the authenticated user.
-
-    Args:
-        request: FastAPI request object
-        agent_data: Agent creation data from request body
-        current_user: Current authenticated user (from JWT token)
-        db: Database session
-
-    Returns:
-        ResponseAPI: Success response with created agent data
-    """
-    try:
-        created_agent = await create_agent(
-            db,
-            file,
-            CreateAgent(**json.loads(agent_data)),
-            current_user,
-            background_tasks,
-        )
-        print(f"created_agent: {created_agent}")
-        # Return success response
-        return success_response(
-            message="Agent created successfully", data=created_agent
-        )
-
-    except Exception as e:
-        # This will be handled by the global error handler middleware
-        raise
+# Note: Create agent endpoint has been moved to specific agent type routes
+# Use /api/agents/simple-rag for Simple RAG Agents
+# Use /api/agents/customer-service for Customer Service Agents (to be implemented)
 
 
 @router.put("/{agent_id}", status_code=status.HTTP_200_OK)

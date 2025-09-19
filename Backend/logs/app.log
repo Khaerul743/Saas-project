@@ -6255,3 +6255,181 @@ ValueError: [TypeError("'coroutine' object is not iterable"), TypeError('vars() 
 2025-09-14 10:53:12,051 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
 2025-09-14 10:54:16,613 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
 2025-09-14 10:54:16,941 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-18 19:08:18,677 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-18 19:12:07,843 | INFO | app.AI.document_store.RAG | Successfully loaded document: 1670422926LAPORAN_KEUANGAN.pdf
+2025-09-18 19:12:16,024 | INFO | app.AI.simple_RAG_agent | Successfully added document '1670422926LAPORAN_KEUANGAN.pdf' with ID '1'
+2025-09-18 19:12:16,440 | INFO | app.controllers.agent_controller | Agent 'ketiga' (ID: 14) document store successfully by user khaerul@gmail.com
+2025-09-18 19:12:16,502 | INFO | app.controllers.agent_controller | Agent 'ketiga' created successfully by user khaerul@gmail.com (user_id: 1, agent_id: 14)
+2025-09-18 19:42:07,323 | INFO | app.AI.document_store.RAG | Successfully loaded document: 1670422926LAPORAN_KEUANGAN.pdf
+2025-09-18 19:42:11,585 | INFO | app.AI.simple_RAG_agent | Successfully added document '1670422926LAPORAN_KEUANGAN.pdf' with ID '2'
+2025-09-18 19:42:11,627 | INFO | app.controllers.simple_rag_controller | Simple RAG Agent 'ketiga' (ID: 15) created successfully by user khaerul@gmail.com
+2025-09-18 21:40:22,076 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-18 21:40:35,343 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-18 21:40:42,209 | ERROR | app.middlewares.error_handler | Unexpected error: 1 validation errors:
+  {'type': 'model_attributes_type', 'loc': ('response', 'data'), 'msg': 'Input should be a valid dictionary or object to extract fields from', 'input': None}
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 328, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 177, in serialize_response
+    raise ResponseValidationError(
+        errors=_normalize_errors(errors), body=response_content
+    )
+fastapi.exceptions.ResponseValidationError: 1 validation errors:
+  {'type': 'model_attributes_type', 'loc': ('response', 'data'), 'msg': 'Input should be a valid dictionary or object to extract fields from', 'input': None}
+
+2025-09-18 21:43:21,862 | ERROR | app.middlewares.error_handler | Unexpected error: 1 validation errors:
+  {'type': 'model_attributes_type', 'loc': ('response', 'data'), 'msg': 'Input should be a valid dictionary or object to extract fields from', 'input': None}
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 328, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 177, in serialize_response
+    raise ResponseValidationError(
+        errors=_normalize_errors(errors), body=response_content
+    )
+fastapi.exceptions.ResponseValidationError: 1 validation errors:
+  {'type': 'model_attributes_type', 'loc': ('response', 'data'), 'msg': 'Input should be a valid dictionary or object to extract fields from', 'input': None}
+
+2025-09-18 21:44:45,006 | ERROR | app.middlewares.error_handler | Unexpected error: 1 validation errors:
+  {'type': 'model_attributes_type', 'loc': ('response', 'data'), 'msg': 'Input should be a valid dictionary or object to extract fields from', 'input': None}
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 328, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 177, in serialize_response
+    raise ResponseValidationError(
+        errors=_normalize_errors(errors), body=response_content
+    )
+fastapi.exceptions.ResponseValidationError: 1 validation errors:
+  {'type': 'model_attributes_type', 'loc': ('response', 'data'), 'msg': 'Input should be a valid dictionary or object to extract fields from', 'input': None}
+

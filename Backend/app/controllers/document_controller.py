@@ -190,11 +190,28 @@ def document_delete(document_id: int, agent_id: int, current_user: dict, db: Ses
             )
         directory_path = f"documents/user_{current_user.get('id')}/agent_{agent_id}"
         file_path = os.path.join(directory_path, document.file_name)
-        agents[str(current_user.get("id"))].delete_document(str(document.id))
-        if os.path.exists(file_path):
-            os.remove(file_path)
-        db.delete(document)
-        db.commit()
+        
+        try:
+            # Try to delete from RAG system first
+            agents[str(current_user.get("id"))].delete_document(str(document.id))
+            
+            # If RAG deletion succeeds, delete from database
+            db.delete(document)
+            db.commit()
+            
+            # Finally, remove physical file
+            if os.path.exists(file_path):
+                os.remove(file_path)
+                logger.info(f"Removed physical file: {file_path}")
+                
+        except Exception as e:
+            # If RAG deletion fails, rollback database transaction
+            db.rollback()
+            logger.error(f"Failed to delete document from RAG system: {str(e)}")
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f"Failed to delete document from RAG system: {str(e)}"
+            )
         logger.info(
             f"Document '{document.file_name}' (ID: {document.id}) deleted successfully by user {current_user.get('email')}"
         )
