@@ -6,8 +6,6 @@ from app.AI.utils.tone import get_tone
 class AgentPromptControl:
     def __init__(
         self,
-        base_prompt:str,
-        tone:str,
         is_include_memory: bool = False,
         memory_provider: Optional[str] = "",
         provider_host: Optional[str] = "",

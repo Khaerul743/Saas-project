@@ -67,6 +67,7 @@ async def create_customer_service_agent(
         HTTPException: If creation fails
     """
     try:
+        # ✅ Removed debug print statement
         # Validate user exists
         user_id = current_user.get("id")
         if not user_id:
@@ -110,7 +111,7 @@ async def create_customer_service_agent(
                 post_document = Document(
                     agent_id=new_agent.id,
                     file_name=file.filename,
-                    content_type="pdf",
+                    content_type=content_type,  # ✅ Fixed: Use dynamic content_type
                 )
                 
                 db.add(post_document)
@@ -130,6 +131,15 @@ async def create_customer_service_agent(
                     
                     if dataset_desc:
                         dataset_descriptions[f"db_{filename_without_ext}_description"] = dataset_desc.description
+                    
+                    # Create database file in the same directory as documents
+                    db_path = os.path.join(directory_path, f"{filename_without_ext}.db")
+                    try:
+                        # Create database from CSV/Excel file
+                        dataset.get_dataset(file_path, db_path, f"SELECT * FROM {filename_without_ext}", filename_without_ext)
+                        logger.info(f"Created database {db_path} from {file.filename}")
+                    except Exception as e:
+                        logger.error(f"Failed to create database for {file.filename}: {str(e)}")
                     
                     # Get dataset info for detail_data
                     try:
@@ -157,69 +167,68 @@ async def create_customer_service_agent(
                     logger.error(f"Failed to remove file {file_path} during rollback: {file_err}")
                 
                 raise e
-        print("===========Document Records===========\n", document_records)
-        print("===========Available Databases===========\n", available_databases)
-        print("===========Dataset Descriptions===========\n", dataset_descriptions)
-        print("===========Detail Data Parts===========\n", detail_data_parts)
         
         # Initialize Customer Service Agent instance
-        # if not str(new_agent.id) in agents:
-        #     def init_agent():
-        #         # Prepare kwargs with dataset descriptions
-        #         agent_kwargs = {
-        #             **dataset_descriptions,
-        #             "detail_data": "\n".join(detail_data_parts) if detail_data_parts else ""
-        #         }
+        if not str(new_agent.id) in agents:
+            def init_agent():
+                # Prepare kwargs with dataset descriptions
+                agent_kwargs = {
+                    **dataset_descriptions
+                }
                 
-        #         agents[str(new_agent.id)] = AI.Agent(
-        #             base_prompt=new_agent.base_prompt,
-        #             tone=new_agent.tone,
-        #             directory_path=directory_path,
-        #             chromadb_path="chroma_db",
-        #             collection_name=f"agent_{new_agent.id}",
-        #             available_databases=available_databases,
-        #             long_memory=agent_data.long_term_memory,
-        #             short_memory=agent_data.short_term_memory,
-        #             **agent_kwargs
-        #         )
+                # ✅ Removed debug print statements
+                agents[str(new_agent.id)] = AI.Agent(
+                    base_prompt=agent_data.base_prompt,
+                    tone=agent_data.tone,
+                    llm_model=agent_data.model,
+                    directory_path=directory_path,
+                    chromadb_path="chroma_db",
+                    collection_name=f"agent_{new_agent.id}",
+                    available_databases=available_databases,
+                    detail_data="\n".join(detail_data_parts) if detail_data_parts else "",
+                    long_memory=agent_data.long_term_memory,
+                    short_memory=agent_data.short_term_memory,
+                    **agent_kwargs
+                )
 
-        #     init_agent()
+            init_agent()
         
-        # # Add PDF/TXT documents to RAG system
-        # for doc_record in document_records:
-        #     if doc_record.content_type in ["pdf", "txt"]:
-        #         try:
-        #             agents[str(new_agent.id)].add_document(
-        #                 doc_record.file_name,
-        #                 doc_record.content_type,
-        #                 str(doc_record.id),
-        #             )
-        #         except Exception as e:
-        #             logger.error(f"Failed to add document {doc_record.file_name} to RAG system: {str(e)}")
-        #             # Continue with other documents even if one fails
 
-        # # Commit all changes
-        # db.commit()
-        # db.refresh(new_agent)
+        # Add PDF/TXT documents to RAG system
+        for doc_record in document_records:
+            if doc_record.content_type in ["pdf", "txt"]:
+                try:
+                    agents[str(new_agent.id)].add_document(
+                        doc_record.file_name,
+                        doc_record.content_type,
+                        str(doc_record.id),
+                    )
+                except Exception as e:
+                    logger.error(f"Failed to add document {doc_record.file_name} to RAG system: {str(e)}")
+                    # Continue with other documents even if one fails
 
-        # logger.info(
-        #     f"Customer Service Agent '{new_agent.name}' (ID: {new_agent.id}) created successfully by user "
-        #     f"{current_user.get('email')} with {len(available_databases)} datasets and {len(document_records)} documents"
-        # )
+        # Commit all changes
+        db.commit()
+        db.refresh(new_agent)
 
-        # return CustomerServiceAgentOut(
-        #     id=new_agent.id,
-        #     name=new_agent.name,
-        #     avatar=new_agent.avatar,
-        #     model=new_agent.model,
-        #     description=new_agent.description,
-        #     base_prompt=new_agent.base_prompt,
-        #     tone=new_agent.tone,
-        #     short_term_memory=new_agent.short_term_memory,
-        #     long_term_memory=new_agent.long_term_memory,
-        #     status=new_agent.status,
-        #     created_at=new_agent.created_at,
-        # )
+        logger.info(
+            f"Customer Service Agent '{new_agent.name}' (ID: {new_agent.id}) created successfully by user "
+            f"{current_user.get('email')} with {len(available_databases)} datasets and {len(document_records)} documents"
+        )
+
+        return CustomerServiceAgentOut(
+            id=new_agent.id,
+            name=new_agent.name,
+            avatar=new_agent.avatar,
+            model=new_agent.model,
+            description=new_agent.description,
+            base_prompt=new_agent.base_prompt,
+            tone=new_agent.tone,
+            short_term_memory=new_agent.short_term_memory,
+            long_term_memory=new_agent.long_term_memory,
+            status=new_agent.status,
+            created_at=new_agent.created_at,
+        )
 
     except IntegrityError as e:
         db.rollback()

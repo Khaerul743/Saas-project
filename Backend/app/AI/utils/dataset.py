@@ -4,7 +4,13 @@ import os
 import io
 
 def get_dataset(file_path: str, db_path:str, query: str, table_name: str = None):
-    df = pd.read_csv(file_path)
+    # Support both CSV and Excel files
+    if file_path.endswith('.csv'):
+        df = pd.read_csv(file_path)
+    elif file_path.endswith(('.xlsx', '.xls')):
+        df = pd.read_excel(file_path)
+    else:
+        raise ValueError(f"Unsupported file format: {file_path}")
     
     # Determine table name from file path if not provided
     if table_name is None:
@@ -27,7 +33,13 @@ def get_dataset(file_path: str, db_path:str, query: str, table_name: str = None)
 
 
 def get_dataset_info(file_path: str, db_name: str):
-    df = pd.read_csv(file_path)
+    # Support both CSV and Excel files
+    if file_path.endswith('.csv'):
+        df = pd.read_csv(file_path)
+    elif file_path.endswith(('.xlsx', '.xls')):
+        df = pd.read_excel(file_path)
+    else:
+        raise ValueError(f"Unsupported file format: {file_path}")
     
     # Basic information
     num_rows = len(df)

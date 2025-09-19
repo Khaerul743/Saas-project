@@ -6433,3 +6433,511 @@ Traceback (most recent call last):
 fastapi.exceptions.ResponseValidationError: 1 validation errors:
   {'type': 'model_attributes_type', 'loc': ('response', 'data'), 'msg': 'Input should be a valid dictionary or object to extract fields from', 'input': None}
 
+2025-09-19 10:40:00,775 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-19 10:40:18,963 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-19 10:47:28,952 | ERROR | app.controllers.customer_service_controller | Unexpected error while creating Customer Service Agent: AgentPromptControl.__init__() missing 2 required positional arguments: 'base_prompt' and 'tone'
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\controllers\customer_service_controller.py", line 186, in create_customer_service_agent
+    init_agent()
+    ~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\app\controllers\customer_service_controller.py", line 174, in init_agent
+    agents[str(new_agent.id)] = AI.Agent(
+                                ~~~~~~~~^
+        base_prompt=new_agent.base_prompt,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+        **agent_kwargs
+        ^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\app\AI\customer_service\__init__.py", line 35, in __init__
+    self.workflow = Workflow(
+                    ~~~~~~~~^
+        base_prompt=base_prompt,
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\app\AI\customer_service\workflow.py", line 54, in __init__
+    self.prompts = AgentPromptControl(
+                   ~~~~~~~~~~~~~~~~~~^
+        is_include_memory=long_memory,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        provider_port=self.provider_port,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+TypeError: AgentPromptControl.__init__() missing 2 required positional arguments: 'base_prompt' and 'tone'
+2025-09-19 10:47:28,973 | ERROR | app.utils.error_utils | Unexpected error during creating Customer Service Agent: AgentPromptControl.__init__() missing 2 required positional arguments: 'base_prompt' and 'tone'
+2025-09-19 10:51:55,505 | ERROR | app.controllers.customer_service_controller | Unexpected error while creating Customer Service Agent: AgentPromptControl.__init__() missing 2 required positional arguments: 'base_prompt' and 'tone'
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\controllers\customer_service_controller.py", line 187, in create_customer_service_agent
+    init_agent()
+    ~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\app\controllers\customer_service_controller.py", line 175, in init_agent
+    agents[str(new_agent.id)] = AI.Agent(
+                                ~~~~~~~~^
+        base_prompt=new_agent.base_prompt,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+        **agent_kwargs
+        ^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\app\AI\customer_service\__init__.py", line 35, in __init__
+    self.workflow = Workflow(
+                    ~~~~~~~~^
+        base_prompt=base_prompt,
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\app\AI\customer_service\workflow.py", line 54, in __init__
+    self.prompts = AgentPromptControl(
+                   ~~~~~~~~~~~~~~~~~~^
+        is_include_memory=long_memory,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        provider_port=self.provider_port,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+TypeError: AgentPromptControl.__init__() missing 2 required positional arguments: 'base_prompt' and 'tone'
+2025-09-19 10:51:55,520 | ERROR | app.utils.error_utils | Unexpected error during creating Customer Service Agent: AgentPromptControl.__init__() missing 2 required positional arguments: 'base_prompt' and 'tone'
+2025-09-19 11:13:20,127 | ERROR | app.controllers.customer_service_controller | Unexpected error while creating Customer Service Agent: AgentPromptControl.__init__() missing 2 required positional arguments: 'base_prompt' and 'tone'
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\controllers\customer_service_controller.py", line 185, in create_customer_service_agent
+    init_agent()
+    ~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\app\controllers\customer_service_controller.py", line 172, in init_agent
+    agents[str(new_agent.id)] = AI.Agent(
+                                ~~~~~~~~^
+        base_prompt=agent_data.base_prompt,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<8 lines>...
+        **agent_kwargs
+        ^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\app\AI\customer_service\__init__.py", line 36, in __init__
+    self.workflow = Workflow(
+                    ~~~~~~~~^
+        base_prompt=base_prompt,
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\app\AI\customer_service\workflow.py", line 56, in __init__
+    self.prompts = AgentPromptControl(
+                   ~~~~~~~~~~~~~~~~~~^
+        is_include_memory=long_memory,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        provider_port=self.provider_port,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+TypeError: AgentPromptControl.__init__() missing 2 required positional arguments: 'base_prompt' and 'tone'
+2025-09-19 11:13:20,145 | ERROR | app.utils.error_utils | Unexpected error during creating Customer Service Agent: AgentPromptControl.__init__() missing 2 required positional arguments: 'base_prompt' and 'tone'
+2025-09-19 11:20:07,403 | ERROR | app.controllers.customer_service_controller | Unexpected error while creating Customer Service Agent: Gagal setup memory: Semua parameter (memory_provider, provider_host, provider_port) harus diisi!
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\AI\memory\memory.py", line 41, in __init__
+    raise MemoryError("Semua parameter (memory_provider, provider_host, provider_port) harus diisi!")
+app.AI.memory.memory.MemoryError: Semua parameter (memory_provider, provider_host, provider_port) harus diisi!
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\controllers\customer_service_controller.py", line 185, in create_customer_service_agent
+    init_agent()
+    ~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\app\controllers\customer_service_controller.py", line 172, in init_agent
+    agents[str(new_agent.id)] = AI.Agent(
+                                ~~~~~~~~^
+        base_prompt=agent_data.base_prompt,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<8 lines>...
+        **agent_kwargs
+        ^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\app\AI\customer_service\__init__.py", line 36, in __init__
+    self.workflow = Workflow(
+                    ~~~~~~~~^
+        base_prompt=base_prompt,
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\app\AI\customer_service\workflow.py", line 56, in __init__
+    self.prompts = AgentPromptControl(
+                   ~~~~~~~~~~~~~~~~~~^
+        is_include_memory=long_memory,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        provider_port=self.provider_port,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\app\AI\customer_service\prompts.py", line 17, in __init__
+    self.memory = MemoryControl(
+                  ~~~~~~~~~~~~~^
+        memory_provider=memory_provider,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        provider_host=provider_host,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        provider_port=provider_port,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\app\AI\memory\memory.py", line 57, in __init__
+    raise MemoryError(f"Gagal setup memory: {str(e)}") from e
+app.AI.memory.memory.MemoryError: Gagal setup memory: Semua parameter (memory_provider, provider_host, provider_port) harus diisi!
+2025-09-19 11:20:07,557 | ERROR | app.utils.error_utils | Unexpected error during creating Customer Service Agent: Gagal setup memory: Semua parameter (memory_provider, provider_host, provider_port) harus diisi!
+2025-09-19 11:21:39,751 | INFO | app.AI.customer_service.workflow | Main agent processing user message: hai...
+2025-09-19 11:21:42,445 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-19 11:29:08,077 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Apa product dengan stok paling banyak?...
+2025-09-19 11:29:10,554 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-19 11:29:19,375 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-19 11:29:19,391 | INFO | app.AI.customer_service.workflow | Tool message:  Based on the given context, it is not possible to determine the stock that is the most. The context...
+2025-09-19 11:29:22,400 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=check_products_database
+2025-09-19 11:29:22,436 | ERROR | app.AI.customer_service.workflow | Error in validation agent: 'StructuredOutputValidationAgent' object has no attribute 'usage_metadata'
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\AI\customer_service\workflow.py", line 348, in _validation_agent
+    + response.usage_metadata.get("total_tokens", 0),
+      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pydantic\main.py", line 991, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'StructuredOutputValidationAgent' object has no attribute 'usage_metadata'
+2025-09-19 11:33:08,801 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Apa product dengan stok paling banyak?...
+2025-09-19 11:33:10,160 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-19 11:33:13,673 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-19 11:33:13,675 | INFO | app.AI.customer_service.workflow | Tool message:  I'm not sure what you're asking for. Could you please provide more context or clarify your question...
+2025-09-19 11:33:15,267 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=check_products_database
+2025-09-19 11:33:20,639 | INFO | app.AI.customer_service.workflow | Generating query for problem: Mencari produk dengan jumlah stok paling banyak....
+2025-09-19 11:33:25,079 | INFO | app.AI.customer_service.workflow | Generated query: SELECT nama, stok FROM products ORDER BY stok DESC LIMIT 1...
+2025-09-19 11:33:25,102 | INFO | app.AI.customer_service.workflow | Target database: products
+2025-09-19 11:33:25,443 | INFO | app.AI.customer_service.workflow | Query executed successfully, returned 1 rows
+2025-09-19 11:33:25,450 | INFO | app.AI.customer_service.workflow | Generating final answer for user
+2025-09-19 11:33:28,124 | INFO | app.AI.customer_service.workflow | Final answer generated successfully
+2025-09-19 19:40:53,007 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-19 19:42:45,710 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Apa product dengan stok paling banyak?...
+2025-09-19 19:42:45,710 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Apa product dengan stok paling banyak?...
+2025-09-19 19:42:48,164 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-19 19:42:48,164 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-19 19:42:58,103 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-19 19:42:58,103 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-19 19:42:58,120 | INFO | app.AI.customer_service.workflow | Tool message: 
+
+I'm sorry, but I don't have enough context to answer this question. Can you please provide more in...
+2025-09-19 19:42:58,120 | INFO | app.AI.customer_service.workflow | Tool message: 
+
+I'm sorry, but I don't have enough context to answer this question. Can you please provide more in...
+2025-09-19 19:43:02,382 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=check_products_database, tokens=527
+2025-09-19 19:43:02,382 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=check_products_database, tokens=527
+2025-09-19 19:43:05,227 | INFO | app.AI.customer_service.workflow | Generating query for problem: Mencari produk dengan stok paling banyak...
+2025-09-19 19:43:05,227 | INFO | app.AI.customer_service.workflow | Generating query for problem: Mencari produk dengan stok paling banyak...
+2025-09-19 19:43:07,755 | INFO | app.AI.customer_service.workflow | Generated query: SELECT nama, stok FROM products ORDER BY stok DESC LIMIT 1...
+2025-09-19 19:43:07,755 | INFO | app.AI.customer_service.workflow | Generated query: SELECT nama, stok FROM products ORDER BY stok DESC LIMIT 1...
+2025-09-19 19:43:07,781 | INFO | app.AI.customer_service.workflow | Target database: products
+2025-09-19 19:43:07,781 | INFO | app.AI.customer_service.workflow | Target database: products
+2025-09-19 19:43:07,802 | INFO | app.AI.customer_service.workflow | Estimated tokens: 680
+2025-09-19 19:43:07,802 | INFO | app.AI.customer_service.workflow | Estimated tokens: 680
+2025-09-19 19:43:08,201 | INFO | app.AI.customer_service.workflow | Query executed successfully, returned 1 rows
+2025-09-19 19:43:08,201 | INFO | app.AI.customer_service.workflow | Query executed successfully, returned 1 rows
+2025-09-19 19:43:08,215 | INFO | app.AI.customer_service.workflow | Generating final answer for user
+2025-09-19 19:43:08,215 | INFO | app.AI.customer_service.workflow | Generating final answer for user
+2025-09-19 19:43:10,776 | INFO | app.AI.customer_service.workflow | Final answer generated successfully
+2025-09-19 19:43:10,776 | INFO | app.AI.customer_service.workflow | Final answer generated successfully
+2025-09-19 20:05:41,079 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_30\products.db from products.csv
+2025-09-19 20:06:31,999 | ERROR | app.AI.document_store.RAG | Error loading document 'products.csv': Stream has ended unexpectedly
+2025-09-19 20:06:32,001 | ERROR | app.AI.customer_service | Failed to add document 'products.csv': 500: Failed to load document 'products.csv': Stream has ended unexpectedly
+2025-09-19 20:06:32,004 | ERROR | app.controllers.customer_service_controller | Failed to add document products.csv to RAG system: Failed to add document 'products.csv' to RAG system: 500: Failed to load document 'products.csv': Stream has ended unexpectedly
+2025-09-19 20:06:34,083 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-09-19 20:06:34,096 | INFO | app.AI.customer_service | Successfully loaded document: FAQ.pdf
+2025-09-19 20:06:40,537 | INFO | app.AI.customer_service | Successfully added document 'FAQ.pdf' with ID '32'
+2025-09-19 20:06:40,641 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 30) created successfully by user khaerul@gmail.com with 1 datasets and 2 documents
+2025-09-19 20:15:36,014 | ERROR | app.controllers.customer_service_controller | IntegrityError while creating Customer Service Agent: (pymysql.err.IntegrityError) (1452, 'Cannot add or update a child row: a foreign key constraint fails (`saas`.`agents`, CONSTRAINT `agents_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)')
+[SQL: INSERT INTO agents (user_id, name, avatar, model, `role`, status, base_prompt, short_term_memory, long_term_memory, tone) VALUES (%(user_id)s, %(name)s, %(avatar)s, %(model)s, %(role)s, %(status)s, %(base_prompt)s, %(short_term_memory)s, %(long_term_memory)s, %(tone)s)]
+[parameters: {'user_id': 1, 'name': 'Customer Support Bot', 'avatar': None, 'model': 'gpt-4o', 'role': 'customer service', 'status': 'active', 'base_prompt': 'You are a helpful customer service agent', 'short_term_memory': 0, 'long_term_memory': 0, 'tone': 'friendly'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-09-19 20:16:43,428 | INFO | app.controllers.auth_controller | New user registered with email: khaerul@gmail.com
+2025-09-19 20:16:50,228 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-19 20:17:15,515 | INFO | app.AI.document_store.RAG | Successfully loaded document: 1670422926LAPORAN_KEUANGAN.pdf
+2025-09-19 20:17:24,016 | INFO | app.AI.simple_RAG_agent | Successfully added document '1670422926LAPORAN_KEUANGAN.pdf' with ID '1'
+2025-09-19 20:17:24,845 | INFO | app.controllers.simple_rag_controller | Simple RAG Agent 'ketiga' (ID: 2) created successfully by user khaerul@gmail.com
+2025-09-19 20:18:20,674 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_3\products.db from products.csv
+2025-09-19 20:18:40,863 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-09-19 20:18:40,865 | INFO | app.AI.customer_service | Successfully loaded document: FAQ.pdf
+2025-09-19 20:18:43,330 | INFO | app.AI.customer_service | Successfully added document 'FAQ.pdf' with ID '3'
+2025-09-19 20:18:43,376 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 3) created successfully by user khaerul@gmail.com with 1 datasets and 2 documents
+2025-09-19 20:26:56,744 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_4\products.db from products.csv
+2025-09-19 20:27:14,481 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-09-19 20:27:14,482 | INFO | app.AI.customer_service | Successfully loaded document: FAQ.pdf
+2025-09-19 20:27:21,866 | INFO | app.AI.customer_service | Successfully added document 'FAQ.pdf' with ID '5'
+2025-09-19 20:27:22,280 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 4) created successfully by user khaerul@gmail.com with 1 datasets and 2 documents
+2025-09-19 20:29:46,001 | INFO | app.controllers.integration_controller | Agent integration to platform api is successfuly: agent ID 4 and user ID 1
+2025-09-19 20:30:44,588 | INFO | app.AI.customer_service.workflow | Main agent processing user message: hai...
+2025-09-19 20:30:44,588 | INFO | app.AI.customer_service.workflow | Main agent processing user message: hai...
+2025-09-19 20:30:46,756 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-19 20:30:46,756 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-19 20:30:46,847 | ERROR | app.controllers.platform_controller | Unexpected error while sending api message: 'Agent' object has no attribute 'llm_model'
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\controllers\platform_controller.py", line 205, in api_handler
+    model=agent.llm_model,
+          ^^^^^^^^^^^^^^^
+AttributeError: 'Agent' object has no attribute 'llm_model'
+2025-09-19 20:35:37,151 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_5\products.db from products.csv
+2025-09-19 20:35:55,174 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-09-19 20:35:55,176 | INFO | app.AI.customer_service | Successfully loaded document: FAQ.pdf
+2025-09-19 20:36:02,719 | INFO | app.AI.customer_service | Successfully added document 'FAQ.pdf' with ID '7'
+2025-09-19 20:36:02,902 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 5) created successfully by user khaerul@gmail.com with 1 datasets and 2 documents
+2025-09-19 20:36:03,396 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_6\products.db from products.csv
+2025-09-19 20:36:12,774 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-09-19 20:36:12,779 | INFO | app.AI.customer_service | Successfully loaded document: FAQ.pdf
+2025-09-19 20:36:15,718 | INFO | app.AI.customer_service | Successfully added document 'FAQ.pdf' with ID '9'
+2025-09-19 20:36:15,727 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 6) created successfully by user khaerul@gmail.com with 1 datasets and 2 documents
+2025-09-19 20:36:29,285 | INFO | app.controllers.integration_controller | Agent integration to platform api is successfuly: agent ID 6 and user ID 1
+2025-09-19 20:37:23,251 | INFO | app.AI.customer_service.workflow | Main agent processing user message: hai...
+2025-09-19 20:37:23,251 | INFO | app.AI.customer_service.workflow | Main agent processing user message: hai...
+2025-09-19 20:37:26,074 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-19 20:37:26,074 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-19 20:38:55,371 | ERROR | app.controllers.platform_controller | Unexpected error while sending api message: 1 validation error for AgentState
+user_problem
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/string_type
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\controllers\platform_controller.py", line 169, in api_handler
+    agent_response = agent.execute(
+        {"user_message": user_message, "total_token": 0}, generate_id
+    )
+  File "D:\Saas_Project\Backend\app\AI\customer_service\__init__.py", line 55, in execute
+    result = self.workflow.run(state=state, thread_id=thread_id)
+  File "D:\Saas_Project\Backend\app\AI\customer_service\workflow.py", line 610, in run
+    return self.build.invoke(
+           ~~~~~~~~~~~~~~~~~^
+        state,
+        ^^^^^^
+        config={"configurable": {"thread_id": thread_id}},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3026, in invoke
+    for chunk in self.stream(
+                 ~~~~~~~~~~~^
+        input,
+        ^^^^^^
+    ...<10 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ):
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\langgraph\pregel\main.py", line 2647, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 162, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 42, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 659, in invoke
+    input = step.invoke(input, config)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 401, in invoke
+    ret = self.func(*args, **kwargs)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\langgraph\graph\_branch.py", line 157, in _route
+    value = reader(config)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\langgraph\pregel\_read.py", line 89, in do_read
+    return mapper(read(select, fresh))
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\langgraph\graph\state.py", line 1230, in _coerce_state
+    return schema(**input)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pydantic\main.py", line 253, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for AgentState
+user_problem
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/string_type
+During task with name 'trust_level_check' and id '470cf129-3f83-1520-1072-6cab3b316c26'
+2025-09-19 20:40:30,579 | ERROR | app.controllers.platform_controller | Unexpected error while sending api message: 1 validation error for AgentState
+user_problem
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/string_type
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\controllers\platform_controller.py", line 169, in api_handler
+    agent_response = agent.execute(
+        {"user_message": user_message, "total_token": 0}, generate_id
+    )
+  File "D:\Saas_Project\Backend\app\AI\customer_service\__init__.py", line 55, in execute
+    result = self.workflow.run(state=state, thread_id=thread_id)
+  File "D:\Saas_Project\Backend\app\AI\customer_service\workflow.py", line 610, in run
+    return self.build.invoke(
+           ~~~~~~~~~~~~~~~~~^
+        state,
+        ^^^^^^
+        config={"configurable": {"thread_id": thread_id}},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3026, in invoke
+    for chunk in self.stream(
+                 ~~~~~~~~~~~^
+        input,
+        ^^^^^^
+    ...<10 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ):
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\langgraph\pregel\main.py", line 2647, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 162, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 42, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 659, in invoke
+    input = step.invoke(input, config)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 401, in invoke
+    ret = self.func(*args, **kwargs)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\langgraph\graph\_branch.py", line 157, in _route
+    value = reader(config)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\langgraph\pregel\_read.py", line 89, in do_read
+    return mapper(read(select, fresh))
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\langgraph\graph\state.py", line 1230, in _coerce_state
+    return schema(**input)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pydantic\main.py", line 253, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for AgentState
+user_problem
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/string_type
+During task with name 'trust_level_check' and id '0554d4cc-2bb2-9751-1a64-aa582ed3e482'
+2025-09-19 20:46:38,847 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_7\products.db from products.csv
+2025-09-19 20:47:04,474 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-09-19 20:47:04,477 | INFO | app.AI.customer_service | Successfully loaded document: FAQ.pdf
+2025-09-19 20:47:09,135 | INFO | app.AI.customer_service | Successfully added document 'FAQ.pdf' with ID '11'
+2025-09-19 20:47:09,530 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 7) created successfully by user khaerul@gmail.com with 1 datasets and 2 documents
+2025-09-19 20:47:35,551 | INFO | app.controllers.integration_controller | Agent integration to platform api is successfuly: agent ID 7 and user ID 1
+2025-09-19 20:48:37,985 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Apa product dengan stok paling banyak?...
+2025-09-19 20:48:37,985 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Apa product dengan stok paling banyak?...
+2025-09-19 20:48:40,036 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-19 20:48:40,036 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-19 20:48:43,065 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-19 20:48:43,065 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-19 20:48:43,141 | INFO | app.AI.customer_service.workflow | Tool message:  Kami tidak dapat memberikan informasi mengenai stok yang tersedia karena dapat berubah setiap saat....
+2025-09-19 20:48:43,141 | INFO | app.AI.customer_service.workflow | Tool message:  Kami tidak dapat memberikan informasi mengenai stok yang tersedia karena dapat berubah setiap saat....
+2025-09-19 20:48:49,730 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=end, tokens=553
+2025-09-19 20:48:49,730 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=end, tokens=553
+2025-09-19 20:54:15,751 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_8\products.db from products.csv
+2025-09-19 20:54:41,411 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-09-19 20:54:41,416 | INFO | app.AI.customer_service | Successfully loaded document: FAQ.pdf
+2025-09-19 20:54:47,360 | INFO | app.AI.customer_service | Successfully added document 'FAQ.pdf' with ID '13'
+2025-09-19 20:54:47,600 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 8) created successfully by user khaerul@gmail.com with 1 datasets and 2 documents
+2025-09-19 20:55:04,891 | INFO | app.controllers.integration_controller | Agent integration to platform api is successfuly: agent ID 8 and user ID 1
+2025-09-19 20:55:40,521 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Apa product dengan stok paling banyak?...
+2025-09-19 20:55:40,521 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Apa product dengan stok paling banyak?...
+2025-09-19 20:55:43,411 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-19 20:55:43,411 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-19 20:55:46,760 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-19 20:55:46,760 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-19 20:55:46,775 | INFO | app.AI.customer_service.workflow | Tool message:  Maaf, saya tidak dapat mengetahui produk dengan stok paling banyak karena tidak ada informasi yang ...
+2025-09-19 20:55:46,775 | INFO | app.AI.customer_service.workflow | Tool message:  Maaf, saya tidak dapat mengetahui produk dengan stok paling banyak karena tidak ada informasi yang ...
+2025-09-19 20:55:48,849 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=check_products_database, tokens=540
+2025-09-19 20:55:48,849 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=check_products_database, tokens=540
+2025-09-19 20:55:51,418 | INFO | app.AI.customer_service.workflow | Generating query for problem: Mencari produk dengan stok paling banyak....
+2025-09-19 20:55:51,418 | INFO | app.AI.customer_service.workflow | Generating query for problem: Mencari produk dengan stok paling banyak....
+2025-09-19 20:55:53,049 | INFO | app.AI.customer_service.workflow | Generated query: SELECT nama, stok FROM products ORDER BY stok DESC LIMIT 1...
+2025-09-19 20:55:53,049 | INFO | app.AI.customer_service.workflow | Generated query: SELECT nama, stok FROM products ORDER BY stok DESC LIMIT 1...
+2025-09-19 20:55:53,050 | INFO | app.AI.customer_service.workflow | Target database: products
+2025-09-19 20:55:53,050 | INFO | app.AI.customer_service.workflow | Target database: products
+2025-09-19 20:55:53,062 | INFO | app.AI.customer_service.workflow | Estimated tokens: 693
+2025-09-19 20:55:53,062 | INFO | app.AI.customer_service.workflow | Estimated tokens: 693
+2025-09-19 20:55:55,636 | INFO | app.AI.customer_service.workflow | Query executed successfully, returned 1 rows
+2025-09-19 20:55:55,636 | INFO | app.AI.customer_service.workflow | Query executed successfully, returned 1 rows
+2025-09-19 20:55:55,644 | INFO | app.AI.customer_service.workflow | Generating final answer for user
+2025-09-19 20:55:55,644 | INFO | app.AI.customer_service.workflow | Generating final answer for user
+2025-09-19 20:55:57,547 | INFO | app.AI.customer_service.workflow | Final answer generated successfully
+2025-09-19 20:55:57,547 | INFO | app.AI.customer_service.workflow | Final answer generated successfully
+2025-09-19 20:56:57,456 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Apa product dengan stok paling sedikit?...
+2025-09-19 20:56:57,456 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Apa product dengan stok paling sedikit?...
+2025-09-19 20:56:58,940 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-19 20:56:58,940 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-19 20:57:01,494 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-19 20:57:01,494 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-19 20:57:01,499 | INFO | app.AI.customer_service.workflow | Tool message:  Maaf, saya tidak dapat memberikan jawaban yang akurat karena tidak ada informasi mengenai stok prod...
+2025-09-19 20:57:01,499 | INFO | app.AI.customer_service.workflow | Tool message:  Maaf, saya tidak dapat memberikan jawaban yang akurat karena tidak ada informasi mengenai stok prod...
+2025-09-19 20:57:03,480 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=end, tokens=544
+2025-09-19 20:57:03,480 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=end, tokens=544
+2025-09-19 20:57:22,091 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Apa product dengan stok paling sedikit?...
+2025-09-19 20:57:22,091 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Apa product dengan stok paling sedikit?...
+2025-09-19 20:57:23,706 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-19 20:57:23,706 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-19 20:57:25,866 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-19 20:57:25,866 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-19 20:57:25,951 | INFO | app.AI.customer_service.workflow | Tool message:  Maaf, saya tidak memiliki informasi tentang stok produk yang sedang tersedia. Silakan hubungi tim l...
+2025-09-19 20:57:25,951 | INFO | app.AI.customer_service.workflow | Tool message:  Maaf, saya tidak memiliki informasi tentang stok produk yang sedang tersedia. Silakan hubungi tim l...
+2025-09-19 20:57:27,443 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=end, tokens=523
+2025-09-19 20:57:27,443 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=end, tokens=523
+2025-09-19 20:57:53,521 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Apa product dengan stok paling sedikit?...
+2025-09-19 20:57:53,521 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Apa product dengan stok paling sedikit?...
+2025-09-19 20:57:54,689 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-19 20:57:54,689 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-19 20:57:57,997 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-19 20:57:57,997 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-19 20:57:58,010 | INFO | app.AI.customer_service.workflow | Tool message:  Saya tidak dapat menentukan stok paling sedikit karena informasi yang diberikan tidak menjelaskan j...
+2025-09-19 20:57:58,010 | INFO | app.AI.customer_service.workflow | Tool message:  Saya tidak dapat menentukan stok paling sedikit karena informasi yang diberikan tidak menjelaskan j...
+2025-09-19 20:57:59,561 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=check_products_database, tokens=532
+2025-09-19 20:57:59,561 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=check_products_database, tokens=532
+2025-09-19 20:58:02,343 | INFO | app.AI.customer_service.workflow | Generating query for problem: Mencari produk dengan stok paling sedikit....
+2025-09-19 20:58:02,343 | INFO | app.AI.customer_service.workflow | Generating query for problem: Mencari produk dengan stok paling sedikit....
+2025-09-19 20:58:04,895 | INFO | app.AI.customer_service.workflow | Generated query: SELECT nama, stok FROM products ORDER BY stok ASC LIMIT 1;...
+2025-09-19 20:58:04,895 | INFO | app.AI.customer_service.workflow | Generated query: SELECT nama, stok FROM products ORDER BY stok ASC LIMIT 1;...
+2025-09-19 20:58:04,904 | INFO | app.AI.customer_service.workflow | Target database: products
+2025-09-19 20:58:04,904 | INFO | app.AI.customer_service.workflow | Target database: products
+2025-09-19 20:58:04,907 | INFO | app.AI.customer_service.workflow | Estimated tokens: 707
+2025-09-19 20:58:04,907 | INFO | app.AI.customer_service.workflow | Estimated tokens: 707
+2025-09-19 20:58:05,113 | INFO | app.AI.customer_service.workflow | Query executed successfully, returned 1 rows
+2025-09-19 20:58:05,113 | INFO | app.AI.customer_service.workflow | Query executed successfully, returned 1 rows
+2025-09-19 20:58:05,127 | INFO | app.AI.customer_service.workflow | Generating final answer for user
+2025-09-19 20:58:05,127 | INFO | app.AI.customer_service.workflow | Generating final answer for user
+2025-09-19 20:58:07,738 | INFO | app.AI.customer_service.workflow | Final answer generated successfully
+2025-09-19 20:58:07,738 | INFO | app.AI.customer_service.workflow | Final answer generated successfully

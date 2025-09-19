@@ -88,8 +88,8 @@ class AgentState(BaseModel):
     messages: Annotated[Sequence[BaseMessage], add_messages]
     user_message: str = "none"
     trust_level: int = 100
-    message_for_user: str = "none"
-    user_problem: str = "none"
+    message_for_user: Optional[str] = None
+    user_problem: Optional[str] = None
     response: str = "none"
     total_token: int = 0
     include_data: bool = False
@@ -99,9 +99,8 @@ class AgentState(BaseModel):
     problem: str = "none"
     problem_solving: str = "none"
     detail_data: str = "none"
-    db_name: str = "none"
     query: str = "none"
-    result: str = "none"
+    result: str = "data"
     data: str = "data:"
     query_again: bool = False
     next_query_desc: Optional[str] = "none"

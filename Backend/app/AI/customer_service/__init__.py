@@ -17,10 +17,12 @@ class Agent:
         self,
         base_prompt: str,
         tone: str,
+        llm_model: str,
         directory_path: str,
         chromadb_path: str,
         collection_name: str,
         available_databases: List[str],
+        detail_data: str,
         long_memory: bool = False,
         short_memory: bool = False,
         **kwargs,
@@ -29,6 +31,7 @@ class Agent:
         self.tools = AgentTools(
             chromadb_path=chromadb_path, collection_name=collection_name
         )
+        self.llm_model = llm_model
         self.rag = RAGSystem(
             chroma_directiory=chromadb_path, collection_name=collection_name
         )
@@ -37,6 +40,8 @@ class Agent:
             tone=tone,
             tools=self.tools,
             available_databases=available_databases,
+            detail_data=detail_data,
+            directory_path=directory_path,  # ✅ Pass directory_path to workflow
             short_memory=short_memory,
             long_memory=long_memory,
             **kwargs,

@@ -33,7 +33,7 @@ from app.utils.response import success_response
 router = APIRouter(prefix="/api/agents/customer-service", tags=["customer-service-agents"])
 
 
-@router.post("", status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=CustomerServiceAgentResponse, status_code=status.HTTP_201_CREATED)
 @limiter.limit("10/minute")
 async def createCustomerServiceAgent(
     request: Request,
@@ -128,7 +128,8 @@ async def createCustomerServiceAgent(
         
         # Return success response
         return success_response(
-            message="Customer Service Agent created successfully"
+            message="Customer Service Agent created successfully",
+            data=created_agent
         )
 
     except ValueError as e:

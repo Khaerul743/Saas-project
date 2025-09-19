@@ -13,7 +13,7 @@ class Document(Base):
         nullable=False,
     )
     file_name = sa.Column(sa.String(100), nullable=False)
-    content_type = sa.Column(sa.Enum("pdf", "docs", "txt"), nullable=False)
+    content_type = sa.Column(sa.Enum("pdf", "docs", "txt", "csv", "xlsx", "xls"), nullable=False)
     created_at = sa.Column(sa.DateTime(timezone=True), server_default=sa.func.now())
 
     # relationship

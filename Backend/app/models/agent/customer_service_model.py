@@ -12,7 +12,7 @@ class CustomerServiceAgentBase(BaseModel):
     base_prompt: str  # Required for Customer Service Agent
     tone: Literal["formal", "friendly", "casual", "profesional"]
     short_term_memory: bool = False
-    long_term_memory: bool = True  # Usually enabled for customer service
+    long_term_memory: bool = False  # Usually enabled for customer service
     status: Literal["active", "non-active"]
 
 

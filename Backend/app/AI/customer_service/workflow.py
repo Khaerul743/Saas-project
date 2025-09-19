@@ -1,4 +1,3 @@
-import logging
 import os
 import re
 import time
@@ -9,6 +8,7 @@ from langchain_openai import ChatOpenAI
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import END, START, StateGraph
 from langgraph.prebuilt import ToolNode
+import tiktoken
 
 from app.AI.customer_service.models import (
     AgentState,
@@ -18,6 +18,7 @@ from app.AI.customer_service.models import (
     StructuredOutputValidationAgent,
     create_validation_agent_model,
 )
+from app.utils.logger import get_logger
 from app.AI.customer_service.prompts import AgentPromptControl
 from app.AI.customer_service.tools import AgentTools
 from app.AI.utils.dataset import get_dataset
@@ -31,6 +32,8 @@ class Workflow:
         tone:str,
         tools,
         available_databases: List[str],
+        detail_data: str,
+        directory_path: str = None,
         long_memory: bool = False,
         short_memory: bool = False,
         **kwargs,
@@ -38,6 +41,8 @@ class Workflow:
         self.base_prompt = base_prompt
         self.tone = tone
         self.available_databases = available_databases
+        self.detail_data = detail_data
+        self.directory_path = directory_path
         self.kwargs = kwargs
         self.llm_for_reasoning = ChatOpenAI(model="gpt-4o-mini")
         self.llm_for_explanation = ChatOpenAI(model="gpt-4o-mini")
@@ -59,10 +64,14 @@ class Workflow:
         )
 
         self.validation_agent_model = create_validation_agent_model(available_databases)
-
-        # Setup logging
-        logging.basicConfig(level=logging.INFO)
-        self.logger = logging.getLogger(__name__)
+        self.logger = get_logger(__name__)
+        
+        # Initialize tokenizer for token counting
+        try:
+            self.tokenizer = tiktoken.encoding_for_model("gpt-4o-mini")
+        except KeyError:
+            # Fallback to cl100k_base encoding if model not found
+            self.tokenizer = tiktoken.get_encoding("cl100k_base")
 
         self.build = self._build_workflow()
 
@@ -118,6 +127,32 @@ class Workflow:
                 )
                 time.sleep(delay)
 
+    def _estimate_tokens(self, text: str) -> int:
+        """Estimate token count for text using tiktoken"""
+        try:
+            return len(self.tokenizer.encode(text))
+        except Exception as e:
+            self.logger.warning(f"Error estimating tokens: {str(e)}")
+            # Fallback: rough estimation (1 token ≈ 4 characters)
+            return len(text) // 4
+
+    def _estimate_structured_output_tokens(self, prompt: str, response_content: str = "") -> int:
+        """Estimate tokens for structured output calls"""
+        try:
+            # Estimate input tokens from prompt
+            input_tokens = self._estimate_tokens(prompt)
+            
+            # Estimate output tokens from response content
+            output_tokens = self._estimate_tokens(response_content) if response_content else 50
+            
+            # Add overhead for structured output formatting
+            overhead_tokens = 20
+            
+            return input_tokens + output_tokens + overhead_tokens
+        except Exception as e:
+            self.logger.warning(f"Error estimating structured output tokens: {str(e)}")
+            return 100  # Default fallback
+
     def _handle_error(
         self, error_type: str, error_message: str, user_message: str = ""
     ) -> str:
@@ -145,65 +180,75 @@ class Workflow:
         graph.add_node("agent_generate_query", self._agent_generate_query)
         graph.add_node("agent_answer_query", self._agent_answer_query)
         graph.add_node("trust_level_check", self._trust_level_check)
-        # graph.add_edge(START, "trust_level_check")
-        # graph.add_conditional_edges(
-        #     "trust_level_check",
-        #     self._trust_level_router,
-        #     {"main_agent": "main_agent", "end": END},
-        # )
-        # graph.add_conditional_edges(
-        #     "main_agent",
-        #     self._should_continue,
-        #     {"tool_call": "get_document", "end": END},
-        # )
-        # graph.add_edge("get_document", "validation_agent")
-        # # Buat routing dinamis berdasarkan database yang tersedia
-        # routing_options = {}
-        # for db in self.available_databases:
-        #     routing_options[f"check_{db}_database"] = "agent_identify_next_step"
-        # routing_options["end"] = END
+        graph.add_edge(START, "trust_level_check")
+        graph.add_conditional_edges(
+            "trust_level_check",
+            self._trust_level_router,
+            {"main_agent": "main_agent", "end": END},
+        )
+        graph.add_conditional_edges(
+            "main_agent",
+            self._should_continue,
+            {"tool_call": "get_document", "end": END},
+        )
+        graph.add_edge("get_document", "validation_agent")
+        # Buat routing dinamis berdasarkan database yang tersedia
+        routing_options = {}
+        for db in self.available_databases:
+            routing_options[f"check_{db}_database"] = "agent_identify_next_step"
+        routing_options["end"] = END
 
-        # graph.add_conditional_edges(
-        #     "validation_agent",
-        #     self._next_step,
-        #     routing_options,
-        # )
-        # graph.add_edge("agent_identify_next_step", "agent_generate_query")
-        # graph.add_conditional_edges(
-        #     "agent_generate_query",
-        #     self._query_again,
-        #     {"agent_generate_query": "agent_generate_query", "end": "agent_answer_query"},
-        # )
-        # graph.add_edge("agent_answer_query", END)
-        graph.add_edge(START, "main_agent")
-        graph.add_edge("main_agent", END)
+        graph.add_conditional_edges(
+            "validation_agent",
+            self._next_step,
+            routing_options,
+        )
+        graph.add_edge("agent_identify_next_step", "agent_generate_query")
+        graph.add_conditional_edges(
+            "agent_generate_query",
+            self._query_again,
+            {"agent_generate_query": "agent_generate_query", "end": "agent_answer_query"},
+        )
+        graph.add_edge("agent_answer_query", END)
+        # graph.add_edge(START, "main_agent")
+        # graph.add_edge("main_agent", END)
         return graph.compile(checkpointer=self.checkpointer)
 
     def _trust_level_check(self, state: AgentState):
-        # print("\n" + "="*60)
-        # print("🔍 TRUST LEVEL CHECK")
-        # print("="*60)
+        print("\n" + "="*60)
+        print("🔍 TRUST LEVEL CHECK")
+        print("="*60)
 
         history_messages = get_history_messages(state.messages)
-        if len(history_messages) > 5:
+        if len(history_messages) >8:
             prompt = self.prompts.trust_level_check(history_messages)
             llm = self.llm_for_reasoning.with_structured_output(
                 StructuredOutputTrustLevelCheck
             )
             response = llm.invoke(prompt)
-            # print(f"📊 Trust Level: {response.trust_level}%")
-            # print(f"💬 Message: {response.message}")
-            # print(f"🎯 Problem: {response.problem}")
-            # print("="*60)
+            
+            # Estimate tokens for structured output
+            estimated_tokens = self._estimate_structured_output_tokens(
+                str(prompt), 
+                f"trust_level: {response.trust_level}, message: {response.message}, problem: {response.problem}"
+            )
+            
+            print(f"📊 Trust Level: {response.trust_level}%")
+            print(f"💬 Message: {response.message}")
+            print(f"🎯 Problem: {response.problem}")
+            print(f"🔢 Estimated Tokens: {estimated_tokens}")
+            print("="*60)
             return {
                 "trust_level": response.trust_level,
                 "message_for_user": response.message,
                 "user_problem": response.problem,
+                "total_token": state.total_token + estimated_tokens,
             }
         print("📊 Trust Level: 100% (Default - New User)")
         print("=" * 60)
         return {
             "trust_level": 100,
+            "total_token": state.total_token,
         }
 
     def _trust_level_router(self, state: AgentState):
@@ -240,7 +285,9 @@ class Workflow:
             self.logger.info(
                 f"Main agent processing user message: {state.user_message[:50]}..."
             )
-
+            print(f"detail_data: {self.detail_data}")
+            print(f"available_databases: {self.available_databases}")
+            print(f"kwargs: {self.kwargs}")
             # Validate user input
             if not self._validate_user_input(state.user_message):
                 error_msg = self._handle_error(
@@ -255,7 +302,10 @@ class Workflow:
                 }
 
             all_previous_messages = self._get_all_previous_messages(state.messages)
-            print(f"all_previous_messages: {len(all_previous_messages)}")
+
+            print(f"available_databases: {self.available_databases}")
+            print(f"detail_data: {self.detail_data}")
+            print(f"kwargs: {self.kwargs}")
 
             # Generate prompt and invoke LLM with retry mechanism
             def invoke_llm():
@@ -265,7 +315,6 @@ class Workflow:
                 return llm.invoke(messages)
 
             response = self._retry_with_backoff(invoke_llm, max_retries=3)
-            print(f"response: {response.content}")
 
             if self.prompts.is_include_memory and not response.tool_calls:
                 message = [
@@ -273,9 +322,10 @@ class Workflow:
                     AIMessage(content=response.content),
                 ]
                 formatted_message = self._formatted_message(message)
-                self.prompts.memory.add_context(
-                    formatted_message, self.prompts.memory_id
-                )
+                if self.prompts.memory_id:
+                    self.prompts.memory.add_context(
+                        formatted_message, self.prompts.memory_id
+                    )
 
             self.logger.info("Main agent response generated successfully")
             return {
@@ -316,9 +366,10 @@ class Workflow:
                     "can_answer": False,
                     "reason": "No messages available for validation",
                     "next_step": "end",
+                    "total_token": state.total_token,
                 }
 
-            tool_message = state.messages[-1].content
+            tool_message = str(state.messages[-1].content) if state.messages[-1].content else ""
             self.logger.info(f"Tool message: {tool_message[:100]}...")
 
             # Invoke LLM with retry mechanism
@@ -332,16 +383,22 @@ class Workflow:
                 return llm.invoke(prompts)
 
             response = self._retry_with_backoff(invoke_validation, max_retries=2)
+            print(f"response: {response}")
+            # Estimate tokens for structured output
+            prompts = self.prompts.agent_validation(state.user_message, tool_message, **self.kwargs)
+            estimated_tokens = self._estimate_structured_output_tokens(
+                str(prompts),
+                f"can_answer: {response.can_answer}, reasoning: {response.reasoning}, next_step: {response.next_step}"
+            )
 
             self.logger.info(
-                f"Validation result: can_answer={response.can_answer}, next_step={response.next_step}"
+                f"Validation result: can_answer={response.can_answer}, next_step={response.next_step}, tokens={estimated_tokens}"
             )
             return {
                 "can_answer": response.can_answer,
                 "reason": response.reasoning,
                 "next_step": response.next_step,
-                "total_token": state.total_token
-                + response.usage_metadata.get("total_tokens", 0),
+                "total_token": state.total_token + estimated_tokens,
             }
 
         except Exception as e:
@@ -350,6 +407,7 @@ class Workflow:
                 "can_answer": False,
                 "reason": f"Validation error: {str(e)}",
                 "next_step": "end",
+                "total_token": state.total_token,
             }
 
     def _next_step(self, state: AgentState):
@@ -360,25 +418,32 @@ class Workflow:
         return state.next_step
 
     def _agent_identify_next_step(self, state: AgentState):
-        # print("\n" + "="*60)
-        # print("🧠 AGENT IDENTIFY NEXT STEP")
-        # print("="*60)
+        print("\n" + "="*60)
+        print("🧠 AGENT IDENTIFY NEXT STEP")
+        print("="*60)
 
         prompt = self.prompts.agent_identify_next_step(
-            state.user_message, state.detail_data, state.reason
+            state.user_message, self.detail_data, state.reason
         )
         llm = self.llm_for_reasoning.with_structured_output(
             StructuredOutputIdentifyNextStep
         )
         response = llm.invoke(prompt)
-        # print(f"🎯 Problem: {response.problem}")
-        # print(f"💡 Problem Solving: {response.problem_solving}")
-        # print("="*60)
+        
+        # Estimate tokens for structured output
+        estimated_tokens = self._estimate_structured_output_tokens(
+            str(prompt),
+            f"problem: {response.problem}, problem_solving: {response.problem_solving}"
+        )
+        
+        print(f"🎯 Problem: {response.problem}")
+        print(f"💡 Problem Solving: {response.problem_solving}")
+        print(f"🔢 Estimated Tokens: {estimated_tokens}")
+        print("="*60)
         return {
             "problem": response.problem,
             "problem_solving": response.problem_solving,
-            "total_token": state.total_token
-            + response.usage_metadata.get("total_tokens", 0),
+            "total_token": state.total_token + estimated_tokens,
         }
 
     def _agent_generate_query(self, state: AgentState):
@@ -386,15 +451,15 @@ class Workflow:
             self.logger.info(f"Generating query for problem: {state.problem[:50]}...")
 
             if self.retry > 0:
-                problem_solving = state.next_query_desc
+                problem_solving = state.next_query_desc or ""
                 self.logger.info(f"Retry #{self.retry} - using next query description")
             else:
-                problem_solving = state.problem_solving
+                problem_solving = state.problem_solving or ""
 
             # Generate query with retry mechanism
             def generate_query():
                 prompt = self.prompts.agent_generate_query(
-                    state.problem, problem_solving, state.detail_data
+                    state.problem, problem_solving, self.detail_data
                 )
                 llm = self.llm_for_reasoning.with_structured_output(
                     StructuredOutputGenerateQuery
@@ -403,14 +468,24 @@ class Workflow:
 
             response = self._retry_with_backoff(generate_query, max_retries=2)
 
+            # Estimate tokens for structured output
+            prompt = self.prompts.agent_generate_query(state.problem, problem_solving, self.detail_data)
+            estimated_tokens = self._estimate_structured_output_tokens(
+                str(prompt),
+                f"query: {response.query}, db_name: {response.db_name}, file_path: {response.file_path}, query_again: {response.query_again}, next_query_desc: {response.next_query_desc}"
+            )
+
             self.logger.info(f"Generated query: {response.query[:100]}...")
             self.logger.info(f"Target database: {response.db_name}")
+            self.logger.info(f"Estimated tokens: {estimated_tokens}")
 
             # Execute database query with comprehensive error handling
             try:
+                # Use the directory_path from agent initialization for dataset location
+                db_path = os.path.join(self.directory_path, f"{response.db_name}.db")
                 result_df = get_dataset(
                     response.file_path,
-                    f"dataset/{response.db_name}.db",
+                    db_path,
                     response.query,
                     response.db_name,
                 )
@@ -432,6 +507,7 @@ class Workflow:
                     "result": f"{state.result}\n{error_msg}",
                     "query_again": False,
                     "next_query_desc": "",
+                    "total_token": state.total_token,
                 }
             except Exception as e:
                 self.logger.error(f"Database query error: {str(e)}")
@@ -441,6 +517,7 @@ class Workflow:
                     "result": f"{state.result}\n{error_msg}",
                     "query_again": False,
                     "next_query_desc": "",
+                    "total_token": state.total_token,
                 }
 
             return {
@@ -448,8 +525,7 @@ class Workflow:
                 "result": f"{state.result}\n{result_str}",
                 "query_again": response.query_again,
                 "next_query_desc": response.next_query_desc,
-                "total_token": state.total_token
-                + response.usage_metadata.get("total_tokens", 0),
+                "total_token": state.total_token + estimated_tokens,
             }
 
         except Exception as e:
@@ -460,16 +536,17 @@ class Workflow:
                 "result": f"{state.result}\n{error_msg}",
                 "query_again": False,
                 "next_query_desc": "",
+                "total_token": state.total_token,
             }
 
     def _query_again(self, state: AgentState):
-        # print("\n" + "="*60)
-        # print("🔄 QUERY AGAIN CHECK")
-        # print("="*60)
+        print("\n" + "="*60)
+        print("🔄 QUERY AGAIN CHECK")
+        print("="*60)
 
         if self.retry > 5:
-            # print("❌ Max retry limit reached (5)")
-            # print("="*60)
+            print("❌ Max retry limit reached (5)")
+            print("="*60)
             return "end"
         if state.query_again:
             print(f"✅ Query again requested - Retry #{self.retry + 1}")
@@ -510,9 +587,10 @@ class Workflow:
                     AIMessage(content=response.content),
                 ]
                 formatted_message = self._formatted_message(message)
-                self.prompts.memory.add_context(
-                    formatted_message, self.prompts.memory_id
-                )
+                if self.prompts.memory_id:
+                    self.prompts.memory.add_context(
+                        formatted_message, self.prompts.memory_id
+                    )
 
             self.logger.info("Final answer generated successfully")
             return {
