@@ -49,7 +49,7 @@ def create_validation_agent_model(available_databases: List[str]):
 class StructuredOutputTrustLevelCheck(BaseModel):
     trust_level: int = Field(description="Level trust dalam persentase (0-100%)")
     message: Optional[str] = Field(
-        description="Pernyataan kepada pengguna bahwa kamu akan mengirim keluhan pengguna ke tim kami"
+        description="Pernyataan kepada pengguna bahwa kamu akan mengirim keluhan pengguna ke tim kami(jika trust level rendah)"
     )
     problem: Optional[str] = Field(description="Masalah yang dialami pengguna")
 

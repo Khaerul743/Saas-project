@@ -18,7 +18,13 @@ class CustomerServiceAgentBase(BaseModel):
 
 class CreateCustomerServiceAgent(CustomerServiceAgentBase):
     """Model for creating a Customer Service Agent"""
-    pass
+    company_name: str
+    industry: str
+    company_description: str
+    address: str
+    email: str
+    website: Optional[str] = None
+    fallback_email: str
 
 
 class CustomerServiceAgentOut(CustomerServiceAgentBase):
@@ -27,6 +33,7 @@ class CustomerServiceAgentOut(CustomerServiceAgentBase):
 
 
 class UpdateCustomerServiceAgent(BaseModel):
+    # Agent fields
     name: Optional[str] = None
     avatar: Optional[str] = None
     model: Optional[Literal["gpt-3.5-turbo", "gpt-4o"]] = None
@@ -36,6 +43,15 @@ class UpdateCustomerServiceAgent(BaseModel):
     short_term_memory: Optional[bool] = None
     long_term_memory: Optional[bool] = None
     status: Optional[Literal["active", "non-active"]] = None
+    
+    # Company information fields
+    company_name: Optional[str] = None
+    industry: Optional[str] = None
+    company_description: Optional[str] = None
+    address: Optional[str] = None
+    email: Optional[str] = None
+    website: Optional[str] = None
+    fallback_email: Optional[str] = None
 
 
 class CustomerServiceAgentResponse(BaseModel):
@@ -57,3 +73,6 @@ class CustomerServiceAgentCreateRequest(BaseModel):
         default_factory=list, 
         description="List of dataset descriptions for CSV/Excel files"
     )
+
+    
+

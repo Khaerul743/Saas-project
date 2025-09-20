@@ -74,7 +74,7 @@ Analisis level trust dan emosi pengguna.
 )
         ] 
 
-    def main_agent(self, user_message:str, base_prompt:str, tone:str):
+    def main_agent(self, user_message:str, base_prompt:str, tone:str, company_information):
         previous_context = "tidak ada."
         if self.is_include_memory:
             previous_context = self.memory.get_context(
@@ -86,6 +86,16 @@ Analisis level trust dan emosi pengguna.
 f"""
 {base_prompt}
 {get_tone(tone)}
+
+## INFORMASI PERUSAHAAN:
+**Identitas Perusahaan:**
+- Nama: {company_information.name}
+- Industri: {company_information.industry}
+- Deskripsi: {company_information.description}
+- Alamat: {company_information.address}
+- Email: {company_information.email}
+- Website: {company_information.website or 'Tidak tersedia'}
+
 ## TUGAS:
 1. Gunakan tools untuk mencari informasi dari dokumentasi FAQ
 2. Jawab pertanyaan berdasarkan informasi FAQ yang tersedia
@@ -107,17 +117,18 @@ Jawab pertanyaan pengguna dengan mengikuti panduan di atas.
 ), HumanMessage(content=user_message)
         ]
     
-    def agent_validation(self, user_message: str, tool_message: str, **kwargs):
+    def agent_validation(self, user_message: str, tool_message: str, detail_data: str, **kwargs):
         # Buat deskripsi data dinamis berdasarkan kwargs
         data_descriptions = []
         available_options = []
-        
+        # available_options.append("end")
         for key, value in kwargs.items():
             if key.startswith('db_') and key.endswith('_description'):
                 db_name = key.replace('db_', '').replace('_description', '')
                 data_descriptions.append(f"**Database {db_name}:**\n{value}")
                 available_options.append(f"check_{db_name}_database")
         
+        data_descriptions.append(f"**Database yang tersedia:**\n{detail_data}")
         # Buat string deskripsi data
         data_description_text = "\n\n".join(data_descriptions) if data_descriptions else "Tidak ada database tambahan yang tersedia."
         

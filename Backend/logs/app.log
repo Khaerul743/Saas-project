@@ -6941,3 +6941,257 @@ During task with name 'trust_level_check' and id '0554d4cc-2bb2-9751-1a64-aa582e
 2025-09-19 20:58:05,127 | INFO | app.AI.customer_service.workflow | Generating final answer for user
 2025-09-19 20:58:07,738 | INFO | app.AI.customer_service.workflow | Final answer generated successfully
 2025-09-19 20:58:07,738 | INFO | app.AI.customer_service.workflow | Final answer generated successfully
+2025-09-20 10:48:28,869 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-20 10:49:07,044 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_9\products.db from products.csv
+2025-09-20 10:49:32,247 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 9) created successfully by user khaerul@gmail.com with 1 datasets and 1 documents
+2025-09-20 10:49:50,890 | INFO | app.controllers.integration_controller | Agent integration to platform api is successfuly: agent ID 9 and user ID 1
+2025-09-20 10:50:12,272 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-20 10:51:17,144 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Bagaimana kebijakan untuk mengembalikan product?...
+2025-09-20 10:51:17,144 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Bagaimana kebijakan untuk mengembalikan product?...
+2025-09-20 10:51:19,602 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-20 10:51:19,602 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-20 10:51:25,165 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-20 10:51:25,165 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-20 10:51:25,167 | INFO | app.AI.customer_service.workflow | Tool message:  Kebijakan pengembalian produk adalah aturan atau prosedur yang ditetapkan oleh suatu perusahaan ata...
+2025-09-20 10:51:25,167 | INFO | app.AI.customer_service.workflow | Tool message:  Kebijakan pengembalian produk adalah aturan atau prosedur yang ditetapkan oleh suatu perusahaan ata...
+2025-09-20 10:51:25,233 | WARNING | app.AI.customer_service.workflow | Attempt 1 failed: AgentPromptControl.agent_validation() missing 1 required positional argument: 'detail_data'. Retrying in 1.0s...
+2025-09-20 10:51:25,233 | WARNING | app.AI.customer_service.workflow | Attempt 1 failed: AgentPromptControl.agent_validation() missing 1 required positional argument: 'detail_data'. Retrying in 1.0s...
+2025-09-20 10:51:26,270 | ERROR | app.AI.customer_service.workflow | Max retries (2) exceeded. Last error: AgentPromptControl.agent_validation() missing 1 required positional argument: 'detail_data'
+2025-09-20 10:51:26,270 | ERROR | app.AI.customer_service.workflow | Max retries (2) exceeded. Last error: AgentPromptControl.agent_validation() missing 1 required positional argument: 'detail_data'
+2025-09-20 10:51:26,274 | ERROR | app.AI.customer_service.workflow | Error in validation agent: AgentPromptControl.agent_validation() missing 1 required positional argument: 'detail_data'
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\AI\customer_service\workflow.py", line 385, in _validation_agent
+    response = self._retry_with_backoff(invoke_validation, max_retries=2)
+  File "D:\Saas_Project\Backend\app\AI\customer_service\workflow.py", line 122, in _retry_with_backoff
+    raise e
+  File "D:\Saas_Project\Backend\app\AI\customer_service\workflow.py", line 116, in _retry_with_backoff
+    return func()
+  File "D:\Saas_Project\Backend\app\AI\customer_service\workflow.py", line 380, in invoke_validation
+    prompts = self.prompts.agent_validation(
+        state.user_message, tool_message, **self.kwargs
+    )
+TypeError: AgentPromptControl.agent_validation() missing 1 required positional argument: 'detail_data'
+2025-09-20 10:51:26,274 | ERROR | app.AI.customer_service.workflow | Error in validation agent: AgentPromptControl.agent_validation() missing 1 required positional argument: 'detail_data'
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\AI\customer_service\workflow.py", line 385, in _validation_agent
+    response = self._retry_with_backoff(invoke_validation, max_retries=2)
+  File "D:\Saas_Project\Backend\app\AI\customer_service\workflow.py", line 122, in _retry_with_backoff
+    raise e
+  File "D:\Saas_Project\Backend\app\AI\customer_service\workflow.py", line 116, in _retry_with_backoff
+    return func()
+  File "D:\Saas_Project\Backend\app\AI\customer_service\workflow.py", line 380, in invoke_validation
+    prompts = self.prompts.agent_validation(
+        state.user_message, tool_message, **self.kwargs
+    )
+TypeError: AgentPromptControl.agent_validation() missing 1 required positional argument: 'detail_data'
+2025-09-20 10:56:38,682 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_10\products.db from products.csv
+2025-09-20 10:56:56,822 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 10) created successfully by user khaerul@gmail.com with 1 datasets and 1 documents
+2025-09-20 10:57:15,625 | INFO | app.controllers.integration_controller | Agent integration to platform api is successfuly: agent ID 10 and user ID 1
+2025-09-20 10:57:22,641 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-20 10:57:49,327 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Bagaimana kebijakan untuk mengembalikan product?...
+2025-09-20 10:57:49,327 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Bagaimana kebijakan untuk mengembalikan product?...
+2025-09-20 10:57:50,674 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-20 10:57:50,674 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-20 10:57:54,232 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-20 10:57:54,232 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-20 10:57:54,234 | INFO | app.AI.customer_service.workflow | Tool message: 
+Kebijakan pengembalian produk adalah kebijakan yang ditetapkan oleh sebuah perusahaan atau toko unt...
+2025-09-20 10:57:54,234 | INFO | app.AI.customer_service.workflow | Tool message: 
+Kebijakan pengembalian produk adalah kebijakan yang ditetapkan oleh sebuah perusahaan atau toko unt...
+2025-09-20 10:57:56,961 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=end, tokens=867
+2025-09-20 10:57:56,961 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=end, tokens=867
+2025-09-20 10:59:06,395 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Bagaimana cara menghubungi layanan pelanggan?...
+2025-09-20 10:59:06,395 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Bagaimana cara menghubungi layanan pelanggan?...
+2025-09-20 10:59:08,150 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-20 10:59:08,150 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-20 10:59:12,451 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-20 10:59:12,451 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-20 10:59:12,453 | INFO | app.AI.customer_service.workflow | Tool message:  Untuk menghubungi layanan pelanggan, Anda dapat mencari nomor telepon atau alamat email yang terter...
+2025-09-20 10:59:12,453 | INFO | app.AI.customer_service.workflow | Tool message:  Untuk menghubungi layanan pelanggan, Anda dapat mencari nomor telepon atau alamat email yang terter...
+2025-09-20 10:59:14,775 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=True, next_step=end, tokens=850
+2025-09-20 10:59:14,775 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=True, next_step=end, tokens=850
+2025-09-20 11:00:21,900 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Oke apakah ada batasan waktu?...
+2025-09-20 11:00:21,900 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Oke apakah ada batasan waktu?...
+2025-09-20 11:00:23,725 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-20 11:00:23,725 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-20 11:00:25,677 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-20 11:00:25,677 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-20 11:00:25,691 | INFO | app.AI.customer_service.workflow | Tool message:  Batasan waktu adalah batas yang ditetapkan untuk menyelesaikan suatu tugas atau aktivitas.
+
+Context...
+2025-09-20 11:00:25,691 | INFO | app.AI.customer_service.workflow | Tool message:  Batasan waktu adalah batas yang ditetapkan untuk menyelesaikan suatu tugas atau aktivitas.
+
+Context...
+2025-09-20 11:00:27,123 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=True, next_step=end, tokens=827
+2025-09-20 11:00:27,123 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=True, next_step=end, tokens=827
+2025-09-20 11:01:41,267 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Apa visi perusahaan ini?...
+2025-09-20 11:01:41,267 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Apa visi perusahaan ini?...
+2025-09-20 11:01:42,362 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-20 11:01:42,362 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-20 11:01:44,727 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-20 11:01:44,727 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-20 11:01:44,776 | INFO | app.AI.customer_service.workflow | Tool message: 
+Visi perusahaan adalah gambaran atau tujuan jangka panjang yang ingin dicapai oleh suatu perusahaan...
+2025-09-20 11:01:44,776 | INFO | app.AI.customer_service.workflow | Tool message: 
+Visi perusahaan adalah gambaran atau tujuan jangka panjang yang ingin dicapai oleh suatu perusahaan...
+2025-09-20 11:01:46,159 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=end, tokens=841
+2025-09-20 11:01:46,159 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=end, tokens=841
+2025-09-20 11:10:11,421 | INFO | app.AI.document_store.RAG | Successfully loaded document: 1670422926LAPORAN_KEUANGAN.pdf
+2025-09-20 11:10:15,631 | INFO | app.AI.simple_RAG_agent | Successfully added document '1670422926LAPORAN_KEUANGAN.pdf' with ID '16'
+2025-09-20 11:10:15,657 | INFO | app.controllers.simple_rag_controller | Simple RAG Agent 'ketiga' (ID: 11) created successfully by user khaerul@gmail.com
+2025-09-20 11:10:34,438 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_12\products.db from products.csv
+2025-09-20 11:10:48,427 | INFO | app.controllers.customer_service_controller | Adding csv file products.csv to RAG system
+2025-09-20 11:10:48,492 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 12) created successfully by user khaerul@gmail.com with 1 datasets and 1 documents
+2025-09-20 11:20:30,167 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_13\products.db from products.csv
+2025-09-20 11:20:48,617 | INFO | app.controllers.customer_service_controller | Adding csv file products.csv to RAG system
+2025-09-20 11:20:48,650 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 13) created successfully by user khaerul@gmail.com with 1 datasets and 1 documents
+2025-09-20 11:33:58,490 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_14\products.db from products.csv
+2025-09-20 11:34:18,524 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 14) created successfully by user khaerul@gmail.com with 1 datasets and 1 documents
+2025-09-20 11:35:13,890 | WARNING | main | Validation error: [{'type': 'missing', 'loc': ('body', 'files'), 'msg': 'Field required', 'input': None}]
+2025-09-20 11:35:35,989 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_15\products.db from products.csv
+2025-09-20 11:35:45,391 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 15) created successfully by user khaerul@gmail.com with 1 datasets and 1 documents
+2025-09-20 11:37:05,057 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_16\products.db from products.csv
+2025-09-20 11:37:37,939 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 16) created successfully by user khaerul@gmail.com with 1 datasets and 1 documents
+2025-09-20 11:38:46,459 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_17\products.db from products.csv
+2025-09-20 11:39:05,072 | INFO | app.controllers.customer_service_controller | Adding pdf file 1670422926LAPORAN_KEUANGAN.pdf to RAG system
+2025-09-20 11:39:08,107 | INFO | app.AI.document_store.RAG | Successfully loaded document: 1670422926LAPORAN_KEUANGAN.pdf
+2025-09-20 11:39:08,113 | INFO | app.AI.customer_service | Successfully loaded document: 1670422926LAPORAN_KEUANGAN.pdf
+2025-09-20 11:39:13,887 | INFO | app.AI.customer_service | Successfully added document '1670422926LAPORAN_KEUANGAN.pdf' with ID '23'
+2025-09-20 11:39:14,099 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 17) created successfully by user khaerul@gmail.com with 1 datasets and 2 documents
+2025-09-20 11:42:35,286 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_18\products.db from products.csv
+2025-09-20 11:43:02,720 | INFO | app.controllers.customer_service_controller | Adding pdf file FAQ.pdf to RAG system
+2025-09-20 11:43:04,693 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-09-20 11:43:04,695 | INFO | app.AI.customer_service | Successfully loaded document: FAQ.pdf
+2025-09-20 11:43:10,344 | INFO | app.AI.customer_service | Successfully added document 'FAQ.pdf' with ID '25'
+2025-09-20 11:43:10,681 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 18) created successfully by user khaerul@gmail.com with 1 datasets and 2 documents
+2025-09-20 11:46:39,702 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_19\products.db from products.csv
+2025-09-20 11:47:01,359 | INFO | app.controllers.customer_service_controller | Adding pdf file FAQ.pdf to RAG system
+2025-09-20 11:47:03,108 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-09-20 11:47:03,109 | INFO | app.AI.customer_service | Successfully loaded document: FAQ.pdf
+2025-09-20 11:47:06,338 | INFO | app.AI.customer_service | Successfully added document 'FAQ.pdf' with ID '27'
+2025-09-20 11:47:06,391 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 19) created successfully by user khaerul@gmail.com with 1 datasets and 2 documents
+2025-09-20 11:47:42,035 | INFO | app.controllers.integration_controller | Agent integration to platform api is successfuly: agent ID 19 and user ID 1
+2025-09-20 11:47:51,821 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-20 11:48:18,550 | INFO | app.AI.customer_service.workflow | Main agent processing user message: hai...
+2025-09-20 11:48:18,550 | INFO | app.AI.customer_service.workflow | Main agent processing user message: hai...
+2025-09-20 11:48:20,262 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-20 11:48:20,262 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-20 11:49:03,931 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Oke saya mau mengembalikan product yang sudah saya...
+2025-09-20 11:49:03,931 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Oke saya mau mengembalikan product yang sudah saya...
+2025-09-20 11:49:05,087 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-20 11:49:05,087 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-20 11:49:09,403 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-20 11:49:09,403 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-20 11:49:09,469 | INFO | app.AI.customer_service.workflow | Tool message:  Anda dapat mengembalikan produk dalam waktu [jumlah hari, contoh: 7 hari] setelah penerimaan, denga...
+2025-09-20 11:49:09,469 | INFO | app.AI.customer_service.workflow | Tool message:  Anda dapat mengembalikan produk dalam waktu [jumlah hari, contoh: 7 hari] setelah penerimaan, denga...
+2025-09-20 11:49:11,049 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=True, next_step=end, tokens=856
+2025-09-20 11:49:11,049 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=True, next_step=end, tokens=856
+2025-09-20 11:49:58,236 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Oke kalo boleh tau, product apa ya yang paling bag...
+2025-09-20 11:49:58,236 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Oke kalo boleh tau, product apa ya yang paling bag...
+2025-09-20 11:49:59,535 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-20 11:49:59,535 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-20 11:50:01,999 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-20 11:50:01,999 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-20 11:50:02,003 | INFO | app.AI.customer_service.workflow | Tool message:  Kami menawarkan berbagai produk dan layanan berkualitas tinggi, inovatif, dan berkelanjutan kepada ...
+2025-09-20 11:50:02,003 | INFO | app.AI.customer_service.workflow | Tool message:  Kami menawarkan berbagai produk dan layanan berkualitas tinggi, inovatif, dan berkelanjutan kepada ...
+2025-09-20 11:50:05,361 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=check_products_database, tokens=841
+2025-09-20 11:50:05,361 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=check_products_database, tokens=841
+2025-09-20 11:50:07,777 | INFO | app.AI.customer_service.workflow | Generating query for problem: Menentukan produk yang memiliki rating tertinggi d...
+2025-09-20 11:50:07,777 | INFO | app.AI.customer_service.workflow | Generating query for problem: Menentukan produk yang memiliki rating tertinggi d...
+2025-09-20 11:50:09,404 | INFO | app.AI.customer_service.workflow | Generated query: SELECT product_name, rating FROM products ORDER BY rating DESC LIMIT 1;...
+2025-09-20 11:50:09,404 | INFO | app.AI.customer_service.workflow | Generated query: SELECT product_name, rating FROM products ORDER BY rating DESC LIMIT 1;...
+2025-09-20 11:50:09,405 | INFO | app.AI.customer_service.workflow | Target database: products
+2025-09-20 11:50:09,405 | INFO | app.AI.customer_service.workflow | Target database: products
+2025-09-20 11:50:09,407 | INFO | app.AI.customer_service.workflow | Estimated tokens: 714
+2025-09-20 11:50:09,407 | INFO | app.AI.customer_service.workflow | Estimated tokens: 714
+2025-09-20 11:50:09,856 | INFO | app.AI.customer_service.workflow | Query executed successfully, returned 1 rows
+2025-09-20 11:50:09,856 | INFO | app.AI.customer_service.workflow | Query executed successfully, returned 1 rows
+2025-09-20 11:50:09,869 | INFO | app.AI.customer_service.workflow | Generating final answer for user
+2025-09-20 11:50:09,869 | INFO | app.AI.customer_service.workflow | Generating final answer for user
+2025-09-20 11:50:14,691 | INFO | app.AI.customer_service.workflow | Final answer generated successfully
+2025-09-20 11:50:14,691 | INFO | app.AI.customer_service.workflow | Final answer generated successfully
+2025-09-20 11:51:40,545 | INFO | app.AI.customer_service.workflow | Main agent processing user message: wah sangat informatif sekali kamu dalam membantu s...
+2025-09-20 11:51:40,545 | INFO | app.AI.customer_service.workflow | Main agent processing user message: wah sangat informatif sekali kamu dalam membantu s...
+2025-09-20 11:51:42,076 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-20 11:51:42,076 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-20 11:53:47,110 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-20 11:54:02,525 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-20 11:54:13,519 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 6 user agents for user_id=1
+2025-09-20 18:25:14,967 | WARNING | app.controllers.auth_controller | Email not found: khaerul@gmail.com
+2025-09-20 18:25:29,517 | INFO | app.controllers.auth_controller | New user registered with email: khaerul@gmail.com
+2025-09-20 18:25:52,819 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-20 18:30:39,834 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_1\products.db from products.csv
+2025-09-20 18:30:58,712 | INFO | app.controllers.customer_service_controller | Adding pdf file FAQ.pdf to RAG system
+2025-09-20 18:31:00,147 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-09-20 18:31:00,152 | INFO | app.AI.customer_service | Successfully loaded document: FAQ.pdf
+2025-09-20 18:31:06,295 | INFO | app.AI.customer_service | Successfully added document 'FAQ.pdf' with ID '2'
+2025-09-20 18:31:06,535 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 1) created successfully by user khaerul@gmail.com with 1 datasets and 2 documents
+2025-09-20 18:31:29,093 | INFO | app.controllers.integration_controller | Agent integration to platform api is successfuly: agent ID 1 and user ID 1
+2025-09-20 18:31:35,491 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-20 18:32:18,342 | INFO | app.AI.customer_service.workflow | Main agent processing user message: perusahaan ini bergerak di industry apa ya?...
+2025-09-20 18:32:18,342 | INFO | app.AI.customer_service.workflow | Main agent processing user message: perusahaan ini bergerak di industry apa ya?...
+2025-09-20 18:32:21,384 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-20 18:32:21,384 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-20 18:32:48,278 | INFO | app.AI.customer_service.workflow | Main agent processing user message: alamat perusahaan ini dimana ya?...
+2025-09-20 18:32:48,278 | INFO | app.AI.customer_service.workflow | Main agent processing user message: alamat perusahaan ini dimana ya?...
+2025-09-20 18:32:51,068 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-20 18:32:51,068 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-20 18:33:15,305 | WARNING | app.controllers.history_controllers | User agent not found: User agent ID 119 and user khaerul@gmail.com
+2025-09-20 19:35:48,162 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-20 19:35:57,302 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-20 19:36:02,179 | INFO | app.controllers.company_information_controller | Successfully retrieved 1 company information records for user khaerul@gmail.com
+2025-09-20 19:36:15,912 | INFO | app.controllers.company_information_controller | Successfully retrieved company information 1 by user khaerul@gmail.com
+2025-09-20 19:53:52,316 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_2\products.db from products.csv
+2025-09-20 19:54:08,807 | INFO | app.controllers.customer_service_controller | Adding pdf file FAQ.pdf to RAG system
+2025-09-20 19:54:10,440 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-09-20 19:54:10,442 | INFO | app.AI.customer_service | Successfully loaded document: FAQ.pdf
+2025-09-20 19:54:17,561 | INFO | app.AI.customer_service | Successfully added document 'FAQ.pdf' with ID '4'
+2025-09-20 19:54:17,804 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 2) created successfully by user khaerul@gmail.com with 1 datasets and 2 documents
+2025-09-20 19:54:25,957 | INFO | app.controllers.company_information_controller | Successfully retrieved company information 1 by user khaerul@gmail.com
+2025-09-20 19:54:44,984 | INFO | app.controllers.company_information_controller | Successfully retrieved company information 2 by user khaerul@gmail.com
+2025-09-20 19:55:10,274 | INFO | app.controllers.company_information_controller | Successfully retrieved 2 company information records for user khaerul@gmail.com
+2025-09-20 20:02:44,228 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_3\products.db from products.csv
+2025-09-20 20:03:01,101 | INFO | app.controllers.customer_service_controller | Adding pdf file FAQ.pdf to RAG system
+2025-09-20 20:03:03,281 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-09-20 20:03:03,283 | INFO | app.AI.customer_service | Successfully loaded document: FAQ.pdf
+2025-09-20 20:03:08,433 | INFO | app.AI.customer_service | Successfully added document 'FAQ.pdf' with ID '6'
+2025-09-20 20:03:08,638 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 3) created successfully by user khaerul@gmail.com with 1 datasets and 2 documents
+2025-09-20 20:06:55,918 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_4\products.db from products.csv
+2025-09-20 20:07:13,302 | INFO | app.controllers.customer_service_controller | Adding pdf file FAQ.pdf to RAG system
+2025-09-20 20:07:14,831 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-09-20 20:07:14,834 | INFO | app.AI.customer_service | Successfully loaded document: FAQ.pdf
+2025-09-20 20:07:18,579 | INFO | app.AI.customer_service | Successfully added document 'FAQ.pdf' with ID '8'
+2025-09-20 20:07:18,637 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 4) created successfully by user khaerul@gmail.com with 1 datasets and 2 documents
+2025-09-20 20:08:18,280 | INFO | app.controllers.company_information_controller | Successfully retrieved 4 company information records for user khaerul@gmail.com
+2025-09-20 20:08:38,551 | INFO | app.controllers.company_information_controller | Updated company_information in agent 4 object
+2025-09-20 20:08:38,566 | INFO | app.controllers.company_information_controller | Successfully updated company information 4 by user khaerul@gmail.com
+2025-09-20 20:16:46,632 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_5\products.db from products.csv
+2025-09-20 20:17:02,242 | INFO | app.controllers.customer_service_controller | Adding pdf file FAQ.pdf to RAG system
+2025-09-20 20:17:05,327 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-09-20 20:17:05,331 | INFO | app.AI.customer_service | Successfully loaded document: FAQ.pdf
+2025-09-20 20:17:10,695 | INFO | app.AI.customer_service | Successfully added document 'FAQ.pdf' with ID '10'
+2025-09-20 20:17:10,739 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 5) created successfully by user khaerul@gmail.com with 1 datasets and 2 documents
+2025-09-20 20:18:12,335 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-20 20:20:01,198 | INFO | app.controllers.customer_service_controller | Updated company_information in agent 5 object
+2025-09-20 20:20:01,201 | INFO | app.controllers.customer_service_controller | Updated agent 5 object in memory
+2025-09-20 20:20:01,204 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 5) updated successfully by user khaerul@gmail.com
+2025-09-20 20:25:55,801 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 5) retrieved successfully by user khaerul@gmail.com
+2025-09-20 20:28:03,041 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 5) with company information retrieved successfully by user khaerul@gmail.com
+2025-09-20 20:30:26,930 | ERROR | app.utils.error_utils | Database error during deleting agent: (pymysql.err.IntegrityError) (1048, "Column 'agent_id' cannot be null")
+[SQL: UPDATE company_information SET agent_id=%(agent_id)s WHERE company_information.id = %(company_information_id)s]
+[parameters: {'agent_id': None, 'company_information_id': 5}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-09-20 20:31:53,731 | ERROR | app.utils.error_utils | Database error during deleting agent: (pymysql.err.IntegrityError) (1048, "Column 'agent_id' cannot be null")
+[SQL: UPDATE company_information SET agent_id=%(agent_id)s WHERE company_information.id = %(company_information_id)s]
+[parameters: {'agent_id': None, 'company_information_id': 5}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-09-20 20:33:13,425 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-20 20:33:22,117 | ERROR | app.utils.error_utils | Database error during deleting agent: (pymysql.err.IntegrityError) (1048, "Column 'agent_id' cannot be null")
+[SQL: UPDATE company_information SET agent_id=%(agent_id)s WHERE company_information.id = %(company_information_id)s]
+[parameters: {'agent_id': None, 'company_information_id': 5}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-09-20 20:34:17,530 | ERROR | app.utils.error_utils | Database error during deleting agent: (pymysql.err.IntegrityError) (1048, "Column 'agent_id' cannot be null")
+[SQL: UPDATE company_information SET agent_id=%(agent_id)s WHERE company_information.id = %(company_information_id)s]
+[parameters: {'agent_id': None, 'company_information_id': 5}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-09-20 20:40:32,986 | INFO | app.controllers.agent_controller | Agent 'Customer Support Bot' (ID: 5) deleted successfully by user khaerul@gmail.com

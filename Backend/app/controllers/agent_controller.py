@@ -21,6 +21,7 @@ from app.models.history_message.history_entity import HistoryMessage
 from app.models.history_message.metadata_entity import Metadata
 from app.models.integration.integration_entity import Integration
 from app.models.platform.platform_entity import Platform
+from app.models.company_information.company_entity import CompanyInformation
 from app.models.user.user_entity import User
 from app.models.user_agent.user_agent_entity import UserAgent
 from app.utils.logger import get_logger
@@ -146,246 +147,247 @@ def get_all_agents(db: Session, current_user: dict):
         raise handle_database_error(e, "getting agents", current_user.get('email'))
 
 
-async def create_agent(
-    db: Session,
-    file,
-    agent_data: CreateAgent,
-    current_user: dict,
-    background_tasks: BackgroundTasks,
-) -> AgentOut:
-    """
-    Create a new agent for the authenticated user.
+# async def create_agent(
+#     db: Session,
+#     file,
+#     agent_data: CreateAgent,
+#     current_user: dict,
+#     background_tasks: BackgroundTasks,
+# ) -> AgentOut:
+#     """
+#     Create a new agent for the authenticated user.
 
-    Args:
-        db: Database session
-        agent_data: Agent creation data
-        current_user: Current authenticated user data
+#     Args:
+#         db: Database session
+#         agent_data: Agent creation data
+#         current_user: Current authenticated user data
 
-    Returns:
-        AgentOut: Created agent data
+#     Returns:
+#         AgentOut: Created agent data
 
-    Raises:
-        HTTPException: If user not found or database error occurs
-    """
-    try:
-        # Get user from database to ensure user exists
-        user_id = current_user.get("id")
-        if not user_id:
-            raise handle_user_not_found(current_user.get('email', 'unknown'))
-        user = validate_user_exists(db, user_id, current_user.get('email'))
+#     Raises:
+#         HTTPException: If user not found or database error occurs
+#     """
+#     try:
+#         # Get user from database to ensure user exists
+#         user_id = current_user.get("id")
+#         if not user_id:
+#             raise handle_user_not_found(current_user.get('email', 'unknown'))
+#         user = validate_user_exists(db, user_id, current_user.get('email'))
 
-        # Create new agent instance
-        new_agent = Agent(
-            user_id=user.id,
-            name=agent_data.name,
-            avatar=agent_data.avatar,
-            model=agent_data.model,
-            role=agent_data.role or "simple RAG agent",
-            description=agent_data.description or "Tidak ada deskripsi",
-            tone=agent_data.tone or "formal",
-            short_term_memory=agent_data.short_term_memory or False,
-            long_term_memory=agent_data.long_term_memory or False,
-            status=agent_data.status,
-            base_prompt=agent_data.base_prompt or "Tidak ada base prompt tambahan",
-        )
+#         # Create new agent instance
+#         new_agent = Agent(
+#             user_id=user.id,
+#             name=agent_data.name,
+#             avatar=agent_data.avatar,
+#             model=agent_data.model,
+#             role=agent_data.role or "simple RAG agent",
+#             description=agent_data.description or "Tidak ada deskripsi",
+#             tone=agent_data.tone or "formal",
+#             short_term_memory=agent_data.short_term_memory or False,
+#             long_term_memory=agent_data.long_term_memory or False,
+#             status=agent_data.status,
+#             base_prompt=agent_data.base_prompt or "Tidak ada base prompt tambahan",
+#         )
 
-        # Add to database
-        db.add(new_agent)
-        db.flush()
+#         # Add to database
+#         db.add(new_agent)
+#         db.flush()
 
-        directory_path = f"documents/user_{current_user.get('id')}/agent_{new_agent.id}"
-        if not str(new_agent.id) in agents:
 
-            def init_agent():
-                agents[str(new_agent.id)] = AI.Agent(
-                    base_prompt=new_agent.base_prompt,
-                    tone=new_agent.tone,
-                    directory_path=directory_path,
-                    chromadb_path="chroma_db",
-                    collection_name=f"agent_{new_agent.id}",
-                    model_llm=new_agent.model,
-                    short_memory=agent_data.short_term_memory,
-                )
-                # agents[str(new_agent.id)].execute(
-                #     {"user_message": "hai", "base_prompt": new_agent.base_prompt, "tone": new_agent.tone},
-                #     "thread_123",
-                # )
+#         directory_path = f"documents/user_{current_user.get('id')}/agent_{new_agent.id}"
+#         if not str(new_agent.id) in agents:
 
-            init_agent()
+#             def init_agent():
+#                 agents[str(new_agent.id)] = AI.Agent(
+#                     base_prompt=new_agent.base_prompt,
+#                     tone=new_agent.tone,
+#                     directory_path=directory_path,
+#                     chromadb_path="chroma_db",
+#                     collection_name=f"agent_{new_agent.id}",
+#                     model_llm=new_agent.model,
+#                     short_memory=agent_data.short_term_memory,
+#                 )
+#                 # agents[str(new_agent.id)].execute(
+#                 #     {"user_message": "hai", "base_prompt": new_agent.base_prompt, "tone": new_agent.tone},
+#                 #     "thread_123",
+#                 # )
+
+#             init_agent()
        
-        if file:
-            # if file.content_type == "application/pdf":
-            #     content_type = "pdf"
-            # elif file.content_type == "application/txt":
-            #     content_type = "txt"
-            # else:
-            #     content_type = "docs"
-            #     raise HTTPException(
-            #         status_code=status.HTTP_400_BAD_REQUEST,
-            #         detail="File type must be pdf or txt.",
-            #     )
-            # if not os.path.exists(directory_path):
-            #     os.makedirs(directory_path, exist_ok=True)
-            # file_path = os.path.join(directory_path, file.filename)
-            # with open(file_path, "wb") as buffer:
-            #     shutil.copyfileobj(file.file, buffer)
-            # Write file to disk first
-            content_type = write_document(file, directory_path)
-            file_path = os.path.join(directory_path, file.filename)
+#         if file:
+#             # if file.content_type == "application/pdf":
+#             #     content_type = "pdf"
+#             # elif file.content_type == "application/txt":
+#             #     content_type = "txt"
+#             # else:
+#             #     content_type = "docs"
+#             #     raise HTTPException(
+#             #         status_code=status.HTTP_400_BAD_REQUEST,
+#             #         detail="File type must be pdf or txt.",
+#             #     )
+#             # if not os.path.exists(directory_path):
+#             #     os.makedirs(directory_path, exist_ok=True)
+#             # file_path = os.path.join(directory_path, file.filename)
+#             # with open(file_path, "wb") as buffer:
+#             #     shutil.copyfileobj(file.file, buffer)
+#             # Write file to disk first
+#             content_type = write_document(file, directory_path)
+#             file_path = os.path.join(directory_path, file.filename)
             
-            try:
-                # Create document record in database
-                post_document = Document(
-                    agent_id=new_agent.id,
-                    file_name=file.filename,
-                    content_type=content_type,
-                )
+#             try:
+#                 # Create document record in database
+#                 post_document = Document(
+#                     agent_id=new_agent.id,
+#                     file_name=file.filename,
+#                     content_type=content_type,
+#                 )
 
-                db.add(post_document)
-                db.flush()
+#                 db.add(post_document)
+#                 db.flush()
                 
-                # Try to add document to RAG system
-                agents[str(new_agent.id)].add_document(
-                    file.filename,
-                    content_type,
-                    str(post_document.id),
-                )
+#                 # Try to add document to RAG system
+#                 agents[str(new_agent.id)].add_document(
+#                     file.filename,
+#                     content_type,
+#                     str(post_document.id),
+#                 )
 
-                # If everything succeeds, commit the transaction
-                db.commit()
-                db.refresh(post_document)
+#                 # If everything succeeds, commit the transaction
+#                 db.commit()
+#                 db.refresh(post_document)
                 
-            except Exception as e:
-                # Rollback database transaction
-                db.rollback()
+#             except Exception as e:
+#                 # Rollback database transaction
+#                 db.rollback()
                 
-                # Remove physical file if it exists
-                try:
-                    if os.path.exists(file_path):
-                        os.remove(file_path)
-                        logger.info(f"Rollback: Removed file {file_path} due to error")
-                except Exception as file_err:
-                    logger.error(f"Failed to remove file {file_path} during rollback: {file_err}")
+#                 # Remove physical file if it exists
+#                 try:
+#                     if os.path.exists(file_path):
+#                         os.remove(file_path)
+#                         logger.info(f"Rollback: Removed file {file_path} due to error")
+#                 except Exception as file_err:
+#                     logger.error(f"Failed to remove file {file_path} during rollback: {file_err}")
                 
-                # Re-raise the original exception
-                raise e
+#                 # Re-raise the original exception
+#                 raise e
 
-            logger.info(
-                f"Agent '{new_agent.name}' (ID: {new_agent.id}) document store successfully by user "
-                f"{current_user.get('email')}"
-            )
-        else:
-            db.commit()
+#             logger.info(
+#                 f"Agent '{new_agent.name}' (ID: {new_agent.id}) document store successfully by user "
+#                 f"{current_user.get('email')}"
+#             )
+#         else:
+#             db.commit()
 
-        # Log successful creation
-        logger.info(
-            f"Agent '{new_agent.name}' created successfully by user {current_user.get('email')} "
-            f"(user_id: {user.id}, agent_id: {new_agent.id})"
-        )
-        # Return agent data in expected format
-        return AgentOut(
-            id=new_agent.id,
-            name=new_agent.name,
-            avatar=new_agent.avatar or "",
-            model=new_agent.model,
-            role=new_agent.role,
-            description=new_agent.description or "",
-            tone=new_agent.tone,
-            status="active",
-        )
+#         # Log successful creation
+#         logger.info(
+#             f"Agent '{new_agent.name}' created successfully by user {current_user.get('email')} "
+#             f"(user_id: {user.id}, agent_id: {new_agent.id})"
+#         )
+#         # Return agent data in expected format
+#         return AgentOut(
+#             id=new_agent.id,
+#             name=new_agent.name,
+#             avatar=new_agent.avatar or "",
+#             model=new_agent.model,
+#             role=new_agent.role,
+#             description=new_agent.description or "",
+#             tone=new_agent.tone,
+#             status="active",
+#         )
 
-    except HTTPException:
-        # Re-raise HTTP exceptions
-        raise
+#     except HTTPException:
+#         # Re-raise HTTP exceptions
+#         raise
 
-    except Exception as e:
-        db.rollback()
-        raise handle_database_error(e, "creating agent", current_user.get('email'))
+#     except Exception as e:
+#         db.rollback()
+#         raise handle_database_error(e, "creating agent", current_user.get('email'))
 
 
-def update_agent(
-    db: Session, agent_id: int, agent_data: UpdateAgent, current_user: dict
-) -> AgentOut:
-    """
-    Update an existing agent for the authenticated user.
+# def update_agent(
+#     db: Session, agent_id: int, agent_data: UpdateAgent, current_user: dict
+# ) -> AgentOut:
+#     """
+#     Update an existing agent for the authenticated user.
 
-    Args:
-        db: Database session
-        agent_id: ID of the agent to update
-        agent_data: Agent update data
-        current_user: Current authenticated user data
+#     Args:
+#         db: Database session
+#         agent_id: ID of the agent to update
+#         agent_data: Agent update data
+#         current_user: Current authenticated user data
 
-    Returns:
-        AgentOut: Updated agent data
+#     Returns:
+#         AgentOut: Updated agent data
 
-    Raises:
-        HTTPException: If agent not found, unauthorized, or database error occurs
-    """
-    try:
-        # Get user from database to ensure user exists
-        user_id = current_user.get("id")
-        if not user_id:
-            raise handle_user_not_found(current_user.get('email', 'unknown'))
-        user = validate_user_exists(db, user_id, current_user.get('email'))
+#     Raises:
+#         HTTPException: If agent not found, unauthorized, or database error occurs
+#     """
+#     try:
+#         # Get user from database to ensure user exists
+#         user_id = current_user.get("id")
+#         if not user_id:
+#             raise handle_user_not_found(current_user.get('email', 'unknown'))
+#         user = validate_user_exists(db, user_id, current_user.get('email'))
 
-        # Get agent and verify ownership
-        agent = validate_agent_exists_and_owned(db, agent_id, user.id, current_user.get('email'))
-        this_agent = agents[str(agent_id)]
-        if not this_agent:
-            logger.warning(
-                f"Agent not found: agent_id {agent_id}"
-            )
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail="Agent not found",
-            )
+#         # Get agent and verify ownership
+#         agent = validate_agent_exists_and_owned(db, agent_id, user.id, current_user.get('email'))
+#         this_agent = agents[str(agent_id)]
+#         if not this_agent:
+#             logger.warning(
+#                 f"Agent not found: agent_id {agent_id}"
+#             )
+#             raise HTTPException(
+#                 status_code=status.HTTP_404_NOT_FOUND,
+#                 detail="Agent not found",
+#             )
         
-        # Update agent properties using the new methods
-        if agent_data.base_prompt is not None:
-            this_agent.update_base_prompt(agent_data.base_prompt)
-        if agent_data.tone is not None:
-            this_agent.update_tone(agent_data.tone)
-        if agent_data.short_term_memory is not None:
-            this_agent.update_short_memory(agent_data.short_term_memory)
+#         # Update agent properties using the new methods
+#         if agent_data.base_prompt is not None:
+#             this_agent.update_base_prompt(agent_data.base_prompt)
+#         if agent_data.tone is not None:
+#             this_agent.update_tone(agent_data.tone)
+#         if agent_data.short_term_memory is not None:
+#             this_agent.update_short_memory(agent_data.short_term_memory)
         
-        print(f"model: {this_agent.llm_model}")
-        print(f"base_prompt: {this_agent.base_prompt}")
-        print(f"tone: {this_agent.tone}")
-        print(f"short_memory: {this_agent.short_memory}")
-        # Update agent fields (only update provided fields)
-        update_data = agent_data.dict(exclude_unset=True)
+#         print(f"model: {this_agent.llm_model}")
+#         print(f"base_prompt: {this_agent.base_prompt}")
+#         print(f"tone: {this_agent.tone}")
+#         print(f"short_memory: {this_agent.short_memory}")
+#         # Update agent fields (only update provided fields)
+#         update_data = agent_data.dict(exclude_unset=True)
 
-        for field, value in update_data.items():
-            if hasattr(agent, field):
-                setattr(agent, field, value)
+#         for field, value in update_data.items():
+#             if hasattr(agent, field):
+#                 setattr(agent, field, value)
 
-        # Commit changes
-        db.commit()
-        db.refresh(agent)
+#         # Commit changes
+#         db.commit()
+#         db.refresh(agent)
 
-        # Log successful update
-        logger.info(
-            f"Agent '{agent.name}' (ID: {agent.id}) updated successfully by user "
-            f"{current_user.get('email')} (user_id: {user.id})"
-        )
-        # Return updated agent data
-        return AgentOut(
-            id=agent.id,
-            name=agent.name,
-            avatar=agent.avatar or "",
-            model=agent.model,
-            description=agent.description or "",
-            tone=agent.tone,
-            status=agent.status,
-        )
+#         # Log successful update
+#         logger.info(
+#             f"Agent '{agent.name}' (ID: {agent.id}) updated successfully by user "
+#             f"{current_user.get('email')} (user_id: {user.id})"
+#         )
+#         # Return updated agent data
+#         return AgentOut(
+#             id=agent.id,
+#             name=agent.name,
+#             avatar=agent.avatar or "",
+#             model=agent.model,
+#             description=agent.description or "",
+#             tone=agent.tone,
+#             status=agent.status,
+#         )
 
-    except HTTPException:
-        # Re-raise HTTP exceptions
-        raise
+#     except HTTPException:
+#         # Re-raise HTTP exceptions
+#         raise
 
-    except Exception as e:
-        db.rollback()
-        raise handle_database_error(e, "updating agent", current_user.get('email'))
+#     except Exception as e:
+#         db.rollback()
+#         raise handle_database_error(e, "updating agent", current_user.get('email'))
 
 
 def delete_agent(agent_id: int, current_user: dict, db: Session):
@@ -397,8 +399,21 @@ def delete_agent(agent_id: int, current_user: dict, db: Session):
 
         agent = validate_agent_exists_and_owned(db, agent_id, user.id, current_user.get('email'))
 
+        # Remove agent from memory if it exists
+        try:
+            from app.controllers.document_controller import agents
+            agent_id_str = str(agent_id)
+            if agent_id_str in agents:
+                del agents[agent_id_str]
+                logger.info(f"Removed agent {agent_id_str} from memory")
+        except Exception as memory_error:
+            logger.warning(f"Failed to remove agent from memory: {str(memory_error)}")
+
+        # Delete agent (cascade will handle company_information, documents, etc.)
         db.delete(agent)
         db.commit()
+        
+        logger.info(f"Agent '{agent.name}' (ID: {agent_id}) deleted successfully by user {current_user.get('email')}")
         return {"message": f"delete agent is successfully: agent ID is {agent_id}"}
     except HTTPException:
         # Re-raise HTTP exceptions

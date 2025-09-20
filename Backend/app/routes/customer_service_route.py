@@ -19,6 +19,7 @@ from app.configs.limiter import limiter
 from app.controllers.customer_service_controller import (
     create_customer_service_agent,
     delete_customer_service_agent,
+    get_customer_service_agent_by_id,
     update_customer_service_agent,
 )
 from app.middlewares.RBAC import role_required
@@ -179,6 +180,34 @@ def updateCustomerServiceAgent(
             data=updated_agent
         )
 
+    except Exception as e:
+        # This will be handled by the global error handler middleware
+        raise
+
+
+@router.get("/{agent_id}", status_code=status.HTTP_200_OK)
+@limiter.limit("10/minute")
+def getCustomerServiceAgentById(
+    request: Request,
+    agent_id: int,
+    current_user: dict = Depends(role_required(["admin", "user"])),
+    db: Session = Depends(get_db),
+):
+    """
+    Get a Customer Service Agent by its ID for the authenticated user.
+
+    Args:
+        request: FastAPI request object
+        agent_id: ID of the Customer Service Agent to retrieve
+        current_user: Current authenticated user (from JWT token)
+        db: Database session
+
+    Returns:
+        CustomerServiceAgentResponse: Success response with agent data
+    """
+    try:
+        agent = get_customer_service_agent_by_id(db, agent_id, current_user)
+        return success_response("Customer Service Agent retrieved successfully", agent)
     except Exception as e:
         # This will be handled by the global error handler middleware
         raise

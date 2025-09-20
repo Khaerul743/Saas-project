@@ -90,7 +90,7 @@ async def create_simple_rag_agent(
         if file:
             try:
                 # Write file to disk first
-                content_type = write_document(file, directory_path)
+                content_type: Literal['pdf'] | Literal['txt'] | Literal['csv'] | Literal['excel'] = write_document(file, directory_path)
                 file_path = os.path.join(directory_path, file.filename)
                 
                 # Create document record in database

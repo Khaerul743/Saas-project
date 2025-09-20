@@ -20,12 +20,14 @@ from app.models.integration.integration_entity import Integration  # noqa: F401
 from app.models.platform.platform_entity import Platform  # noqa: F401
 from app.models.user.user_entity import User  # noqa: F401
 from app.models.user_agent.user_agent_entity import UserAgent  # noqa: F401
+from app.models.company_information.company_entity import CompanyInformation  # noqa: F401
 from app.models.user.api_key_entity import ApiKey  # noqa: F401
 
 # Ensure all model mappers are registered before metadata.create_all
 from app.routes import (
     agent_route,
     auth_route,
+    company_information_route,
     customer_service_route,
     dashboard_route,
     document_route,
@@ -82,6 +84,7 @@ app.include_router(auth_route.router)
 app.include_router(agent_route.router)  # General agent routes (get all, etc.)
 app.include_router(simple_rag_route.router)  # Simple RAG Agent specific routes
 app.include_router(customer_service_route.router)  # Customer Service Agent specific routes
+app.include_router(company_information_route.router)  # Company Information routes
 app.include_router(document_route.router)
 app.include_router(integration_route.router)
 app.include_router(platform_route.router)

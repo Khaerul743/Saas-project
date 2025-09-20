@@ -8,6 +8,7 @@ from app.AI.customer_service.tools import AgentTools
 from app.AI.customer_service.workflow import Workflow
 from app.AI.document_store.RAG import RAGSystem
 from app.utils.logger import get_logger
+from app.models.company_information.company_model import CreateCompanyInformation
 
 logger = get_logger(__name__)
 
@@ -23,6 +24,7 @@ class Agent:
         collection_name: str,
         available_databases: List[str],
         detail_data: str,
+        company_information: CreateCompanyInformation,
         long_memory: bool = False,
         short_memory: bool = False,
         **kwargs,
@@ -31,6 +33,7 @@ class Agent:
         self.tools = AgentTools(
             chromadb_path=chromadb_path, collection_name=collection_name
         )
+        self.company_information: CreateCompanyInformation = company_information
         self.llm_model = llm_model
         self.rag = RAGSystem(
             chroma_directiory=chromadb_path, collection_name=collection_name
@@ -41,6 +44,7 @@ class Agent:
             tools=self.tools,
             available_databases=available_databases,
             detail_data=detail_data,
+            company_information=self.company_information,
             directory_path=directory_path,  # ✅ Pass directory_path to workflow
             short_memory=short_memory,
             long_memory=long_memory,

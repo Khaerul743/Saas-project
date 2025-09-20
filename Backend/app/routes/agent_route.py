@@ -50,40 +50,40 @@ def getAllAgent(
 # Use /api/agents/customer-service for Customer Service Agents (to be implemented)
 
 
-@router.put("/{agent_id}", status_code=status.HTTP_200_OK)
-@limiter.limit("10/minute")
-def updateAgent(
-    request: Request,
-    agent_id: int,
-    agent_data: UpdateAgent,
-    current_user: dict = Depends(role_required(["admin", "user"])),
-    db: Session = Depends(get_db),
-):
-    """
-    Update an existing agent for the authenticated user.
+# @router.put("/{agent_id}", status_code=status.HTTP_200_OK)
+# @limiter.limit("10/minute")
+# def updateAgent(
+#     request: Request,
+#     agent_id: int,
+#     agent_data: UpdateAgent,
+#     current_user: dict = Depends(role_required(["admin", "user"])),
+#     db: Session = Depends(get_db),
+# ):
+#     """
+#     Update an existing agent for the authenticated user.
 
-    Args:
-        request: FastAPI request object
-        agent_id: ID of the agent to update
-        agent_data: Agent update data from request body
-        current_user: Current authenticated user (from JWT token)
-        db: Database session
+#     Args:
+#         request: FastAPI request object
+#         agent_id: ID of the agent to update
+#         agent_data: Agent update data from request body
+#         current_user: Current authenticated user (from JWT token)
+#         db: Database session
 
-    Returns:
-        ResponseAPI: Success response with updated agent data
-    """
-    try:
-        # Update agent using controller
-        updated_agent = update_agent(db, agent_id, agent_data, current_user)
+#     Returns:
+#         ResponseAPI: Success response with updated agent data
+#     """
+#     try:
+#         # Update agent using controller
+#         updated_agent = update_agent(db, agent_id, agent_data, current_user)
 
-        # Return success response
-        return success_response(
-            message="Agent updated successfully", data=updated_agent
-        )
+#         # Return success response
+#         return success_response(
+#             message="Agent updated successfully", data=updated_agent
+#         )
 
-    except Exception as e:
-        # This will be handled by the global error handler middleware
-        raise
+#     except Exception as e:
+#         # This will be handled by the global error handler middleware
+#         raise
 
 
 @router.delete("/{agent_id}", status_code=status.HTTP_200_OK)
@@ -95,6 +95,7 @@ def deleteAgent(
     db: Session = Depends(get_db),
 ):
     try:
+        print("deleteAgent")
         response = delete_agent(agent_id, current_user, db)
         return success_response(response.get("message"))
     except Exception as e:
@@ -111,3 +112,4 @@ def getAllUserAgent(
         return success_response("Get all history is successfully", get_history)
     except:
         raise
+

@@ -60,6 +60,12 @@ class Agent(Base):
 
     # Relationship
     user = relationship("User", back_populates="agents")
+    company_information = relationship(
+        "CompanyInformation", 
+        back_populates="agent",
+        cascade="all, delete-orphan",
+        passive_deletes=True
+    )
     # Relationship
     documents = relationship(
         "Document",

@@ -6,11 +6,13 @@ from typing import Dict, List, Optional
 from fastapi import BackgroundTasks, HTTPException, UploadFile, status
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session
+from app.models.company_information.company_entity import CompanyInformation
 
 from app.AI import customer_service as AI
 from app.AI.utils import dataset
 from app.controllers.document_controller import agents
 from app.models.agent.agent_entity import Agent
+from app.models.company_information.company_model import CreateCompanyInformation
 from app.models.agent.customer_service_model import (
     CreateCustomerServiceAgent,
     CustomerServiceAgentOut,
@@ -92,6 +94,19 @@ async def create_customer_service_agent(
         db.add(new_agent)
         db.flush()
 
+        # Add company information to database
+        new_company_information = CompanyInformation(
+            agent_id=new_agent.id,
+            name=agent_data.company_name,
+            industry=agent_data.industry,
+            description=agent_data.company_description,
+            address=agent_data.address,
+            email=agent_data.email,
+            website=agent_data.website,
+            fallback_email=agent_data.fallback_email,
+        )
+        db.add(new_company_information)
+
         # Create directory for agent documents
         directory_path = f"documents/user_{user_id}/agent_{new_agent.id}"
         
@@ -151,8 +166,8 @@ async def create_customer_service_agent(
                 
                 # For PDF/TXT files, add to RAG system
                 elif content_type in ["pdf", "txt"]:
-                    # This will be handled after agent initialization
                     pass
+
                     
             except Exception as e:
                 # Rollback database transaction
@@ -167,7 +182,7 @@ async def create_customer_service_agent(
                     logger.error(f"Failed to remove file {file_path} during rollback: {file_err}")
                 
                 raise e
-        
+        print(f"document records: {document_records}")
         # Initialize Customer Service Agent instance
         if not str(new_agent.id) in agents:
             def init_agent():
@@ -176,6 +191,15 @@ async def create_customer_service_agent(
                     **dataset_descriptions
                 }
                 
+                company_information = CreateCompanyInformation(
+                    name=agent_data.company_name,
+                    industry=agent_data.industry,
+                    description=agent_data.company_description,
+                    address=agent_data.address,
+                    email=agent_data.email,
+                    website=agent_data.website,
+                    fallback_email=agent_data.fallback_email,
+                )
                 # ✅ Removed debug print statements
                 agents[str(new_agent.id)] = AI.Agent(
                     base_prompt=agent_data.base_prompt,
@@ -186,17 +210,21 @@ async def create_customer_service_agent(
                     collection_name=f"agent_{new_agent.id}",
                     available_databases=available_databases,
                     detail_data="\n".join(detail_data_parts) if detail_data_parts else "",
+                    company_information=company_information,
                     long_memory=agent_data.long_term_memory,
                     short_memory=agent_data.short_term_memory,
+
                     **agent_kwargs
                 )
 
             init_agent()
         
+        print(f"agents: {agents[str(new_agent.id)].company_information}")
 
         # Add PDF/TXT documents to RAG system
         for doc_record in document_records:
             if doc_record.content_type in ["pdf", "txt"]:
+                logger.info(f"Adding {doc_record.content_type} file {doc_record.file_name} to RAG system")
                 try:
                     agents[str(new_agent.id)].add_document(
                         doc_record.file_name,
@@ -253,12 +281,12 @@ def update_customer_service_agent(
     current_user: dict,
 ) -> CustomerServiceAgentOut:
     """
-    Update an existing Customer Service Agent.
+    Update an existing Customer Service Agent and its company information.
     
     Args:
         db: Database session
         agent_id: ID of the agent to update
-        agent_data: Update data
+        agent_data: Update data including agent and company information
         current_user: Current authenticated user
         
     Returns:
@@ -278,18 +306,117 @@ def update_customer_service_agent(
                 detail="This endpoint is only for Customer Service Agents."
             )
 
-        # Update agent fields
+        # Separate agent fields from company information fields
         update_data = agent_data.dict(exclude_unset=True)
+        agent_fields = {}
+        company_fields = {}
+        
+        # Define company information field names
+        company_field_names = {
+            'company_name', 'industry', 'company_description', 
+            'address', 'email', 'website', 'fallback_email'
+        }
+        
+        # Separate fields
         for field, value in update_data.items():
-            setattr(agent, field, value)
+            if field in company_field_names:
+                company_fields[field] = value
+            else:
+                agent_fields[field] = value
 
+        # Update agent fields
+        for field, value in agent_fields.items():
+            if hasattr(agent, field):
+                setattr(agent, field, value)
+
+        # Update company information if provided
+        if company_fields:
+            # Get or create company information
+            company_info = (
+                db.query(CompanyInformation)
+                .filter(CompanyInformation.agent_id == agent_id)
+                .first()
+            )
+            
+            if not company_info:
+                # Create new company information if it doesn't exist
+                company_info = CompanyInformation(
+                    agent_id=agent_id,
+                    name=company_fields.get('company_name', ''),
+                    industry=company_fields.get('industry', ''),
+                    description=company_fields.get('company_description', ''),
+                    address=company_fields.get('address', ''),
+                    email=company_fields.get('email', ''),
+                    website=company_fields.get('website'),
+                    fallback_email=company_fields.get('fallback_email', '')
+                )
+                db.add(company_info)
+            else:
+                # Update existing company information
+                for field, value in company_fields.items():
+                    # Map company field names to database field names
+                    db_field_mapping = {
+                        'company_name': 'name',
+                        'company_description': 'description'
+                    }
+                    db_field = db_field_mapping.get(field, field)
+                    if hasattr(company_info, db_field):
+                        setattr(company_info, db_field, value)
+
+        # Commit changes to database
         db.commit()
         db.refresh(agent)
+        if company_fields:
+            db.refresh(company_info)
+
+        # Update agent object in memory if it exists
+        try:
+            from app.controllers.document_controller import agents
+            agent_id_str = str(agent_id)
+            
+            if agent_id_str in agents:
+                # Update agent object properties
+                if agent_fields:
+                    for field, value in agent_fields.items():
+                        if hasattr(agents[agent_id_str], field):
+                            setattr(agents[agent_id_str], field, value)
+                
+                # Update company information in agent object
+                if company_fields:
+                    # Get updated company information
+                    updated_company_info = {
+                        "name": company_info.name,
+                        "industry": company_info.industry,
+                        "description": company_info.description,
+                        "address": company_info.address,
+                        "email": company_info.email,
+                        "website": company_info.website,
+                        "fallback_email": company_info.fallback_email,
+                    }
+                    
+                    # Update agent's company_information
+                    if hasattr(agents[agent_id_str], 'company_information'):
+                        setattr(agents[agent_id_str], 'company_information', updated_company_info)
+                        logger.info(f"Updated company_information in agent {agent_id_str} object")
+                    else:
+                        # Try to set the attribute even if it doesn't exist
+                        setattr(agents[agent_id_str], 'company_information', updated_company_info)
+                        logger.info(f"Set company_information attribute in agent {agent_id_str} object")
+                
+                logger.info(f"Updated agent {agent_id_str} object in memory")
+            else:
+                logger.info(f"Agent {agent_id_str} not found in memory, skipping agent object update")
+                
+        except Exception as agent_update_error:
+            # Log error but don't fail the update
+            logger.warning(f"Failed to update agent object: {str(agent_update_error)}")
 
         logger.info(
             f"Customer Service Agent '{agent.name}' (ID: {agent.id}) updated successfully by user "
             f"{current_user.get('email')}"
         )
+
+        print(f"agents: {agents[agent_id_str].company_information}")
 
         return CustomerServiceAgentOut(
             id=agent.id,
@@ -312,6 +439,89 @@ def update_customer_service_agent(
         db.rollback()
         logger.error(f"Unexpected error while updating Customer Service Agent: {str(e)}", exc_info=True)
         raise handle_database_error(e, "updating Customer Service Agent", current_user.get('email'))
+
+
+def get_customer_service_agent_by_id(
+    db: Session,
+    agent_id: int,
+    current_user: dict,
+) -> dict:
+    """
+    Get a Customer Service Agent by its ID including company information.
+    
+    Args:
+        db: Database session
+        agent_id: ID of the agent to retrieve
+        current_user: Current authenticated user
+        
+    Returns:
+        dict: Agent data with company information
+        
+    Raises:
+        HTTPException: If agent not found or unauthorized
+    """
+    try:
+        # Validate agent exists and is owned by user
+        agent = validate_agent_exists_and_owned(db, agent_id, current_user.get("id"), current_user.get('email'))
+        
+        # Check if agent is Customer Service Agent
+        if agent.role != "customer service":
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="This endpoint is only for Customer Service Agents."
+            )
+
+        # Get company information for the agent
+        company_info = (
+            db.query(CompanyInformation)
+            .filter(CompanyInformation.agent_id == agent_id)
+            .first()
+        )
+
+        # Prepare response data
+        response_data = {
+            "id": agent.id,
+            "name": agent.name,
+            "avatar": agent.avatar,
+            "model": agent.model,
+            "description": agent.description,
+            "base_prompt": agent.base_prompt,
+            "tone": agent.tone,
+            "short_term_memory": agent.short_term_memory,
+            "long_term_memory": agent.long_term_memory,
+            "status": agent.status,
+            "created_at": agent.created_at,
+            "company_information": None
+        }
+
+        # Add company information if exists
+        if company_info:
+            response_data["company_information"] = {
+                "id": company_info.id,
+                "agent_id": company_info.agent_id,
+                "name": company_info.name,
+                "industry": company_info.industry,
+                "description": company_info.description,
+                "address": company_info.address,
+                "email": company_info.email,
+                "website": company_info.website,
+                "fallback_email": company_info.fallback_email,
+                "created_at": company_info.created_at
+            }
+
+        logger.info(
+            f"Customer Service Agent '{agent.name}' (ID: {agent.id}) with company information retrieved successfully by user "
+            f"{current_user.get('email')}"
+        )
+
+        return response_data
+
+    except HTTPException:
+        # Re-raise HTTP exceptions
+        raise
+    except Exception as e:
+        logger.error(f"Unexpected error while retrieving Customer Service Agent: {str(e)}", exc_info=True)
+        raise handle_database_error(e, "retrieving Customer Service Agent", current_user.get('email'))
 
 
 def delete_customer_service_agent(

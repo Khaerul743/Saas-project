@@ -9,7 +9,7 @@ from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import END, START, StateGraph
 from langgraph.prebuilt import ToolNode
 import tiktoken
-
+from app.models.company_information.company_model import CreateCompanyInformation
 from app.AI.customer_service.models import (
     AgentState,
     StructuredOutputGenerateQuery,
@@ -33,6 +33,7 @@ class Workflow:
         tools,
         available_databases: List[str],
         detail_data: str,
+        company_information: CreateCompanyInformation,
         directory_path: str = None,
         long_memory: bool = False,
         short_memory: bool = False,
@@ -62,6 +63,7 @@ class Workflow:
             provider_host=self.provider_host,
             provider_port=self.provider_port,
         )
+        self.company_information = company_information
 
         self.validation_agent_model = create_validation_agent_model(available_databases)
         self.logger = get_logger(__name__)
@@ -309,7 +311,7 @@ class Workflow:
 
             # Generate prompt and invoke LLM with retry mechanism
             def invoke_llm():
-                prompt = self.prompts.main_agent(state.user_message, self.base_prompt, self.tone)
+                prompt = self.prompts.main_agent(state.user_message, self.base_prompt, self.tone, self.company_information)
                 messages = [prompt[0]] + all_previous_messages + [prompt[1]]
                 llm = self.llm_for_reasoning.bind_tools([self.tools.get_document])
                 return llm.invoke(messages)
@@ -378,14 +380,14 @@ class Workflow:
                     self.validation_agent_model
                 )
                 prompts = self.prompts.agent_validation(
-                    state.user_message, tool_message, **self.kwargs
+                    state.user_message, tool_message, self.detail_data, **self.kwargs
                 )
                 return llm.invoke(prompts)
 
             response = self._retry_with_backoff(invoke_validation, max_retries=2)
             print(f"response: {response}")
             # Estimate tokens for structured output
-            prompts = self.prompts.agent_validation(state.user_message, tool_message, **self.kwargs)
+            prompts = self.prompts.agent_validation(state.user_message, tool_message, self.detail_data, **self.kwargs)
             estimated_tokens = self._estimate_structured_output_tokens(
                 str(prompts),
                 f"can_answer: {response.can_answer}, reasoning: {response.reasoning}, next_step: {response.next_step}"
@@ -397,6 +399,7 @@ class Workflow:
             return {
                 "can_answer": response.can_answer,
                 "reason": response.reasoning,
+                "response":tool_message,
                 "next_step": response.next_step,
                 "total_token": state.total_token + estimated_tokens,
             }
