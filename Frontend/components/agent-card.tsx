@@ -6,7 +6,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { Bot, Cpu, Edit, Eye, Globe, MessageCircle, MessageSquare, MoreHorizontal, Phone, Trash2 } from "lucide-react"
+import { BarChart3, Bot, Brain, Cpu, DollarSign, Edit, Eye, Globe, Headphones, MessageCircle, MessageSquare, MoreHorizontal, Phone, Trash2, Users } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 
 interface Agent {
@@ -24,6 +24,7 @@ interface Agent {
   api_key: string
   total_conversations: number
   avg_response_time: number
+  role?: string
 }
 
 interface AgentCardProps {
@@ -37,6 +38,22 @@ const platformIcons = {
   web: Globe,
   whatsapp: Phone,
   telegram: MessageCircle,
+}
+
+const roleIcons = {
+  "simple RAG agent": Brain,
+  "customer support": Headphones,
+  "data analyst": BarChart3,
+  "finance assistant": DollarSign,
+  "sales": Users,
+}
+
+const roleColors = {
+  "simple RAG agent": "bg-blue-50 text-blue-700 border-blue-200",
+  "customer support": "bg-green-50 text-green-700 border-green-200",
+  "data analyst": "bg-purple-50 text-purple-700 border-purple-200",
+  "finance assistant": "bg-yellow-50 text-yellow-700 border-yellow-200",
+  "sales": "bg-orange-50 text-orange-700 border-orange-200",
 }
 
 export function AgentCard({ agent, onEdit, onDelete, onDetail }: AgentCardProps) {
@@ -72,15 +89,32 @@ export function AgentCard({ agent, onEdit, onDelete, onDetail }: AgentCardProps)
             </Avatar>
             <div>
               <h3 className="font-semibold text-foreground font-heading">{agent.name}</h3>
-              <Badge
-                variant={agent.status === "active" ? "default" : "secondary"}
-                className={cn(
-                  "text-xs mt-1",
-                  agent.status === "active" && "bg-primary/20 text-primary border-primary/30",
+              <div className="flex items-center gap-2 mt-1">
+                <Badge
+                  variant={agent.status === "active" ? "default" : "secondary"}
+                  className={cn(
+                    "text-xs",
+                    agent.status === "active" && "bg-primary/20 text-primary border-primary/30",
+                  )}
+                >
+                  {agent.status}
+                </Badge>
+                {agent.role && (
+                  <Badge
+                    variant="outline"
+                    className={cn(
+                      "text-xs flex items-center gap-1",
+                      roleColors[agent.role as keyof typeof roleColors] || "bg-gray-50 text-gray-700 border-gray-200"
+                    )}
+                  >
+                    {(() => {
+                      const RoleIcon = roleIcons[agent.role as keyof typeof roleIcons] || Bot
+                      return <RoleIcon className="h-3 w-3" />
+                    })()}
+                    {agent.role}
+                  </Badge>
                 )}
-              >
-                {agent.status}
-              </Badge>
+              </div>
             </div>
           </div>
           <div className="relative" ref={dropdownRef}>

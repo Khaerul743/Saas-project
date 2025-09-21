@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { UserMenu } from "@/components/user-menu"
 import { useAuth } from "@/lib/auth-context"
 import { cn } from "@/lib/utils"
-import { Activity, Bot, Home, Menu, Plus, X } from "lucide-react"
+import { Activity, Bot, Home, Menu, Play, Plus, X } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
@@ -14,6 +14,7 @@ import { useState } from "react"
 const navigation = [
   { name: "Dashboard", href: "/", icon: Home },
   { name: "Agents", href: "/agents", icon: Bot },
+  { name: "Playground", href: "/playground", icon: Play },
   { name: "Tracing", href: "/tracing", icon: Activity },
 ]
 

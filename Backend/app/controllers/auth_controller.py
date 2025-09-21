@@ -65,8 +65,8 @@ def loginHandler(response: Response, db: Session, payload: AuthIn) -> User:
             key="access_token",
             value=access_token,
             httponly=True,
-            secure=True,  # True for HTTPS (ngrok)
-            samesite="none",  # Allow cross-site cookies for ngrok
+            secure=False,  # True for HTTPS (ngrok)
+            samesite="lax",  # Allow cross-site cookies for ngrok
             max_age=3600,  # 1 jam sesuai token expire
         )
         logger.info(f"User {payload.email} login is successfully.")

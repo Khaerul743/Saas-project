@@ -7195,3 +7195,200 @@ Visi perusahaan adalah gambaran atau tujuan jangka panjang yang ingin dicapai ol
 [parameters: {'agent_id': None, 'company_information_id': 5}]
 (Background on this error at: https://sqlalche.me/e/20/gkpj)
 2025-09-20 20:40:32,986 | INFO | app.controllers.agent_controller | Agent 'Customer Support Bot' (ID: 5) deleted successfully by user khaerul@gmail.com
+2025-09-20 20:52:16,734 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-20 20:52:16,774 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-20 20:52:16,869 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-20 20:52:16,925 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-20 20:52:33,630 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-20 20:52:33,657 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-20 20:52:42,527 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-20 20:52:42,571 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-20 20:52:44,679 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-20 20:52:44,852 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-14 00:00:00 to=2025-09-21 00:00:00, total_periods=1
+2025-09-20 20:52:45,036 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-20 20:52:45,211 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-14 00:00:00 to=2025-09-21 00:00:00, total_periods=1
+2025-09-20 20:52:55,281 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-20 20:52:55,306 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-20 21:19:38,516 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-20 21:19:38,667 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-20 21:19:41,025 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-20 21:19:41,637 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-20 21:20:09,348 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-20 21:20:09,607 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 1 user agents for user_id=1
+2025-09-20 21:20:34,924 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-20 21:20:35,675 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-20 21:30:04,178 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-20 21:30:04,313 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-20 21:30:04,734 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-20 21:30:04,729 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-21 10:56:12,074 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-21 10:56:12,103 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-21 10:56:12,109 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-21 10:56:12,176 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-21 10:56:23,125 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-21 10:56:23,205 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-21 10:56:35,285 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-21 10:56:35,394 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-21 10:56:37,875 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-21 10:56:38,057 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-15 00:00:00 to=2025-09-22 00:00:00, total_periods=1
+2025-09-21 10:56:38,182 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-21 10:56:38,270 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-15 00:00:00 to=2025-09-22 00:00:00, total_periods=1
+2025-09-21 11:07:59,543 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-21 11:08:08,608 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_6\products.db from products.csv
+2025-09-21 11:08:32,281 | INFO | app.controllers.customer_service_controller | Adding pdf file FAQ.pdf to RAG system
+2025-09-21 11:08:34,512 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-09-21 11:08:34,513 | INFO | app.AI.customer_service | Successfully loaded document: FAQ.pdf
+2025-09-21 11:08:39,760 | INFO | app.AI.customer_service | Successfully added document 'FAQ.pdf' with ID '12'
+2025-09-21 11:08:39,934 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 6) created successfully by user khaerul@gmail.com with 1 datasets and 2 documents
+2025-09-21 11:15:11,312 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-21 11:15:11,422 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-21 11:15:11,710 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-21 11:15:11,729 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-21 11:15:12,843 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-15 00:00:00 to=2025-09-22 00:00:00, total_periods=1
+2025-09-21 11:15:13,419 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-15 00:00:00 to=2025-09-22 00:00:00, total_periods=1
+2025-09-21 11:15:17,369 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 11:15:17,688 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 11:20:12,034 | INFO | app.controllers.customer_service_controller | Created database documents/user_1/agent_7\products.db from products.csv
+2025-09-21 11:20:22,910 | INFO | app.controllers.customer_service_controller | Adding pdf file FAQ.pdf to RAG system
+2025-09-21 11:20:23,683 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-09-21 11:20:23,747 | INFO | app.AI.customer_service | Successfully loaded document: FAQ.pdf
+2025-09-21 11:20:26,484 | INFO | app.AI.customer_service | Successfully added document 'FAQ.pdf' with ID '13'
+2025-09-21 11:20:26,538 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Khaerul's Team' (ID: 7) created successfully by user khaerul@gmail.com with 1 datasets and 2 documents
+2025-09-21 11:20:28,588 | INFO | app.controllers.integration_controller | Agent integration to platform api is successfuly: agent ID 7 and user ID 1
+2025-09-21 11:20:41,627 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-21 11:20:41,629 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-15 00:00:00 to=2025-09-22 00:00:00, total_periods=1
+2025-09-21 11:20:42,124 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-15 00:00:00 to=2025-09-22 00:00:00, total_periods=1
+2025-09-21 11:20:42,344 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-21 11:20:43,744 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 11:20:43,923 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 11:21:38,804 | INFO | app.AI.customer_service.workflow | Main agent processing user message: alamat perusahaan ini dimana ya?...
+2025-09-21 11:21:38,804 | INFO | app.AI.customer_service.workflow | Main agent processing user message: alamat perusahaan ini dimana ya?...
+2025-09-21 11:21:42,027 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-21 11:21:42,027 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-21 11:22:12,210 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Product paling laris apa ya?...
+2025-09-21 11:22:12,210 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Product paling laris apa ya?...
+2025-09-21 11:22:13,536 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-21 11:22:13,536 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-21 11:22:18,459 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-21 11:22:18,459 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-09-21 11:22:18,558 | INFO | app.AI.customer_service.workflow | Tool message:  Kami menawarkan berbagai produk/layanan, termasuk [sebutkan produk/layanan utama, contoh: layanan k...
+2025-09-21 11:22:18,558 | INFO | app.AI.customer_service.workflow | Tool message:  Kami menawarkan berbagai produk/layanan, termasuk [sebutkan produk/layanan utama, contoh: layanan k...
+2025-09-21 11:22:20,974 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=check_products_database, tokens=869
+2025-09-21 11:22:20,974 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=check_products_database, tokens=869
+2025-09-21 11:22:22,970 | INFO | app.AI.customer_service.workflow | Generating query for problem: Menemukan produk yang paling laris dari data yang ...
+2025-09-21 11:22:22,970 | INFO | app.AI.customer_service.workflow | Generating query for problem: Menemukan produk yang paling laris dari data yang ...
+2025-09-21 11:22:24,416 | INFO | app.AI.customer_service.workflow | Generated query: SELECT product_name, stock FROM products ORDER BY stock DESC LIMIT 1...
+2025-09-21 11:22:24,416 | INFO | app.AI.customer_service.workflow | Generated query: SELECT product_name, stock FROM products ORDER BY stock DESC LIMIT 1...
+2025-09-21 11:22:24,432 | INFO | app.AI.customer_service.workflow | Target database: products
+2025-09-21 11:22:24,432 | INFO | app.AI.customer_service.workflow | Target database: products
+2025-09-21 11:22:24,432 | INFO | app.AI.customer_service.workflow | Estimated tokens: 704
+2025-09-21 11:22:24,432 | INFO | app.AI.customer_service.workflow | Estimated tokens: 704
+2025-09-21 11:22:24,649 | INFO | app.AI.customer_service.workflow | Query executed successfully, returned 1 rows
+2025-09-21 11:22:24,649 | INFO | app.AI.customer_service.workflow | Query executed successfully, returned 1 rows
+2025-09-21 11:22:24,850 | INFO | app.AI.customer_service.workflow | Generating final answer for user
+2025-09-21 11:22:24,850 | INFO | app.AI.customer_service.workflow | Generating final answer for user
+2025-09-21 11:22:28,092 | INFO | app.AI.customer_service.workflow | Final answer generated successfully
+2025-09-21 11:22:28,092 | INFO | app.AI.customer_service.workflow | Final answer generated successfully
+2025-09-21 11:22:57,091 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-15 00:00:00 to=2025-09-22 00:00:00, total_periods=2
+2025-09-21 11:22:57,101 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-21 11:22:57,505 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-15 00:00:00 to=2025-09-22 00:00:00, total_periods=2
+2025-09-21 11:22:57,585 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-21 11:23:43,898 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 2 user agents for user_id=1
+2025-09-21 11:23:43,950 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 2 user agents for user_id=1
+2025-09-21 11:24:45,323 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 11:24:45,444 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 11:26:16,498 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Khaerul's Team' (ID: 7) with company information retrieved successfully by user khaerul@gmail.com
+2025-09-21 11:37:31,887 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-21 11:37:32,238 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 11:37:33,282 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-21 11:37:33,590 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 11:37:39,831 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-21 11:37:40,057 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-21 11:37:40,242 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 11:37:40,966 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 11:37:47,817 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Khaerul's Team' (ID: 7) with company information retrieved successfully by user khaerul@gmail.com
+2025-09-21 11:37:55,438 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Khaerul's Team' (ID: 7) with company information retrieved successfully by user khaerul@gmail.com
+2025-09-21 11:38:31,661 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Khaerul's Team' (ID: 7) with company information retrieved successfully by user khaerul@gmail.com
+2025-09-21 11:38:59,194 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Khaerul's Team' (ID: 7) with company information retrieved successfully by user khaerul@gmail.com
+2025-09-21 11:39:03,515 | INFO | app.controllers.customer_service_controller | Updated company_information in agent 7 object
+2025-09-21 11:39:03,516 | INFO | app.controllers.customer_service_controller | Updated agent 7 object in memory
+2025-09-21 11:39:03,516 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Khaerul's Team' (ID: 7) updated successfully by user khaerul@gmail.com
+2025-09-21 11:39:09,921 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Khaerul's Team' (ID: 7) with company information retrieved successfully by user khaerul@gmail.com
+2025-09-21 11:42:44,351 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-21 11:42:45,249 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 11:42:46,400 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 11:42:46,407 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-21 11:42:57,613 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Khaerul's Team' (ID: 7) with company information retrieved successfully by user khaerul@gmail.com
+2025-09-21 11:43:17,329 | INFO | app.controllers.customer_service_controller | Updated company_information in agent 7 object
+2025-09-21 11:43:17,329 | INFO | app.controllers.customer_service_controller | Updated agent 7 object in memory
+2025-09-21 11:43:17,330 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Khaerul's Team' (ID: 7) updated successfully by user khaerul@gmail.com
+2025-09-21 11:44:03,011 | INFO | app.AI.customer_service.workflow | Main agent processing user message: hai dengan siapa?...
+2025-09-21 11:44:03,011 | INFO | app.AI.customer_service.workflow | Main agent processing user message: hai dengan siapa?...
+2025-09-21 11:44:04,682 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-21 11:44:04,682 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-21 11:44:58,103 | INFO | app.AI.customer_service.workflow | Main agent processing user message: nama perusahaan ini apa ya?...
+2025-09-21 11:44:58,103 | INFO | app.AI.customer_service.workflow | Main agent processing user message: nama perusahaan ini apa ya?...
+2025-09-21 11:45:01,548 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-21 11:45:01,548 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-09-21 11:46:04,487 | WARNING | app.controllers.platform_controller | Invalid API key: ccb4f8c62285b8a7702e9ea715478932972755791d525fac420fdfec4cec6fc
+2025-09-21 11:46:46,090 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-21 11:46:46,093 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-15 00:00:00 to=2025-09-22 00:00:00, total_periods=2
+2025-09-21 11:46:46,286 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-15 00:00:00 to=2025-09-22 00:00:00, total_periods=2
+2025-09-21 11:46:46,307 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-21 11:46:53,205 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 2 user agents for user_id=1
+2025-09-21 11:46:53,389 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 2 user agents for user_id=1
+2025-09-21 11:47:12,897 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 11:47:13,091 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 11:47:17,264 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-21 11:47:17,293 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-15 00:00:00 to=2025-09-22 00:00:00, total_periods=2
+2025-09-21 11:47:17,435 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-21 11:47:17,651 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-15 00:00:00 to=2025-09-22 00:00:00, total_periods=2
+2025-09-21 11:47:21,689 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 11:47:21,762 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 11:52:09,359 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-21 11:52:09,399 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 11:52:09,911 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-21 11:52:10,633 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 11:52:21,312 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-15 00:00:00 to=2025-09-22 00:00:00, total_periods=2
+2025-09-21 11:52:21,335 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-21 11:52:21,437 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-15 00:00:00 to=2025-09-22 00:00:00, total_periods=2
+2025-09-21 11:52:21,456 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-21 11:52:31,063 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 11:52:31,243 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 11:53:28,834 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-09-21 11:53:31,834 | INFO | app.AI.simple_RAG_agent | Successfully added document 'FAQ.pdf' with ID '15'
+2025-09-21 11:53:31,926 | INFO | app.controllers.simple_rag_controller | Simple RAG Agent 'Khaerul's Team' (ID: 8) created successfully by user khaerul@gmail.com
+2025-09-21 11:53:33,207 | INFO | app.controllers.integration_controller | Agent integration to platform api is successfuly: agent ID 8 and user ID 1
+2025-09-21 11:53:43,714 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-15 00:00:00 to=2025-09-22 00:00:00, total_periods=2
+2025-09-21 11:53:43,738 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-21 11:53:44,388 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 11:53:44,454 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-15 00:00:00 to=2025-09-22 00:00:00, total_periods=2
+2025-09-21 11:53:44,463 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-21 11:53:44,595 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 11:54:08,106 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Khaerul's Team' (ID: 7) with company information retrieved successfully by user khaerul@gmail.com
+2025-09-21 11:54:37,705 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 12:00:00,099 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 12:04:47,834 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-21 12:04:47,838 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-21 12:04:47,961 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-21 12:04:48,271 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-21 12:04:52,133 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-21 12:04:52,162 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-21 12:05:34,129 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-21 12:05:34,249 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-09-21 12:05:56,549 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-15 00:00:00 to=2025-09-22 00:00:00, total_periods=2
+2025-09-21 12:05:56,732 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-21 12:05:56,842 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-15 00:00:00 to=2025-09-22 00:00:00, total_periods=2
+2025-09-21 12:05:57,104 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-21 12:06:02,194 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 12:06:02,611 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 12:06:34,449 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 2) with company information retrieved successfully by user khaerul@gmail.com
+2025-09-21 12:06:52,227 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-15 00:00:00 to=2025-09-22 00:00:00, total_periods=2
+2025-09-21 12:06:52,244 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-21 12:06:52,322 | INFO | app.controllers.dashboard_controller | [Analytics] Conversation trend fetched for user=1, group_by=day, from=2025-09-15 00:00:00 to=2025-09-22 00:00:00, total_periods=2
+2025-09-21 12:06:52,330 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-21 12:07:14,897 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 12:07:15,120 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-21 12:07:32,752 | INFO | app.controllers.customer_service_controller | Customer Service Agent 'Customer Support Bot' (ID: 1) with company information retrieved successfully by user khaerul@gmail.com
+2025-09-21 12:07:37,862 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 2 user agents for user_id=1
+2025-09-21 12:07:37,918 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 2 user agents for user_id=1

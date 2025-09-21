@@ -20,7 +20,6 @@ from app.controllers.agent_controller import (
     delete_agent,
     get_all_user_agent,
     get_all_agents,
-    update_agent,
 )
 from app.controllers.document_controller import document_store
 from app.middlewares.RBAC import role_required

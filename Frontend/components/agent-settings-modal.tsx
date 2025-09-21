@@ -13,18 +13,45 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Textarea } from "@/components/ui/textarea"
 import { agentService, CreateAgentRequest, CreateIntegrationRequest, UpdateIntegrationRequest } from "@/lib/api"; // Fixed import
 import {
-    Brain,
-    ChevronLeft,
-    ChevronRight,
-    Code,
-    Cpu,
-    Globe,
-    MessageCircle,
-    Phone,
-    Settings,
-    Upload
+  Brain,
+  ChevronLeft,
+  ChevronRight,
+  Code,
+  Cpu,
+  Globe,
+  MessageCircle,
+  Phone,
+  Settings,
+  Upload
 } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
+
+// Define CustomerSupportAgent interface locally to avoid import issues
+interface CustomerSupportAgent {
+  id: number
+  name: string
+  avatar: string | null
+  model: string
+  description: string
+  base_prompt: string
+  tone: string
+  short_term_memory: boolean
+  long_term_memory: boolean
+  status: string
+  created_at: string
+  company_information: {
+    id: number
+    agent_id: number
+    name: string
+    industry: string
+    description: string
+    address: string
+    email: string
+    website: string | null
+    fallback_email: string
+    created_at: string
+  }
+}
 
 interface Agent {
   id?: number
@@ -63,6 +90,8 @@ export function AgentSettingsModal({ agent, isOpen, onClose }: AgentSettingsModa
   const [isDragOver, setIsDragOver] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [avatarFile, setAvatarFile] = useState<File | null>(null)
+  const [customerSupportAgent, setCustomerSupportAgent] = useState<CustomerSupportAgent | null>(null)
+  const [isLoadingAgentData, setIsLoadingAgentData] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -76,54 +105,164 @@ export function AgentSettingsModal({ agent, isOpen, onClose }: AgentSettingsModa
     provider: "",
     model: "",
     maxTokens: "150",
-    basePrompt: "You are a helpful AI assistant. Always be polite, professional, and provide accurate information."
+    basePrompt: "You are a helpful AI assistant. Always be polite, professional, and provide accurate information.",
+    // Customer Support specific fields
+    companyName: "",
+    companyIndustry: "",
+    companyDescription: "",
+    companyAddress: "",
+    companyEmail: "",
+    fallbackEmail: "",
+    // Document data
+    faqDocument: null as File | null,
+    dataDocuments: [] as Array<{ file: File; description: string }>
   })
 
   // Initialize form data when agent changes (for edit mode)
   useEffect(() => {
-    if (agent) {
-      setFormData({
-        name: agent.name || "",
-        description: agent.description || "",
-        status: agent.status || "active",
-        role: "simple RAG agent", // Default value since not in Agent interface
-        tone: agent.tone || "formal",
-        shortTermMemory: agent.short_term_memory || false,
-        longTermMemory: agent.long_term_memory || false,
-        platform: agent.platform || "telegram",
-        apiKey: agent.api_key || "",
-        provider: "", // Not stored in Agent interface
-        model: agent.model || "",
-        maxTokens: "150", // Default value
-        basePrompt: agent.base_prompt || "You are a helpful AI assistant. Always be polite, professional, and provide accurate information.",
-      })
-    } else {
-      // Reset to default values for create mode
-      setFormData({
-        name: "",
-        description: "",
-        status: "active",
-        role: "simple RAG agent",
-        tone: "formal",
-        shortTermMemory: false,
-        longTermMemory: false,
-        platform: "telegram",
-        apiKey: "",
-        provider: "",
-        model: "",
-        maxTokens: "150",
-        basePrompt: "You are a helpful AI assistant. Always be polite, professional, and provide accurate information."
-      })
+    const loadAgentData = async () => {
+      if (agent) {
+        // Check if this is a customer support agent by checking if it has company information
+        // For now, we'll assume all agents in edit mode might be customer support
+        // In a real app, you'd have a role field or check the agent type
+        setIsLoadingAgentData(true)
+        
+        try {
+          // Try to load customer support agent data first
+          const customerSupportResponse = await agentService.getCustomerSupportAgent(agent.id!)
+          if (customerSupportResponse.status === 'success') {
+            const customerSupportData = customerSupportResponse.data as CustomerSupportAgent
+            setCustomerSupportAgent(customerSupportData)
+            
+            // Set form data with customer support information
+            setFormData({
+              name: customerSupportData.name || "",
+              description: customerSupportData.description || "",
+              status: customerSupportData.status || "active",
+              role: "customer support", // Set role to customer support
+              tone: customerSupportData.tone || "formal",
+              shortTermMemory: customerSupportData.short_term_memory || false,
+              longTermMemory: customerSupportData.long_term_memory || false,
+              platform: agent.platform || "telegram",
+              apiKey: agent.api_key || "",
+              provider: "openai", // Default provider
+              model: customerSupportData.model || "",
+              maxTokens: "150", // Default value
+              basePrompt: customerSupportData.base_prompt || "You are a helpful AI assistant. Always be polite, professional, and provide accurate information.",
+              // Customer Support specific fields from company_information
+              companyName: customerSupportData.company_information?.name || "",
+              companyIndustry: customerSupportData.company_information?.industry || "",
+              companyDescription: customerSupportData.company_information?.description || "",
+              companyAddress: customerSupportData.company_information?.address || "",
+              companyEmail: customerSupportData.company_information?.email || "",
+              fallbackEmail: customerSupportData.company_information?.fallback_email || "",
+              // Document data (not editable in update mode)
+              faqDocument: null,
+              dataDocuments: []
+            })
+          } else {
+            // Fallback to regular agent data
+            setFormData({
+              name: agent.name || "",
+              description: agent.description || "",
+              status: agent.status || "active",
+              role: "simple RAG agent", // Default value since not in Agent interface
+              tone: agent.tone || "formal",
+              shortTermMemory: agent.short_term_memory || false,
+              longTermMemory: agent.long_term_memory || false,
+              platform: agent.platform || "telegram",
+              apiKey: agent.api_key || "",
+              provider: "openai", // Default provider
+              model: agent.model || "",
+              maxTokens: "150", // Default value
+              basePrompt: agent.base_prompt || "You are a helpful AI assistant. Always be polite, professional, and provide accurate information.",
+              // Customer Support specific fields
+              companyName: "",
+              companyIndustry: "",
+              companyDescription: "",
+              companyAddress: "",
+              companyEmail: "",
+              fallbackEmail: "",
+              // Document data
+              faqDocument: null,
+              dataDocuments: []
+            })
+          }
+        } catch (error) {
+          console.log('Not a customer support agent, using regular agent data')
+          // Fallback to regular agent data
+          setFormData({
+            name: agent.name || "",
+            description: agent.description || "",
+            status: agent.status || "active",
+            role: "simple RAG agent", // Default value since not in Agent interface
+            tone: agent.tone || "formal",
+            shortTermMemory: agent.short_term_memory || false,
+            longTermMemory: agent.long_term_memory || false,
+            platform: agent.platform || "telegram",
+            apiKey: agent.api_key || "",
+            provider: "openai", // Default provider
+            model: agent.model || "",
+            maxTokens: "150", // Default value
+            basePrompt: agent.base_prompt || "You are a helpful AI assistant. Always be polite, professional, and provide accurate information.",
+            // Customer Support specific fields
+            companyName: "",
+            companyIndustry: "",
+            companyDescription: "",
+            companyAddress: "",
+            companyEmail: "",
+            fallbackEmail: "",
+            // Document data
+            faqDocument: null,
+            dataDocuments: []
+          })
+        } finally {
+          setIsLoadingAgentData(false)
+        }
+      } else {
+        // Reset to default values for create mode
+        setCustomerSupportAgent(null)
+        setFormData({
+          name: "",
+          description: "",
+          status: "active",
+          role: "simple RAG agent",
+          tone: "formal",
+          shortTermMemory: false,
+          longTermMemory: false,
+          platform: "telegram",
+          apiKey: "",
+          provider: "",
+          model: "",
+          maxTokens: "150",
+          basePrompt: "You are a helpful AI assistant. Always be polite, professional, and provide accurate information.",
+          // Customer Support specific fields
+          companyName: "",
+          companyIndustry: "",
+          companyDescription: "",
+          companyAddress: "",
+          companyEmail: "",
+          fallbackEmail: "",
+          // Document data
+          faqDocument: null,
+          dataDocuments: []
+        })
+      }
     }
+
+    loadAgentData()
   }, [agent])
   
   const avatarInputRef = useRef<HTMLInputElement>(null)
   const documentInputRef = useRef<HTMLInputElement>(null)
+  const faqInputRef = useRef<HTMLInputElement>(null)
+  const dataInputRef = useRef<HTMLInputElement>(null)
 
   const steps = [
     { id: "profile", title: "Profile", icon: Upload },
     { id: "model", title: "Model", icon: Cpu },
     { id: "memory", title: "Memory", icon: Brain },
+    { id: "knowledge", title: "Knowledge", icon: Brain },
     { id: "platforms", title: "Platform", icon: Settings },
     { id: "behavior", title: "Behavior", icon: Settings },
   ]
@@ -214,6 +353,47 @@ export function AgentSettingsModal({ agent, isOpen, onClose }: AgentSettingsModa
     setUploadedFiles(prev => prev.filter((_, i) => i !== index))
   }
 
+  const handleFaqUpload = () => {
+    faqInputRef.current?.click()
+  }
+
+  const handleFaqFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      setFormData(prev => ({ ...prev, faqDocument: file }))
+    }
+  }
+
+  const handleDataUpload = () => {
+    dataInputRef.current?.click()
+  }
+
+  const handleDataFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      setFormData(prev => ({ 
+        ...prev, 
+        dataDocuments: [...prev.dataDocuments, { file, description: "" }] 
+      }))
+    }
+  }
+
+  const updateDataDescription = (index: number, description: string) => {
+    setFormData(prev => ({
+      ...prev,
+      dataDocuments: prev.dataDocuments.map((item, i) => 
+        i === index ? { ...item, description } : item
+      )
+    }))
+  }
+
+  const removeDataDocument = (index: number) => {
+    setFormData(prev => ({
+      ...prev,
+      dataDocuments: prev.dataDocuments.filter((_, i) => i !== index)
+    }))
+  }
+
 
   const handleFormSubmit = async () => {
     if (!formData.name.trim()) {
@@ -226,19 +406,42 @@ export function AgentSettingsModal({ agent, isOpen, onClose }: AgentSettingsModa
     try {
       if (agent) {
         // Update existing agent
-        const updateData = {
-          name: formData.name,
-          avatar: agent.avatar || "",
-          model: formData.model,
-          role: formData.role,
-          description: formData.description,
-          tone: formData.tone,
-          status: formData.status
+        if (customerSupportAgent) {
+          // Update customer support agent
+          const customerSupportUpdateData = {
+            name: formData.name,
+            model: formData.model,
+            description: formData.description,
+            base_prompt: formData.basePrompt,
+            tone: formData.tone,
+            status: formData.status,
+            company_name: formData.companyName,
+            industry: formData.companyIndustry,
+            company_description: formData.companyDescription,
+            address: formData.companyAddress,
+            email: formData.companyEmail,
+            fallback_email: formData.fallbackEmail
+          }
+          
+          console.log('Updating customer support agent with data:', customerSupportUpdateData)
+          const updateResponse = await agentService.updateCustomerSupportAgent(agent.id!, customerSupportUpdateData)
+          console.log('Customer support agent updated:', updateResponse)
+        } else {
+          // Update regular agent
+          const updateData = {
+            name: formData.name,
+            avatar: agent.avatar || "",
+            model: formData.model,
+            role: formData.role,
+            description: formData.description,
+            tone: formData.tone,
+            status: formData.status
+          }
+          
+          console.log('Updating agent with data:', updateData)
+          const updateResponse = await agentService.updateAgent(agent.id!, updateData)
+          console.log('Agent updated:', updateResponse)
         }
-        
-        console.log('Updating agent with data:', updateData)
-        const updateResponse = await agentService.updateAgent(agent.id!, updateData)
-        console.log('Agent updated:', updateResponse)
         
         // If platform is telegram and API key has changed, update integration
         if (agent.platform === "telegram" && formData.apiKey !== agent.api_key) {
@@ -266,31 +469,119 @@ export function AgentSettingsModal({ agent, isOpen, onClose }: AgentSettingsModa
           alert('Please enter Telegram API key')
           return
         }
+        
+        // Additional validation for customer support role (both create and update)
+        if (formData.role === "customer support" || customerSupportAgent) {
+          if (!formData.companyName.trim()) {
+            alert('Please enter company name')
+            return
+          }
+          if (!formData.companyIndustry.trim()) {
+            alert('Please enter company industry')
+            return
+          }
+          if (!formData.companyEmail.trim()) {
+            alert('Please enter company email')
+            return
+          }
+          if (!formData.fallbackEmail.trim()) {
+            alert('Please enter fallback email')
+            return
+          }
+        }
 
-        // Prepare agent data
-        const agentData: CreateAgentRequest = {
-          name: formData.name,
-          model: formData.model,
-          avatar: avatarFile ? avatarFile.name : "",
-          status: formData.status,
-          role: formData.role,
-          description: formData.description,
-          tone: formData.tone,
-          base_prompt: formData.basePrompt,
-          short_term_memory: formData.shortTermMemory,
-          long_term_memory: formData.longTermMemory
+        // Step 1: Create agent based on role
+        let agentResponse
+        
+        if (formData.role === "customer support") {
+          // Customer Support Agent - use new endpoint
+          const customerSupportData = {
+            name: formData.name,
+            model: formData.model,
+            base_prompt: formData.basePrompt,
+            tone: formData.tone,
+            status: formData.status,
+            company_name: formData.companyName,
+            industry: formData.companyIndustry,
+            company_description: formData.companyDescription,
+            address: formData.companyAddress,
+            email: formData.companyEmail,
+            fallback_email: formData.fallbackEmail
+          }
+          
+          // Process datasets - remove file extensions from filenames
+          const datasets = formData.dataDocuments.map(item => ({
+            filename: item.file.name.replace(/\.[^/.]+$/, ""), // Remove file extension
+            description: item.description
+          }))
+          
+          // Collect all files (FAQ + CSV data)
+          const allFiles: File[] = []
+          if (formData.faqDocument) {
+            allFiles.push(formData.faqDocument)
+          }
+          formData.dataDocuments.forEach(item => {
+            allFiles.push(item.file)
+          })
+          
+          console.log('Creating customer support agent with data:', customerSupportData)
+          console.log('Datasets:', datasets)
+          console.log('Files:', allFiles.map(f => f.name))
+          
+          agentResponse = await agentService.createCustomerSupportAgent(
+            customerSupportData,
+            datasets,
+            allFiles
+          )
+        } else if (formData.role === "simple RAG agent") {
+          // Simple RAG Agent - use new endpoint
+          const simpleRagData = {
+            name: formData.name,
+            model: formData.model,
+            avatar: avatarFile ? avatarFile.name : "",
+            status: formData.status,
+            role: formData.role,
+            description: formData.description,
+            tone: formData.tone,
+            base_prompt: formData.basePrompt,
+            short_term_memory: formData.shortTermMemory,
+            long_term_memory: formData.longTermMemory
+          }
+          
+          console.log('Creating simple RAG agent with data:', simpleRagData)
+          console.log('Uploaded files:', uploadedFiles.map(f => f.name))
+          
+          // Send the first uploaded file as the main file (or null if no files)
+          const mainFile = uploadedFiles.length > 0 ? uploadedFiles[0] : null
+          console.log('Main file to send:', mainFile)
+          
+          agentResponse = await agentService.createSimpleRagAgent(simpleRagData, mainFile || undefined)
+        } else {
+          // Other roles - use existing endpoint
+          const agentData: CreateAgentRequest = {
+            name: formData.name,
+            model: formData.model,
+            avatar: avatarFile ? avatarFile.name : "",
+            status: formData.status,
+            role: formData.role,
+            description: formData.description,
+            tone: formData.tone,
+            base_prompt: formData.basePrompt,
+            short_term_memory: formData.shortTermMemory,
+            long_term_memory: formData.longTermMemory
+          }
+          
+          console.log('Uploaded files before sending:', uploadedFiles)
+          console.log('Uploaded files count:', uploadedFiles.length)
+          console.log('Uploaded files details:', uploadedFiles.map(f => ({ name: f.name, size: f.size, type: f.type })))
+          
+          // Send the first uploaded file as the main file (or null if no files)
+          const mainFile = uploadedFiles.length > 0 ? uploadedFiles[0] : null
+          console.log('Main file to send:', mainFile)
+          
+          agentResponse = await agentService.createAgent(agentData, mainFile || undefined)
         }
         
-        // Step 1: Create agent
-        console.log('Uploaded files before sending:', uploadedFiles)
-        console.log('Uploaded files count:', uploadedFiles.length)
-        console.log('Uploaded files details:', uploadedFiles.map(f => ({ name: f.name, size: f.size, type: f.type })))
-        
-        // Send the first uploaded file as the main file (or null if no files)
-        const mainFile = uploadedFiles.length > 0 ? uploadedFiles[0] : null
-        console.log('Main file to send:', mainFile)
-        
-        const agentResponse = await agentService.createAgent(agentData, mainFile || undefined)
         console.log('Agent created:', agentResponse)
         
         // Step 2: Create integration
@@ -401,7 +692,7 @@ export function AgentSettingsModal({ agent, isOpen, onClose }: AgentSettingsModa
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="simple RAG agent">Simple RAG agent</SelectItem>
-                  <SelectItem value="customer service">Customer Service</SelectItem>
+                  <SelectItem value="customer support">Customer Support</SelectItem>
                   <SelectItem value="data analyst">Data Analyst</SelectItem>
                   <SelectItem value="finance assistant">Finance Assistant</SelectItem>
                   <SelectItem value="sales">Sales</SelectItem>
@@ -419,6 +710,75 @@ export function AgentSettingsModal({ agent, isOpen, onClose }: AgentSettingsModa
                 rows={3}
               />
             </div>
+
+            {/* Customer Support specific fields */}
+            {formData.role === "customer support" && (
+              <div className="space-y-4 p-4 bg-muted/50 rounded-lg border">
+                <h4 className="font-medium text-sm">Company Information</h4>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="companyName">Company Name</Label>
+                    <Input 
+                      id="companyName" 
+                      value={formData.companyName}
+                      onChange={(e) => setFormData(prev => ({ ...prev, companyName: e.target.value }))}
+                      placeholder="Enter company name" 
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="companyIndustry">Industry</Label>
+                    <Input 
+                      id="companyIndustry" 
+                      value={formData.companyIndustry}
+                      onChange={(e) => setFormData(prev => ({ ...prev, companyIndustry: e.target.value }))}
+                      placeholder="e.g., Technology, Healthcare, Finance" 
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="companyDescription">Company Description</Label>
+                  <Textarea
+                    id="companyDescription"
+                    value={formData.companyDescription}
+                    onChange={(e) => setFormData(prev => ({ ...prev, companyDescription: e.target.value }))}
+                    placeholder="Brief description of your company"
+                    rows={2}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="companyAddress">Company Address</Label>
+                  <Textarea
+                    id="companyAddress"
+                    value={formData.companyAddress}
+                    onChange={(e) => setFormData(prev => ({ ...prev, companyAddress: e.target.value }))}
+                    placeholder="Full company address"
+                    rows={2}
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="companyEmail">Company Email</Label>
+                    <Input 
+                      id="companyEmail" 
+                      type="email"
+                      value={formData.companyEmail}
+                      onChange={(e) => setFormData(prev => ({ ...prev, companyEmail: e.target.value }))}
+                      placeholder="contact@company.com" 
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="fallbackEmail">Fallback Email (Real CS)</Label>
+                    <Input 
+                      id="fallbackEmail" 
+                      type="email"
+                      value={formData.fallbackEmail}
+                      onChange={(e) => setFormData(prev => ({ ...prev, fallbackEmail: e.target.value }))}
+                      placeholder="support@company.com" 
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )
 
@@ -544,6 +904,169 @@ export function AgentSettingsModal({ agent, isOpen, onClose }: AgentSettingsModa
                   </SelectContent>
                 </Select>
               </div>
+            </CardContent>
+          </Card>
+        )
+
+      case "knowledge":
+        return (
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base flex items-center gap-2">
+                <Brain className="h-4 w-4" />
+                Knowledge Base
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {formData.role === "customer support" ? (
+                <>
+                  {/* FAQ Document - Only for Customer Support */}
+                  <div className="space-y-3">
+                    <Label className="text-sm font-medium">FAQ Document</Label>
+                    <div className="flex items-center gap-3">
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        onClick={handleFaqUpload}
+                        className="flex items-center gap-2"
+                      >
+                        <Upload className="h-4 w-4" />
+                        Upload FAQ
+                      </Button>
+                      {formData.faqDocument && (
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <span>✓ {formData.faqDocument.name}</span>
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            onClick={() => setFormData(prev => ({ ...prev, faqDocument: null }))}
+                            className="h-6 w-6 p-0 text-red-500 hover:text-red-700"
+                          >
+                            ×
+                          </Button>
+                        </div>
+                      )}
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                      Upload a document containing frequently asked questions and answers
+                    </p>
+                    <input
+                      ref={faqInputRef}
+                      type="file"
+                      accept=".pdf,.doc,.docx,.txt"
+                      onChange={handleFaqFileChange}
+                      className="hidden"
+                    />
+                  </div>
+
+                  <Separator />
+
+                  {/* Data Documents - Only for Customer Support */}
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <Label className="text-sm font-medium">Data Documents (CSV)</Label>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        onClick={handleDataUpload}
+                        className="flex items-center gap-2"
+                      >
+                        <Upload className="h-4 w-4" />
+                        Add Data
+                      </Button>
+                    </div>
+                    
+                    {formData.dataDocuments.length > 0 && (
+                      <div className="space-y-3">
+                        {formData.dataDocuments.map((item, index) => (
+                          <div key={index} className="p-3 border rounded-lg space-y-2">
+                            <div className="flex items-center justify-between">
+                              <span className="text-sm font-medium">{item.file.name}</span>
+                              <Button 
+                                variant="ghost" 
+                                size="sm" 
+                                onClick={() => removeDataDocument(index)}
+                                className="h-6 w-6 p-0 text-red-500 hover:text-red-700"
+                              >
+                                ×
+                              </Button>
+                            </div>
+                            <Textarea
+                              placeholder="Describe what this data contains and how it should be used"
+                              value={item.description}
+                              onChange={(e) => updateDataDescription(index, e.target.value)}
+                              rows={2}
+                              className="text-sm"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    
+                    <p className="text-xs text-muted-foreground">
+                      Upload CSV files containing relevant data. Add a description for each file to help the agent understand the context.
+                    </p>
+                    <input
+                      ref={dataInputRef}
+                      type="file"
+                      accept=".csv"
+                      onChange={handleDataFileChange}
+                      className="hidden"
+                    />
+                  </div>
+                </>
+              ) : (
+                /* Regular Document Upload - For other roles */
+                <div className="space-y-3">
+                  <Label className="text-sm font-medium">Knowledge Documents</Label>
+                  <div className="flex items-center gap-3">
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      onClick={handleDocumentUpload}
+                      className="flex items-center gap-2"
+                    >
+                      <Upload className="h-4 w-4" />
+                      Upload Documents
+                    </Button>
+                    {uploadedFiles.length > 0 && (
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <span>✓ {uploadedFiles.length} file(s) uploaded</span>
+                      </div>
+                    )}
+                  </div>
+                  
+                  {uploadedFiles.length > 0 && (
+                    <div className="space-y-2">
+                      {uploadedFiles.map((file, index) => (
+                        <div key={index} className="flex items-center justify-between p-2 border rounded">
+                          <span className="text-sm">{file.name}</span>
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            onClick={() => removeFile(index)}
+                            className="h-6 w-6 p-0 text-red-500 hover:text-red-700"
+                          >
+                            ×
+                          </Button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  
+                  <p className="text-xs text-muted-foreground">
+                    Upload documents (PDF, DOC, TXT) to provide knowledge context for your agent
+                  </p>
+                  <input
+                    ref={documentInputRef}
+                    type="file"
+                    accept=".pdf,.doc,.docx,.txt"
+                    multiple
+                    onChange={handleDocumentFileChange}
+                    className="hidden"
+                  />
+                </div>
+              )}
             </CardContent>
           </Card>
         )
@@ -687,7 +1210,9 @@ export function AgentSettingsModal({ agent, isOpen, onClose }: AgentSettingsModa
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl max-h-[90vh] flex flex-col">
         <DialogHeader>
-          <DialogTitle className="font-heading">{agent ? `Edit ${agent.name}` : "Create New Agent"}</DialogTitle>
+          <DialogTitle className="font-heading">
+            {isLoadingAgentData ? "Loading..." : (agent ? `Edit ${agent.name}` : "Create New Agent")}
+          </DialogTitle>
         </DialogHeader>
 
         {!agent ? (
@@ -772,10 +1297,11 @@ export function AgentSettingsModal({ agent, isOpen, onClose }: AgentSettingsModa
         ) : (
           // Existing tab interface for editing agents
           <Tabs value={activeTab} onValueChange={setActiveTab} className="flex flex-col flex-1 min-h-0">
-            <TabsList className="grid w-full grid-cols-5">
+            <TabsList className="grid w-full grid-cols-6">
               <TabsTrigger value="profile">Profile</TabsTrigger>
               <TabsTrigger value="model">Model</TabsTrigger>
               <TabsTrigger value="memory">Memory</TabsTrigger>
+              <TabsTrigger value="knowledge">Knowledge</TabsTrigger>
               <TabsTrigger value="platforms">Platforms</TabsTrigger>
               <TabsTrigger value="behavior">Behavior</TabsTrigger>
             </TabsList>
@@ -842,6 +1368,75 @@ export function AgentSettingsModal({ agent, isOpen, onClose }: AgentSettingsModa
                     rows={3}
                   />
                 </div>
+
+                {/* Customer Support specific fields - Show in edit mode if it's a customer support agent */}
+                {customerSupportAgent && (
+                  <div className="space-y-4 p-4 bg-muted/50 rounded-lg border">
+                    <h4 className="font-medium text-sm">Company Information</h4>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="companyName">Company Name</Label>
+                        <Input 
+                          id="companyName" 
+                          value={formData.companyName}
+                          onChange={(e) => setFormData(prev => ({ ...prev, companyName: e.target.value }))}
+                          placeholder="Enter company name" 
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="companyIndustry">Industry</Label>
+                        <Input 
+                          id="companyIndustry" 
+                          value={formData.companyIndustry}
+                          onChange={(e) => setFormData(prev => ({ ...prev, companyIndustry: e.target.value }))}
+                          placeholder="e.g., Technology, Healthcare, Finance" 
+                        />
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="companyDescription">Company Description</Label>
+                      <Textarea
+                        id="companyDescription"
+                        value={formData.companyDescription}
+                        onChange={(e) => setFormData(prev => ({ ...prev, companyDescription: e.target.value }))}
+                        placeholder="Brief description of your company"
+                        rows={2}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="companyAddress">Company Address</Label>
+                      <Textarea
+                        id="companyAddress"
+                        value={formData.companyAddress}
+                        onChange={(e) => setFormData(prev => ({ ...prev, companyAddress: e.target.value }))}
+                        placeholder="Full company address"
+                        rows={2}
+                      />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="companyEmail">Company Email</Label>
+                        <Input 
+                          id="companyEmail" 
+                          type="email"
+                          value={formData.companyEmail}
+                          onChange={(e) => setFormData(prev => ({ ...prev, companyEmail: e.target.value }))}
+                          placeholder="contact@company.com" 
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="fallbackEmail">Fallback Email (Real CS)</Label>
+                        <Input 
+                          id="fallbackEmail" 
+                          type="email"
+                          value={formData.fallbackEmail}
+                          onChange={(e) => setFormData(prev => ({ ...prev, fallbackEmail: e.target.value }))}
+                          placeholder="support@company.com" 
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
               </TabsContent>
 
               <TabsContent value="model" className="space-y-4">
@@ -964,6 +1559,190 @@ export function AgentSettingsModal({ agent, isOpen, onClose }: AgentSettingsModa
                         </SelectContent>
                       </Select>
                     </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="knowledge" className="space-y-4">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-base flex items-center gap-2">
+                      <Brain className="h-4 w-4" />
+                      Knowledge Base
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    {formData.role === "customer support" ? (
+                      <>
+                        {customerSupportAgent ? (
+                          /* Edit Mode - Show existing knowledge info */
+                          <div className="space-y-4">
+                            <div className="p-4 bg-muted/50 rounded-lg border border-dashed">
+                              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                <Brain className="h-4 w-4" />
+                                <span>Knowledge base and documents cannot be modified in edit mode. Use the knowledge management section for updates.</span>
+                              </div>
+                            </div>
+                            <div className="space-y-3">
+                              <Label className="text-sm font-medium">Current Knowledge Base</Label>
+                              <div className="text-sm text-muted-foreground">
+                                <p>• FAQ documents and CSV data files are managed separately</p>
+                                <p>• Contact your administrator to update knowledge base</p>
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          /* Create Mode - Allow uploads */
+                          <>
+                            {/* FAQ Document - Only for Customer Support */}
+                            <div className="space-y-3">
+                              <Label className="text-sm font-medium">FAQ Document</Label>
+                              <div className="flex items-center gap-3">
+                                <Button 
+                                  variant="outline" 
+                                  size="sm" 
+                                  onClick={handleFaqUpload}
+                                  className="flex items-center gap-2"
+                                >
+                                  <Upload className="h-4 w-4" />
+                                  Upload FAQ
+                                </Button>
+                                {formData.faqDocument && (
+                                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                    <span>✓ {formData.faqDocument.name}</span>
+                                    <Button 
+                                      variant="ghost" 
+                                      size="sm" 
+                                      onClick={() => setFormData(prev => ({ ...prev, faqDocument: null }))}
+                                      className="h-6 w-6 p-0 text-red-500 hover:text-red-700"
+                                    >
+                                      ×
+                                    </Button>
+                                  </div>
+                                )}
+                              </div>
+                              <p className="text-xs text-muted-foreground">
+                                Upload a document containing frequently asked questions and answers
+                              </p>
+                              <input
+                                ref={faqInputRef}
+                                type="file"
+                                accept=".pdf,.doc,.docx,.txt"
+                                onChange={handleFaqFileChange}
+                                className="hidden"
+                              />
+                            </div>
+
+                            <Separator />
+
+                            {/* Data Documents - Only for Customer Support */}
+                            <div className="space-y-3">
+                              <div className="flex items-center justify-between">
+                                <Label className="text-sm font-medium">Data Documents (CSV)</Label>
+                                <Button 
+                                  variant="outline" 
+                                  size="sm" 
+                                  onClick={handleDataUpload}
+                                  className="flex items-center gap-2"
+                                >
+                                  <Upload className="h-4 w-4" />
+                                  Add Data
+                                </Button>
+                              </div>
+                              
+                              {formData.dataDocuments.length > 0 && (
+                                <div className="space-y-3">
+                                  {formData.dataDocuments.map((item, index) => (
+                                    <div key={index} className="p-3 border rounded-lg space-y-2">
+                                      <div className="flex items-center justify-between">
+                                        <span className="text-sm font-medium">{item.file.name}</span>
+                                        <Button 
+                                          variant="ghost" 
+                                          size="sm" 
+                                          onClick={() => removeDataDocument(index)}
+                                          className="h-6 w-6 p-0 text-red-500 hover:text-red-700"
+                                        >
+                                          ×
+                                        </Button>
+                                      </div>
+                                      <Textarea
+                                        placeholder="Describe what this data contains and how it should be used"
+                                        value={item.description}
+                                        onChange={(e) => updateDataDescription(index, e.target.value)}
+                                        rows={2}
+                                        className="text-sm"
+                                      />
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+                              
+                              <p className="text-xs text-muted-foreground">
+                                Upload CSV files containing relevant data. Add a description for each file to help the agent understand the context.
+                              </p>
+                              <input
+                                ref={dataInputRef}
+                                type="file"
+                                accept=".csv"
+                                onChange={handleDataFileChange}
+                                className="hidden"
+                              />
+                            </div>
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      /* Regular Document Upload - For other roles */
+                      <div className="space-y-3">
+                        <Label className="text-sm font-medium">Knowledge Documents</Label>
+                        <div className="flex items-center gap-3">
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            onClick={handleDocumentUpload}
+                            className="flex items-center gap-2"
+                          >
+                            <Upload className="h-4 w-4" />
+                            Upload Documents
+                          </Button>
+                          {uploadedFiles.length > 0 && (
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                              <span>✓ {uploadedFiles.length} file(s) uploaded</span>
+                            </div>
+                          )}
+                        </div>
+                        
+                        {uploadedFiles.length > 0 && (
+                          <div className="space-y-2">
+                            {uploadedFiles.map((file, index) => (
+                              <div key={index} className="flex items-center justify-between p-2 border rounded">
+                                <span className="text-sm">{file.name}</span>
+                                <Button 
+                                  variant="ghost" 
+                                  size="sm" 
+                                  onClick={() => removeFile(index)}
+                                  className="h-6 w-6 p-0 text-red-500 hover:text-red-700"
+                                >
+                                  ×
+                                </Button>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                        
+                        <p className="text-xs text-muted-foreground">
+                          Upload documents (PDF, DOC, TXT) to provide knowledge context for your agent
+                        </p>
+                        <input
+                          ref={documentInputRef}
+                          type="file"
+                          accept=".pdf,.doc,.docx,.txt"
+                          multiple
+                          onChange={handleDocumentFileChange}
+                          className="hidden"
+                        />
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               </TabsContent>

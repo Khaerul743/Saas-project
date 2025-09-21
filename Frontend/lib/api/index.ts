@@ -5,13 +5,13 @@ export { BaseApiService } from './base'
 export type { ApiResponse } from './base'
 export { DashboardService, dashboardService } from './dashboard'
 export { HistoryService, historyService } from './history'
+export { PlaygroundService, playgroundService } from './playground'
 
 // Export types
 export type {
     Agent,
     CreateAgentRequest,
-    CreateIntegrationRequest,
-    UpdateAgentRequest,
+    CreateIntegrationRequest, CustomerSupportAgent, UpdateAgentRequest,
     UpdateIntegrationRequest
 } from './agent'
 export type { LoginRequest, RegisterRequest, User } from './auth'

@@ -304,7 +304,6 @@ class Workflow:
                 }
 
             all_previous_messages = self._get_all_previous_messages(state.messages)
-
             print(f"available_databases: {self.available_databases}")
             print(f"detail_data: {self.detail_data}")
             print(f"kwargs: {self.kwargs}")
@@ -312,6 +311,7 @@ class Workflow:
             # Generate prompt and invoke LLM with retry mechanism
             def invoke_llm():
                 prompt = self.prompts.main_agent(state.user_message, self.base_prompt, self.tone, self.company_information)
+                print(f"prompt: {prompt}")
                 messages = [prompt[0]] + all_previous_messages + [prompt[1]]
                 llm = self.llm_for_reasoning.bind_tools([self.tools.get_document])
                 return llm.invoke(messages)

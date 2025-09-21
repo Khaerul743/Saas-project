@@ -50,6 +50,32 @@ export interface UpdateIntegrationRequest {
   api_key: string
 }
 
+export interface CustomerSupportAgent {
+  id: number
+  name: string
+  avatar: string | null
+  model: string
+  description: string
+  base_prompt: string
+  tone: string
+  short_term_memory: boolean
+  long_term_memory: boolean
+  status: string
+  created_at: string
+  company_information: {
+    id: number
+    agent_id: number
+    name: string
+    industry: string
+    description: string
+    address: string
+    email: string
+    website: string | null
+    fallback_email: string
+    created_at: string
+  }
+}
+
 export class AgentService extends BaseApiService {
   async getAgents(): Promise<ApiResponse<Agent[]>> {
     return this.get<Agent[]>('/agents')
@@ -113,6 +139,53 @@ export class AgentService extends BaseApiService {
 
   async updateIntegration(agentId: number, integrationData: UpdateIntegrationRequest): Promise<ApiResponse> {
     return this.put(`/integrations/${agentId}`, integrationData)
+  }
+
+  // New method for customer support agent creation
+  async createCustomerSupportAgent(
+    agentData: any,
+    datasets: Array<{ filename: string; description: string }>,
+    files: File[]
+  ): Promise<ApiResponse> {
+    const formData = new FormData()
+    
+    // Add agent_data as JSON string
+    formData.append('agent_data', JSON.stringify(agentData))
+    
+    // Add datasets as JSON string
+    formData.append('datasets', JSON.stringify(datasets))
+    
+    // Add files
+    files.forEach((file, index) => {
+      formData.append('files', file)
+    })
+    
+    return this.postFormData('/agents/customer-service', formData)
+  }
+
+  // New method for simple RAG agent creation
+  async createSimpleRagAgent(agentData: any, file?: File): Promise<ApiResponse> {
+    const formData = new FormData()
+    
+    // Add file if provided
+    if (file) {
+      formData.append('file', file, file.name)
+    }
+    
+    // Add agent data as JSON string
+    formData.append('agent_data', JSON.stringify(agentData))
+    
+    return this.postFormData('/agents/simple-rag', formData)
+  }
+
+  // Get customer support agent details
+  async getCustomerSupportAgent(agentId: number): Promise<ApiResponse> {
+    return this.get(`/agents/customer-service/${agentId}`)
+  }
+
+  // Update customer support agent
+  async updateCustomerSupportAgent(agentId: number, agentData: any): Promise<ApiResponse> {
+    return this.put(`/agents/customer-service/${agentId}`, agentData)
   }
 
   async updateAgent(agentId: number, agentData: UpdateAgentRequest): Promise<ApiResponse<Agent>> {

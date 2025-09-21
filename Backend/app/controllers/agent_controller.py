@@ -122,6 +122,7 @@ def get_all_agents(db: Session, current_user: dict):
                     "avatar": agent.avatar,
                     "name": agent.name,
                     "model": agent.model,
+                    "role": agent.role,
                     "status": agent.status,
                     "description": agent.description,
                     "base_prompt": agent.base_prompt,
