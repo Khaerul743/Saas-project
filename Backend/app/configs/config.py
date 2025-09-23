@@ -11,6 +11,11 @@ class Settings(BaseSettings):
     DB_HOST: str
     DB_PORT: int
     DB_NAME: str
+
+    REDIS_HOST: str
+    REDIS_PORT: int
+    REDIS_DB: int
+    
     OPENAI_API_KEY: str
     THIS_APP_URL: str
     FRONTEND_URL: str = "http://localhost:3000"
