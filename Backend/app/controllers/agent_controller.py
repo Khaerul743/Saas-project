@@ -7,6 +7,8 @@ from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy.orm.query import Query
 
+from app.models.agent.agent_model import AgentInvoke
+from app.controllers.document_controller import agents
 from app.AI import simple_RAG_agent as AI
 from app.controllers.document_controller import agents
 from app.models.agent.agent_entity import Agent
@@ -41,6 +43,7 @@ from app.utils.validation_utils import (
 )
 from app.utils.document_utils import write_document
 logger = get_logger(__name__)
+
 
 
 def get_all_agents(db: Session, current_user: dict):
@@ -485,3 +488,61 @@ def get_all_user_agent(current_user: dict, db: Session):
         raise
     except Exception as e:
         raise handle_database_error(e, "getting user agents", current_user.get('email'))
+
+def invoke_agent(agent_id: int, agent_invoke: AgentInvoke, current_user: dict, db: Session):
+    try:
+        user_id = current_user.get("id")
+        if not user_id:
+            raise handle_user_not_found(current_user.get('email', 'unknown'))
+        
+        get_agent = validate_agent_exists_and_owned(db, agent_id, user_id, current_user.get('email'))
+        
+        agent = agents.get(str(agent_id))
+        if not agent:
+            logger.warning(f"Agent not found")
+            raise HTTPException(
+                status_code=status.HTTP_200_OK,
+                detail="Agent not found.",
+            )
+        
+        get_user_agent = db.query(UserAgent).filter(UserAgent.agent_id == agent_id).first()
+        if not get_user_agent:
+            user_agent = UserAgent(
+                id=str(agent_id),
+                agent_id=agent_id,
+                username="Testing by admin",
+                user_platform="api",
+            )
+            db.add(user_agent)
+            db.flush()
+            user_agent_id = user_agent.id
+        else:
+            user_agent_id = get_user_agent.id
+            
+        agent_response = agent.execute({"user_message": agent_invoke.message}, str(agent_id))
+        new_history_message = HistoryMessage(
+            user_agent_id=user_agent_id,
+            user_message=agent_invoke.message,
+            response=agent_response.get("response", ""),
+        )
+        db.add(new_history_message)
+        db.flush()
+        history_message_id = new_history_message.id
+        response_time = agent.response_time
+        token_usage = agent.token_usage
+        new_metadata = Metadata(
+            history_message_id=history_message_id,
+            total_tokens=token_usage,
+            response_time=response_time,
+            model=agent.llm_model,
+        )
+        db.add(new_metadata)
+        db.commit()
+        logger.info(f"Agent '{get_agent.name}' (ID: {agent_id}) invoked successfully by user {current_user.get('email')}")
+        return {"user_message": agent_invoke.message, "response": agent_response.get("response", "")}
+    except HTTPException:
+        db.rollback()
+        raise
+    except Exception as e:
+        db.rollback()
+        raise handle_database_error(e, "invoking agent", current_user.get('email'))

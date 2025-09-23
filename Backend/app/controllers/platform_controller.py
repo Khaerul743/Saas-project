@@ -71,13 +71,21 @@ async def telegram_handler(data: dict, db: Session):
                 status_code=status.HTTP_200_OK,
                 detail="Agent not found.",
             )
+        
 
+        api_key = platform.api_key
+        if agent.status == "non-active":
+            await send_message(str(api_key), chat_id, "Sorry, I'm not available right now. Please try again later.")
+            logger.warning(f"Agent is not active: {agent_id}")
+            raise HTTPException(
+                status_code=status.HTTP_200_OK,
+                detail="Agent is not active.",
+            )
         generate_id = str(chat_id) + str(agent_id)
 
         agent_response = agent.execute(
             {"user_message": text, "total_token": 0}, generate_id
         )
-        api_key = platform.api_key
 
         # Checking user agent
         user_agent = (
@@ -118,7 +126,7 @@ async def telegram_handler(data: dict, db: Session):
 
         db.add(new_metadata)
 
-        response = await send_message(api_key, chat_id, safe_message_length(agent_response.get("response", ""), max_length=4096))
+        response = await send_message(str(api_key), chat_id, safe_message_length(agent_response.get("response", ""), max_length=4096))
         if not response.get("status"):
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
@@ -165,6 +173,14 @@ def api_handler(api_key: str, agent_id: int, data: dict, db: Session):
                 detail="Agent not found.",
             )
         
+        if agent.status == "non-active":
+            logger.warning(f"Agent is not active: {agent_id}")
+            return {
+                "username": username,
+                "user_message": user_message,
+                "response": "Sorry, I'm not active right now. Please try again later.",
+            }
+
         generate_id = str(unique_id) + str(agent_id)
         agent_response = agent.execute(
             {"user_message": user_message, "total_token": 0}, generate_id

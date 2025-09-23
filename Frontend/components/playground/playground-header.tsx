@@ -2,15 +2,12 @@
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Bot, Deploy, Share } from "lucide-react"
+import { Agent as ApiAgent } from "@/lib/api"
+import { Bot, Rocket, Share } from "lucide-react"
 
-interface Agent {
+// Playground-specific Agent type with required id
+interface Agent extends Omit<ApiAgent, 'id'> {
   id: number
-  name: string
-  avatar: string
-  status: "active" | "non-active"
-  description: string
-  platform: string
 }
 
 interface PlaygroundHeaderProps {
@@ -59,7 +56,7 @@ export function PlaygroundHeader({
           onClick={onDeploy}
           disabled={!selectedAgent || isDeploying}
         >
-          <Deploy className="h-4 w-4 mr-2" />
+          <Rocket className="h-4 w-4 mr-2" />
           {isDeploying ? "Deploying..." : "Deploy"}
         </Button>
       </div>

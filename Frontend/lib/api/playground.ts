@@ -43,6 +43,13 @@ export class PlaygroundService extends BaseApiService {
   }
 
   /**
+   * Invoke an agent directly (for playground chat)
+   */
+  async invokeAgent(agentId: number, message: string): Promise<ApiResponse<any>> {
+    return this.post<any>(`/agents/invoke/${agentId}`, { message })
+  }
+
+  /**
    * Generate a shareable link for agent testing
    */
   async generateShareLink(request: ShareLinkRequest): Promise<ApiResponse<ShareLinkResponse>> {

@@ -5,16 +5,13 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { Agent as ApiAgent } from "@/lib/api"
 import { Bot, Copy, ExternalLink, Share } from "lucide-react"
 import React, { useState } from "react"
 
-interface Agent {
+// Playground-specific Agent type with required id
+interface Agent extends Omit<ApiAgent, 'id'> {
   id: number
-  name: string
-  avatar: string
-  status: "active" | "non-active"
-  description: string
-  platform: string
 }
 
 interface ShareModalProps {

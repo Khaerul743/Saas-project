@@ -27,8 +27,10 @@ class Agent:
         company_information: CreateCompanyInformation,
         long_memory: bool = False,
         short_memory: bool = False,
+        status: str = "active",
         **kwargs,
     ):
+        self.status = status
         self.directory_path = directory_path
         self.tools = AgentTools(
             chromadb_path=chromadb_path, collection_name=collection_name

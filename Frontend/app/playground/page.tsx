@@ -1,23 +1,16 @@
 "use client"
 
 import { DashboardLayout } from "@/components/dashboard-layout"
-import { AgentSelector } from "@/components/playground/agent-selector"
-import { ChatInterface } from "@/components/playground/chat-interface"
-import { PlaygroundHeader } from "@/components/playground/playground-header"
-import { ShareModal } from "@/components/playground/share-modal"
+import { AgentSelector, ChatInterface, PlaygroundHeader, ShareModal } from "@/components/playground"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { agentService } from "@/lib/api"
+import { agentService, Agent as ApiAgent } from "@/lib/api"
 import { Bot, MessageCircle, Play, Share, Zap } from "lucide-react"
 import { useEffect, useState } from "react"
 
-interface Agent {
+// Playground-specific Agent type with required id
+interface Agent extends Omit<ApiAgent, 'id'> {
   id: number
-  name: string
-  avatar: string
-  status: "active" | "non-active"
-  description: string
-  platform: string
 }
 
 interface ChatMessage {
@@ -42,9 +35,14 @@ export default function PlaygroundPage() {
       try {
         const response = await agentService.getAgents()
         if (response.status === 'success') {
-          setAgents(response.data || [])
+          // Filter agents that have id and convert to playground Agent type
+          const agentsWithId = (response.data || [])
+            .filter((agent: ApiAgent) => agent.id !== undefined)
+            .map((agent: ApiAgent) => ({ ...agent, id: agent.id! }))
+          
+          setAgents(agentsWithId)
           // Auto-select first active agent if available
-          const activeAgent = response.data?.find((agent: Agent) => agent.status === 'active')
+          const activeAgent = agentsWithId.find((agent: Agent) => agent.status === 'active')
           if (activeAgent) {
             setSelectedAgent(activeAgent)
           }
@@ -73,43 +71,31 @@ export default function PlaygroundPage() {
     }
   }, [selectedAgent])
 
-  const handleSendMessage = async (message: string) => {
-    if (!selectedAgent || !message.trim()) return
+  const handleSendMessage = async (userMessage: string, agentResponse?: string) => {
+    if (!selectedAgent || !userMessage.trim()) return
 
-    const userMessage: ChatMessage = {
+    // Add user message
+    const userMsg: ChatMessage = {
       id: Date.now().toString(),
       role: 'user',
-      content: message,
+      content: userMessage,
       timestamp: new Date()
     }
 
-    setMessages(prev => [...prev, userMessage])
-    setIsLoading(true)
+    setMessages(prev => [...prev, userMsg])
 
-    try {
-      // Simulate API call to test agent
-      // In real implementation, this would call the agent testing endpoint
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
-      const agentResponse: ChatMessage = {
+    // If agentResponse is provided, add it directly
+    if (agentResponse) {
+      const agentMsg: ChatMessage = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: `This is a test response from ${selectedAgent.name}. In a real implementation, this would be the actual agent response based on your message: "${message}"`,
+        content: agentResponse,
         timestamp: new Date()
       }
-
-      setMessages(prev => [...prev, agentResponse])
-    } catch (error) {
-      console.error('Failed to send message:', error)
-      const errorMessage: ChatMessage = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: 'Sorry, I encountered an error. Please try again.',
-        timestamp: new Date()
-      }
-      setMessages(prev => [...prev, errorMessage])
-    } finally {
-      setIsLoading(false)
+      setMessages(prev => [...prev, agentMsg])
+    } else {
+      // Set loading state if no response provided yet
+      setIsLoading(true)
     }
   }
 
@@ -209,6 +195,7 @@ export default function PlaygroundPage() {
                     onResetChat={handleResetChat}
                     isLoading={isLoading}
                     agentName={selectedAgent.name}
+                    agentId={selectedAgent.id}
                   />
                 ) : (
                   <div className="flex-1 flex items-center justify-center">

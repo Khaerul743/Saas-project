@@ -1,21 +1,17 @@
 "use client"
 
-import { ChatInterface } from "@/components/playground/chat-interface"
+import { ChatInterface } from "@/components/playground"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { agentService } from "@/lib/api"
+import { agentService, Agent as ApiAgent } from "@/lib/api"
 import { ArrowLeft, Bot } from "lucide-react"
 import Link from "next/link"
 import { useParams, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
-interface Agent {
+// Playground-specific Agent type with required id
+interface Agent extends Omit<ApiAgent, 'id'> {
   id: number
-  name: string
-  avatar: string
-  status: "active" | "non-active"
-  description: string
-  platform: string
 }
 
 interface ChatMessage {
@@ -41,14 +37,16 @@ export default function TestAgentPage() {
     const loadAgent = async () => {
       try {
         const response = await agentService.getAgent(parseInt(agentId))
-        if (response.status === 'success') {
-          setAgent(response.data)
+        if (response.status === 'success' && response.data.id !== undefined) {
+          // Convert to playground Agent type
+          const agentWithId = { ...response.data, id: response.data.id! }
+          setAgent(agentWithId)
           // Initialize with welcome message
           setMessages([
             {
               id: '1',
               role: 'assistant',
-              content: `Hi! I'm ${response.data.name}, your AI assistant. How can I help you today?`,
+              content: `Hi! I'm ${agentWithId.name}, your AI assistant. How can I help you today?`,
               timestamp: new Date()
             }
           ])
@@ -68,42 +66,31 @@ export default function TestAgentPage() {
     }
   }, [agentId])
 
-  const handleSendMessage = async (message: string) => {
-    if (!agent || !message.trim()) return
+  const handleSendMessage = async (userMessage: string, agentResponse?: string) => {
+    if (!agent || !userMessage.trim()) return
 
-    const userMessage: ChatMessage = {
+    // Add user message
+    const userMsg: ChatMessage = {
       id: Date.now().toString(),
       role: 'user',
-      content: message,
+      content: userMessage,
       timestamp: new Date()
     }
 
-    setMessages(prev => [...prev, userMessage])
-    setIsLoading(true)
+    setMessages(prev => [...prev, userMsg])
 
-    try {
-      // Simulate API call to test agent
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
-      const agentResponse: ChatMessage = {
+    // If agentResponse is provided, add it directly
+    if (agentResponse) {
+      const agentMsg: ChatMessage = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: `This is a test response from ${agent.name}. In a real implementation, this would be the actual agent response based on your message: "${message}"`,
+        content: agentResponse,
         timestamp: new Date()
       }
-
-      setMessages(prev => [...prev, agentResponse])
-    } catch (error) {
-      console.error('Failed to send message:', error)
-      const errorMessage: ChatMessage = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: 'Sorry, I encountered an error. Please try again.',
-        timestamp: new Date()
-      }
-      setMessages(prev => [...prev, errorMessage])
-    } finally {
-      setIsLoading(false)
+      setMessages(prev => [...prev, agentMsg])
+    } else {
+      // Set loading state if no response provided yet
+      setIsLoading(true)
     }
   }
 
@@ -201,6 +188,7 @@ export default function TestAgentPage() {
                 onResetChat={handleResetChat}
                 isLoading={isLoading}
                 agentName={agent.name}
+                agentId={agent.id}
               />
             </CardContent>
           </Card>

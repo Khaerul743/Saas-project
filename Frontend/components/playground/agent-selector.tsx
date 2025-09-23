@@ -3,16 +3,13 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Agent as ApiAgent } from "@/lib/api"
 import { cn } from "@/lib/utils"
 import { Bot, Code, Globe, MessageCircle, Phone } from "lucide-react"
 
-interface Agent {
+// Playground-specific Agent type with required id
+interface Agent extends Omit<ApiAgent, 'id'> {
   id: number
-  name: string
-  avatar: string
-  status: "active" | "non-active"
-  description: string
-  platform: string
 }
 
 interface AgentSelectorProps {

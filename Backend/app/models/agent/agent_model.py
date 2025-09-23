@@ -56,3 +56,6 @@ class UpdateAgent(BaseModel):
     short_term_memory: Optional[bool] = False
     long_term_memory: Optional[bool] = False
     status: Optional[Literal["active", "non-active"]]
+
+class AgentInvoke(BaseModel):
+    message:str

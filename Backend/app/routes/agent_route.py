@@ -14,18 +14,20 @@ from fastapi import (
 )
 from sqlalchemy.orm import Session
 
+from app.models.agent.agent_model import AgentInvoke
 from app.configs.database import get_db
 from app.configs.limiter import limiter
 from app.controllers.agent_controller import (
     delete_agent,
     get_all_user_agent,
     get_all_agents,
+    invoke_agent,
 )
 from app.controllers.document_controller import document_store
 from app.middlewares.RBAC import role_required
 from app.models.agent.agent_model import CreateAgent, ResponseAPI, UpdateAgent
 from app.utils.response import success_response
-
+from app.models.agent.agent_model import AgentInvoke
 router = APIRouter(prefix="/api/agents", tags=["agents"])
 
 
@@ -112,3 +114,10 @@ def getAllUserAgent(
     except:
         raise
 
+@router.post("/invoke/{agent_id}")
+def invokeAgent(agent_id: int, agent_invoke: AgentInvoke, current_user: dict = Depends(role_required(["admin", "user"])), db: Session = Depends(get_db)):
+    try:
+        response = invoke_agent(agent_id, agent_invoke, current_user, db)
+        return success_response("Invoke agent is successfully", response)
+    except:
+        raise

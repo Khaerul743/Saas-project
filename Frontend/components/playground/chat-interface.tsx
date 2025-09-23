@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { playgroundService } from "@/lib/api"
 import { Bot, RotateCcw, Send, User } from "lucide-react"
 import { useState } from "react"
 
@@ -16,10 +17,11 @@ interface ChatMessage {
 
 interface ChatInterfaceProps {
   messages: ChatMessage[]
-  onSendMessage: (message: string) => void
+  onSendMessage: (userMessage: string, agentResponse?: string) => void
   onResetChat: () => void
   isLoading: boolean
   agentName: string
+  agentId?: number
 }
 
 export function ChatInterface({ 
@@ -27,15 +29,37 @@ export function ChatInterface({
   onSendMessage, 
   onResetChat, 
   isLoading, 
-  agentName 
+  agentName,
+  agentId 
 }: ChatInterfaceProps) {
   const [inputMessage, setInputMessage] = useState("")
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (inputMessage.trim() && !isLoading) {
-      onSendMessage(inputMessage)
+    if (inputMessage.trim() && !isLoading && agentId) {
+      const message = inputMessage.trim()
       setInputMessage("")
+      
+      // Call the API to get agent response
+      try {
+        console.log('Sending message to agent:', agentId, message)
+        const response = await playgroundService.invokeAgent(agentId, message)
+        console.log('Received response:', response)
+        
+        if (response.status === 'success') {
+          console.log('Success response, data:', response.data)
+          // Call the parent's onSendMessage with both user message and agent response
+          onSendMessage(message, response.data.response)
+        } else {
+          console.log('Error response:', response)
+          // Handle error response
+          onSendMessage(message, 'Sorry, I encountered an error. Please try again.')
+        }
+      } catch (error) {
+        console.error('Failed to get agent response:', error)
+        // Fallback to parent's onSendMessage with error message
+        onSendMessage(message, 'Sorry, I encountered an error. Please try again.')
+      }
     }
   }
 

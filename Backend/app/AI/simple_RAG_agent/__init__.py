@@ -19,9 +19,11 @@ class Agent:
         chromadb_path: str,
         collection_name: str,
         model_llm: str,
+        status: str = "active",
         include_memory=False,
         short_memory=False,
     ):
+        self.status = status
         self.directory_path = directory_path
         self.llm_model = model_llm
         self.base_prompt = base_prompt
