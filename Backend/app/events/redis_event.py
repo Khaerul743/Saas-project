@@ -48,7 +48,7 @@ class RedisEventBus:
             logger.error(f"Error publishing event: {e}")
             raise e
     
-    async def subscribe(self, event_type: EventType, callback: Callable):
+    def subscribe(self, event_type: EventType, callback: Callable):
         if event_type not in self._subscribers:
             self._subscribers[event_type] = []
         self._subscribers[event_type].append(callback)

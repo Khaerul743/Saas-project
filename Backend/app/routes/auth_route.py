@@ -20,8 +20,8 @@ def register(response: Response, payload: RegisterModel, db: Session = Depends(g
 
 
 @router.post("/login", response_model=AuthOut, status_code=status.HTTP_200_OK)
-def login(response: Response, payload: AuthIn, db: Session = Depends(get_db)):
-    user = loginHandler(response, db, payload)
+async def login(response: Response, payload: AuthIn, db: Session = Depends(get_db)):
+    user = await loginHandler(response, db, payload)
     return success_response(
         "Login is successfully",
         {"username": user.name, "email": user.email, "plan": user.plan},

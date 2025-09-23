@@ -12,6 +12,8 @@ from app.utils.auth_utils import (
     email_not_found_handler,
     invalid_credentials_handler,
 )
+from app.events.redis_event import EventType, event_bus, Event
+from datetime import datetime
 logger = get_logger(__name__)
 
 
@@ -43,12 +45,20 @@ def registerHandler(db, payload):
         )
 
 
-def loginHandler(response: Response, db: Session, payload: AuthIn) -> User:
+async def loginHandler(response: Response, db: Session, payload: AuthIn) -> User:
     """
     Login user: cek kredensial, buat JWT, simpan di cookie.
     """
     user = db.query(User).filter(User.email == payload.email).first()
     
+    #Test event
+    await event_bus.publish(Event(
+        event_type=EventType.DOCUMENT_UPLOADED,
+        timestamp=datetime.now(),
+        data={"user_id": "2", "agent_id": "2"},
+        user_id=2,
+        agent_id=1,
+    ))
     # Check if email exists
     if not user:
         email_not_found_handler(logger, payload.email)
