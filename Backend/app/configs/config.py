@@ -31,6 +31,10 @@ class Settings(BaseSettings):
             f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
         )
 
+    @property
+    def REDIS_URL(self) -> str:
+        return f"redis://{self.REDIS_HOST}:{self.REDIS_PORT}/{self.REDIS_DB}"
+
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"

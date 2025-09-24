@@ -36,11 +36,15 @@ from app.routes import (
     platform_route,
     simple_rag_route,
     user_route,
+    task_route,
 )
 from app.utils.logger import get_logger
 from app.utils.response import error_response
+from app.events.redis_event import event_bus
+from app.events.handlers import *
 
 logger = get_logger(__name__)
+
 
 # Buat tabel otomatis kalau belum ada (tanpa Alembic)
 Base.metadata.create_all(bind=engine)
@@ -90,7 +94,24 @@ app.include_router(integration_route.router)
 app.include_router(platform_route.router)
 app.include_router(history_route.router)
 app.include_router(dashboard_route.router)
+app.include_router(task_route.router)
 
+
+@app.on_event("startup")
+async def startup_event():
+    try:
+        await event_bus.start()
+        logger.info("Redis event bus started")
+    except Exception as e:
+        logger.error(f"Error starting Redis event bus: {e}")
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    try:
+        await event_bus.stop_listening()
+        logger.info("Redis event bus stopped")
+    except Exception as e:
+        logger.error(f"Error stopping Redis event bus: {e}")
 
 @app.get("/")
 def root() -> dict[str, str]:

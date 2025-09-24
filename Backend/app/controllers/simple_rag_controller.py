@@ -16,6 +16,8 @@ from app.utils.document_utils import write_document
 from app.utils.error_utils import handle_database_error, handle_user_not_found
 from app.utils.logger import get_logger
 from app.utils.validation_utils import validate_agent_exists_and_owned
+from app.tasks.agent_task import create_simple_rag_agent as create_simple_rag_agent_task
+from app.tasks import celery_app
 
 logger = get_logger(__name__)
 
@@ -25,8 +27,7 @@ async def create_simple_rag_agent(
     file: Optional[UploadFile],
     agent_data: CreateSimpleRAGAgent,
     current_user: dict,
-    background_tasks: Optional[BackgroundTasks] = None,
-) -> SimpleRAGAgentOut:
+) -> dict:
     """
     Create a new Simple RAG Agent for the authenticated user.
     
@@ -48,111 +49,124 @@ async def create_simple_rag_agent(
         user_id = current_user.get("id")
         if not user_id:
             raise handle_user_not_found(current_user.get('email', 'unknown'))
-
-        # Create new agent in database
-        new_agent = Agent(
-            user_id=user_id,
-            name=agent_data.name,
-            avatar=agent_data.avatar,
-            model=agent_data.model,
-            role="simple RAG agent",  # Fixed role for Simple RAG Agent
-            description=agent_data.description,
-            base_prompt=agent_data.base_prompt,
-            tone=agent_data.tone,
-            short_term_memory=agent_data.short_term_memory,
-            long_term_memory=agent_data.long_term_memory,
-            status=agent_data.status,
-        )
-
-        # Add to database
-        db.add(new_agent)
-        db.flush()
-
-        # Create directory for agent documents
-        directory_path = f"documents/user_{user_id}/agent_{new_agent.id}"
-        
-        # Initialize Simple RAG Agent instance
-        if not str(new_agent.id) in agents:
-            def init_agent():
-                agents[str(new_agent.id)] = AI.Agent(
-                    base_prompt=new_agent.base_prompt,
-                    tone=new_agent.tone,
-                    directory_path=directory_path,
-                    chromadb_path="chroma_db",
-                    collection_name=f"agent_{new_agent.id}",
-                    model_llm=new_agent.model,
-                    short_memory=agent_data.short_term_memory,
-                )
-
-            init_agent()
-       
-        # Handle file upload if provided
+    
         if file:
-            try:
-                # Write file to disk first
-                content_type: Literal['pdf'] | Literal['txt'] | Literal['csv'] | Literal['excel'] = write_document(file, directory_path)
-                file_path = os.path.join(directory_path, file.filename)
-                
-                # Create document record in database
-                post_document = Document(
-                    agent_id=new_agent.id,
-                    file_name=file.filename,
-                    content_type=content_type,
+            if file.content_type not in ["pdf", "txt"]:
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail="File type must be pdf or txt.",
                 )
+        
+        task = create_simple_rag_agent_task.delay(file, agent_data, user_id)
+        return {
+            "status":"pending",
+            "message":"Simple RAG Agent creation is pending",
+            "task_id":task.id,
+        }
+        # Create new agent in database
+        # new_agent = Agent(
+        #     user_id=user_id,
+        #     name=agent_data.name,
+        #     avatar=agent_data.avatar,
+        #     model=agent_data.model,
+        #     role="simple RAG agent",  # Fixed role for Simple RAG Agent
+        #     description=agent_data.description,
+        #     base_prompt=agent_data.base_prompt,
+        #     tone=agent_data.tone,
+        #     short_term_memory=agent_data.short_term_memory,
+        #     long_term_memory=agent_data.long_term_memory,
+        #     status=agent_data.status,
+        # )
 
-                db.add(post_document)
-                db.flush()
+        # # Add to database
+        # db.add(new_agent)
+        # db.flush()
+
+        # # Create directory for agent documents
+        # directory_path = f"documents/user_{user_id}/agent_{new_agent.id}"
+        
+        # # Initialize Simple RAG Agent instance
+        # if not str(new_agent.id) in agents:
+        #     def init_agent():
+        #         agents[str(new_agent.id)] = AI.Agent(
+        #             base_prompt=new_agent.base_prompt,
+        #             tone=new_agent.tone,
+        #             directory_path=directory_path,
+        #             chromadb_path="chroma_db",
+        #             collection_name=f"agent_{new_agent.id}",
+        #             model_llm=new_agent.model,
+        #             short_memory=agent_data.short_term_memory,
+        #         )
+
+        #     init_agent()
+       
+        # # Handle file upload if provided
+        # if file:
+        #     try:
+        #         # Write file to disk first
+        #         content_type: Literal['pdf'] | Literal['txt'] | Literal['csv'] | Literal['excel'] = write_document(file, directory_path)
+        #         file_path = os.path.join(directory_path, file.filename)
                 
-                # Try to add document to RAG system
-                agents[str(new_agent.id)].add_document(
-                    file.filename,
-                    content_type,
-                    str(post_document.id),
-                )
+        #         # Create document record in database
+        #         post_document = Document(
+        #             agent_id=new_agent.id,
+        #             file_name=file.filename,
+        #             content_type=content_type,
+        #         )
 
-                # If everything succeeds, commit the transaction
-                db.commit()
-                db.refresh(post_document)
+        #         db.add(post_document)
+        #         db.flush()
                 
-            except Exception as e:
-                # Rollback database transaction
-                db.rollback()
+        #         # Try to add document to RAG system
+        #         agents[str(new_agent.id)].add_document(
+        #             file.filename,
+        #             content_type,
+        #             str(post_document.id),
+        #         )
+
+        #         # If everything succeeds, commit the transaction
+        #         db.commit()
+        #         db.refresh(post_document)
                 
-                # Remove physical file if it exists
-                try:
-                    if os.path.exists(file_path):
-                        os.remove(file_path)
-                        logger.info(f"Rollback: Removed file {file_path} due to error")
-                except Exception as file_err:
-                    logger.error(f"Failed to remove file {file_path} during rollback: {file_err}")
+        #     except Exception as e:
+        #         # Rollback database transaction
+        #         db.rollback()
                 
-                # Re-raise the original exception
-                raise e
-        else:
-            # No file upload, just commit the agent creation
-            db.commit()
+        #         # Remove physical file if it exists
+        #         try:
+        #             if os.path.exists(file_path):
+        #                 os.remove(file_path)
+        #                 logger.info(f"Rollback: Removed file {file_path} due to error")
+        #         except Exception as file_err:
+        #             logger.error(f"Failed to remove file {file_path} during rollback: {file_err}")
+                
+        #         # Re-raise the original exception
+        #         raise e
+        # else:
+        #     # No file upload, just commit the agent creation
+        #     db.commit()
 
-        # Refresh to get the created agent with all fields
-        db.refresh(new_agent)
+        # # Refresh to get the created agent with all fields
+        # db.refresh(new_agent)
 
-        logger.info(
-            f"Simple RAG Agent '{new_agent.name}' (ID: {new_agent.id}) created successfully by user "
-            f"{current_user.get('email')}"
-        )
+        # logger.info(
+        #     f"Simple RAG Agent '{new_agent.name}' (ID: {new_agent.id}) created successfully by user "
+        #     f"{current_user.get('email')}"
+        # )
 
-        return SimpleRAGAgentOut(
-            id=new_agent.id,
-            name=new_agent.name,
-            avatar=new_agent.avatar,
-            model=new_agent.model,
-            description=new_agent.description,
-            base_prompt=new_agent.base_prompt,
-            tone=new_agent.tone,
-            short_term_memory=new_agent.short_term_memory,
-            long_term_memory=new_agent.long_term_memory,
-            status=new_agent.status,
-            created_at=new_agent.created_at,
-        )
+        # return SimpleRAGAgentOut(
+        #     id=new_agent.id,
+        #     name=new_agent.name,
+        #     avatar=new_agent.avatar,
+        #     model=new_agent.model,
+        #     description=new_agent.description,
+        #     base_prompt=new_agent.base_prompt,
+        #     tone=new_agent.tone,
+        #     short_term_memory=new_agent.short_term_memory,
+        #     long_term_memory=new_agent.long_term_memory,
+        #     status=new_agent.status,
+        #     created_at=new_agent.created_at,
+        # )
 
     except IntegrityError as e:
         db.rollback()

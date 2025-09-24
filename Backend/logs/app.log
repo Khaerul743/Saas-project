@@ -7577,3 +7577,72 @@ Visi perusahaan adalah gambaran atau tujuan jangka panjang yang ingin dicapai ol
 2025-09-21 21:07:46,298 | INFO | app.controllers.agent_controller | [UserAgents] Fetched 5 user agents for user_id=1
 2025-09-21 21:08:36,355 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
 2025-09-21 21:08:37,453 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-09-23 14:11:20,177 | INFO | app.events.redis_event | Subscribed to event: EventType.DOCUMENT_UPLOADED
+2025-09-23 14:11:26,197 | ERROR | main | Error starting Redis event bus: Error 22 connecting to localhost:6379. The remote computer refused the network connection.
+2025-09-23 14:11:50,096 | INFO | app.events.redis_event | Stopped listening for Redis events
+2025-09-23 14:11:50,098 | INFO | main | Redis event bus stopped
+2025-09-23 14:14:12,247 | INFO | app.events.redis_event | Subscribed to event: EventType.DOCUMENT_UPLOADED
+2025-09-23 14:14:12,924 | INFO | app.events.redis_event | Redis event bus started
+2025-09-23 14:14:12,940 | INFO | main | Redis event bus started
+2025-09-23 14:14:12,941 | ERROR | app.events.redis_event | Error listening to messages: 'async_generator' object is not iterable
+2025-09-23 14:18:28,586 | INFO | app.events.redis_event | Stopped listening for Redis events
+2025-09-23 14:18:28,734 | INFO | main | Redis event bus stopped
+2025-09-23 14:19:04,368 | INFO | app.events.redis_event | Subscribed to event: EventType.DOCUMENT_UPLOADED
+2025-09-23 14:19:05,285 | INFO | app.events.redis_event | Redis event bus started
+2025-09-23 14:19:05,288 | INFO | main | Redis event bus started
+2025-09-23 14:19:50,274 | INFO | app.events.redis_event | Stopped listening for Redis events
+2025-09-23 14:19:50,275 | INFO | main | Redis event bus stopped
+2025-09-23 16:12:07,394 | INFO | app.events.redis_event | Subscribed to event: EventType.DOCUMENT_UPLOADED
+2025-09-23 16:12:08,942 | INFO | app.events.redis_event | Redis event bus started
+2025-09-23 16:12:08,945 | INFO | main | Redis event bus started
+2025-09-23 16:13:32,128 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-23 16:13:32,394 | ERROR | app.events.redis_event | Error listening to messages: 'RedisEventBus' object has no attribute '_handle_message'
+2025-09-23 16:17:39,062 | INFO | app.events.redis_event | Subscribed to event: EventType.DOCUMENT_UPLOADED
+2025-09-23 16:17:40,411 | INFO | app.events.redis_event | Redis event bus started
+2025-09-23 16:17:40,413 | INFO | main | Redis event bus started
+2025-09-23 16:17:54,218 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-23 16:17:54,512 | ERROR | app.events.redis_event | Error handling message: 'Event' object has no attribute 'get'
+2025-09-23 16:17:54,841 | ERROR | app.events.redis_event | Error listening to messages: 'Event' object has no attribute 'get'
+2025-09-23 16:22:33,488 | INFO | app.events.redis_event | Stopped listening for Redis events
+2025-09-23 16:22:33,494 | INFO | main | Redis event bus stopped
+2025-09-23 16:22:54,007 | INFO | app.events.redis_event | Subscribed to event: EventType.DOCUMENT_UPLOADED
+2025-09-23 16:22:54,819 | INFO | app.events.redis_event | Redis event bus started
+2025-09-23 16:22:54,822 | INFO | main | Redis event bus started
+2025-09-23 16:23:03,719 | ERROR | app.events.redis_event | Error handling message: string indices must be integers, not 'str'
+2025-09-23 16:23:03,727 | ERROR | app.events.redis_event | Error listening to messages: string indices must be integers, not 'str'
+2025-09-23 16:23:04,469 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-23 16:23:43,996 | INFO | app.events.redis_event | Stopped listening for Redis events
+2025-09-23 16:23:44,001 | INFO | main | Redis event bus stopped
+2025-09-23 16:24:43,356 | INFO | app.events.redis_event | Subscribed to event: EventType.DOCUMENT_UPLOADED
+2025-09-23 16:24:43,964 | INFO | app.events.redis_event | Redis event bus started
+2025-09-23 16:24:43,966 | INFO | main | Redis event bus started
+2025-09-23 16:24:50,729 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-23 16:24:50,746 | ERROR | app.events.redis_event | Error handling message: 'Event' object has no attribute 'get'
+2025-09-23 16:24:50,747 | ERROR | app.events.redis_event | Error listening to messages: 'Event' object has no attribute 'get'
+2025-09-23 16:26:17,919 | INFO | app.events.redis_event | Stopped listening for Redis events
+2025-09-23 16:26:17,920 | INFO | main | Redis event bus stopped
+2025-09-23 16:26:38,880 | INFO | app.events.redis_event | Subscribed to event: EventType.DOCUMENT_UPLOADED
+2025-09-23 16:26:39,700 | INFO | app.events.redis_event | Redis event bus started
+2025-09-23 16:26:39,703 | INFO | main | Redis event bus started
+2025-09-23 16:26:46,879 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-23 16:26:46,917 | ERROR | app.events.redis_event | Error handling message: 'Event' object has no attribute 'get'
+2025-09-23 16:26:46,918 | ERROR | app.events.redis_event | Error listening to messages: 'Event' object has no attribute 'get'
+2025-09-23 16:28:17,632 | INFO | app.events.redis_event | Stopped listening for Redis events
+2025-09-23 16:28:17,654 | INFO | main | Redis event bus stopped
+2025-09-23 16:28:40,352 | INFO | app.events.redis_event | Subscribed to event: EventType.DOCUMENT_UPLOADED
+2025-09-23 16:28:41,158 | INFO | app.events.redis_event | Redis event bus started
+2025-09-23 16:28:41,160 | INFO | main | Redis event bus started
+2025-09-23 16:28:49,500 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-23 16:28:49,518 | INFO | app.events.handlers | Document uploaded: Event(event_type=<EventType.DOCUMENT_UPLOADED: 'document.uploaded'>, timestamp=datetime.datetime(2025, 9, 23, 16, 28, 47, 595605), data={'user_id': '2', 'agent_id': '2'}, user_id=2, agent_id=1) by user 2 and agent 1
+2025-09-23 16:29:07,823 | INFO | app.events.redis_event | Stopped listening for Redis events
+2025-09-23 16:29:07,828 | INFO | main | Redis event bus stopped
+2025-09-23 16:29:31,307 | INFO | app.events.redis_event | Subscribed to event: EventType.DOCUMENT_UPLOADED
+2025-09-23 16:29:32,338 | INFO | app.events.redis_event | Redis event bus started
+2025-09-23 16:29:32,348 | INFO | main | Redis event bus started
+2025-09-23 16:29:37,040 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-23 16:30:26,664 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-23 16:32:27,487 | INFO | app.events.redis_event | Subscribed to event: EventType.DOCUMENT_UPLOADED
+2025-09-23 16:32:27,955 | INFO | app.events.redis_event | Redis event bus started
+2025-09-23 16:32:27,956 | INFO | main | Redis event bus started
+2025-09-23 16:32:33,723 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-23 16:32:33,804 | INFO | app.events.handlers | Document uploaded: Event(event_type=<EventType.DOCUMENT_UPLOADED: 'document.uploaded'>, timestamp=datetime.datetime(2025, 9, 23, 16, 32, 31, 765801), data={'user_id': '2', 'agent_id': '2'}, user_id=2, agent_id=1) by user 2 and agent 1

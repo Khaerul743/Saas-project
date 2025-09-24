@@ -1,19 +1,22 @@
 # auth_controller.py
+from datetime import datetime
+
 from fastapi import HTTPException, Response, status
 from sqlalchemy.orm import Session
 
+from app.events.redis_event import Event, EventType, event_bus
 from app.models.auth.auth_model import AuthIn
 from app.models.user.user_entity import User
-from app.utils.hash import hash_password, verify_password
-from app.utils.logger import get_logger
-from app.utils.security import create_access_token
 from app.utils.auth_utils import (
     email_exists_handler,
     email_not_found_handler,
     invalid_credentials_handler,
 )
-from app.events.redis_event import EventType, event_bus, Event
-from datetime import datetime
+
+from app.utils.hash import hash_password, verify_password
+from app.utils.logger import get_logger
+from app.utils.security import create_access_token
+
 logger = get_logger(__name__)
 
 
@@ -50,19 +53,10 @@ async def loginHandler(response: Response, db: Session, payload: AuthIn) -> User
     Login user: cek kredensial, buat JWT, simpan di cookie.
     """
     user = db.query(User).filter(User.email == payload.email).first()
-    
-    #Test event
-    await event_bus.publish(Event(
-        event_type=EventType.DOCUMENT_UPLOADED,
-        timestamp=datetime.now(),
-        data={"user_id": "2", "agent_id": "2"},
-        user_id=2,
-        agent_id=1,
-    ))
     # Check if email exists
     if not user:
         email_not_found_handler(logger, payload.email)
-    
+
     # Check if password is correct
     if not verify_password(payload.password, user.password):
         invalid_credentials_handler(logger, payload.email)
