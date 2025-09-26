@@ -23,6 +23,7 @@ from app.middlewares.RBAC import role_required
 from app.models.agent.simple_rag_model import (
     CreateSimpleRAGAgent,
     SimpleRAGAgentResponse,
+    SimpleRAGAgentAsyncResponse,
     UpdateSimpleRAGAgent,
 )
 from app.utils.response import success_response
@@ -30,7 +31,7 @@ from app.utils.response import success_response
 router = APIRouter(prefix="/api/agents/simple-rag", tags=["simple-rag-agents"])
 
 
-@router.post("", response_model=SimpleRAGAgentResponse, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=SimpleRAGAgentAsyncResponse, status_code=status.HTTP_202_ACCEPTED)
 @limiter.limit("10/minute")
 async def createSimpleRAGAgent(
     request: Request,
@@ -71,15 +72,11 @@ async def createSimpleRAGAgent(
             db,
             file,
             CreateSimpleRAGAgent(**parsed_data),
-            current_user,
-            background_tasks,
+            current_user
         )
         
-        # Return success response
-        return success_response(
-            message="Simple RAG Agent created successfully", 
-            data=created_agent
-        )
+        # Return async response directly (no need for success_response wrapper)
+        return created_agent
 
     except ValueError as e:
         raise HTTPException(

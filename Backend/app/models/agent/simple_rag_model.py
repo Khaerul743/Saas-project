@@ -42,3 +42,20 @@ class SimpleRAGAgentResponse(BaseModel):
     status: str
     message: str
     data: SimpleRAGAgentOut
+
+
+class SimpleRAGAgentAsyncResponse(BaseModel):
+    """Response model for async Simple RAG Agent creation"""
+    id: Optional[int] = None
+    name: str
+    avatar: Optional[str] = None
+    model: Literal["gpt-3.5-turbo", "gpt-4o"]
+    description: Optional[str] = None
+    base_prompt: str
+    tone: Literal["formal", "friendly", "casual", "profesional"]
+    short_term_memory: bool = False
+    long_term_memory: bool = False
+    status: Literal["active", "non-active", "pending"]  # Add pending status
+    created_at: Optional[datetime] = None
+    task_id: str
+    message: str

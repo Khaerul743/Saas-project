@@ -11,6 +11,11 @@ class Settings(BaseSettings):
     DB_HOST: str
     DB_PORT: int
     DB_NAME: str
+
+    REDIS_HOST: str
+    REDIS_PORT: int
+    REDIS_DB: int
+    
     OPENAI_API_KEY: str
     THIS_APP_URL: str
     FRONTEND_URL: str = "http://localhost:3000"
@@ -25,6 +30,10 @@ class Settings(BaseSettings):
             f"mysql+pymysql://{self.DB_USER}:{self.DB_PASSWORD}"
             f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
         )
+
+    @property
+    def REDIS_URL(self) -> str:
+        return f"redis://{self.REDIS_HOST}:{self.REDIS_PORT}/{self.REDIS_DB}"
 
     class Config:
         env_file = ".env"
