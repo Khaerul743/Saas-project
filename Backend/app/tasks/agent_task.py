@@ -1,7 +1,9 @@
 import json
 import os
 import shutil
+import asyncio
 from typing import Literal, Optional
+from datetime import datetime
 
 # from celery import current_task  # Not needed since we use bind=True
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
@@ -31,6 +33,7 @@ from app.utils.document_utils import write_document
 from app.utils.error_utils import handle_database_error, handle_user_not_found
 from app.utils.logger import get_logger
 from app.utils.validation_utils import validate_agent_exists_and_owned
+from app.events.redis_event import event_bus, Event, EventType
 
 logger = get_logger(__name__)
 
@@ -47,7 +50,7 @@ def create_simple_rag_agent(
             state="PROGRESS",
             meta={"current": 20, "total": 100, "status": "Creating Simple RAG Agent"},
         )
-
+        
         # Convert dict back to Pydantic model
         agent_data_obj = CreateSimpleRAGAgent(**agent_data)
 
@@ -65,11 +68,23 @@ def create_simple_rag_agent(
             long_term_memory=agent_data_obj.long_term_memory,
             status=agent_data_obj.status,
         )
-
         # Add to database
         db.add(new_agent) 
         db.flush()
         db.refresh(new_agent)  # Refresh to get the actual values
+
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        try:
+            loop.run_until_complete(event_bus.publish(Event(
+                event_type=EventType.AGENT_CREATION_PROGRESS,
+                timestamp=datetime.now(),
+                data={"current": 40, "total": 100, "status": "Initializing Simple RAG Agent"},
+                user_id=user_id,
+                agent_id=new_agent.id,
+            )))
+        finally:
+            loop.close()
 
         self.update_state(
             state="PROGRESS",

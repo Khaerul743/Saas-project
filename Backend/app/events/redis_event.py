@@ -84,8 +84,18 @@ class RedisEventBus:
             while self._is_running:
                 message = await self.pubsub.get_message(ignore_subscribe_messages=True)
                 if message:
-                    print(f"message: {message}")
-                    await self._handle_message(message.get("data"))
+                    # Handle both regular messages and pattern messages
+                    if message.get("type") == "pmessage":
+                        # Pattern message - extract channel from pattern
+                        channel = message.get("channel")
+                        data = message.get("data")
+                        logger.debug(f"Pattern message received on channel: {channel}")
+                        await self._handle_message(data)
+                    elif message.get("type") == "message":
+                        # Regular message
+                        data = message.get("data")
+                        logger.debug(f"Message received: {data}")
+                        await self._handle_message(data)
                 await asyncio.sleep(0.01)
         except Exception as e:
             logger.error(f"Error listening to messages: {e}")
@@ -95,10 +105,14 @@ class RedisEventBus:
         if self._is_running:
             return
         self._is_running = True
-        channel = [f"ai.events.user:{user_id}.{event.value}" for event in EventType for user_id in range(1, 100)]
-        await self.pubsub.subscribe(*channel)
+        
+        # Use wildcard pattern subscription for production scalability
+        # This allows receiving events for any user without hardcoding user IDs
+        patterns = [f"ai.events.user:*" for event in EventType]
+        await self.pubsub.psubscribe(*patterns)
+        
         asyncio.create_task(self._listening_loop())
-        logger.info("Redis event bus started")
+        logger.info(f"Redis event bus started with pattern subscription for {len(patterns)} patterns")
 
     async def stop_listening(self):
         """Stop listening for events"""
