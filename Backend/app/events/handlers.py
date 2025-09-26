@@ -18,4 +18,4 @@ async def document_uploaded_handler(event_data: Event):
         )
 
 
-event_bus.subscribe(EventType.DOCUMENT_UPLOADED, document_uploaded_handler)
+# event_bus.subscribe(EventType.DOCUMENT_UPLOADED, document_uploaded_handler)

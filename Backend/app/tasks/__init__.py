@@ -2,10 +2,9 @@ from celery import Celery
 from app.configs.config import settings
 
 celery_app = Celery(
-    "tasks",
+    "saas_backend",
     broker=settings.REDIS_URL,
     backend=settings.REDIS_URL,
-    include=["app.tasks.document_tasks", "app.tasks.agent_tasks"],
 )
 
 celery_app.conf.update(
@@ -19,11 +18,14 @@ celery_app.conf.update(
     task_soft_time_limit=25 * 60,
     worker_prefetch_multiplier=1,
     worker_max_tasks_per_child=1000,
+    task_routes={
+        "app.tasks.agent_task.*": {"queue": "queue_agent_task"},
+    },
+    task_default_queue="default",
 )
 
-# Task routing
-celery_app.conf.task_routes = {
-    "app.tasks.document_tasks.*": {"queue": "document_processing"},
-    "app.tasks.agent_tasks.*": {"queue": "agent_processing"},
-    "app.tasks.customer_service_tasks.*": {"queue": "customer_service"},
-}
+# Import tasks to ensure they are registered
+from app.tasks import agent_task  # noqa: F401
+
+# Auto-discover tasks from the app.tasks module
+celery_app.autodiscover_tasks(['app.tasks'])

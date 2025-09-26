@@ -10,7 +10,7 @@ from sqlalchemy.orm import Session
 from app.AI import simple_RAG_agent as AI
 from app.controllers.document_controller import agents
 from app.models.agent.agent_entity import Agent
-from app.models.agent.simple_rag_model import CreateSimpleRAGAgent, SimpleRAGAgentOut, UpdateSimpleRAGAgent
+from app.models.agent.simple_rag_model import CreateSimpleRAGAgent, SimpleRAGAgentOut, UpdateSimpleRAGAgent, SimpleRAGAgentAsyncResponse
 from app.models.document.document_entity import Document
 from app.utils.document_utils import write_document
 from app.utils.error_utils import handle_database_error, handle_user_not_found
@@ -27,7 +27,7 @@ async def create_simple_rag_agent(
     file: Optional[UploadFile],
     agent_data: CreateSimpleRAGAgent,
     current_user: dict,
-) -> dict:
+) -> SimpleRAGAgentAsyncResponse:
     """
     Create a new Simple RAG Agent for the authenticated user.
     
@@ -50,19 +50,52 @@ async def create_simple_rag_agent(
         if not user_id:
             raise handle_user_not_found(current_user.get('email', 'unknown'))
     
-        if file:
-            if file.content_type not in ["pdf", "txt"]:
-                raise HTTPException(
-                    status_code=status.HTTP_400_BAD_REQUEST,
-                    detail="File type must be pdf or txt.",
-                )
+        # if file:
+        #     if file.content_type not in ["pdf", "txt"]:
+        #         raise HTTPException(
+        #             status_code=status.HTTP_400_BAD_REQUEST,
+        #             detail="File type must be pdf or txt.",
+        #         )
         
-        task = create_simple_rag_agent_task.delay(file, agent_data, user_id)
-        return {
-            "status":"pending",
-            "message":"Simple RAG Agent creation is pending",
-            "task_id":task.id,
-        }
+        # Convert Pydantic model to dict untuk JSON serialization
+        agent_data_dict = agent_data.dict()
+        
+        # Handle file data untuk serialization
+        file_data = None
+        if file:
+            # Read file content
+            file_content = await file.read()
+            file_data = {
+                "filename": file.filename,
+                "content_type": file.content_type,
+                "content": file_content.hex(),  # Convert binary to hex string
+                "size": len(file_content)
+            }
+            # Reset file pointer
+            await file.seek(0)
+        
+        # Start Celery task dengan data yang sudah di-serialize
+        task = create_simple_rag_agent_task.delay(
+            file_data=file_data,  # Dict instead of UploadFile
+            agent_data=agent_data_dict,  # Dict instead of Pydantic model
+            user_id=user_id
+        )
+        # Return response dengan format yang sesuai untuk async task
+        return SimpleRAGAgentAsyncResponse(
+            id=None,  # Will be set when task completes
+            name=agent_data.name,
+            avatar=agent_data.avatar,
+            model=agent_data.model,
+            description=agent_data.description,
+            base_prompt=agent_data.base_prompt,
+            tone=agent_data.tone,
+            short_term_memory=agent_data.short_term_memory,
+            long_term_memory=agent_data.long_term_memory,
+            status="pending",  # Override status untuk async task
+            created_at=None,  # Will be set when task completes
+            task_id=task.id,
+            message="Simple RAG Agent creation is pending"
+        )
         # Create new agent in database
         # new_agent = Agent(
         #     user_id=user_id,

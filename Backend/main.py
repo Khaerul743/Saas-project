@@ -12,16 +12,23 @@ from app.configs.database import Base, engine
 from app.configs.limiter import limiter
 from app.middlewares.error_handler import ErrorHandlerMiddleware
 from app.middlewares.limiter_handler import rate_limit_exceeded_handler
-from app.models.agent.agent_entity import Agent  # noqa: F401
+# Import models that have relationships with Agent first
+from app.models.company_information.company_entity import CompanyInformation  # noqa: F401
 from app.models.document.document_entity import Document  # noqa: F401
+from app.models.user.api_key_entity import ApiKey  # noqa: F401
+from app.models.user.user_entity import User  # noqa: F401
+
+# Import Platform before Integration (Integration has relationship to Platform)
+from app.models.platform.platform_entity import Platform  # noqa: F401
+from app.models.integration.integration_entity import Integration  # noqa: F401
+
+# Import HistoryMessage before UserAgent (UserAgent has relationship to HistoryMessage)
 from app.models.history_message.history_entity import HistoryMessage  # noqa: F401
 from app.models.history_message.metadata_entity import Metadata  # noqa: F401
-from app.models.integration.integration_entity import Integration  # noqa: F401
-from app.models.platform.platform_entity import Platform  # noqa: F401
-from app.models.user.user_entity import User  # noqa: F401
 from app.models.user_agent.user_agent_entity import UserAgent  # noqa: F401
-from app.models.company_information.company_entity import CompanyInformation  # noqa: F401
-from app.models.user.api_key_entity import ApiKey  # noqa: F401
+
+# Import Agent after all its related models
+from app.models.agent.agent_entity import Agent  # noqa: F401
 
 # Ensure all model mappers are registered before metadata.create_all
 from app.routes import (

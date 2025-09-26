@@ -470,7 +470,7 @@ class Workflow:
                 return llm.invoke(prompt)
 
             response = self._retry_with_backoff(generate_query, max_retries=2)
-
+            print(f"response: {response}")
             # Estimate tokens for structured output
             prompt = self.prompts.agent_generate_query(state.problem, problem_solving, self.detail_data)
             estimated_tokens = self._estimate_structured_output_tokens(
