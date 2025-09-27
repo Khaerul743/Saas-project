@@ -50,6 +50,7 @@ class RedisEventBus:
                 "agent_id": event.agent_id,
             }
             channel = f"ai.events.user:{event.user_id}.{event.event_type.value}"
+            print(f"channel: {channel}")
             await self.redis_client.publish(channel, json.dumps(event_data))
         except Exception as e:
             logger.error(f"Error publishing event: {e}")

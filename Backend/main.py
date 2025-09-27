@@ -45,6 +45,7 @@ from app.routes import (
     user_route,
     task_route,
 )
+from app.websocket import websocket_route
 from app.utils.logger import get_logger
 from app.utils.response import error_response
 from app.events.redis_event import event_bus
@@ -103,6 +104,9 @@ app.include_router(history_route.router)
 app.include_router(dashboard_route.router)
 app.include_router(task_route.router)
 
+# WebSocket routes
+app.include_router(websocket_route.router)
+
 
 @app.on_event("startup")
 async def startup_event():
@@ -120,32 +124,51 @@ async def shutdown_event():
     except Exception as e:
         logger.error(f"Error stopping Redis event bus: {e}")
 
-@app.get("/")
-def root() -> dict[str, str]:
-    return {"message": f"Welcome to {settings.PROJECT_NAME} v{settings.VERSION}"}
 
-
-# Handler untuk HTTPException
+# Global exception handlers
 @app.exception_handler(StarletteHTTPException)
 async def http_exception_handler(request: Request, exc: StarletteHTTPException):
-    return JSONResponse(
+    return error_response(
         status_code=exc.status_code,
-        content=error_response(message=exc.detail),
+        message=exc.detail,
+        data=None,
     )
 
 
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
-    logger.warning(f"Validation error: {exc.errors()}")
-    return JSONResponse(
+    return error_response(
         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-        content={
-            "status": "fail",
-            "message": "Validation error.",
-            "errors": exc.errors(),
-        },
+        message="Validation Error",
+        data=exc.errors(),
     )
 
 
+@app.exception_handler(Exception)
+async def general_exception_handler(request: Request, exc: Exception):
+    logger.error(f"Unhandled exception: {exc}", exc_info=True)
+    return error_response(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        message="Internal Server Error",
+        data=None,
+    )
+
+
+@app.get("/")
+async def root():
+    return {"message": "Welcome to SaaS Backend API", "version": settings.VERSION}
+
+
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy", "version": settings.VERSION}
+
+
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="127.0.0.1", port=8080, reload=False)
+    uvicorn.run(
+        "main:app",
+        host="0.0.0.0",
+        port=8080,
+        reload=settings.DEBUG,
+        log_level="info",
+    )

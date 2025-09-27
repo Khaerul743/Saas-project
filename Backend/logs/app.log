@@ -8098,3 +8098,60 @@ fastapi.exceptions.ResponseValidationError: 7 validation errors:
 2025-09-26 08:27:00,649 | INFO | app.AI.simple_RAG_agent | Successfully added document 'FAQ.pdf' with ID '25'
 2025-09-26 08:28:11,550 | INFO | app.events.redis_event | Stopped listening for Redis events
 2025-09-26 08:28:11,552 | INFO | main | Redis event bus stopped
+2025-09-26 09:00:54,308 | INFO | app.events.redis_event | Subscribed to event: EventType.AGENT_CREATION_PROGRESS
+2025-09-26 09:00:55,838 | INFO | app.events.redis_event | Redis event bus started with pattern subscription for 3 patterns
+2025-09-26 09:00:55,840 | INFO | main | Redis event bus started
+2025-09-26 09:01:46,240 | INFO | app.tasks.agent_task | Creating Simple RAG Agent for user 1
+2025-09-26 09:01:57,466 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-09-26 09:02:02,165 | INFO | app.AI.simple_RAG_agent | Successfully added document 'FAQ.pdf' with ID '26'
+2025-09-26 11:12:46,177 | INFO | app.events.redis_event | Subscribed to event: EventType.AGENT_CREATION_PROGRESS
+2025-09-26 11:12:46,195 | INFO | app.events.redis_event | Subscribed to event: EventType.AGENT_CREATION_SUCCESS
+2025-09-26 11:12:46,196 | INFO | app.events.redis_event | Subscribed to event: EventType.AGENT_CREATION_FAILED
+2025-09-26 11:13:49,870 | INFO | app.events.redis_event | Subscribed to event: EventType.AGENT_CREATION_PROGRESS
+2025-09-26 11:13:49,873 | INFO | app.events.redis_event | Subscribed to event: EventType.AGENT_CREATION_SUCCESS
+2025-09-26 11:13:49,874 | INFO | app.events.redis_event | Subscribed to event: EventType.AGENT_CREATION_FAILED
+2025-09-26 11:13:51,331 | INFO | app.events.redis_event | Redis event bus started with pattern subscription for 3 patterns
+2025-09-26 11:13:51,333 | INFO | main | Redis event bus started
+2025-09-26 11:15:10,315 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-26 11:16:23,309 | INFO | app.tasks.agent_task | Creating Simple RAG Agent for user 1
+2025-09-26 11:16:24,524 | INFO | app.tasks.agent_task | Starting event bus in Celery worker
+2025-09-26 11:16:25,398 | INFO | app.events.redis_event | Redis event bus started with pattern subscription for 3 patterns
+2025-09-26 11:16:25,419 | INFO | app.tasks.agent_task | Event bus started in Celery worker
+2025-09-26 11:16:25,656 | INFO | app.events.handlers | agent progress: {'current': 40, 'total': 100, 'status': 'Initializing Simple RAG Agent'} by user 1 and agent 19
+2025-09-26 11:16:25,767 | INFO | app.events.handlers | agent progress: {'current': 40, 'total': 100, 'status': 'Initializing Simple RAG Agent'} by user 1 and agent 19
+2025-09-26 11:16:25,877 | INFO | app.tasks.agent_task | Published agent creation progress event for agent 19
+2025-09-26 11:16:56,215 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-09-26 11:17:01,117 | INFO | app.AI.simple_RAG_agent | Successfully added document 'FAQ.pdf' with ID '27'
+2025-09-26 11:17:01,778 | INFO | app.tasks.agent_task | Published agent creation success event for agent 19
+2025-09-26 11:17:01,853 | INFO | app.events.handlers | agent creation success: {'agent_id': 19, 'status': 'completed'} by user 1 and agent 19
+2025-09-26 11:34:59,681 | INFO | app.events.redis_event | Stopped listening for Redis events
+2025-09-26 11:34:59,687 | INFO | main | Redis event bus stopped
+2025-09-26 11:41:45,002 | INFO | app.events.redis_event | Subscribed to event: EventType.AGENT_CREATION_PROGRESS
+2025-09-26 11:41:45,014 | INFO | app.events.redis_event | Subscribed to event: EventType.AGENT_CREATION_SUCCESS
+2025-09-26 11:41:45,016 | INFO | app.events.redis_event | Subscribed to event: EventType.AGENT_CREATION_FAILED
+2025-09-26 11:41:46,579 | INFO | app.events.redis_event | Redis event bus started with pattern subscription for 3 patterns
+2025-09-26 11:41:46,580 | INFO | main | Redis event bus started
+2025-09-26 11:42:08,326 | INFO | app.controllers.dashboard_controller | Dashboard overview generated for user khaerul@gmail.com
+2025-09-26 11:42:50,017 | INFO | app.tasks.agent_task | Creating Simple RAG Agent for user 1
+2025-09-26 11:42:51,139 | INFO | app.events.handlers | agent creation success: {'agent_id': 19, 'status': 'completed'} by user 1 and agent 19
+2025-09-26 11:42:51,144 | INFO | app.tasks.agent_task | Published agent creation progress event for agent 20
+2025-09-26 11:42:51,161 | INFO | app.events.handlers | agent progress: {'current': 40, 'total': 100, 'status': 'Initializing Simple RAG Agent'} by user 1 and agent 20
+2025-09-26 11:43:01,070 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-09-26 11:43:04,063 | INFO | app.AI.simple_RAG_agent | Successfully added document 'FAQ.pdf' with ID '28'
+2025-09-26 11:43:04,104 | INFO | app.events.handlers | agent progress: {'current': 40, 'total': 100, 'status': 'Initializing Simple RAG Agent'} by user 1 and agent 20
+2025-09-26 11:43:04,105 | INFO | app.tasks.agent_task | Published agent creation success event for agent 20
+2025-09-26 11:43:04,125 | INFO | app.events.handlers | agent creation success: {'agent_id': 20, 'status': 'completed'} by user 1 and agent 20
+2025-09-26 11:51:31,963 | INFO | app.events.redis_event | Stopped listening for Redis events
+2025-09-26 11:51:31,974 | INFO | main | Redis event bus stopped
+2025-09-26 20:47:54,610 | INFO | app.events.redis_event | Subscribed to event: EventType.AGENT_CREATION_PROGRESS
+2025-09-26 20:47:54,838 | INFO | app.events.redis_event | Subscribed to event: EventType.AGENT_CREATION_SUCCESS
+2025-09-26 20:47:54,926 | INFO | app.events.redis_event | Subscribed to event: EventType.AGENT_CREATION_FAILED
+2025-09-26 20:48:52,981 | INFO | app.events.redis_event | Subscribed to event: EventType.AGENT_CREATION_PROGRESS
+2025-09-26 20:48:52,986 | INFO | app.events.redis_event | Subscribed to event: EventType.AGENT_CREATION_SUCCESS
+2025-09-26 20:48:53,007 | INFO | app.events.redis_event | Subscribed to event: EventType.AGENT_CREATION_FAILED
+2025-09-26 20:49:01,674 | ERROR | main | Error starting Redis event bus: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-09-26 20:49:10,586 | INFO | app.websocket.connection_manager | WebSocket connected for user 1. Total connections: 1
+2025-09-26 20:49:10,593 | INFO | app.websocket.websocket_route | WebSocket connected for agent progress - User: 1
+2025-09-26 20:51:39,754 | INFO | app.websocket.connection_manager | WebSocket disconnected for user 1
+2025-09-26 20:51:54,413 | INFO | app.events.redis_event | Stopped listening for Redis events
+2025-09-26 20:51:54,425 | INFO | main | Redis event bus stopped

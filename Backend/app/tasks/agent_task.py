@@ -1,25 +1,36 @@
-import json
-import os
-import shutil
+"""
+Celery task for creating Simple RAG Agent
+"""
 import asyncio
-from typing import Literal, Optional
-from datetime import datetime
+from typing import Optional
 
-# from celery import current_task  # Not needed since we use bind=True
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session
 
-from app.AI import simple_RAG_agent as AI
 from app.configs.database import SessionLocal
-from app.controllers.document_controller import agents
 from app.events.redis_event import Event, EventType, event_bus
 from app.models.agent.agent_entity import Agent
-from app.models.agent.simple_rag_model import (
-    CreateSimpleRAGAgent,
-    SimpleRAGAgentOut,
-    UpdateSimpleRAGAgent,
-)
+from app.models.agent.simple_rag_model import CreateSimpleRAGAgent
 from app.models.document.document_entity import Document
+from app.tasks import celery_app
+from app.utils.agent_utils import (
+    create_agent_entity,
+    initialize_ai_agent,
+    add_document_to_agent,
+    build_task_result,
+)
+from app.utils.event_utils import (
+    publish_agent_progress_event,
+    publish_agent_success_event,
+    publish_agent_failure_event,
+)
+from app.utils.file_utils import (
+    create_agent_directory,
+    save_uploaded_file,
+    cleanup_file_on_error,
+)
+from app.utils.logger import get_logger
+
 # Import related models to ensure they are registered
 from app.models.company_information.company_entity import CompanyInformation  # noqa: F401
 from app.models.platform.platform_entity import Platform  # noqa: F401
@@ -28,12 +39,9 @@ from app.models.history_message.history_entity import HistoryMessage  # noqa: F4
 from app.models.history_message.metadata_entity import Metadata  # noqa: F401
 from app.models.user_agent.user_agent_entity import UserAgent  # noqa: F401
 from app.models.user.api_key_entity import ApiKey  # noqa: F401
-from app.tasks import celery_app
-from app.utils.document_utils import write_document
-from app.utils.error_utils import handle_database_error, handle_user_not_found
-from app.utils.logger import get_logger
-from app.utils.validation_utils import validate_agent_exists_and_owned
-from app.events.redis_event import event_bus, Event, EventType
+
+# Import handlers to ensure they are registered in Celery worker
+from app.events import handlers  # noqa: F401
 
 logger = get_logger(__name__)
 
@@ -42,181 +50,159 @@ logger = get_logger(__name__)
 def create_simple_rag_agent(
     self, file_data: Optional[dict], agent_data: dict, user_id: int
 ):
+    """
+    Create a Simple RAG Agent with optional document upload
+    
+    Args:
+        self: Celery task instance
+        file_data: Optional file data dictionary
+        agent_data: Agent creation data dictionary
+        user_id: ID of the user creating the agent
+        
+    Returns:
+        dict: Task result with agent information
+    """
     db = SessionLocal()
     task_id = self.request.id
+    new_agent = None
+    
     try:
         logger.info(f"Creating Simple RAG Agent for user {user_id}")
-        self.update_state(
-            state="PROGRESS",
-            meta={"current": 20, "total": 100, "status": "Creating Simple RAG Agent"},
-        )
         
-        # Convert dict back to Pydantic model
+        # Step 1: Initialize task
+        _update_progress(self, 20, "Creating Simple RAG Agent")
+        
+        # Step 2: Parse agent data
         agent_data_obj = CreateSimpleRAGAgent(**agent_data)
-
-        # Create new agent in database
-        new_agent = Agent(
-            user_id=user_id,
-            name=agent_data_obj.name,
-            avatar=agent_data_obj.avatar,
-            model=agent_data_obj.model,
-            role="simple RAG agent",  # Fixed role for Simple RAG Agent
-            description=agent_data_obj.description,
-            base_prompt=agent_data_obj.base_prompt,
-            tone=agent_data_obj.tone,
-            short_term_memory=agent_data_obj.short_term_memory,
-            long_term_memory=agent_data_obj.long_term_memory,
-            status=agent_data_obj.status,
-        )
-        # Add to database
-        db.add(new_agent) 
-        db.flush()
-        db.refresh(new_agent)  # Refresh to get the actual values
-
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        try:
-            loop.run_until_complete(event_bus.publish(Event(
-                event_type=EventType.AGENT_CREATION_PROGRESS,
-                timestamp=datetime.now(),
-                data={"current": 40, "total": 100, "status": "Initializing Simple RAG Agent"},
-                user_id=user_id,
-                agent_id=new_agent.id,
-            )))
-        finally:
-            loop.close()
-
-        self.update_state(
-            state="PROGRESS",
-            meta={
-                "current": 40,
-                "total": 100,
-                "status": "Initializing Simple RAG Agent",
-            },
-        )
-        # Create directory for agent documents
-        directory_path = f"documents/user_{user_id}/agent_{new_agent.id}"
         
-        # Ensure directory exists
-        os.makedirs(directory_path, exist_ok=True)
-
-        # Initialize Simple RAG Agent instance
-        if not str(new_agent.id) in agents:
-
-            def init_agent():
-                agents[str(new_agent.id)] = AI.Agent(
-                    base_prompt=str(new_agent.base_prompt),  # type: ignore
-                    tone=str(new_agent.tone),  # type: ignore
-                    directory_path=directory_path,
-                    chromadb_path="chroma_db",
-                    collection_name=f"agent_{new_agent.id}",
-                    model_llm=str(new_agent.model),  # type: ignore
-                    short_memory=agent_data_obj.short_term_memory,
-                )
-
-            init_agent()
-        self.update_state(
-            state="PROGRESS",
-            meta={
-                "current": 60,
-                "total": 100,
-                "status": "Adding Document to Simple RAG Agent",
-            },
-        )
-        # Handle file upload if provided
-        if file_data:
-            try:
-                # Recreate file from serialized data
-                file_path = os.path.join(directory_path, file_data["filename"])
-
-                # Write file content from hex string
-                file_content = bytes.fromhex(file_data["content"])
-                with open(file_path, "wb") as f:
-                    f.write(file_content)
-
-                # Determine content type
-                content_type = (
-                    "pdf" if file_data["content_type"] == "application/pdf" else "txt"
-                )
-
-                # Create document record in database
-                post_document = Document(
-                    agent_id=new_agent.id,
-                    file_name=file_data["filename"],
-                    content_type=content_type,
-                )
-
-                db.add(post_document)
-                db.flush()
-
-                # Try to add document to RAG system
-                agents[str(new_agent.id)].add_document(
-                    file_data["filename"],
-                    content_type,
-                    str(post_document.id),
-                )
-
-                # If everything succeeds, commit the transaction
-                db.commit()
-                db.refresh(post_document)
-                self.update_state(
-                    state="PROGRESS",
-                    meta={
-                        "current": 80,
-                        "total": 100,
-                        "status": "Committing Transaction",
-                    },
-                )
-            except Exception as e:
-                # Rollback database transaction
-                db.rollback()
-
-                # Remove physical file if it exists
-                try:
-                    if os.path.exists(file_path):
-                        os.remove(file_path)
-                        logger.info(f"Rollback: Removed file {file_path} due to error")
-                except Exception as file_err:
-                    logger.error(
-                        f"Failed to remove file {file_path} during rollback: {file_err}"
-                    )
-
-                # Re-raise the original exception
-                raise e
-        else:
-            # No file upload, just commit the agent creation
-            db.commit()
-
-        # Refresh to get the created agent with all fields
+        # Step 3: Create agent entity
+        new_agent = create_agent_entity(agent_data_obj, user_id)
+        db.add(new_agent)
+        db.flush()
         db.refresh(new_agent)
-        self.update_state(
-            state="SUCCESS", meta={"current": 100, "total": 100, "status": "Completed"}
+        
+        # Step 4: Publish progress event
+        publish_agent_progress_event(
+            user_id=user_id,
+            agent_id=int(new_agent.id),  # type: ignore
+            current=40,
+            total=100,
+            status="Initializing Simple RAG Agent",
+            task_id=task_id
         )
-        result = {
-            "status": "completed",
-            "agent_id": new_agent.id,
-            "message": "Simple RAG Agent created successfully",
-            "task_id": task_id,
-        }
-        # Add file info if file was uploaded
+        
+        # Step 5: Initialize AI agent
+        _update_progress(self, 40, "Initializing Simple RAG Agent")
+        directory_path = create_agent_directory(user_id, int(new_agent.id))  # type: ignore
+        initialize_ai_agent(new_agent, directory_path)
+        
+        # Step 6: Handle file upload if provided
+        document_id = None
         if file_data:
-            result["file_name"] = file_data["filename"]
-            # Check if post_document exists in local scope
-            if "post_document" in locals():
-                result["document_id"] = post_document.id
-
-        return result
+            _update_progress(self, 60, "Adding Document to Simple RAG Agent")
+            document_id = _handle_file_upload(
+                self, db, new_agent, file_data, directory_path
+            )
+        
+        # Step 7: Commit transaction
+        db.commit()
+        db.refresh(new_agent)
+        
+        # Step 8: Publish success event
+        publish_agent_success_event(
+            user_id=user_id,
+            agent_id=int(new_agent.id),  # type: ignore
+            additional_data={"document_id": document_id} if document_id else None,
+            task_id=task_id
+        )
+        
+        # Step 9: Complete task
+        _update_progress(self, 100, "Completed")
+        
+        return build_task_result(
+            agent=new_agent,
+            task_id=task_id,
+            file_data=file_data,  # type: ignore
+            document_id=document_id  # type: ignore
+        )
+        
     except Exception as e:
         db.rollback()
         logger.error(f"Error creating Simple RAG Agent: {str(e)}")
-        self.update_state(
-            state="FAILURE",
-            meta={
-                "current": 100,
-                "total": 100,
-                "status": "Failed to create Simple RAG Agent",
-            },
+        
+        # Publish failure event
+        publish_agent_failure_event(
+            user_id=user_id,
+            agent_id=int(new_agent.id) if new_agent else 0,  # type: ignore
+            error_message=str(e),
+            task_id=task_id
         )
+        
+        _update_progress(self, 100, "Failed to create Simple RAG Agent", "FAILURE")
         raise e
+        
     finally:
         db.close()
+
+
+def _update_progress(task_instance, current: int, status: str, state: str = "PROGRESS"):
+    """Update task progress"""
+    task_instance.update_state(
+        state=state,
+        meta={"current": current, "total": 100, "status": status}
+    )
+
+
+def _handle_file_upload(
+    task_instance, db: Session, agent: Agent, file_data: dict, directory_path: str
+) -> int:
+    """
+    Handle file upload and document creation
+    
+    Args:
+        task_instance: Celery task instance
+        db: Database session
+        agent: Agent entity
+        file_data: File data dictionary
+        directory_path: Directory path for files
+        
+    Returns:
+        int: Document ID
+        
+    Raises:
+        Exception: If file upload fails
+    """
+    file_path = None
+    
+    try:
+        # Save file to disk
+        file_path, content_type = save_uploaded_file(file_data, directory_path)
+        
+        # Create document record in database
+        post_document = Document(
+            agent_id=int(agent.id),  # type: ignore
+            file_name=file_data["filename"],
+            content_type=content_type,
+        )
+        
+        db.add(post_document)
+        db.flush()
+        
+        # Add document to AI agent
+        add_document_to_agent(
+            agent=agent,
+            filename=file_data["filename"],
+            content_type=content_type,
+            document_id=int(post_document.id)  # type: ignore
+        )
+        
+        # Update progress
+        _update_progress(task_instance, 80, "Committing Transaction")
+        
+        return int(post_document.id)  # type: ignore
+        
+    except Exception as e:
+        # Cleanup file on error
+        if file_path:
+            cleanup_file_on_error(file_path)
+        raise e
