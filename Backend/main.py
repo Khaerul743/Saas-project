@@ -1,4 +1,5 @@
 import uvicorn
+from app.websocket import websocket_route
 from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
@@ -10,25 +11,29 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from app.configs.config import settings
 from app.configs.database import Base, engine
 from app.configs.limiter import limiter
+from app.events.redis_event import event_bus
 from app.middlewares.error_handler import ErrorHandlerMiddleware
 from app.middlewares.limiter_handler import rate_limit_exceeded_handler
-# Import models that have relationships with Agent first
-from app.models.company_information.company_entity import CompanyInformation  # noqa: F401
-from app.models.document.document_entity import Document  # noqa: F401
-from app.models.user.api_key_entity import ApiKey  # noqa: F401
-from app.models.user.user_entity import User  # noqa: F401
 
-# Import Platform before Integration (Integration has relationship to Platform)
-from app.models.platform.platform_entity import Platform  # noqa: F401
-from app.models.integration.integration_entity import Integration  # noqa: F401
+# Import Agent after all its related models
+from app.models.agent.agent_entity import Agent  # noqa: F401
+
+# Import models that have relationships with Agent first
+from app.models.company_information.company_entity import (
+    CompanyInformation,  # noqa: F401
+)
+from app.models.document.document_entity import Document  # noqa: F401
 
 # Import HistoryMessage before UserAgent (UserAgent has relationship to HistoryMessage)
 from app.models.history_message.history_entity import HistoryMessage  # noqa: F401
 from app.models.history_message.metadata_entity import Metadata  # noqa: F401
-from app.models.user_agent.user_agent_entity import UserAgent  # noqa: F401
+from app.models.integration.integration_entity import Integration  # noqa: F401
 
-# Import Agent after all its related models
-from app.models.agent.agent_entity import Agent  # noqa: F401
+# Import Platform before Integration (Integration has relationship to Platform)
+from app.models.platform.platform_entity import Platform  # noqa: F401
+from app.models.user.api_key_entity import ApiKey  # noqa: F401
+from app.models.user.user_entity import User  # noqa: F401
+from app.models.user_agent.user_agent_entity import UserAgent  # noqa: F401
 
 # Ensure all model mappers are registered before metadata.create_all
 from app.routes import (
@@ -42,14 +47,11 @@ from app.routes import (
     integration_route,
     platform_route,
     simple_rag_route,
-    user_route,
     task_route,
+    user_route,
 )
-from app.websocket import websocket_route
 from app.utils.logger import get_logger
 from app.utils.response import error_response
-from app.events.redis_event import event_bus
-from app.events.handlers import *
 
 logger = get_logger(__name__)
 
@@ -89,13 +91,14 @@ app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, rate_limit_exceeded_handler)
 
 
-
 # Routes
 app.include_router(user_route.router)
 app.include_router(auth_route.router)
 app.include_router(agent_route.router)  # General agent routes (get all, etc.)
 app.include_router(simple_rag_route.router)  # Simple RAG Agent specific routes
-app.include_router(customer_service_route.router)  # Customer Service Agent specific routes
+app.include_router(
+    customer_service_route.router
+)  # Customer Service Agent specific routes
 app.include_router(company_information_route.router)  # Company Information routes
 app.include_router(document_route.router)
 app.include_router(integration_route.router)
@@ -115,6 +118,7 @@ async def startup_event():
         logger.info("Redis event bus started")
     except Exception as e:
         logger.error(f"Error starting Redis event bus: {e}")
+
 
 @app.on_event("shutdown")
 async def shutdown_event():
