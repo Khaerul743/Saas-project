@@ -7,6 +7,7 @@ from app.events.loop_manager import run_async
 from app.events.redis_event import Event, EventType, event_bus
 from app.tasks import celery_app
 from app.utils.logger import get_logger
+from app.utils.event_utils import publish_agent_event
 
 logger = get_logger(__name__)
 
@@ -18,14 +19,15 @@ def test_task(self, file_data: Optional[dict], agent_data: dict, user_id: int):
     logger.info(f"Task Execution: user_id {user_id}")
 
     progress = _update_progress(self, 20, status="Initialize agent")
-    data = Event(
-        event_type=EventType.AGENT_CREATION_PROGRESS,
-        user_id=user_id,
-        agent_id=2,
-        payload=progress,
-    )
-    run_async(event_bus.publish(data))
-
+    publish_agent_event(EventType.AGENT_CREATION_PROGRESS, user_id, 2, progress)
+    progress = _update_progress(self, 40, status="Initialize agent")
+    publish_agent_event(EventType.AGENT_CREATION_PROGRESS, user_id, 2, progress)
+    progress = _update_progress(self, 60, status="Initialize agent")
+    publish_agent_event(EventType.AGENT_CREATION_PROGRESS, user_id, 2, progress)
+    progress = _update_progress(self, 80, status="Initialize agent")
+    publish_agent_event(EventType.AGENT_CREATION_PROGRESS, user_id, 2, progress)
+    progress = _update_progress(self, 100, status="Initialize agent")
+    publish_agent_event(EventType.AGENT_CREATION_PROGRESS, user_id, 2, progress)
     return {"Message": "Successfully"}
 
 
