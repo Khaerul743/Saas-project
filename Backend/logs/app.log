@@ -8155,3 +8155,544 @@ fastapi.exceptions.ResponseValidationError: 7 validation errors:
 2025-09-26 20:51:39,754 | INFO | app.websocket.connection_manager | WebSocket disconnected for user 1
 2025-09-26 20:51:54,413 | INFO | app.events.redis_event | Stopped listening for Redis events
 2025-09-26 20:51:54,425 | INFO | main | Redis event bus stopped
+2025-09-28 15:44:11,730 | ERROR | app.events.redis_event | Error while published event: Object of type datetime is not JSON serializable
+2025-09-28 15:44:15,098 | INFO | main | Redis event bus started
+2025-09-28 15:45:33,642 | INFO | main | Redis event bus stopped
+2025-09-28 15:46:38,116 | INFO | main | Redis event bus started
+2025-09-28 15:46:44,180 | INFO | app.events.redis_event | User with id 1 published event event.agent.progress
+2025-09-28 15:47:31,033 | INFO | app.events.redis_event | User with id 1 published event event.agent.progress
+2025-09-28 15:47:52,474 | INFO | main | Redis event bus stopped
+2025-09-28 15:49:42,480 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress']
+2025-09-28 15:49:42,482 | INFO | main | Redis event bus started
+2025-09-28 15:52:45,802 | INFO | main | Redis event bus stopped
+2025-09-28 15:53:45,334 | INFO | app.events.redis_event | Subscribe to channel: ['user:1event.agent.progress']
+2025-09-28 15:53:45,336 | INFO | main | Redis event bus started
+2025-09-28 15:53:54,935 | INFO | app.events.redis_event | User with id 1 published to channel user:1event.agent.progress
+2025-09-28 15:55:08,885 | INFO | main | Redis event bus stopped
+2025-09-28 15:55:39,668 | INFO | app.events.redis_event | Subscribe to channel: ['user:1event.agent.progress']
+2025-09-28 15:55:39,675 | INFO | main | Redis event bus started
+2025-09-28 15:59:17,266 | INFO | main | Redis event bus stopped
+2025-09-28 16:00:28,717 | INFO | app.events.redis_event | Subscribe to channel: user:*
+2025-09-28 16:00:28,719 | INFO | main | Redis event bus started
+2025-09-28 16:00:37,469 | INFO | app.events.redis_event | User with id 1 published to channel user:1_event.agent.progress
+2025-09-28 16:00:43,929 | INFO | app.events.redis_event | User with id 1 published to channel user:1_event.agent.progress
+2025-09-28 16:03:06,758 | INFO | main | Redis event bus stopped
+2025-09-28 16:03:45,923 | INFO | app.events.redis_event | Subscribe to channel: user:*
+2025-09-28 16:03:45,925 | INFO | main | Redis event bus started
+2025-09-28 16:04:10,742 | INFO | main | Redis event bus stopped
+2025-09-28 16:04:53,690 | INFO | app.events.redis_event | Subscribe to channel: user:*
+2025-09-28 16:04:53,700 | INFO | main | Redis event bus started
+2025-09-28 16:05:00,231 | INFO | app.events.redis_event | User with id 1 published to channel user:1_event.agent.progress
+2025-09-28 16:05:19,188 | INFO | main | Redis event bus stopped
+2025-09-28 16:05:53,313 | INFO | app.events.redis_event | Subscribe to channel: user:*
+2025-09-28 16:05:53,315 | INFO | main | Redis event bus started
+2025-09-28 16:07:33,610 | INFO | main | Redis event bus stopped
+2025-09-28 16:10:09,879 | INFO | app.events.redis_event | Subscribe to channel: user:*:*
+2025-09-28 16:10:09,882 | INFO | main | Redis event bus started
+2025-09-28 16:10:18,738 | INFO | app.events.redis_event | User with id 1 published to channel user:1:event.agent.progress
+2025-09-28 16:10:41,129 | INFO | app.events.redis_event | User with id 1 published to channel user:1:event.agent.progress
+2025-09-28 16:10:59,178 | INFO | main | Redis event bus stopped
+2025-09-28 16:11:49,056 | INFO | app.events.redis_event | Subscribe to channel: user:*
+2025-09-28 16:11:49,059 | INFO | main | Redis event bus started
+2025-09-28 16:11:55,451 | INFO | app.events.redis_event | User with id 1 published to channel user:1:event.agent.progress
+2025-09-28 16:12:19,134 | INFO | main | Redis event bus stopped
+2025-09-28 16:12:49,464 | INFO | app.events.redis_event | User with id 1 published to channel user:1:event.agent.progress
+2025-09-28 16:12:54,828 | INFO | app.events.redis_event | Subscribe to channel: user:*:*
+2025-09-28 16:12:54,844 | INFO | main | Redis event bus started
+2025-09-28 16:13:02,217 | INFO | app.events.redis_event | User with id 1 published to channel user:1:event.agent.progress
+2025-09-28 16:14:43,219 | INFO | main | Redis event bus stopped
+2025-09-28 16:16:02,108 | INFO | app.events.redis_event | Subscribe to channel: user:*:*
+2025-09-28 16:16:02,114 | INFO | main | Redis event bus started
+2025-09-28 16:16:12,528 | INFO | app.events.redis_event | User with id 1 published to channel user:1:event.agent.progress
+2025-09-28 20:46:53,972 | INFO | app.events.redis_event | Subscribe to channel: user:*:*
+2025-09-28 20:46:53,975 | INFO | main | Redis event bus started
+2025-09-28 20:47:08,488 | INFO | app.events.redis_event | User with id 1 published to channel user:1:event.agent.progress
+2025-09-28 20:48:15,843 | INFO | main | Redis event bus stopped
+2025-09-28 20:48:35,990 | INFO | app.events.redis_event | Subscribe to channel: user:*:*
+2025-09-28 20:48:35,995 | INFO | main | Redis event bus started
+2025-09-28 20:49:22,182 | INFO | app.events.redis_event | User with id 1 published to channel user:1:event.agent.progress
+2025-09-28 20:50:27,269 | INFO | main | Redis event bus stopped
+2025-09-28 20:50:57,347 | INFO | app.events.redis_event | Subscribe to channel: user:*:*
+2025-09-28 20:50:57,350 | INFO | main | Redis event bus started
+2025-09-28 20:53:41,439 | INFO | main | Redis event bus stopped
+2025-09-28 20:55:12,340 | INFO | app.events.redis_event | Subscribe to channel: user:*:*
+2025-09-28 20:55:12,343 | INFO | main | Redis event bus started
+2025-09-28 20:56:06,405 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-09-28 20:56:06,406 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-09-28 20:56:33,136 | INFO | app.events.redis_event | User with id 1 published to channel user:1:event.agent.progress
+2025-09-28 20:56:33,152 | INFO | app.websocket.manager | Sending message to user with id 1: the message is From listening loop
+2025-09-28 20:57:34,722 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-09-28 20:57:34,769 | INFO | app.websocket.manager | User with id 1 has been deleted from connections
+2025-09-28 20:57:35,280 | INFO | main | Redis event bus stopped
+2025-09-28 20:57:58,492 | INFO | app.events.redis_event | Subscribe to channel: user:*:*
+2025-09-28 20:57:58,495 | INFO | main | Redis event bus started
+2025-09-28 20:58:08,757 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-09-28 20:58:08,758 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-09-28 20:58:18,237 | INFO | app.events.redis_event | User with id 1 published to channel user:1:event.agent.progress
+2025-09-28 20:58:18,243 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 1, 'payload': {'message': 'makan tuh'}, 'timestamp': '2025-09-28T13:58:18.196598'}
+2025-09-28 20:58:18,248 | ERROR | app.events.redis_event | Error while running the listening loop: data is a dict-like object
+2025-09-28 20:58:47,966 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-09-28 20:58:48,016 | INFO | app.websocket.manager | User with id 1 has been deleted from connections
+2025-09-28 20:58:48,141 | INFO | main | Redis event bus stopped
+2025-09-28 21:00:04,488 | INFO | app.events.redis_event | Subscribe to channel: user:*:*
+2025-09-28 21:00:04,491 | INFO | main | Redis event bus started
+2025-09-28 21:00:32,027 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-09-28 21:00:32,028 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-09-28 21:00:39,768 | INFO | app.events.redis_event | User with id 1 published to channel user:1:event.agent.progress
+2025-09-28 21:00:39,776 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 1, 'payload': {'message': 'makan tuh'}, 'timestamp': '2025-09-28T14:00:39.730292'}
+2025-09-28 21:04:57,000 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-09-28 21:04:57,024 | INFO | app.websocket.manager | User with id 1 has been deleted from connections
+2025-09-28 21:09:07,243 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-09-28 21:09:07,245 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-09-28 21:09:37,713 | INFO | app.websocket.manager | User id 2 connection to websocket.
+2025-09-28 21:09:37,714 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 2
+2025-09-28 21:10:29,470 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-09-28 21:10:29,478 | INFO | app.websocket.manager | User with id 1 has been deleted from connections
+2025-09-28 21:10:29,512 | INFO | app.websocket.manager | User with id 2 diconnect from websocket
+2025-09-28 21:10:29,520 | INFO | app.websocket.manager | User with id 2 has been deleted from connections
+2025-09-28 21:10:30,048 | INFO | main | Redis event bus stopped
+2025-09-28 21:10:56,231 | INFO | app.events.redis_event | Subscribe to channel: user:*:*
+2025-09-28 21:10:56,234 | INFO | main | Redis event bus started
+2025-09-28 21:11:01,254 | INFO | app.websocket.manager | User id 2 connection to websocket.
+2025-09-28 21:11:01,256 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 2
+2025-09-28 21:11:03,893 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-09-28 21:11:03,893 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-09-28 21:11:25,723 | INFO | app.events.redis_event | User with id 1 published to channel user:1:event.agent.progress
+2025-09-28 21:11:32,635 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-09-28 21:11:32,672 | INFO | app.websocket.manager | User with id 1 has been deleted from connections
+2025-09-28 21:11:38,981 | INFO | app.websocket.manager | User with id 2 diconnect from websocket
+2025-09-28 21:11:38,989 | INFO | app.websocket.manager | User with id 2 has been deleted from connections
+2025-09-28 21:11:57,234 | INFO | main | Redis event bus stopped
+2025-09-28 21:19:22,460 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*']
+2025-09-28 21:19:22,463 | INFO | main | Redis event bus started
+2025-09-28 21:19:33,942 | INFO | app.websocket.manager | User id 2 connection to websocket.
+2025-09-28 21:19:33,947 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 2
+2025-09-28 21:19:45,761 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-28 21:21:15,167 | INFO | app.websocket.manager | User with id 2 diconnect from websocket
+2025-09-28 21:21:15,172 | INFO | app.websocket.manager | User with id 2 has been deleted from connections
+2025-09-28 21:21:15,291 | INFO | main | Redis event bus stopped
+2025-09-29 08:20:46,246 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*']
+2025-09-29 08:20:46,250 | INFO | main | Redis event bus started
+2025-09-29 08:20:50,447 | INFO | app.websocket.manager | User id 2 connection to websocket.
+2025-09-29 08:20:50,449 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 2
+2025-09-29 08:21:16,219 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 08:21:32,019 | INFO | app.websocket.manager | User with id 2 diconnect from websocket
+2025-09-29 08:21:32,461 | INFO | app.websocket.manager | User with id 2 has been deleted from connections
+2025-09-29 08:21:32,627 | INFO | main | Redis event bus stopped
+2025-09-29 08:47:15,625 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*']
+2025-09-29 08:47:15,628 | INFO | main | Redis event bus started
+2025-09-29 08:47:32,203 | INFO | app.websocket.manager | User id 2 connection to websocket.
+2025-09-29 08:47:32,211 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 2
+2025-09-29 08:47:40,207 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 08:47:40,215 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 08:47:40,261 | INFO | app.events.redis_event | The handler function accepted the message
+2025-09-29 08:47:40,271 | WARNING | app.events.redis_event | Event type not in subscribers
+2025-09-29 08:48:39,588 | INFO | app.websocket.manager | User with id 2 diconnect from websocket
+2025-09-29 08:48:39,620 | INFO | app.websocket.manager | User with id 2 has been deleted from connections
+2025-09-29 08:48:40,119 | INFO | main | Redis event bus stopped
+2025-09-29 08:49:15,045 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*']
+2025-09-29 08:49:15,048 | INFO | main | Redis event bus started
+2025-09-29 08:49:15,129 | INFO | main | Redis event bus stopped
+2025-09-29 08:50:10,221 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*']
+2025-09-29 08:50:10,224 | INFO | main | Redis event bus started
+2025-09-29 08:50:13,485 | INFO | app.websocket.manager | User id 2 connection to websocket.
+2025-09-29 08:50:13,492 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 2
+2025-09-29 08:50:20,544 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 08:50:20,558 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 08:50:20,584 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 08:50:20,586 | WARNING | app.events.redis_event | Event type not in subscribers
+2025-09-29 08:51:10,032 | INFO | app.websocket.manager | User with id 2 diconnect from websocket
+2025-09-29 08:51:10,038 | INFO | app.websocket.manager | User with id 2 has been deleted from connections
+2025-09-29 08:51:11,106 | INFO | main | Redis event bus stopped
+2025-09-29 08:51:29,650 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*']
+2025-09-29 08:51:29,662 | INFO | main | Redis event bus started
+2025-09-29 08:51:34,236 | INFO | app.websocket.manager | User id 2 connection to websocket.
+2025-09-29 08:51:34,237 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 2
+2025-09-29 08:51:41,008 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 08:51:41,023 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 08:51:41,064 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 08:51:41,101 | WARNING | app.events.redis_event | Event type not in subscribers
+2025-09-29 08:52:18,588 | INFO | app.websocket.manager | User with id 2 diconnect from websocket
+2025-09-29 08:52:18,604 | INFO | app.websocket.manager | User with id 2 has been deleted from connections
+2025-09-29 08:52:18,711 | INFO | main | Redis event bus stopped
+2025-09-29 08:52:26,715 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 08:52:40,835 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*']
+2025-09-29 08:52:40,842 | INFO | main | Redis event bus started
+2025-09-29 08:52:49,057 | INFO | main | Redis event bus stopped
+2025-09-29 08:52:54,879 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 08:53:07,082 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*']
+2025-09-29 08:53:07,098 | INFO | main | Redis event bus started
+2025-09-29 08:54:40,533 | INFO | main | Redis event bus stopped
+2025-09-29 08:54:48,341 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 08:54:59,618 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*']
+2025-09-29 08:54:59,620 | INFO | main | Redis event bus started
+2025-09-29 08:55:04,014 | INFO | app.websocket.manager | User id 2 connection to websocket.
+2025-09-29 08:55:04,015 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 2
+2025-09-29 08:55:09,934 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 08:55:09,936 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 08:55:09,937 | ERROR | app.events.redis_event | Error while handler the message: 'event.agent.progress'
+2025-09-29 08:55:09,938 | ERROR | app.events.redis_event | Error while running the listening loop: 'event.agent.progress'
+2025-09-29 08:56:24,303 | INFO | app.websocket.manager | User with id 2 diconnect from websocket
+2025-09-29 08:56:24,403 | INFO | app.websocket.manager | User with id 2 has been deleted from connections
+2025-09-29 08:56:24,515 | INFO | main | Redis event bus stopped
+2025-09-29 08:56:33,162 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 08:56:45,909 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*']
+2025-09-29 08:56:45,912 | INFO | main | Redis event bus started
+2025-09-29 08:56:49,040 | INFO | app.websocket.manager | User id 2 connection to websocket.
+2025-09-29 08:56:49,041 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 2
+2025-09-29 08:57:00,520 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 08:57:00,535 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 08:57:00,546 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 08:57:00,547 | ERROR | app.events.redis_event | Error while handler the message: 'event.agent.progress'
+2025-09-29 08:57:00,548 | ERROR | app.events.redis_event | Error while running the listening loop: 'event.agent.progress'
+2025-09-29 08:58:19,045 | INFO | app.websocket.manager | User with id 2 diconnect from websocket
+2025-09-29 08:58:19,051 | INFO | app.websocket.manager | User with id 2 has been deleted from connections
+2025-09-29 08:58:19,211 | INFO | main | Redis event bus stopped
+2025-09-29 08:58:28,510 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 08:58:40,770 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 08:58:55,715 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 08:59:08,326 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*']
+2025-09-29 08:59:08,333 | INFO | main | Redis event bus started
+2025-09-29 08:59:11,942 | INFO | app.websocket.manager | User id 2 connection to websocket.
+2025-09-29 08:59:11,943 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 2
+2025-09-29 08:59:19,175 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 08:59:19,175 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 08:59:19,176 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 08:59:56,280 | INFO | app.websocket.manager | User with id 2 diconnect from websocket
+2025-09-29 08:59:56,365 | INFO | app.websocket.manager | User with id 2 has been deleted from connections
+2025-09-29 08:59:57,033 | INFO | main | Redis event bus stopped
+2025-09-29 09:00:05,380 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 09:00:19,016 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*']
+2025-09-29 09:00:19,017 | INFO | main | Redis event bus started
+2025-09-29 09:00:51,059 | INFO | main | Redis event bus stopped
+2025-09-29 09:01:07,340 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 09:01:23,366 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 09:01:35,655 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*']
+2025-09-29 09:01:35,659 | INFO | main | Redis event bus started
+2025-09-29 09:01:39,128 | INFO | app.websocket.manager | User id 2 connection to websocket.
+2025-09-29 09:01:39,129 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 2
+2025-09-29 09:01:45,950 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 09:01:45,968 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 09:01:45,972 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 09:01:59,449 | INFO | app.websocket.manager | User with id 2 diconnect from websocket
+2025-09-29 09:01:59,452 | INFO | app.websocket.manager | User with id 2 has been deleted from connections
+2025-09-29 09:02:05,648 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-09-29 09:02:05,649 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-09-29 09:02:17,351 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 09:02:17,350 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 09:02:17,352 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 09:02:17,353 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'message': 'from handler message'}
+2025-09-29 09:04:42,901 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-09-29 09:04:42,915 | INFO | app.websocket.manager | User with id 1 has been deleted from connections
+2025-09-29 09:04:43,085 | INFO | main | Redis event bus stopped
+2025-09-29 09:06:04,894 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 09:06:16,376 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 09:06:23,330 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 09:06:40,022 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 09:06:58,697 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*']
+2025-09-29 09:06:58,703 | INFO | main | Redis event bus started
+2025-09-29 09:07:52,744 | INFO | main | Redis event bus stopped
+2025-09-29 09:08:12,341 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 09:08:33,112 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*']
+2025-09-29 09:08:33,116 | INFO | main | Redis event bus started
+2025-09-29 09:09:58,457 | INFO | main | Redis event bus stopped
+2025-09-29 09:10:09,586 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 09:10:39,840 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 09:10:55,754 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 09:10:55,756 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 09:11:47,416 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 09:11:47,420 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 09:12:03,246 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*']
+2025-09-29 09:12:03,248 | INFO | main | Redis event bus started
+2025-09-29 09:12:13,990 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 09:12:14,005 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 09:12:14,033 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 09:12:22,816 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-09-29 09:12:22,817 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-09-29 09:12:40,636 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-09-29 09:12:40,730 | INFO | app.websocket.manager | User with id 1 has been deleted from connections
+2025-09-29 09:12:40,997 | INFO | main | Redis event bus stopped
+2025-09-29 09:12:47,755 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 09:12:47,766 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 09:13:01,576 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*']
+2025-09-29 09:13:01,581 | INFO | main | Redis event bus started
+2025-09-29 09:13:01,592 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-09-29 09:13:01,595 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-09-29 09:13:19,898 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.success.user:1
+2025-09-29 09:13:19,898 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 09:13:19,900 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_SUCCESS
+2025-09-29 09:13:19,903 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.success', 'user_id': 1, 'agent_id': 1, 'payload': {'message': 'Success create agent.'}, 'timestamp': '2025-09-29T02:13:19.862299'}
+2025-09-29 09:13:45,891 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-09-29 09:13:45,927 | INFO | app.websocket.manager | User with id 1 has been deleted from connections
+2025-09-29 09:13:46,092 | INFO | main | Redis event bus stopped
+2025-09-29 09:13:51,725 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 09:13:51,726 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 09:14:03,699 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*']
+2025-09-29 09:14:03,701 | INFO | main | Redis event bus started
+2025-09-29 09:14:05,426 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-09-29 09:14:05,427 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-09-29 09:14:12,407 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 09:14:12,426 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 09:14:12,458 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 09:14:12,475 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 1, 'payload': {'message': 'prosess create agent.'}, 'timestamp': '2025-09-29T02:14:12.348084'}
+2025-09-29 09:17:28,074 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-09-29 11:26:29,719 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 11:26:29,722 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 11:26:53,222 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 11:26:53,223 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 11:27:06,324 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*']
+2025-09-29 11:27:06,326 | INFO | main | Redis event bus started
+2025-09-29 11:31:13,454 | INFO | main | Redis event bus stopped
+2025-09-29 11:31:58,900 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 11:31:58,901 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 11:32:37,574 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 11:32:37,575 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 11:32:59,712 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*']
+2025-09-29 11:32:59,717 | INFO | main | Redis event bus started
+2025-09-29 11:33:28,587 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-29 11:33:28,689 | ERROR | app.middlewares.error_handler | Unexpected error: error_response() got an unexpected keyword argument 'status_code'
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 59, in wrapped_app
+    response = await handler(conn, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\main.py", line 136, in http_exception_handler
+    return error_response(
+        status_code=exc.status_code,
+        message=exc.detail,
+        data=None,
+    )
+TypeError: error_response() got an unexpected keyword argument 'status_code'
+2025-09-29 11:36:51,645 | INFO | main | Redis event bus stopped
+2025-09-29 11:37:19,204 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 11:37:19,222 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 11:38:02,901 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 11:38:02,945 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 11:38:49,635 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 11:38:49,638 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 11:39:10,772 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 11:39:10,776 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 11:39:26,699 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*']
+2025-09-29 11:39:26,802 | INFO | main | Redis event bus started
+2025-09-29 11:39:33,604 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-29 11:39:47,329 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-29 11:40:07,326 | ERROR | app.controllers.simple_rag_controller | Unexpected error while creating Simple RAG Agent: Object of type Session is not JSON serializable
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\kombu\serialization.py", line 41, in _reraise_errors
+    yield
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\kombu\serialization.py", line 220, in dumps
+    payload = encoder(data)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\kombu\utils\json.py", line 63, in dumps
+    return _dumps(s, cls=cls, **dict(default_kwargs, **kwargs))
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\kombu\utils\json.py", line 47, in default
+    return super().default(o)
+           ~~~~~~~~~~~~~~~^^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+                    f'is not JSON serializable')
+TypeError: Object of type Session is not JSON serializable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\controllers\simple_rag_controller.py", line 90, in create_simple_rag_agent
+    task = test_task.delay(
+        db=db, file_data=file_data, agent_data=agent_data_dict, user_id=user_id
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\celery\app\task.py", line 444, in delay
+    return self.apply_async(args, kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\celery\app\task.py", line 601, in apply_async
+    return app.send_task(
+           ~~~~~~~~~~~~~^
+        self.name, args, kwargs, task_id=task_id, producer=producer,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        **options
+        ^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\celery\app\base.py", line 930, in send_task
+    amqp.send_task_message(P, name, message, **options)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\celery\app\amqp.py", line 523, in send_task_message
+    ret = producer.publish(
+        body,
+    ...<8 lines>...
+        **properties
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\kombu\messaging.py", line 178, in publish
+    body, content_type, content_encoding = self._prepare(
+                                           ~~~~~~~~~~~~~^
+        body, serializer, content_type, content_encoding,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        compression, headers)
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\kombu\messaging.py", line 280, in _prepare
+    body) = dumps(body, serializer=serializer)
+            ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\kombu\serialization.py", line 219, in dumps
+    with _reraise_errors(EncodeError):
+         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\kombu\serialization.py", line 45, in _reraise_errors
+    reraise(wrapper, wrapper(exc), sys.exc_info()[2])
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\kombu\exceptions.py", line 34, in reraise
+    raise value.with_traceback(tb)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\kombu\serialization.py", line 41, in _reraise_errors
+    yield
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\kombu\serialization.py", line 220, in dumps
+    payload = encoder(data)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\kombu\utils\json.py", line 63, in dumps
+    return _dumps(s, cls=cls, **dict(default_kwargs, **kwargs))
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\kombu\utils\json.py", line 47, in default
+    return super().default(o)
+           ~~~~~~~~~~~~~~~^^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+                    f'is not JSON serializable')
+kombu.exceptions.EncodeError: Object of type Session is not JSON serializable
+2025-09-29 11:40:08,755 | ERROR | app.utils.error_utils | Unexpected error during creating Simple RAG Agent: Object of type Session is not JSON serializable
+2025-09-29 11:40:45,969 | INFO | main | Redis event bus stopped
+2025-09-29 11:41:09,184 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 11:41:09,186 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 11:41:37,581 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*']
+2025-09-29 11:41:37,583 | INFO | main | Redis event bus started
+2025-09-29 11:41:46,653 | INFO | main | Redis event bus stopped
+2025-09-29 11:41:54,309 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 11:41:54,311 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 11:42:09,201 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*']
+2025-09-29 11:42:09,207 | INFO | main | Redis event bus started
+2025-09-29 11:42:20,488 | ERROR | app.controllers.simple_rag_controller | Unexpected error while creating Simple RAG Agent: test_task() got an unexpected keyword argument 'db'
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\controllers\simple_rag_controller.py", line 90, in create_simple_rag_agent
+    task = test_task.delay(
+        db=db, file_data=file_data, agent_data=agent_data_dict, user_id=user_id
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\celery\app\task.py", line 444, in delay
+    return self.apply_async(args, kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\celery\app\task.py", line 566, in apply_async
+    check_arguments(*(args or ()), **(kwargs or {}))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: test_task() got an unexpected keyword argument 'db'
+2025-09-29 11:42:20,517 | ERROR | app.utils.error_utils | Unexpected error during creating Simple RAG Agent: test_task() got an unexpected keyword argument 'db'
+2025-09-29 11:42:43,041 | INFO | main | Redis event bus stopped
+2025-09-29 11:42:53,010 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 11:42:53,011 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 11:43:11,825 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*']
+2025-09-29 11:43:11,857 | INFO | main | Redis event bus started
+2025-09-29 11:48:16,152 | INFO | main | Redis event bus stopped
+2025-09-29 11:48:28,226 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 11:48:28,227 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 11:48:33,275 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 11:48:33,276 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 11:48:56,919 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*']
+2025-09-29 11:48:56,922 | INFO | main | Redis event bus started
+2025-09-29 11:49:36,676 | INFO | main | Redis event bus stopped
+2025-09-29 11:49:46,281 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 11:49:46,282 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 11:50:03,716 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*']
+2025-09-29 11:50:03,739 | INFO | main | Redis event bus started
+2025-09-29 11:50:27,602 | INFO | app.tasks.test_task | Task Execution: user_id 1
+2025-09-29 11:52:04,327 | INFO | main | Redis event bus stopped
+2025-09-29 12:11:37,630 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 12:11:37,633 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 12:12:05,317 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 12:12:05,318 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 12:12:19,605 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*']
+2025-09-29 12:12:19,607 | INFO | main | Redis event bus started
+2025-09-29 12:12:58,598 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-09-29 12:12:58,599 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-09-29 12:13:18,560 | INFO | app.tasks.test_task | Task Execution: user_id 1
+2025-09-29 12:13:18,788 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 12:13:18,812 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 12:13:18,821 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 12:13:18,833 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'message': 'prosess create agent.'}, 'timestamp': '2025-09-29T05:13:18.637387'}
+2025-09-29 12:18:08,020 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-09-29 12:18:08,397 | INFO | app.websocket.manager | User with id 1 has been deleted from connections
+2025-09-29 12:18:08,798 | INFO | main | Redis event bus stopped
+2025-09-29 12:18:22,316 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 12:18:22,465 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 12:19:00,726 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*']
+2025-09-29 12:19:00,728 | INFO | main | Redis event bus started
+2025-09-29 12:21:55,007 | INFO | main | Redis event bus stopped
+2025-09-29 12:22:12,861 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 12:22:12,864 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 12:22:36,357 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*']
+2025-09-29 12:22:36,361 | INFO | main | Redis event bus started
+2025-09-29 12:24:26,699 | INFO | main | Redis event bus stopped
+2025-09-29 12:25:37,461 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 12:25:37,465 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 12:26:11,087 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 12:26:11,088 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 12:26:48,248 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*']
+2025-09-29 12:26:48,257 | INFO | main | Redis event bus started
+2025-09-29 12:26:54,329 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-09-29 12:26:54,330 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-09-29 12:27:07,328 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-09-29 12:27:07,329 | INFO | app.websocket.manager | User with id 1 has been deleted from connections
+2025-09-29 12:27:07,786 | INFO | main | Redis event bus stopped
+2025-09-29 12:28:15,304 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 12:28:15,339 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 12:29:21,925 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*']
+2025-09-29 12:29:21,940 | INFO | main | Redis event bus started
+2025-09-29 12:29:22,045 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-09-29 12:29:22,047 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-09-29 12:29:39,856 | INFO | app.tasks.test_task | Task Execution: user_id 1
+2025-09-29 12:29:40,334 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 12:29:40,400 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 12:29:40,629 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 12:29:40,764 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 20, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T05:29:39.963587'}
+2025-09-29 12:30:49,330 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-09-29 12:30:49,332 | INFO | app.websocket.manager | User with id 1 has been deleted from connections
+2025-09-29 12:30:49,489 | INFO | main | Redis event bus stopped

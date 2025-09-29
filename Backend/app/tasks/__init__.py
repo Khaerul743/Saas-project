@@ -1,4 +1,5 @@
 from celery import Celery
+
 from app.configs.config import settings
 
 celery_app = Celery(
@@ -25,7 +26,10 @@ celery_app.conf.update(
 )
 
 # Import tasks to ensure they are registered
-from app.tasks import agent_task  # noqa: F401
+from app.tasks import (
+    agent_task,  # noqa: F401
+    test_task,  # noqa: F401
+)
 
 # Auto-discover tasks from the app.tasks module
-celery_app.autodiscover_tasks(['app.tasks'])
+celery_app.autodiscover_tasks(["app.tasks"])

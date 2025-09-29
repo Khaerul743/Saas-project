@@ -1,5 +1,4 @@
 import uvicorn
-from app.websocket import websocket_route
 from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
@@ -11,6 +10,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from app.configs.config import settings
 from app.configs.database import Base, engine
 from app.configs.limiter import limiter
+from app.events import event_handler
 from app.events.redis_event import event_bus
 from app.middlewares.error_handler import ErrorHandlerMiddleware
 from app.middlewares.limiter_handler import rate_limit_exceeded_handler
@@ -52,6 +52,7 @@ from app.routes import (
 )
 from app.utils.logger import get_logger
 from app.utils.response import error_response
+from app.websocket import ws_route
 
 logger = get_logger(__name__)
 
@@ -108,7 +109,7 @@ app.include_router(dashboard_route.router)
 app.include_router(task_route.router)
 
 # WebSocket routes
-app.include_router(websocket_route.router)
+app.include_router(ws_route.router)
 
 
 @app.on_event("startup")
@@ -132,19 +133,22 @@ async def shutdown_event():
 # Global exception handlers
 @app.exception_handler(StarletteHTTPException)
 async def http_exception_handler(request: Request, exc: StarletteHTTPException):
-    return error_response(
+    return JSONResponse(
         status_code=exc.status_code,
-        message=exc.detail,
-        data=None,
+        content=error_response(message=exc.detail),
     )
 
 
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
-    return error_response(
+    logger.warning(f"Validation error: {exc.errors()}")
+    return JSONResponse(
         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-        message="Validation Error",
-        data=exc.errors(),
+        content={
+            "status": "fail",
+            "message": "Validation error.",
+            "errors": exc.errors(),
+        },
     )
 
 
@@ -152,9 +156,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 async def general_exception_handler(request: Request, exc: Exception):
     logger.error(f"Unhandled exception: {exc}", exc_info=True)
     return error_response(
-        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
         message="Internal Server Error",
-        data=None,
     )
 
 

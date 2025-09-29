@@ -9,15 +9,22 @@ from sqlalchemy.orm import Session
 
 from app.AI import simple_RAG_agent as AI
 from app.controllers.document_controller import agents
-from app.models.agent.agent_entity import Agent
-from app.models.agent.simple_rag_model import CreateSimpleRAGAgent, SimpleRAGAgentOut, UpdateSimpleRAGAgent, SimpleRAGAgentAsyncResponse
+
+# from app.events.redis_event import event_bus
+# from app.models.agent.agent_entity import Agent
+from app.models.agent.simple_rag_model import (
+    CreateSimpleRAGAgent,
+    SimpleRAGAgentAsyncResponse,
+    SimpleRAGAgentOut,
+    UpdateSimpleRAGAgent,
+)
 from app.models.document.document_entity import Document
+from app.tasks import celery_app
+from app.tasks.test_task import test_task
 from app.utils.document_utils import write_document
 from app.utils.error_utils import handle_database_error, handle_user_not_found
 from app.utils.logger import get_logger
 from app.utils.validation_utils import validate_agent_exists_and_owned
-from app.tasks.agent_task import create_simple_rag_agent as create_simple_rag_agent_task
-from app.tasks import celery_app
 
 logger = get_logger(__name__)
 
@@ -30,17 +37,17 @@ async def create_simple_rag_agent(
 ) -> SimpleRAGAgentAsyncResponse:
     """
     Create a new Simple RAG Agent for the authenticated user.
-    
+
     Args:
         db: Database session
         file: Optional uploaded file for document
         agent_data: Simple RAG Agent creation data
         current_user: Current authenticated user
         background_tasks: Optional background tasks
-        
+
     Returns:
         SimpleRAGAgentOut: Created agent data
-        
+
     Raises:
         HTTPException: If creation fails
     """
@@ -48,18 +55,18 @@ async def create_simple_rag_agent(
         # Validate user exists
         user_id = current_user.get("id")
         if not user_id:
-            raise handle_user_not_found(current_user.get('email', 'unknown'))
-    
+            raise handle_user_not_found(current_user.get("email", "unknown"))
+
         # if file:
         #     if file.content_type not in ["pdf", "txt"]:
         #         raise HTTPException(
         #             status_code=status.HTTP_400_BAD_REQUEST,
         #             detail="File type must be pdf or txt.",
         #         )
-        
+
         # Convert Pydantic model to dict untuk JSON serialization
         agent_data_dict = agent_data.dict()
-        
+
         # Handle file data untuk serialization
         file_data = None
         if file:
@@ -69,16 +76,19 @@ async def create_simple_rag_agent(
                 "filename": file.filename,
                 "content_type": file.content_type,
                 "content": file_content.hex(),  # Convert binary to hex string
-                "size": len(file_content)
+                "size": len(file_content),
             }
             # Reset file pointer
             await file.seek(0)
-        
+
         # Start Celery task dengan data yang sudah di-serialize
-        task = create_simple_rag_agent_task.delay(
-            file_data=file_data,  # Dict instead of UploadFile
-            agent_data=agent_data_dict,  # Dict instead of Pydantic model
-            user_id=user_id
+        # task = create_simple_rag_agent_task.delay(
+        #     file_data=file_data,  # Dict instead of UploadFile
+        #     agent_data=agent_data_dict,  # Dict instead of Pydantic model
+        #     user_id=user_id
+        # )
+        task = test_task.delay(
+            file_data=file_data, agent_data=agent_data_dict, user_id=user_id
         )
         # Return response dengan format yang sesuai untuk async task
         return SimpleRAGAgentAsyncResponse(
@@ -94,7 +104,7 @@ async def create_simple_rag_agent(
             status="pending",  # Override status untuk async task
             created_at=None,  # Will be set when task completes
             task_id=task.id,
-            message="Simple RAG Agent creation is pending"
+            message="Simple RAG Agent creation is pending",
         )
         # Create new agent in database
         # new_agent = Agent(
@@ -117,7 +127,7 @@ async def create_simple_rag_agent(
 
         # # Create directory for agent documents
         # directory_path = f"documents/user_{user_id}/agent_{new_agent.id}"
-        
+
         # # Initialize Simple RAG Agent instance
         # if not str(new_agent.id) in agents:
         #     def init_agent():
@@ -132,14 +142,14 @@ async def create_simple_rag_agent(
         #         )
 
         #     init_agent()
-       
+
         # # Handle file upload if provided
         # if file:
         #     try:
         #         # Write file to disk first
         #         content_type: Literal['pdf'] | Literal['txt'] | Literal['csv'] | Literal['excel'] = write_document(file, directory_path)
         #         file_path = os.path.join(directory_path, file.filename)
-                
+
         #         # Create document record in database
         #         post_document = Document(
         #             agent_id=new_agent.id,
@@ -149,7 +159,7 @@ async def create_simple_rag_agent(
 
         #         db.add(post_document)
         #         db.flush()
-                
+
         #         # Try to add document to RAG system
         #         agents[str(new_agent.id)].add_document(
         #             file.filename,
@@ -160,11 +170,11 @@ async def create_simple_rag_agent(
         #         # If everything succeeds, commit the transaction
         #         db.commit()
         #         db.refresh(post_document)
-                
+
         #     except Exception as e:
         #         # Rollback database transaction
         #         db.rollback()
-                
+
         #         # Remove physical file if it exists
         #         try:
         #             if os.path.exists(file_path):
@@ -172,7 +182,7 @@ async def create_simple_rag_agent(
         #                 logger.info(f"Rollback: Removed file {file_path} due to error")
         #         except Exception as file_err:
         #             logger.error(f"Failed to remove file {file_path} during rollback: {file_err}")
-                
+
         #         # Re-raise the original exception
         #         raise e
         # else:
@@ -213,8 +223,12 @@ async def create_simple_rag_agent(
         raise
     except Exception as e:
         db.rollback()
-        logger.error(f"Unexpected error while creating Simple RAG Agent: {str(e)}", exc_info=True)
-        raise handle_database_error(e, "creating Simple RAG Agent", current_user.get('email'))
+        logger.error(
+            f"Unexpected error while creating Simple RAG Agent: {str(e)}", exc_info=True
+        )
+        raise handle_database_error(
+            e, "creating Simple RAG Agent", current_user.get("email")
+        )
 
 
 def update_simple_rag_agent(
@@ -225,28 +239,30 @@ def update_simple_rag_agent(
 ) -> SimpleRAGAgentOut:
     """
     Update an existing Simple RAG Agent.
-    
+
     Args:
         db: Database session
         agent_id: ID of the agent to update
         agent_data: Update data
         current_user: Current authenticated user
-        
+
     Returns:
         SimpleRAGAgentOut: Updated agent data
-        
+
     Raises:
         HTTPException: If update fails
     """
     try:
         # Validate agent exists and is owned by user
-        agent = validate_agent_exists_and_owned(db, agent_id, current_user.get("id"), current_user.get('email'))
-        
+        agent = validate_agent_exists_and_owned(
+            db, agent_id, current_user.get("id"), current_user.get("email")
+        )
+
         # Check if agent is Simple RAG Agent
         if agent.role != "simple RAG agent":
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail="This endpoint is only for Simple RAG Agents."
+                detail="This endpoint is only for Simple RAG Agents.",
             )
 
         # Update agent fields
@@ -281,8 +297,12 @@ def update_simple_rag_agent(
         raise
     except Exception as e:
         db.rollback()
-        logger.error(f"Unexpected error while updating Simple RAG Agent: {str(e)}", exc_info=True)
-        raise handle_database_error(e, "updating Simple RAG Agent", current_user.get('email'))
+        logger.error(
+            f"Unexpected error while updating Simple RAG Agent: {str(e)}", exc_info=True
+        )
+        raise handle_database_error(
+            e, "updating Simple RAG Agent", current_user.get("email")
+        )
 
 
 def delete_simple_rag_agent(
@@ -292,27 +312,29 @@ def delete_simple_rag_agent(
 ) -> dict:
     """
     Delete a Simple RAG Agent.
-    
+
     Args:
         agent_id: ID of the agent to delete
         current_user: Current authenticated user
         db: Database session
-        
+
     Returns:
         dict: Success message
-        
+
     Raises:
         HTTPException: If deletion fails
     """
     try:
         # Validate agent exists and is owned by user
-        agent = validate_agent_exists_and_owned(db, agent_id, current_user.get("id"), current_user.get('email'))
-        
+        agent = validate_agent_exists_and_owned(
+            db, agent_id, current_user.get("id"), current_user.get("email")
+        )
+
         # Check if agent is Simple RAG Agent
         if agent.role != "simple RAG agent":
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail="This endpoint is only for Simple RAG Agents."
+                detail="This endpoint is only for Simple RAG Agents.",
             )
 
         # Remove agent from memory if exists
@@ -328,12 +350,18 @@ def delete_simple_rag_agent(
             f"{current_user.get('email')}"
         )
 
-        return {"message": f"Simple RAG Agent deleted successfully: agent ID is {agent_id}"}
+        return {
+            "message": f"Simple RAG Agent deleted successfully: agent ID is {agent_id}"
+        }
 
     except HTTPException:
         db.rollback()
         raise
     except Exception as e:
         db.rollback()
-        logger.error(f"Unexpected error while deleting Simple RAG Agent: {str(e)}", exc_info=True)
-        raise handle_database_error(e, "deleting Simple RAG Agent", current_user.get('email'))
+        logger.error(
+            f"Unexpected error while deleting Simple RAG Agent: {str(e)}", exc_info=True
+        )
+        raise handle_database_error(
+            e, "deleting Simple RAG Agent", current_user.get("email")
+        )
