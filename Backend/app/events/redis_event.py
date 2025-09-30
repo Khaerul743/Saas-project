@@ -17,6 +17,7 @@ logger = get_logger(__name__)
 class EventType(Enum):
     AGENT_CREATION_PROGRESS = "event.agent.progress"
     AGENT_CREATION_SUCCESS = "event.agent.success"
+    AGENT_CREATION_FAILURE = "event.agent.failure"
 
 
 @dataclass

@@ -20,7 +20,7 @@ from app.models.agent.simple_rag_model import (
 )
 from app.models.document.document_entity import Document
 from app.tasks import celery_app
-from app.tasks.test_task import test_task
+from app.tasks.test_task import create_simple_rag_agent_task
 from app.utils.document_utils import write_document
 from app.utils.error_utils import handle_database_error, handle_user_not_found
 from app.utils.logger import get_logger
@@ -87,7 +87,7 @@ async def create_simple_rag_agent(
         #     agent_data=agent_data_dict,  # Dict instead of Pydantic model
         #     user_id=user_id
         # )
-        task = test_task.delay(
+        task = create_simple_rag_agent_task.delay(
             file_data=file_data, agent_data=agent_data_dict, user_id=user_id
         )
         # Return response dengan format yang sesuai untuk async task

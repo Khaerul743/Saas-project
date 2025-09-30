@@ -1,7 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from app.tasks import celery_app
 from app.middlewares.RBAC import role_required
+from app.utils.logger import get_logger
 
+logger = get_logger(__name__)
 router = APIRouter(prefix="/api/tasks", tags=["tasks"])
 
 @router.get("/status/{task_id}")
@@ -10,7 +12,7 @@ def get_task_status(
     current_user: dict = Depends(role_required(["admin", "user"])),
 ):
     """Get the status of a Celery task"""
-    print(f"Getting task status for task_id: {task_id}")
+    logger.info(f"Getting task status for task_id: {task_id}")
     try:
         task_result = celery_app.AsyncResult(task_id)
         

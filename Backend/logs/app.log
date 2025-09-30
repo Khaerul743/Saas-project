@@ -8696,3 +8696,394 @@ TypeError: test_task() got an unexpected keyword argument 'db'
 2025-09-29 12:30:49,330 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
 2025-09-29 12:30:49,332 | INFO | app.websocket.manager | User with id 1 has been deleted from connections
 2025-09-29 12:30:49,489 | INFO | main | Redis event bus stopped
+2025-09-29 18:59:47,404 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 18:59:47,409 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 19:00:25,970 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 19:00:25,984 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 19:00:39,984 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 19:00:39,985 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 19:00:54,733 | ERROR | main | Error starting Redis event bus: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-09-29 19:03:15,807 | INFO | main | Redis event bus stopped
+2025-09-29 19:03:29,152 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 19:03:29,153 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 19:03:45,410 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*']
+2025-09-29 19:03:45,413 | INFO | main | Redis event bus started
+2025-09-29 19:04:16,818 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-09-29 19:04:16,819 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-09-29 19:05:19,952 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-29 19:05:33,627 | INFO | app.tasks.test_task | Task Execution: user_id 1
+2025-09-29 19:05:33,709 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 19:05:34,370 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 19:05:34,434 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 19:05:34,680 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 19:05:34,690 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:05:34,835 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 19:05:34,837 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 20, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T12:05:33.719226'}
+2025-09-29 19:05:34,803 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 19:05:35,020 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 19:05:35,116 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 19:05:35,023 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:05:35,122 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 19:05:35,123 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 19:05:35,125 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 40, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T12:05:34.371009'}
+2025-09-29 19:05:35,473 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 19:05:35,417 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:05:35,583 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 19:05:35,477 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 19:05:35,725 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 60, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T12:05:34.434777'}
+2025-09-29 19:05:35,993 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:05:36,073 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 19:05:36,203 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 80, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T12:05:34.813726'}
+2025-09-29 19:05:36,580 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:05:36,650 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 19:05:36,700 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 100, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T12:05:35.123746'}
+2025-09-29 19:07:51,811 | INFO | app.routes.task_route | Getting task status for task_id: 0eafc51f-80d4-447a-9744-ab2e1a4b2b8d
+2025-09-29 19:11:26,799 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-09-29 19:11:26,819 | INFO | app.websocket.manager | User with id 1 has been deleted from connections
+2025-09-29 19:31:14,045 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 19:31:14,049 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 19:31:14,050 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-09-29 19:31:45,914 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 19:31:45,919 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 19:31:45,920 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-09-29 19:32:05,607 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*']
+2025-09-29 19:32:05,608 | INFO | main | Redis event bus started
+2025-09-29 19:32:26,196 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-09-29 19:32:26,197 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-09-29 19:33:21,312 | INFO | app.tasks.test_task | Task Execution: user_id 1
+2025-09-29 19:33:21,560 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 19:33:21,594 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 19:33:21,639 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 19:33:21,641 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 19:33:21,650 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 19:33:21,652 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:33:21,658 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 19:33:21,691 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 20, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T12:33:21.570650'}
+2025-09-29 19:33:21,651 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 19:33:21,722 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:33:21,891 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 19:33:21,861 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 19:33:21,854 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 19:33:22,511 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 19:33:22,411 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 40, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T12:33:21.639403'}
+2025-09-29 19:33:22,584 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:33:22,622 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 19:33:22,624 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 60, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T12:33:21.647355'}
+2025-09-29 19:33:22,505 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 19:33:22,649 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:33:22,682 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 19:33:22,683 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 80, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T12:33:21.862287'}
+2025-09-29 19:33:22,705 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:33:22,728 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 19:33:22,754 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 100, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T12:33:22.506505'}
+2025-09-29 19:38:06,042 | INFO | app.tasks.test_task | Task Execution: user_id 1
+2025-09-29 19:38:06,115 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 19:38:06,187 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:38:06,182 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 19:38:06,199 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 19:38:06,209 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 20, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T12:38:06.124421'}
+2025-09-29 19:38:06,245 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 19:38:06,310 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:38:06,378 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 19:38:06,573 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 19:38:06,354 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 19:38:06,590 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 19:38:06,610 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 19:38:06,600 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 40, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T12:38:06.183878'}
+2025-09-29 19:38:06,661 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 19:38:06,723 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:38:07,006 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 19:38:07,159 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 19:38:07,425 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 19:38:07,420 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 60, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T12:38:06.379033'}
+2025-09-29 19:38:07,466 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:38:07,514 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 19:38:07,905 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 80, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T12:38:06.608133'}
+2025-09-29 19:38:07,920 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:38:07,921 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 19:38:07,922 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 100, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T12:38:06.994806'}
+2025-09-29 19:38:30,340 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-09-29 19:38:30,479 | INFO | app.websocket.manager | User with id 1 has been deleted from connections
+2025-09-29 19:38:31,129 | INFO | main | Redis event bus stopped
+2025-09-29 19:39:09,226 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 19:39:09,228 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 19:39:09,229 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-09-29 19:39:40,558 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*']
+2025-09-29 19:39:40,563 | INFO | main | Redis event bus started
+2025-09-29 19:40:14,140 | INFO | main | Redis event bus stopped
+2025-09-29 19:46:17,597 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 19:46:17,598 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 19:46:17,599 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-09-29 19:46:59,152 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 19:46:59,154 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 19:46:59,162 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-09-29 19:47:16,182 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*']
+2025-09-29 19:47:16,184 | INFO | main | Redis event bus started
+2025-09-29 19:47:24,955 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-09-29 19:47:24,956 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-09-29 19:47:43,608 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 1 for user 1
+2025-09-29 19:47:43,613 | INFO | app.utils.event_utils | Published event.agent.success event for agent 1 for user 1
+2025-09-29 19:47:43,623 | INFO | app.utils.event_utils | Published event.agent.failure event for agent 1 for user 1
+2025-09-29 19:47:43,785 | ERROR | app.events.redis_event | Error while published event: no running event loop
+2025-09-29 19:49:08,478 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-09-29 19:49:08,679 | INFO | app.websocket.manager | User with id 1 has been deleted from connections
+2025-09-29 19:49:09,059 | INFO | main | Redis event bus stopped
+2025-09-29 19:49:32,264 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 19:49:32,265 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 19:49:32,265 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-09-29 19:49:50,565 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 19:49:50,567 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 19:49:50,568 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-09-29 19:50:05,976 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*']
+2025-09-29 19:50:05,977 | INFO | main | Redis event bus started
+2025-09-29 19:50:11,841 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-09-29 19:50:11,842 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-09-29 19:50:16,350 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 19:50:16,352 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:50:16,353 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 19:50:16,352 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.success.user:1
+2025-09-29 19:50:16,353 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 1, 'payload': {'message': 'prosess create agent.'}, 'timestamp': '2025-09-29T12:50:16.276412'}
+2025-09-29 19:50:16,355 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.failure.user:1
+2025-09-29 19:50:16,368 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:50:16,391 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_SUCCESS
+2025-09-29 19:50:16,396 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.success', 'user_id': 1, 'agent_id': 1, 'payload': {'message': 'create agent success.'}, 'timestamp': '2025-09-29T12:50:16.350829'}
+2025-09-29 19:50:16,412 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:50:16,432 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_FAILURE
+2025-09-29 19:50:16,435 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.failure', 'user_id': 1, 'agent_id': 1, 'payload': {'message': 'create agent failure.'}, 'timestamp': '2025-09-29T12:50:16.354338'}
+2025-09-29 19:52:18,067 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-09-29 19:52:18,183 | INFO | app.websocket.manager | User with id 1 has been deleted from connections
+2025-09-29 19:52:19,047 | INFO | main | Redis event bus stopped
+2025-09-29 19:52:50,765 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 19:52:50,800 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 19:52:50,864 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-09-29 19:53:21,455 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*']
+2025-09-29 19:53:21,459 | INFO | main | Redis event bus started
+2025-09-29 19:53:24,869 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-09-29 19:53:24,870 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-09-29 19:53:39,885 | INFO | app.tasks.test_task | Task Execution: user_id 1
+2025-09-29 19:53:39,974 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 19:53:40,055 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 19:53:40,106 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:53:40,151 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 19:53:40,124 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 19:53:40,192 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 20, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T12:53:39.979573'}
+2025-09-29 19:53:40,303 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 19:53:40,368 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 19:53:40,287 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 19:53:40,372 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:53:40,496 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 19:53:40,499 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 19:53:40,467 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 19:53:40,719 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 40, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T12:53:40.057363'}
+2025-09-29 19:53:40,829 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:53:40,936 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 19:53:40,938 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 60, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T12:53:40.287955'}
+2025-09-29 19:53:41,156 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 19:53:40,962 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:53:41,164 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 19:53:41,165 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 80, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T12:53:40.495462'}
+2025-09-29 19:53:41,161 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 19:53:41,192 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:53:41,269 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 19:53:41,272 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 100, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T12:53:41.157324'}
+2025-09-29 19:57:00,210 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-09-29 19:57:00,451 | INFO | app.websocket.manager | User with id 1 has been deleted from connections
+2025-09-29 19:57:00,624 | INFO | main | Redis event bus stopped
+2025-09-29 19:57:14,987 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 19:57:14,988 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 19:57:14,989 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-09-29 19:57:30,725 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*']
+2025-09-29 19:57:30,730 | INFO | main | Redis event bus started
+2025-09-29 19:57:46,465 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-09-29 19:57:46,466 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-09-29 19:58:40,683 | INFO | app.tasks.test_task | Task Execution: user_id 1
+2025-09-29 19:58:40,684 | INFO | app.tasks.test_task | Creating Simple RAG Agent for user 1
+2025-09-29 19:58:40,689 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 19:58:40,696 | ERROR | app.tasks.test_task | Error creating Simple RAG Agent: When initializing mapper Mapper[Agent(agents)], expression 'CompanyInformation' failed to locate a name ('CompanyInformation'). If this is a class name, consider adding this relationship() to the <class 'app.models.agent.agent_entity.Agent'> class after both dependent classes have been defined.
+2025-09-29 19:58:40,703 | INFO | app.utils.event_utils | Published event.agent.failure event for agent 2 for user 1
+2025-09-29 19:58:40,731 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 19:58:40,738 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:58:40,754 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 19:58:40,827 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 20, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T12:58:40.698595'}
+2025-09-29 19:58:40,990 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.failure.user:1
+2025-09-29 19:58:41,004 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 19:58:41,005 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_FAILURE
+2025-09-29 19:58:41,007 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.failure', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 100, 'total': 100, 'status': 'Agent creation is failed'}, 'timestamp': '2025-09-29T12:58:40.710919'}
+2025-09-29 19:59:45,006 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-09-29 19:59:45,007 | INFO | app.websocket.manager | User with id 1 has been deleted from connections
+2025-09-29 19:59:45,153 | INFO | main | Redis event bus stopped
+2025-09-29 20:06:43,695 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 20:06:43,705 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 20:06:43,731 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-09-29 20:07:34,607 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 20:07:34,615 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 20:07:34,638 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-09-29 20:08:02,132 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*']
+2025-09-29 20:08:02,135 | INFO | main | Redis event bus started
+2025-09-29 20:08:05,508 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-09-29 20:08:05,509 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-09-29 20:08:17,034 | WARNING | app.dependencies.auth | Access attempt without token
+2025-09-29 20:08:43,282 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-29 20:09:04,743 | INFO | app.tasks.test_task | Task Execution: user_id 1
+2025-09-29 20:09:04,758 | INFO | app.tasks.test_task | Creating Simple RAG Agent for user 1
+2025-09-29 20:09:04,767 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 20:09:05,177 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 20:09:05,182 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 20:09:05,194 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 20, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T13:09:04.923782'}
+2025-09-29 20:09:05,163 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 20:09:05,258 | ERROR | app.tasks.test_task | Error creating Simple RAG Agent: When initializing mapper Mapper[Agent(agents)], expression 'CompanyInformation' failed to locate a name ('CompanyInformation'). If this is a class name, consider adding this relationship() to the <class 'app.models.agent.agent_entity.Agent'> class after both dependent classes have been defined.
+2025-09-29 20:09:05,281 | INFO | app.utils.event_utils | Published event.agent.failure event for agent 2 for user 1
+2025-09-29 20:09:05,320 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 20:09:05,322 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_FAILURE
+2025-09-29 20:09:05,323 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.failure', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 100, 'total': 100, 'status': 'Agent creation is failed'}, 'timestamp': '2025-09-29T13:09:05.313623'}
+2025-09-29 20:09:05,331 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.failure.user:1
+2025-09-29 20:10:47,757 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-09-29 20:10:47,953 | INFO | app.websocket.manager | User with id 1 has been deleted from connections
+2025-09-29 20:10:50,001 | INFO | main | Redis event bus stopped
+2025-09-29 20:11:57,828 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 20:11:57,858 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 20:11:57,977 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-09-29 20:12:27,132 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*']
+2025-09-29 20:12:27,135 | INFO | main | Redis event bus started
+2025-09-29 20:12:35,170 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-09-29 20:12:35,171 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-09-29 20:12:50,589 | INFO | app.tasks.test_task | Task Execution: user_id 1
+2025-09-29 20:12:50,657 | INFO | app.tasks.test_task | Creating Simple RAG Agent for user 1
+2025-09-29 20:12:50,715 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 20:12:50,754 | INFO | app.tasks.test_task | Agent data: name='ketiga' avatar=None model='gpt-3.5-turbo' description=None base_prompt='pp' tone='friendly' short_term_memory=False long_term_memory=False status='active'
+2025-09-29 20:12:50,974 | ERROR | app.tasks.test_task | Error creating Simple RAG Agent: When initializing mapper Mapper[Agent(agents)], expression 'CompanyInformation' failed to locate a name ('CompanyInformation'). If this is a class name, consider adding this relationship() to the <class 'app.models.agent.agent_entity.Agent'> class after both dependent classes have been defined.
+2025-09-29 20:12:51,022 | INFO | app.utils.event_utils | Published event.agent.failure event for agent 2 for user 1
+2025-09-29 20:12:51,048 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 20:12:51,058 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 20:12:51,042 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 20:12:51,076 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 20, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T13:12:50.774712'}
+2025-09-29 20:12:57,626 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.failure.user:1
+2025-09-29 20:12:57,628 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 20:12:57,638 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_FAILURE
+2025-09-29 20:12:57,666 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.failure', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 100, 'total': 100, 'status': 'Agent creation is failed'}, 'timestamp': '2025-09-29T13:12:51.034356'}
+2025-09-29 20:14:20,044 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-09-29 20:14:20,144 | INFO | app.websocket.manager | User with id 1 has been deleted from connections
+2025-09-29 20:14:22,586 | INFO | main | Redis event bus stopped
+2025-09-29 20:15:23,841 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 20:15:24,002 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 20:15:24,021 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-09-29 20:16:57,614 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*']
+2025-09-29 20:16:57,616 | INFO | main | Redis event bus started
+2025-09-29 20:16:57,624 | INFO | main | Redis event bus stopped
+2025-09-29 20:18:21,961 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 20:18:22,022 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 20:18:22,052 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-09-29 20:19:29,378 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 20:19:29,390 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 20:19:29,425 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-09-29 20:20:55,684 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 20:20:55,691 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 20:20:55,708 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-09-29 20:22:31,644 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 20:22:32,058 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 20:22:32,059 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-09-29 20:23:08,055 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 20:23:08,095 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 20:23:08,096 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-09-29 20:23:27,992 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*']
+2025-09-29 20:23:27,994 | INFO | main | Redis event bus started
+2025-09-29 20:23:44,989 | INFO | app.tasks.test_task | Task Execution: user_id 1
+2025-09-29 20:23:45,016 | INFO | app.tasks.test_task | Creating Simple RAG Agent for user 1
+2025-09-29 20:23:45,076 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 20:23:45,118 | INFO | app.tasks.test_task | Agent data: name='ketiga' avatar=None model='gpt-3.5-turbo' description=None base_prompt='pp' tone='friendly' short_term_memory=False long_term_memory=False status='active'
+2025-09-29 20:23:45,330 | ERROR | app.tasks.test_task | Error creating Simple RAG Agent: When initializing mapper Mapper[Agent(agents)], expression 'CompanyInformation' failed to locate a name ('CompanyInformation'). If this is a class name, consider adding this relationship() to the <class 'app.models.agent.agent_entity.Agent'> class after both dependent classes have been defined.
+2025-09-29 20:23:45,405 | INFO | app.utils.event_utils | Published event.agent.failure event for agent 2 for user 1
+2025-09-29 20:23:45,513 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 20:23:45,514 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 20:23:45,516 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 20:23:45,861 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 20:23:45,858 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.failure.user:1
+2025-09-29 20:23:45,915 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_FAILURE
+2025-09-29 20:30:05,318 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 20:30:06,133 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 20:30:06,277 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-09-29 20:30:34,319 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-29 20:30:34,323 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-29 20:30:34,331 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-09-29 20:31:04,588 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*']
+2025-09-29 20:31:04,591 | INFO | main | Redis event bus started
+2025-09-29 20:31:17,980 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-09-29 20:31:17,982 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-09-29 20:31:42,900 | INFO | app.tasks.test_task | Task Execution: user_id 1
+2025-09-29 20:31:42,966 | INFO | app.tasks.test_task | Creating Simple RAG Agent for user 1
+2025-09-29 20:31:42,995 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 20:31:43,119 | INFO | app.tasks.test_task | Agent data: name='ketiga' avatar=None model='gpt-3.5-turbo' description=None base_prompt='pp' tone='friendly' short_term_memory=False long_term_memory=False status='active'
+2025-09-29 20:31:45,480 | INFO | app.tasks.test_task | New agent: <Agent name=ketiga user_id=1>
+2025-09-29 20:31:46,746 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 20:31:46,802 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_25
+2025-09-29 20:31:46,877 | INFO | app.utils.agent_utils | Initializing AI agent for agent 25
+2025-09-29 20:31:49,254 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 20:31:49,470 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 20:31:49,530 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 20:31:49,669 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 20, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-29T13:31:43.177285'}
+2025-09-29 20:31:49,948 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 20:31:49,957 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 20:31:50,057 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 20:31:50,161 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 40, 'total': 100, 'status': 'Initializing Simple RAG Agent'}, 'timestamp': '2025-09-29T13:31:46.777283'}
+2025-09-29 20:32:09,395 | INFO | app.utils.agent_utils | AI agent initialized for agent 25
+2025-09-29 20:32:09,424 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-29 20:32:09,437 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-29 20:32:09,450 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 20:32:09,487 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-29 20:32:09,517 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 60, 'total': 100, 'status': 'Adding Document to Simple RAG Agent'}, 'timestamp': '2025-09-29T13:32:09.435743'}
+2025-09-29 20:32:09,473 | INFO | app.utils.file_utils | Saved file: documents/user_1/agent_25\FAQ.pdf (type: pdf)
+2025-09-29 20:32:13,267 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-09-29 20:32:31,878 | INFO | app.AI.simple_RAG_agent | Successfully added document 'FAQ.pdf' with ID '33'
+2025-09-29 20:32:31,881 | INFO | app.utils.agent_utils | Added document FAQ.pdf to agent 25
+2025-09-29 20:32:31,921 | INFO | app.utils.event_utils | Published event.agent.success event for agent 2 for user 1
+2025-09-29 20:32:31,926 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-29 20:32:31,931 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_SUCCESS
+2025-09-29 20:32:31,925 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.success.user:1
+2025-09-29 20:32:31,932 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.success', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 100, 'total': 100, 'status': 'Agent creation is completed'}, 'timestamp': '2025-09-29T13:32:31.922542'}
+2025-09-29 20:33:08,965 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-09-29 20:33:08,973 | INFO | app.websocket.manager | User with id 1 has been deleted from connections
+2025-09-29 20:47:15,827 | INFO | main | Redis event bus stopped
+2025-09-30 10:46:16,554 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-30 10:46:16,560 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-30 10:46:16,607 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-09-30 10:46:46,990 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-09-30 10:46:46,991 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-09-30 10:46:46,993 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-09-30 10:47:03,706 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*']
+2025-09-30 10:47:03,770 | INFO | main | Redis event bus started
+2025-09-30 10:47:09,688 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-09-30 10:47:09,692 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-09-30 10:48:18,804 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-09-30 10:48:31,032 | INFO | app.tasks.test_task | Task Execution: user_id 1
+2025-09-30 10:48:31,088 | INFO | app.tasks.test_task | Creating Simple RAG Agent for user 1
+2025-09-30 10:48:31,169 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-30 10:48:31,239 | INFO | app.tasks.test_task | Agent data: name='ketiga' avatar=None model='gpt-3.5-turbo' description=None base_prompt='pp' tone='friendly' short_term_memory=False long_term_memory=False status='active'
+2025-09-30 10:48:31,560 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-30 10:48:31,564 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-30 10:48:31,566 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 20, 'total': 100, 'status': 'Initialize agent'}, 'timestamp': '2025-09-30T03:48:31.285701'}
+2025-09-30 10:48:31,555 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-30 10:48:31,647 | INFO | app.tasks.test_task | New agent: <Agent name=ketiga user_id=1>
+2025-09-30 10:48:32,013 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-30 10:48:32,025 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_26
+2025-09-30 10:48:32,022 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-30 10:48:32,024 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-30 10:48:32,034 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-30 10:48:32,051 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 40, 'total': 100, 'status': 'Initializing Simple RAG Agent'}, 'timestamp': '2025-09-30T03:48:32.020366'}
+2025-09-30 10:48:32,061 | INFO | app.utils.agent_utils | Initializing AI agent for agent 26
+2025-09-30 10:48:46,497 | INFO | app.utils.agent_utils | AI agent initialized for agent 26
+2025-09-30 10:48:46,584 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-09-30 10:48:46,596 | INFO | app.utils.file_utils | Saved file: documents/user_1/agent_26\FAQ.pdf (type: pdf)
+2025-09-30 10:48:46,602 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-09-30 10:48:46,612 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-30 10:48:46,622 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-09-30 10:48:46,658 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.progress', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 60, 'total': 100, 'status': 'Adding Document to Simple RAG Agent'}, 'timestamp': '2025-09-30T03:48:46.600758'}
+2025-09-30 10:48:49,969 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-09-30 10:48:54,547 | INFO | app.AI.simple_RAG_agent | Successfully added document 'FAQ.pdf' with ID '34'
+2025-09-30 10:48:54,662 | INFO | app.utils.agent_utils | Added document FAQ.pdf to agent 26
+2025-09-30 10:48:54,751 | INFO | app.utils.event_utils | Published event.agent.success event for agent 2 for user 1
+2025-09-30 10:48:54,781 | INFO | app.events.redis_event | Sending the message to handler function
+2025-09-30 10:48:54,782 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_SUCCESS
+2025-09-30 10:48:54,781 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.success.user:1
+2025-09-30 10:48:54,788 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.success', 'user_id': 1, 'agent_id': 2, 'payload': {'current': 100, 'total': 100, 'status': 'Agent creation is completed'}, 'timestamp': '2025-09-30T03:48:54.773666'}
+2025-09-30 10:49:20,301 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-09-30 10:49:20,327 | INFO | app.websocket.manager | User with id 1 has been deleted from connections

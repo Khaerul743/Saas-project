@@ -20,8 +20,8 @@ def publish_agent_event(
     payload: dict,
 ):
     """Publish agent event"""
-    run_async(event_bus.publish(Event(event_type=event_type, user_id=user_id, agent_id=agent_id, payload=payload)))
     logger.info(f"Published {event_type.value} event for agent {agent_id} for user {user_id}")
+    run_async(event_bus.publish(Event(event_type=event_type, user_id=user_id, agent_id=agent_id, payload=payload)))
 
 # def _get_or_create_event_loop():
 #     """Get existing event loop or create new one safely"""
