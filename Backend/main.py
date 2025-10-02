@@ -15,9 +15,6 @@ from app.events.redis_event import event_bus
 from app.middlewares.error_handler import ErrorHandlerMiddleware
 from app.middlewares.limiter_handler import rate_limit_exceeded_handler
 
-# Import Agent after all its related models
-from app.models.agent.agent_entity import Agent  # noqa: F401
-
 # Import models that have relationships with Agent first
 from app.models.company_information.company_entity import (
     CompanyInformation,  # noqa: F401
@@ -34,6 +31,9 @@ from app.models.platform.platform_entity import Platform  # noqa: F401
 from app.models.user.api_key_entity import ApiKey  # noqa: F401
 from app.models.user.user_entity import User  # noqa: F401
 from app.models.user_agent.user_agent_entity import UserAgent  # noqa: F401
+
+# Import Agent after all its related models
+from app.models.agent.agent_entity import Agent  # noqa: F401
 
 # Ensure all model mappers are registered before metadata.create_all
 from app.routes import (

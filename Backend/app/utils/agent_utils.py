@@ -10,20 +10,79 @@ from typing import Any, Dict, List, Optional
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
-from app.AI import simple_RAG_agent as AI
+from app.AI import simple_RAG_agent as SimpleRAGAI
+from app.AI import customer_service as CustomerServiceAI
 from app.controllers.document_controller import agents
+from app.models.company_information.company_entity import CompanyInformation
+from app.models.document.document_entity import Document
+from app.models.history_message.history_entity import HistoryMessage
+from app.models.history_message.metadata_entity import Metadata
+from app.models.integration.integration_entity import Integration
+from app.models.platform.platform_entity import Platform
+from app.models.user.api_key_entity import ApiKey
+from app.models.user.user_entity import User
+from app.models.user_agent.user_agent_entity import UserAgent
 from app.models.agent.agent_entity import Agent
 from app.models.agent.simple_rag_model import CreateSimpleRAGAgent
 from app.utils.logger import get_logger
+from app.dependencies.redis_storage import redis_storage
 
 logger = get_logger(__name__)
 
+async def build_agent(agent_id: str):
+    get_agent = await redis_storage.get_agent(agent_id)
+    if get_agent:
+        agent = SimpleRAGAI.Agent(
+            base_prompt=get_agent["base_prompt"],
+            tone=get_agent["tone"],
+            directory_path=get_agent["directory_path"],
+            chromadb_path=get_agent["chromadb_path"],
+            collection_name=get_agent["collection_name"],
+            model_llm=get_agent["model_llm"],   
+            short_memory=get_agent["short_memory"],
+        )
+        agents[agent_id] = agent
+        return agent
+    else:
+        return None
+
+
+def generate_agent_id(db: Session):
+    """
+    Generate a unique agent ID with improved collision handling
+    
+    Args:
+        db: Database session
+        
+    Returns:
+        str: Unique agent ID
+    """
+    import time
+    max_attempts = 10
+    
+    for attempt in range(max_attempts):
+        # Generate ID with timestamp component to reduce collision probability
+        timestamp_suffix = str(int(time.time() * 1000))[-3:]  # Last 3 digits of timestamp
+        random_part = ''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(2))
+        id = random_part + timestamp_suffix
+        
+        # Check if ID exists
+        is_exists = db.query(Agent).filter(Agent.id == id).first()
+        if not is_exists:
+            return id
+            
+        # If collision occurs, wait a bit and try again
+        time.sleep(0.001)  # 1ms delay
+    
+    # Fallback: use UUID if all attempts fail
+    import uuid
+    return str(uuid.uuid4())[:8]
 
 def create_agent_entity(
-    agent_data_obj: CreateSimpleRAGAgent, user_id: int, agent_role: str
+    agent_data_obj, user_id: int, agent_role: str
 ) -> Agent:
     """
-    Create Agent entity from CreateSimpleRAGAgent data
+    Create Agent entity
 
     Args:
         agent_data_obj: Agent creation data
@@ -33,11 +92,12 @@ def create_agent_entity(
         Agent: Created agent entity
     """
     return Agent(
+        id=agent_data_obj.id,
         user_id=user_id,
         name=agent_data_obj.name,
         avatar=agent_data_obj.avatar,
         model=agent_data_obj.model,
-        role=agent_role,  # Fixed role for Simple RAG Agent
+        role=agent_role,
         description=agent_data_obj.description,
         base_prompt=agent_data_obj.base_prompt,
         tone=agent_data_obj.tone,
@@ -47,7 +107,7 @@ def create_agent_entity(
     )
 
 
-def initialize_simple_rag_agent(agent: Agent, directory_path: str) -> None:
+def initialize_simple_rag_agent(agent: Agent, directory_path: str):
     """
     Initialize AI agent instance in memory
 
@@ -57,10 +117,10 @@ def initialize_simple_rag_agent(agent: Agent, directory_path: str) -> None:
     """
     agent_id_str = str(agent.id)
 
-    if agent_id_str not in agents:
+    if not agent_id_str in agents:
         logger.info(f"Initializing AI agent for agent {agent.id}")
 
-        agents[agent_id_str] = AI.Agent(
+        agent_obj = SimpleRAGAI.Agent(
             base_prompt=str(agent.base_prompt),  # type: ignore
             tone=str(agent.tone),  # type: ignore
             directory_path=directory_path,
@@ -69,14 +129,85 @@ def initialize_simple_rag_agent(agent: Agent, directory_path: str) -> None:
             model_llm=str(agent.model),  # type: ignore
             short_memory=bool(agent.short_term_memory),  # type: ignore
         )
-
+        agents[agent_id_str] = agent_obj
         logger.info(f"AI agent initialized for agent {agent.id}")
+        print(f"=================================================")
+        print(f"agents: {agents}")
+        print(f"=================================================")
     else:
         logger.info(f"AI agent already exists for agent {agent.id}")
 
 
+
+def initialize_customer_service_agent(
+    agent: Agent, 
+    directory_path: str, 
+    agent_data_obj,
+    datasets: List[dict]
+):
+    """
+    Initialize Customer Service AI agent instance in memory
+
+    Args:
+        agent: Agent entity
+        directory_path: Directory path for agent documents
+        agent_data_obj: Customer Service Agent creation data
+        datasets: List of dataset descriptions
+    """
+    agent_id_str = str(agent.id)
+
+    if agent_id_str not in agents:
+        logger.info(f"Initializing Customer Service AI agent for agent {agent.id}")
+
+        # Prepare dataset descriptions
+        dataset_descriptions = {}
+        available_databases = []
+        detail_data_parts = []
+
+        # Process datasets
+        for dataset in datasets:
+            if dataset.get("filename"):
+                filename_without_ext = dataset["filename"]
+                available_databases.append(filename_without_ext)
+                dataset_descriptions[f"db_{filename_without_ext}_description"] = dataset.get("description", "")
+
+        # Create company information
+        from app.models.company_information.company_model import CreateCompanyInformation
+        company_information = CreateCompanyInformation(
+            name=agent_data_obj.company_name,
+            industry=agent_data_obj.industry,
+            description=agent_data_obj.company_description,
+            address=agent_data_obj.address,
+            email=agent_data_obj.email,
+            website=agent_data_obj.website,
+            fallback_email=agent_data_obj.fallback_email,
+        )
+        
+        # Initialize Customer Service Agent
+        customer_service_agent = CustomerServiceAI.Agent(
+            base_prompt=str(agent.base_prompt),
+            tone=str(agent.tone),
+            llm_model=str(agent.model),
+            directory_path=directory_path,
+            chromadb_path="chroma_db",
+            collection_name=f"agent_{agent.id}",
+            available_databases=available_databases,
+            detail_data="\n".join(detail_data_parts) if detail_data_parts else "",
+            company_information=company_information,
+            long_memory=bool(agent.long_term_memory),
+            short_memory=bool(agent.short_term_memory),
+            status="active",
+            **dataset_descriptions,
+        )
+        agents[agent_id_str] = customer_service_agent  # type: ignore
+        logger.info(f"Customer Service AI agent initialized for agent {agent.id}")
+        return customer_service_agent
+    else:
+        logger.info(f"Customer Service AI agent already exists for agent {agent.id}")
+
+
 def add_document_to_agent(
-    agent: Agent, filename: str, content_type: str, document_id: int
+    agent_id: str, filename: str, content_type: str, document_id: int, directory_path: str
 ) -> None:
     """
     Add document to AI agent
@@ -87,17 +218,19 @@ def add_document_to_agent(
         content_type: Type of content (pdf, txt)
         document_id: ID of the document in database
     """
-    agent_id_str = str(agent.id)
 
-    if agent_id_str in agents:
-        agents[agent_id_str].add_document(
-            filename,
-            content_type,
-            str(document_id),
-        )
-        logger.info(f"Added document {filename} to agent {agent.id}")
-    else:
-        logger.error(f"AI agent not found for agent {agent.id}")
+    agent_id_str = str(agent_id)
+    from app.AI.document_store.RAG import RAGSystem
+    rag = RAGSystem(chroma_directiory="chroma_db", collection_name=f"agent_{agent_id_str}")
+    rag.add_document_collection(directory_path=directory_path, file_name=filename, file_type=content_type, doc_id=str(document_id))
+    logger.info(f"Added document {filename} to agent {agent_id_str}")
+    print(f"=================================================")
+    print(f"Added document {filename} to agent {agent_id_str}")
+    print(f"directory_path: {directory_path}")
+    print(f"collection_name: {f'agent_{agent_id_str}'}")
+    print(f"=================================================")
+
+
 
 
 def build_task_result(
@@ -105,6 +238,7 @@ def build_task_result(
     task_id: str,
     file_data: Optional[Dict] = None,
     document_id: Optional[int] = None,
+    document_ids: Optional[List[int]] = None,
 ) -> Dict[str, Any]:
     """
     Build task result dictionary
@@ -114,6 +248,7 @@ def build_task_result(
         task_id: Celery task ID
         file_data: Optional file data
         document_id: Optional document ID
+        document_ids: Optional list of document IDs
 
     Returns:
         Dict[str, Any]: Task result
@@ -121,7 +256,7 @@ def build_task_result(
     result = {
         "status": "completed",
         "agent_id": agent.id,
-        "message": "Simple RAG Agent created successfully",
+        "message": f"{agent.role.title()} Agent created successfully",
         "task_id": task_id,
     }
 
@@ -130,6 +265,8 @@ def build_task_result(
         result["file_name"] = file_data["filename"]
         if document_id:
             result["document_id"] = document_id
+        if document_ids:
+            result["document_ids"] = document_ids
 
     return result
 

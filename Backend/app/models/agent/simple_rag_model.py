@@ -18,11 +18,11 @@ class SimpleRAGAgentBase(BaseModel):
 
 class CreateSimpleRAGAgent(SimpleRAGAgentBase):
     """Model for creating a Simple RAG Agent"""
-    pass
+    id: Optional[str] = None
 
 
 class SimpleRAGAgentOut(SimpleRAGAgentBase):
-    id: int
+    id: str
     created_at: datetime
 
 
@@ -46,7 +46,7 @@ class SimpleRAGAgentResponse(BaseModel):
 
 class SimpleRAGAgentAsyncResponse(BaseModel):
     """Response model for async Simple RAG Agent creation"""
-    id: Optional[int] = None
+    id: Optional[str] = None
     name: str
     avatar: Optional[str] = None
     model: Literal["gpt-3.5-turbo", "gpt-4o"]

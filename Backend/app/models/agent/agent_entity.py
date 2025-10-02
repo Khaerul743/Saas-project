@@ -7,7 +7,7 @@ from app.configs.database import Base
 class Agent(Base):
     __tablename__ = "agents"
 
-    id = sa.Column(sa.Integer, primary_key=True, index=True, autoincrement=True)
+    id = sa.Column(sa.String(5), primary_key=True, index=True)
     user_id = sa.Column(
         sa.Integer,
         sa.ForeignKey("users.id", ondelete="CASCADE", onupdate="CASCADE"),
@@ -64,7 +64,8 @@ class Agent(Base):
         "CompanyInformation", 
         back_populates="agent",
         cascade="all, delete-orphan",
-        passive_deletes=True
+        passive_deletes=True,
+        uselist=False
     )
     # Relationship
     documents = relationship(

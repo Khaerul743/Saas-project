@@ -32,6 +32,23 @@ class CustomerServiceAgentOut(CustomerServiceAgentBase):
     created_at: datetime
 
 
+class CustomerServiceAgentAsyncResponse(BaseModel):
+    """Response model for async Customer Service Agent creation"""
+    id: Optional[int] = None
+    name: str
+    avatar: Optional[str] = None
+    model: Literal["gpt-3.5-turbo", "gpt-4o"]
+    description: Optional[str] = None
+    base_prompt: str
+    tone: Literal["formal", "friendly", "casual", "profesional"]
+    short_term_memory: bool = False
+    long_term_memory: bool = False
+    status: Literal["active", "non-active", "pending"]  # Add pending status
+    created_at: Optional[datetime] = None
+    task_id: str
+    message: str
+
+
 class UpdateCustomerServiceAgent(BaseModel):
     # Agent fields
     name: Optional[str] = None
@@ -58,6 +75,8 @@ class CustomerServiceAgentResponse(BaseModel):
     status: str
     message: str
     data: CustomerServiceAgentOut
+
+
 
 
 class DatasetDescription(BaseModel):

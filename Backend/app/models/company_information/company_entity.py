@@ -7,7 +7,7 @@ class CompanyInformation(Base):
     __tablename__ = "company_information"
     id = sa.Column(sa.Integer, nullable=False, primary_key=True, autoincrement=True)
     agent_id = sa.Column(
-        sa.Integer,
+        sa.String(5),
         sa.ForeignKey("agents.id", ondelete="CASCADE", onupdate="CASCADE"),
         nullable=False,
         unique=True,

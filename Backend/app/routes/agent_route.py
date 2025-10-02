@@ -115,9 +115,9 @@ def getAllUserAgent(
         raise
 
 @router.post("/invoke/{agent_id}")
-def invokeAgent(agent_id: int, agent_invoke: AgentInvoke, current_user: dict = Depends(role_required(["admin", "user"])), db: Session = Depends(get_db)):
+async def invokeAgent(agent_id: str, agent_invoke: AgentInvoke, current_user: dict = Depends(role_required(["admin", "user"])), db: Session = Depends(get_db)):
     try:
-        response = invoke_agent(agent_id, agent_invoke, current_user, db)
+        response = await invoke_agent(agent_id, agent_invoke, current_user, db)
         return success_response("Invoke agent is successfully", response)
     except:
         raise

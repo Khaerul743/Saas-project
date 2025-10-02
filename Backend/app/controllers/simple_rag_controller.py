@@ -7,7 +7,7 @@ from fastapi import BackgroundTasks, HTTPException, UploadFile, status
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session
 
-from app.AI import simple_RAG_agent as AI
+from app.AI import simple_RAG_agent as SimpleRAGAI
 from app.controllers.document_controller import agents
 
 # from app.events.redis_event import event_bus
@@ -25,6 +25,8 @@ from app.utils.document_utils import write_document
 from app.utils.error_utils import handle_database_error, handle_user_not_found
 from app.utils.logger import get_logger
 from app.utils.validation_utils import validate_agent_exists_and_owned
+from app.dependencies.redis_storage import redis_storage
+
 
 logger = get_logger(__name__)
 
@@ -80,19 +82,41 @@ async def create_simple_rag_agent(
             }
             # Reset file pointer
             await file.seek(0)
+        from app.utils.file_utils import create_agent_directory
+        from app.utils.agent_utils import generate_agent_id
+        agent_data_dict['id'] = generate_agent_id(db)
+
+        directory_path = create_agent_directory(user_id, agent_data_dict['id'])
 
         # Start Celery task dengan data yang sudah di-serialize
-        # task = create_simple_rag_agent_task.delay(
-        #     file_data=file_data,  # Dict instead of UploadFile
-        #     agent_data=agent_data_dict,  # Dict instead of Pydantic model
-        #     user_id=user_id
-        # )
         task = create_simple_rag_agent_task.delay(
-            file_data=file_data, agent_data=agent_data_dict, user_id=user_id
+            file_data=file_data,  # Dict instead of UploadFile
+            agent_data=agent_data_dict,  # Dict instead of Pydantic model
+            user_id=user_id
         )
+
+        await redis_storage.store_agent(agent_data_dict['id'], {
+            "base_prompt": str(agent_data_dict['base_prompt']),
+            "tone": str(agent_data_dict['tone']),
+            "directory_path": directory_path,
+            "chromadb_path": "chroma_db",
+            "collection_name": f"agent_{agent_data_dict['id']}",
+            "model_llm": str(agent_data_dict['model']),
+            "short_memory": bool(agent_data_dict['short_term_memory']),
+        })
+
+        # agents[agent_data_dict['id']] = SimpleRAGAI.Agent(
+        #     base_prompt=agent_data_dict['base_prompt'],
+        #     tone=agent_data_dict['tone'],
+        #     directory_path=directory_path,
+        #     chromadb_path="chroma_db",
+        #     collection_name=f"agent_{agent_data_dict['id']}",
+        #     model_llm=agent_data_dict['model'],
+        #     short_memory=agent_data_dict['short_term_memory'],
+        # )
         # Return response dengan format yang sesuai untuk async task
         return SimpleRAGAgentAsyncResponse(
-            id=None,  # Will be set when task completes
+            id=agent_data_dict['id'],  # Will be set when task completes
             name=agent_data.name,
             avatar=agent_data.avatar,
             model=agent_data.model,

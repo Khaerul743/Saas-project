@@ -8,7 +8,7 @@ class UserAgent(Base):
     __tablename__ = "user_agents"
     id = sa.Column(sa.String(50), nullable=False, primary_key=True)
     agent_id = sa.Column(
-        sa.Integer,
+        sa.String(5),
         sa.ForeignKey("agents.id", ondelete="CASCADE", onupdate="CASCADE"),
         nullable=False,
     )

@@ -25,7 +25,7 @@ class UpdateCompanyInformation(BaseModel):
 
 class CompanyInformationOut(BaseModel):
     id: int
-    agent_id: int
+    agent_id: str
     name: str
     industry: str
     description: str

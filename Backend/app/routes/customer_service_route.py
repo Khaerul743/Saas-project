@@ -26,6 +26,7 @@ from app.middlewares.RBAC import role_required
 from app.models.agent.customer_service_model import (
     CreateCustomerServiceAgent,
     CustomerServiceAgentResponse,
+    CustomerServiceAgentAsyncResponse,
     DatasetDescription,
     UpdateCustomerServiceAgent,
 )
@@ -34,7 +35,7 @@ from app.utils.response import success_response
 router = APIRouter(prefix="/api/agents/customer-service", tags=["customer-service-agents"])
 
 
-@router.post("", response_model=CustomerServiceAgentResponse, status_code=status.HTTP_201_CREATED)
+@router.post("", status_code=status.HTTP_201_CREATED)
 @limiter.limit("10/minute")
 async def createCustomerServiceAgent(
     request: Request,
@@ -43,7 +44,6 @@ async def createCustomerServiceAgent(
     datasets: str = Form(..., description="Dataset descriptions as JSON string"),
     current_user: dict = Depends(role_required(["admin", "user"])),
     db: Session = Depends(get_db),
-    background_tasks: BackgroundTasks = None,
 ):
     """
     Create a new Customer Service Agent for the authenticated user.
@@ -124,7 +124,6 @@ async def createCustomerServiceAgent(
             CreateCustomerServiceAgent(**parsed_agent_data),
             dataset_objects,
             current_user,
-            background_tasks,
         )
         
         # Return success response

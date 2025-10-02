@@ -3,7 +3,7 @@ import os
 import shutil
 from typing import Dict, List, Optional
 
-from fastapi import BackgroundTasks, HTTPException, UploadFile, status
+from fastapi import HTTPException, UploadFile, status
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session
 
@@ -14,6 +14,7 @@ from app.models.agent.agent_entity import Agent
 from app.models.agent.customer_service_model import (
     CreateCustomerServiceAgent,
     CustomerServiceAgentOut,
+    CustomerServiceAgentAsyncResponse,
     DatasetDescription,
     UpdateCustomerServiceAgent,
 )
@@ -59,242 +60,81 @@ async def create_customer_service_agent(
         agent_data: Customer Service Agent creation data
         datasets: List of dataset descriptions
         current_user: Current authenticated user
-        background_tasks: Optional background tasks
 
     Returns:
-        CustomerServiceAgentOut: Created agent data
+        CustomerServiceAgentAsyncResponse: Async response with task ID
 
     Raises:
         HTTPException: If creation fails
     """
     try:
-        # ✅ Removed debug print statement
         # Validate user exists
         user_id = current_user.get("id")
         if not user_id:
             raise handle_user_not_found(current_user.get("email", "unknown"))
 
+        # Convert Pydantic model to dict untuk JSON serialization
         agent_data_dict = agent_data.dict()
 
-        # Create new agent in database
-        new_agent = Agent(
-            user_id=user_id,
-            name=agent_data.name,
-            avatar=agent_data.avatar,
-            model=agent_data.model,
-            role="customer service",  # Fixed role for Customer Service Agent
-            description=agent_data.description,
-            base_prompt=agent_data.base_prompt,
-            tone=agent_data.tone,
-            short_term_memory=agent_data.short_term_memory,
-            long_term_memory=agent_data.long_term_memory,
-            status=agent_data.status,
+        # Convert datasets to dict untuk JSON serialization
+        datasets_dict = [dataset.dict() for dataset in datasets]
+
+        # Handle files data untuk serialization
+        files_data = []
+        if files:
+            for file in files:
+                # Read file content
+                file_content = await file.read()
+                file_data = {
+                    "filename": file.filename,
+                    "content_type": file.content_type,
+                    "content": file_content.hex(),  # Convert binary to hex string
+                    "size": len(file_content),
+                }
+                files_data.append(file_data)
+                # Reset file pointer
+                await file.seek(0)
+
+        print(f"files data: {files_data}")
+        print(f"agent_data: {agent_data_dict}")        
+        print(f"dataset dict: {datasets_dict}")        
+        # Import task function
+        from app.tasks.test_task import create_customer_service_agent_task
+
+        # # Start Celery task dengan data yang sudah di-serialize
+        task = create_customer_service_agent_task.delay(
+            files_data=files_data,  # List of file data dicts
+            agent_data=agent_data_dict,  # Dict instead of Pydantic model
+            datasets=datasets_dict,  # List of dataset dicts
+            user_id=user_id
         )
 
-        # Add to database
-        db.add(new_agent)
-        db.flush()
+        # Return response dengan format yang sesuai untuk async task
+        return {
+            "id": None,  # Will be set when task completes
+            "name": agent_data.name,
+            "avatar": agent_data.avatar,
+            "model": agent_data.model,
+            "description": agent_data.description,
+            "base_prompt": agent_data.base_prompt,
+            "tone": agent_data.tone,
+            "short_term_memory": agent_data.short_term_memory,
+            "long_term_memory": agent_data.long_term_memory,
+            "status": "pending",  # Override status untuk async task
+            "created_at": None,  # Will be set when task completes
+            "task_id": task.id,
+            "message": "Customer Service Agent creation is pending",
+        }
 
-        # Add company information to database
-        new_company_information = CompanyInformation(
-            agent_id=new_agent.id,
-            name=agent_data.company_name,
-            industry=agent_data.industry,
-            description=agent_data.company_description,
-            address=agent_data.address,
-            email=agent_data.email,
-            website=agent_data.website,
-            fallback_email=agent_data.fallback_email,
-        )
-        db.add(new_company_information)
-
-        # Create directory for agent documents
-        directory_path = f"documents/user_{user_id}/agent_{new_agent.id}"
-
-        # Process files and create document records
-        document_records = []
-        available_databases = []
-        dataset_descriptions = {}
-        detail_data_parts = []
-
-        for file in files:
-            try:
-                # Write file to disk
-                content_type = write_document(file, directory_path)
-                file_path = os.path.join(directory_path, file.filename)
-
-                # Create document record
-                post_document = Document(
-                    agent_id=new_agent.id,
-                    file_name=file.filename,
-                    content_type=content_type,  # ✅ Fixed: Use dynamic content_type
-                )
-
-                db.add(post_document)
-                db.flush()
-                document_records.append(post_document)
-
-                # Process CSV/Excel files for dataset info
-                if content_type in ["csv", "excel"]:
-                    filename_without_ext = get_filename_without_extension(file.filename)
-                    available_databases.append(filename_without_ext)
-
-                    # Get dataset description from user input
-                    dataset_desc = next(
-                        (d for d in datasets if d.filename == filename_without_ext),
-                        None,
-                    )
-
-                    if dataset_desc:
-                        dataset_descriptions[
-                            f"db_{filename_without_ext}_description"
-                        ] = dataset_desc.description
-
-                    # Create database file in the same directory as documents
-                    db_path = os.path.join(directory_path, f"{filename_without_ext}.db")
-                    try:
-                        # Create database from CSV/Excel file
-                        dataset.get_dataset(
-                            file_path,
-                            db_path,
-                            f"SELECT * FROM {filename_without_ext}",
-                            filename_without_ext,
-                        )
-                        logger.info(f"Created database {db_path} from {file.filename}")
-                    except Exception as e:
-                        logger.error(
-                            f"Failed to create database for {file.filename}: {str(e)}"
-                        )
-
-                    # Get dataset info for detail_data
-                    try:
-                        dataset_info = process_dataset_info(file_path, file.filename)
-                        detail_data_parts.append(dataset_info)
-                    except Exception as e:
-                        logger.warning(
-                            f"Could not process dataset info for {file.filename}: {str(e)}"
-                        )
-                        detail_data_parts.append(
-                            f"Dataset {file.filename}: Unable to process dataset information"
-                        )
-
-                # For PDF/TXT files, add to RAG system
-                elif content_type in ["pdf", "txt"]:
-                    pass
-
-            except Exception as e:
-                # Rollback database transaction
-                db.rollback()
-
-                # Remove physical file if it exists
-                try:
-                    if os.path.exists(file_path):
-                        os.remove(file_path)
-                        logger.info(f"Rollback: Removed file {file_path} due to error")
-                except Exception as file_err:
-                    logger.error(
-                        f"Failed to remove file {file_path} during rollback: {file_err}"
-                    )
-
-                raise e
-        print(f"document records: {document_records}")
-        # Initialize Customer Service Agent instance
-        if not str(new_agent.id) in agents:
-
-            def init_agent():
-                # Prepare kwargs with dataset descriptions
-                agent_kwargs = {**dataset_descriptions}
-
-                company_information = CreateCompanyInformation(
-                    name=agent_data.company_name,
-                    industry=agent_data.industry,
-                    description=agent_data.company_description,
-                    address=agent_data.address,
-                    email=agent_data.email,
-                    website=agent_data.website,
-                    fallback_email=agent_data.fallback_email,
-                )
-                # ✅ Removed debug print statements
-                agents[str(new_agent.id)] = AI.Agent(
-                    base_prompt=agent_data.base_prompt,
-                    tone=agent_data.tone,
-                    llm_model=agent_data.model,
-                    directory_path=directory_path,
-                    chromadb_path="chroma_db",
-                    collection_name=f"agent_{new_agent.id}",
-                    available_databases=available_databases,
-                    detail_data="\n".join(detail_data_parts)
-                    if detail_data_parts
-                    else "",
-                    company_information=company_information,
-                    long_memory=agent_data.long_term_memory,
-                    short_memory=agent_data.short_term_memory,
-                    **agent_kwargs,
-                )
-
-            init_agent()
-
-        print(f"agents: {agents[str(new_agent.id)].company_information}")
-
-        # Add PDF/TXT documents to RAG system
-        for doc_record in document_records:
-            if doc_record.content_type in ["pdf", "txt"]:
-                logger.info(
-                    f"Adding {doc_record.content_type} file {doc_record.file_name} to RAG system"
-                )
-                try:
-                    agents[str(new_agent.id)].add_document(
-                        doc_record.file_name,
-                        doc_record.content_type,
-                        str(doc_record.id),
-                    )
-                except Exception as e:
-                    logger.error(
-                        f"Failed to add document {doc_record.file_name} to RAG system: {str(e)}"
-                    )
-                    # Continue with other documents even if one fails
-
-        # Commit all changes
-        db.commit()
-        db.refresh(new_agent)
-
-        logger.info(
-            f"Customer Service Agent '{new_agent.name}' (ID: {new_agent.id}) created successfully by user "
-            f"{current_user.get('email')} with {len(available_databases)} datasets and {len(document_records)} documents"
-        )
-
-        return CustomerServiceAgentOut(
-            id=new_agent.id,
-            name=new_agent.name,
-            avatar=new_agent.avatar,
-            model=new_agent.model,
-            description=new_agent.description,
-            base_prompt=new_agent.base_prompt,
-            tone=new_agent.tone,
-            short_term_memory=new_agent.short_term_memory,
-            long_term_memory=new_agent.long_term_memory,
-            status=new_agent.status,
-            created_at=new_agent.created_at,
-        )
-
-    except IntegrityError as e:
-        db.rollback()
-        logger.error(f"IntegrityError while creating Customer Service Agent: {str(e)}")
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Agent with this name already exists or invalid data provided.",
-        )
     except HTTPException:
-        db.rollback()
         raise
     except Exception as e:
-        db.rollback()
         logger.error(
-            f"Unexpected error while creating Customer Service Agent: {str(e)}",
+            f"Unexpected error while starting Customer Service Agent creation: {str(e)}",
             exc_info=True,
         )
         raise handle_database_error(
-            e, "creating Customer Service Agent", current_user.get("email")
+            e, "starting Customer Service Agent creation", current_user.get("email")
         )
 
 

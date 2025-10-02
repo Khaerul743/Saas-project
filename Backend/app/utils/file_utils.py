@@ -9,7 +9,7 @@ from app.utils.logger import get_logger
 logger = get_logger(__name__)
 
 
-def create_agent_directory(user_id: int, agent_id: int) -> str:
+def create_agent_directory(user_id: int, agent_id: str) -> str:
     """
     Create directory for agent documents
     
@@ -21,7 +21,8 @@ def create_agent_directory(user_id: int, agent_id: int) -> str:
         str: Path to the created directory
     """
     directory_path = f"documents/user_{user_id}/agent_{agent_id}"
-    os.makedirs(directory_path, exist_ok=True)
+    if not os.path.exists(directory_path):
+        os.makedirs(directory_path, exist_ok=True)
     logger.info(f"Created directory: {directory_path}")
     return directory_path
 
@@ -49,10 +50,21 @@ def save_uploaded_file(file_data: Dict, directory_path: str) -> Tuple[str, str]:
         with open(file_path, "wb") as f:
             f.write(file_content)
         
-        # Determine content type
-        content_type = (
-            "pdf" if file_data["content_type"] == "application/pdf" else "txt"
-        )
+        # Determine content type based on file extension and MIME type
+        filename = file_data["filename"].lower()
+        mime_type = file_data.get("content_type", "").lower()
+        
+        if filename.endswith('.pdf') or mime_type == "application/pdf":
+            content_type = "pdf"
+        elif filename.endswith('.csv') or mime_type == "text/csv":
+            content_type = "csv"
+        elif filename.endswith(('.xlsx', '.xls')) or mime_type in ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/vnd.ms-excel"]:
+            content_type = "excel"
+        elif filename.endswith('.txt') or mime_type == "text/plain":
+            content_type = "txt"
+        else:
+            # Default to txt for unknown types
+            content_type = "txt"
         
         logger.info(f"Saved file: {file_path} (type: {content_type})")
         return file_path, content_type

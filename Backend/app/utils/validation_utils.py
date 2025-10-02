@@ -31,7 +31,7 @@ def validate_user_exists(db: Session, user_id: int, user_email: Optional[str]) -
     return user
 
 
-def validate_agent_exists_and_owned(db: Session, agent_id: int, user_id: int, user_email: str) -> Agent:
+def validate_agent_exists_and_owned(db: Session, agent_id: str, user_id: int, user_email: str) -> Agent:
     """
     Validate that agent exists and is owned by user.
     

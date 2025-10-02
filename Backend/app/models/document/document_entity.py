@@ -8,7 +8,7 @@ class Document(Base):
     __tablename__ = "documents"
     id = sa.Column(sa.Integer, nullable=False, primary_key=True, autoincrement=True)
     agent_id = sa.Column(
-        sa.Integer,
+        sa.String(5),
         sa.ForeignKey("agents.id", ondelete="CASCADE", onupdate="CASCADE"),
         nullable=False,
     )

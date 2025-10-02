@@ -12,7 +12,7 @@ class ApiKey(Base):
         nullable=False,
     )
     agent_id = sa.Column(
-        sa.Integer,
+        sa.String(5),
         sa.ForeignKey("agents.id", ondelete="CASCADE", onupdate="CASCADE"),
         unique=True,
         nullable=False,

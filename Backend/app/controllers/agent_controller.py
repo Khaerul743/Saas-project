@@ -10,7 +10,7 @@ from sqlalchemy.orm.query import Query
 from app.models.agent.agent_model import AgentInvoke
 from app.controllers.document_controller import agents
 from app.AI import simple_RAG_agent as AI
-from app.controllers.document_controller import agents
+# from app.controllers.document_controller import agents
 from app.models.agent.agent_entity import Agent
 from app.models.agent.agent_model import (
     AgentOut,
@@ -42,6 +42,7 @@ from app.utils.validation_utils import (
     validate_agent_exists_and_owned,
 )
 from app.utils.document_utils import write_document
+from app.dependencies.redis_storage import redis_storage
 logger = get_logger(__name__)
 
 
@@ -489,7 +490,7 @@ def get_all_user_agent(current_user: dict, db: Session):
     except Exception as e:
         raise handle_database_error(e, "getting user agents", current_user.get('email'))
 
-def invoke_agent(agent_id: int, agent_invoke: AgentInvoke, current_user: dict, db: Session):
+async def invoke_agent(agent_id: str, agent_invoke: AgentInvoke, current_user: dict, db: Session):
     try:
         user_id = current_user.get("id")
         if not user_id:
@@ -497,13 +498,25 @@ def invoke_agent(agent_id: int, agent_invoke: AgentInvoke, current_user: dict, d
         
         get_agent = validate_agent_exists_and_owned(db, agent_id, user_id, current_user.get('email'))
         
-        agent = agents.get(str(agent_id))
-        if not agent:
+        agent = agents.get(agent_id, None)
+        check_agent_in_redis = await redis_storage.is_agent_exists(agent_id)
+        print(f"agent: {agent}")
+        if not agent and not check_agent_in_redis:
             logger.warning(f"Agent not found")
             raise HTTPException(
-                status_code=status.HTTP_200_OK,
+                status_code=status.HTTP_404_NOT_FOUND,
                 detail="Agent not found.",
             )
+        elif check_agent_in_redis and not agent:
+            from app.utils.agent_utils import build_agent
+            agent = await build_agent(agent_id)
+            logger.info(f"Agent built from redis: {agent}")
+            if not agent:
+                logger.warning(f"Agent not found")
+                raise HTTPException(
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    detail="Agent not found.",
+                )
         
         get_user_agent = db.query(UserAgent).filter(UserAgent.agent_id == agent_id).first()
         if not get_user_agent:

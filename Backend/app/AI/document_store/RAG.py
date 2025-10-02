@@ -380,6 +380,38 @@ class RAGSystem:
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail="Internal server error, please try again",
             )
+    
+
+    def add_document_collection(self, directory_path: str, file_name: str, file_type: str, doc_id: str):
+        """
+        Add a document to the RAG system.
+        
+        Args:
+            directory_path: Path to the directory containing the document
+            file_name: Name of the file to load
+            file_type: Type of the file ('txt' or 'pdf')
+            doc_id: Unique identifier for the document
+        """
+        try:
+            # Ensure directory exists
+            if not os.path.exists(directory_path + "/"):
+                os.makedirs(directory_path, exist_ok=True)
+            
+            # Load document using RAG system
+            documents = self.load_single_document(
+                directory_path, file_name, file_type
+            )
+            
+            # Add documents to the RAG system
+            self.add_documents(documents, doc_id)
+            
+            logger.info(f"Successfully added document '{file_name}' with ID '{doc_id}'")
+        except Exception as e:
+            logger.error(f"Failed to add document '{file_name}': {str(e)}")
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Internal server error, please try again",
+            )
 
     def delete_document(self, doc_id: str):
         """

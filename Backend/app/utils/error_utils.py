@@ -54,7 +54,7 @@ def handle_user_not_found(user_email: str) -> HTTPException:
     )
 
 
-def handle_agent_not_found(agent_id: int, user_email: str) -> HTTPException:
+def handle_agent_not_found(agent_id: str, user_email: str) -> HTTPException:
     """
     Handle agent not found errors consistently.
     
