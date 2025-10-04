@@ -43,6 +43,7 @@ from app.utils.validation_utils import (
 )
 from app.utils.document_utils import write_document
 from app.dependencies.redis_storage import redis_storage
+from app.events.redis_event import event_bus, Event, EventType
 logger = get_logger(__name__)
 
 
@@ -507,8 +508,10 @@ async def invoke_agent(agent_id: str, agent_invoke: AgentInvoke, current_user: d
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail="Agent not found.",
             )
+        
         elif check_agent_in_redis and not agent:
             from app.utils.agent_utils import build_agent
+            await event_bus.publish(Event(event_type=EventType.AGENT_INVOKE, user_id=user_id, agent_id=agent_id, payload={"message": "Building the agent..."}))
             agent = await build_agent(agent_id)
             logger.info(f"Agent built from redis: {agent}")
             if not agent:
@@ -531,7 +534,7 @@ async def invoke_agent(agent_id: str, agent_invoke: AgentInvoke, current_user: d
             user_agent_id = user_agent.id
         else:
             user_agent_id = get_user_agent.id
-            
+        await event_bus.publish(Event(event_type=EventType.AGENT_INVOKE, user_id=user_id, agent_id=agent_id, payload={"message": "Reasoning..."}))
         agent_response = agent.execute({"user_message": agent_invoke.message}, str(agent_id))
         new_history_message = HistoryMessage(
             user_agent_id=user_agent_id,

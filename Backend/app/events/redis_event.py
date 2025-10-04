@@ -18,13 +18,14 @@ class EventType(Enum):
     AGENT_CREATION_PROGRESS = "event.agent.progress"
     AGENT_CREATION_SUCCESS = "event.agent.success"
     AGENT_CREATION_FAILURE = "event.agent.failure"
+    AGENT_INVOKE = "event.agent.invoke"
 
 
 @dataclass
 class Event:
     event_type: EventType
     user_id: int
-    agent_id: int
+    agent_id: str
     payload: Dict[str, Any]
     datetime = datetime.now()
 

@@ -91,12 +91,11 @@ def getAllAgent(
 @limiter.limit("10/minute")
 def deleteAgent(
     request: Request,
-    agent_id: int,
+    agent_id: str,
     current_user: dict = Depends(role_required(["admin", "user"])),
     db: Session = Depends(get_db),
 ):
     try:
-        print("deleteAgent")
         response = delete_agent(agent_id, current_user, db)
         return success_response(response.get("message"))
     except Exception as e:

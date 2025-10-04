@@ -1,6 +1,6 @@
 import os
 import shutil
-from typing import Dict, List
+from typing import Dict, List, Any
 
 from fastapi import BackgroundTasks, Form, HTTPException, UploadFile, status
 from sqlalchemy.exc import IntegrityError
@@ -14,7 +14,7 @@ from app.utils.logger import get_logger
 from app.utils.validation_utils import validate_agent_exists_and_owned
 logger = get_logger(__name__)
 
-agents: Dict[str, AI.Agent] = {}
+agents: Dict[str, Any] = {}
 
 
 def get_documents_by_agent(

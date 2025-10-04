@@ -169,7 +169,6 @@ async def root():
 async def health_check():
     return {"status": "healthy", "version": settings.VERSION}
 
-
 if __name__ == "__main__":
     uvicorn.run(
         "main:app",

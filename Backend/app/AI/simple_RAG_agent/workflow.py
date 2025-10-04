@@ -1,5 +1,5 @@
 import os
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 from dotenv import load_dotenv
 from langchain_core.messages import AIMessage, HumanMessage
@@ -14,7 +14,9 @@ from app.AI.document_store.RAG import RAGSystem
 from app.AI.simple_RAG_agent.models import AgentState
 from app.AI.simple_RAG_agent.prompts import AgentPromptControl
 from app.AI.simple_RAG_agent.tools import AgentTools
-
+from app.events.loop_manager import run_async
+import json
+from fastapi import WebSocket
 load_dotenv()
 
 
@@ -29,6 +31,7 @@ class Workflow:
         tone: str,
         include_memory: bool = False,
         short_memory: bool = False,
+        websocket: Optional[WebSocket] = None,
     ):
         self.base_prompt = base_prompt
         self.tone = tone
@@ -51,7 +54,7 @@ class Workflow:
         self.build = self._build_workflow()
         self.rag = RAGSystem(self.chromadb_path, self.collection_name)
         self.directiory_path = directory_path
-
+        self.websocket = websocket
     def _build_workflow(self):
         graph = StateGraph(AgentState)
         graph.add_node("main_agent", self._main_agent)
@@ -147,6 +150,14 @@ class Workflow:
             print(formatted_message)
             self.prompts.memory.add_context(formatted_message, self.prompts.memory_id)
         total_tokens = response.usage_metadata["total_tokens"]
+
+        if state.websocket:
+            if self.websocket:
+                run_async(self.websocket.send_text(json.dumps({
+                    "type": "reasoning",
+                    "message": "Agent is reasoning...",
+                })))
+        
         # print(f"AI: {response.content}")
         print(f"state: {state.messages} ")
         return {
@@ -160,6 +171,12 @@ class Workflow:
     def _should_continue(self, state: AgentState):
         last_message = state.messages[-1]
         if isinstance(last_message, AIMessage) and last_message.tool_calls:
+            if state.websocket:
+                if self.websocket:
+                    run_async(self.websocket.send_text(json.dumps({
+                        "type": "reasoning",
+                        "message": "Agent using the tool...",
+                    })))
             return "tool_call"
         return "end"
 

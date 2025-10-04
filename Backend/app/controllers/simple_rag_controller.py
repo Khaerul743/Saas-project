@@ -103,6 +103,7 @@ async def create_simple_rag_agent(
             "collection_name": f"agent_{agent_data_dict['id']}",
             "model_llm": str(agent_data_dict['model']),
             "short_memory": bool(agent_data_dict['short_term_memory']),
+            "role": "simple RAG agent",
         })
 
         # agents[agent_data_dict['id']] = SimpleRAGAI.Agent(

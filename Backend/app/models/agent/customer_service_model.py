@@ -5,6 +5,7 @@ from pydantic import BaseModel, Field
 
 
 class CustomerServiceAgentBase(BaseModel):
+    id: Optional[str] = None
     name: str
     avatar: Optional[str] = None
     model: Literal["gpt-3.5-turbo", "gpt-4o"]
@@ -28,13 +29,13 @@ class CreateCustomerServiceAgent(CustomerServiceAgentBase):
 
 
 class CustomerServiceAgentOut(CustomerServiceAgentBase):
-    id: int
+    id: str
     created_at: datetime
 
 
 class CustomerServiceAgentAsyncResponse(BaseModel):
     """Response model for async Customer Service Agent creation"""
-    id: Optional[int] = None
+    id: Optional[str] = None
     name: str
     avatar: Optional[str] = None
     model: Literal["gpt-3.5-turbo", "gpt-4o"]

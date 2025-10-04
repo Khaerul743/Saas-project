@@ -1,12 +1,12 @@
 import os
 import time
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 
 from app.AI.simple_RAG_agent.workflow import Workflow
 from app.utils.logger import get_logger
-
+from fastapi import WebSocket
 logger = get_logger(__name__)
 
 
@@ -22,7 +22,9 @@ class Agent:
         status: str = "active",
         include_memory=False,
         short_memory=False,
+        websocket: Optional[WebSocket] = None,
     ):
+        self.websocket = websocket
         self.status = status
         self.directory_path = directory_path
         self.llm_model = model_llm
@@ -39,6 +41,7 @@ class Agent:
             short_memory=self.short_memory,
             base_prompt=self.base_prompt,
             tone=self.tone,
+            websocket=self.websocket,
         )
         self._history_messages = None
         self.response_time = None

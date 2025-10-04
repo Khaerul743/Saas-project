@@ -1118,3 +1118,957 @@ ValueError: [TypeError("'coroutine' object is not iterable"), TypeError('vars() 
 2025-10-02 22:17:18,538 | INFO | app.controllers.agent_controller | Agent 'ketiga' (ID: jg903) invoked successfully by user khaerul@gmail.com
 2025-10-02 22:17:35,355 | INFO | app.controllers.agent_controller | Agent 'ketiga' (ID: jg903) invoked successfully by user khaerul@gmail.com
 2025-10-02 22:18:21,548 | INFO | main | Redis event bus stopped
+2025-10-03 09:01:44,868 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-03 09:01:44,891 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-03 09:01:44,893 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-03 09:01:44,894 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-03 09:02:12,925 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-03 09:02:12,933 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-03 09:02:12,934 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-03 09:02:12,935 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-03 09:02:26,256 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-03 09:02:26,257 | INFO | main | Redis event bus started
+2025-10-03 09:03:34,137 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-10-03 09:03:34,160 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-10-03 09:03:51,590 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-10-03 09:04:02,168 | WARNING | app.controllers.agent_controller | Agent not found
+2025-10-03 09:05:12,674 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-10-03 09:05:12,856 | INFO | app.websocket.manager | User with id 1 has been deleted from connections
+2025-10-03 09:05:13,472 | INFO | main | Redis event bus stopped
+2025-10-03 09:05:25,910 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-03 09:05:25,911 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-03 09:05:25,913 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-03 09:05:25,914 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-03 09:05:48,298 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-03 09:05:48,303 | INFO | main | Redis event bus started
+2025-10-03 09:06:22,415 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_tN727
+2025-10-03 09:06:24,230 | INFO | app.dependencies.redis_storage | Agent tN727 stored in Redis
+2025-10-03 09:06:26,759 | INFO | app.tasks.test_task | Task Execution: user_id 1
+2025-10-03 09:06:26,792 | INFO | app.tasks.test_task | Creating Simple RAG Agent for user 1: tN727
+2025-10-03 09:06:26,928 | INFO | app.utils.event_utils | Published event.agent.progress event for agent tN727 for user 1
+2025-10-03 09:06:26,951 | INFO | app.tasks.test_task | Agent data: name='ketiga' avatar=None model='gpt-3.5-turbo' description=None base_prompt='pp' tone='friendly' short_term_memory=False long_term_memory=False status='active' id='tN727'
+2025-10-03 09:06:27,231 | INFO | app.tasks.test_task | New agent: <Agent name=ketiga user_id=1>
+2025-10-03 09:06:27,396 | INFO | app.utils.event_utils | Published event.agent.progress event for agent tN727 for user 1
+2025-10-03 09:06:27,409 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_tN727
+2025-10-03 09:06:27,442 | INFO | app.utils.event_utils | Published event.agent.progress event for agent tN727 for user 1
+2025-10-03 09:06:27,457 | INFO | app.utils.file_utils | Saved file: documents/user_1/agent_tN727\FAQ.pdf (type: pdf)
+2025-10-03 09:06:27,535 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-03 09:06:27,523 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-03 09:06:27,594 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-03 09:06:29,783 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-03 09:06:29,882 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-03 09:06:29,807 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-03 09:06:29,901 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-03 09:06:29,915 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-03 09:06:29,919 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-03 09:06:35,391 | INFO | app.websocket.manager | User id 1 connection to websocket.
+2025-10-03 09:06:35,398 | INFO | app.websocket.ws_route | WebSocket connected for agent progress - User: 1
+2025-10-03 09:06:38,741 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-10-03 09:06:43,575 | INFO | app.AI.document_store.RAG | Successfully added document 'FAQ.pdf' with ID '11'
+2025-10-03 09:06:43,580 | INFO | app.utils.agent_utils | Added document FAQ.pdf to agent tN727
+2025-10-03 09:06:43,603 | INFO | app.utils.event_utils | Published event.agent.success event for agent tN727 for user 1
+2025-10-03 09:06:43,620 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.success.user:1
+2025-10-03 09:06:43,635 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-03 09:06:43,639 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_SUCCESS
+2025-10-03 09:06:43,639 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.success', 'user_id': 1, 'agent_id': 'tN727', 'payload': {'current': 100, 'total': 100, 'status': 'Agent creation is completed'}, 'timestamp': '2025-10-03T02:06:43.617915'}
+2025-10-03 09:07:25,782 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.invoke.user:1
+2025-10-03 09:07:25,796 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-03 09:07:25,811 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_INVOKE
+2025-10-03 09:07:25,815 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.invoke', 'user_id': 1, 'agent_id': 'tN727', 'payload': {'message': 'Building the agent...'}, 'timestamp': '2025-10-03T02:07:25.512442'}
+2025-10-03 09:07:25,825 | INFO | app.dependencies.redis_storage | Agent tN727 retrieved from Redis
+2025-10-03 09:07:47,893 | INFO | app.controllers.agent_controller | Agent built from redis: <app.AI.simple_RAG_agent.Agent object at 0x00000271CD79B380>
+2025-10-03 09:07:48,105 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.invoke.user:1
+2025-10-03 09:07:50,939 | INFO | app.controllers.agent_controller | Agent 'ketiga' (ID: tN727) invoked successfully by user khaerul@gmail.com
+2025-10-03 09:07:50,943 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-03 09:07:50,950 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_INVOKE
+2025-10-03 09:07:50,951 | INFO | app.websocket.manager | Sending message to user with id 1: the message is {'event_type': 'event.agent.invoke', 'user_id': 1, 'agent_id': 'tN727', 'payload': {'message': 'Reasoning...'}, 'timestamp': '2025-10-03T02:07:48.092595'}
+2025-10-03 09:08:10,393 | INFO | app.websocket.manager | User with id 1 diconnect from websocket
+2025-10-03 09:08:10,398 | INFO | app.websocket.manager | User with id 1 has been deleted from connections
+2025-10-03 09:08:10,498 | INFO | main | Redis event bus stopped
+2025-10-03 19:40:39,089 | ERROR | app.dependencies.redis_storage | Error while getting all agents from Redis: Error 22 connecting to localhost:6379. The remote computer refused the network connection.
+2025-10-03 19:46:03,518 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-03 19:46:03,703 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-03 19:46:03,777 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-03 19:46:03,784 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-03 19:49:43,760 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-03 19:49:43,764 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-03 19:49:43,767 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-03 19:49:43,768 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-03 19:51:58,546 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-03 19:51:58,588 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-03 19:51:58,600 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-03 19:51:58,650 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-03 20:06:00,046 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-03 20:06:00,139 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-03 20:06:00,221 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-03 20:06:00,371 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-03 20:07:07,319 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-03 20:07:07,385 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-03 20:07:07,386 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-03 20:07:07,659 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-03 20:07:59,272 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-03 20:07:59,294 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-03 20:07:59,357 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-03 20:07:59,440 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-03 20:08:26,977 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-03 20:08:26,981 | INFO | main | Redis event bus started
+2025-10-03 20:08:52,471 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-10-03 20:09:24,667 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_vW546
+2025-10-03 20:09:27,369 | INFO | app.dependencies.redis_storage | Agent vW546 stored in Redis
+2025-10-03 20:09:28,323 | INFO | app.tasks.test_task | Task Execution: user_id 1
+2025-10-03 20:09:28,357 | INFO | app.tasks.test_task | Creating Simple RAG Agent for user 1: vW546
+2025-10-03 20:09:28,373 | INFO | app.utils.event_utils | Published event.agent.progress event for agent vW546 for user 1
+2025-10-03 20:09:28,538 | INFO | app.tasks.test_task | Agent data: name='ketiga' avatar=None model='gpt-3.5-turbo' description=None base_prompt='pp' tone='friendly' short_term_memory=False long_term_memory=False status='active' id='vW546'
+2025-10-03 20:09:29,807 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-03 20:09:29,797 | INFO | app.tasks.test_task | New agent: <Agent name=ketiga user_id=1>
+2025-10-03 20:09:30,194 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-03 20:09:30,207 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-03 20:09:30,232 | INFO | app.utils.event_utils | Published event.agent.progress event for agent vW546 for user 1
+2025-10-03 20:09:30,395 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-03 20:09:30,394 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-03 20:09:30,439 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-03 20:09:30,363 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_vW546
+2025-10-03 20:09:30,498 | INFO | app.utils.event_utils | Published event.agent.progress event for agent vW546 for user 1
+2025-10-03 20:09:30,549 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-03 20:09:30,552 | INFO | app.utils.file_utils | Saved file: documents/user_1/agent_vW546\FAQ.pdf (type: pdf)
+2025-10-03 20:09:30,716 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-03 20:09:30,538 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-03 20:09:50,565 | INFO | app.AI.document_store.RAG | Successfully loaded document: FAQ.pdf
+2025-10-03 20:09:57,865 | INFO | app.AI.document_store.RAG | Successfully added document 'FAQ.pdf' with ID '12'
+2025-10-03 20:09:57,918 | INFO | app.utils.agent_utils | Added document FAQ.pdf to agent vW546
+2025-10-03 20:09:58,102 | INFO | app.utils.event_utils | Published event.agent.success event for agent vW546 for user 1
+2025-10-03 20:09:58,181 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.success.user:1
+2025-10-03 20:09:58,191 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-03 20:09:58,193 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_SUCCESS
+2025-10-03 20:18:22,086 | INFO | app.websocket.manager | User id agent_invoke_1 connection to websocket.
+2025-10-03 20:18:22,231 | INFO | app.websocket.ws_route | WebSocket connected for agent invoke - User: 1
+2025-10-03 20:19:01,703 | ERROR | app.websocket.ws_route | Error in agent invoke: (<CloseCode.ABNORMAL_CLOSURE: 1006>, '')
+2025-10-03 20:19:01,720 | ERROR | app.websocket.ws_route | WebSocket error for agent invoke - User: 1: Unexpected ASGI message 'websocket.send', after sending 'websocket.close' or response already completed.
+2025-10-03 20:19:01,749 | INFO | app.websocket.manager | User with id agent_invoke_1 diconnect from websocket
+2025-10-03 20:19:01,815 | INFO | app.websocket.manager | User with id agent_invoke_1 has been deleted from connections
+2025-10-03 20:19:26,094 | INFO | app.websocket.manager | User id agent_invoke_1 connection to websocket.
+2025-10-03 20:19:26,136 | INFO | app.websocket.ws_route | WebSocket connected for agent invoke - User: 1
+2025-10-03 20:19:44,948 | ERROR | app.websocket.ws_route | Error in agent invoke: (pymysql.err.DataError) (1265, "Data truncated for column 'user_platform' at row 1")
+[SQL: INSERT INTO user_agents (id, agent_id, username, user_platform) VALUES (%(id)s, %(agent_id)s, %(username)s, %(user_platform)s)]
+[parameters: {'id': 'vW546', 'agent_id': 'vW546', 'username': 'WebSocket User', 'user_platform': 'websocket'}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2025-10-03 20:20:16,233 | ERROR | app.websocket.ws_route | Error in agent invoke: (<CloseCode.ABNORMAL_CLOSURE: 1006>, '')
+2025-10-03 20:20:16,462 | ERROR | app.websocket.ws_route | WebSocket error for agent invoke - User: 1: Unexpected ASGI message 'websocket.send', after sending 'websocket.close' or response already completed.
+2025-10-03 20:20:16,463 | INFO | app.websocket.manager | User with id agent_invoke_1 diconnect from websocket
+2025-10-03 20:20:16,463 | INFO | app.websocket.manager | User with id agent_invoke_1 has been deleted from connections
+2025-10-03 20:21:24,384 | INFO | main | Redis event bus stopped
+2025-10-03 20:22:03,099 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-03 20:22:03,101 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-03 20:22:03,103 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-03 20:22:03,107 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-03 20:22:54,778 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-03 20:22:54,813 | INFO | main | Redis event bus started
+2025-10-03 20:22:54,978 | INFO | app.websocket.manager | User id agent_invoke_1 connection to websocket.
+2025-10-03 20:22:55,025 | INFO | app.websocket.ws_route | WebSocket connected for agent invoke - User: 1
+2025-10-03 20:23:45,242 | ERROR | app.websocket.ws_route | Error in agent invoke: (<CloseCode.ABNORMAL_CLOSURE: 1006>, '')
+2025-10-03 20:23:45,314 | ERROR | app.websocket.ws_route | WebSocket error for agent invoke - User: 1: Unexpected ASGI message 'websocket.send', after sending 'websocket.close' or response already completed.
+2025-10-03 20:23:45,526 | INFO | app.websocket.manager | User with id agent_invoke_1 diconnect from websocket
+2025-10-03 20:23:45,528 | INFO | app.websocket.manager | User with id agent_invoke_1 has been deleted from connections
+2025-10-03 20:23:57,061 | INFO | app.websocket.manager | User id agent_invoke_1 connection to websocket.
+2025-10-03 20:23:57,068 | INFO | app.websocket.ws_route | WebSocket connected for agent invoke - User: 1
+2025-10-03 20:24:07,585 | INFO | app.dependencies.redis_storage | Agent vW546 retrieved from Redis
+2025-10-03 20:24:48,503 | ERROR | app.websocket.ws_route | Error in agent invoke: (<CloseCode.NO_STATUS_RCVD: 1005>, '')
+2025-10-03 20:24:48,509 | ERROR | app.websocket.ws_route | WebSocket error for agent invoke - User: 1: Unexpected ASGI message 'websocket.send', after sending 'websocket.close' or response already completed.
+2025-10-03 20:24:48,540 | INFO | app.websocket.manager | User with id agent_invoke_1 diconnect from websocket
+2025-10-03 20:24:48,555 | INFO | app.websocket.manager | User with id agent_invoke_1 has been deleted from connections
+2025-10-03 20:25:35,884 | INFO | app.websocket.manager | User id agent_invoke_1 connection to websocket.
+2025-10-03 20:25:35,886 | INFO | app.websocket.ws_route | WebSocket connected for agent invoke - User: 1
+2025-10-03 20:25:56,519 | ERROR | app.websocket.ws_route | Error in agent invoke: (<CloseCode.ABNORMAL_CLOSURE: 1006>, '')
+2025-10-03 20:25:56,560 | ERROR | app.websocket.ws_route | WebSocket error for agent invoke - User: 1: Unexpected ASGI message 'websocket.send', after sending 'websocket.close' or response already completed.
+2025-10-03 20:25:56,591 | INFO | app.websocket.manager | User with id agent_invoke_1 diconnect from websocket
+2025-10-03 20:25:56,593 | INFO | app.websocket.manager | User with id agent_invoke_1 has been deleted from connections
+2025-10-03 20:26:35,261 | INFO | app.websocket.manager | User id agent_invoke_1 connection to websocket.
+2025-10-03 20:26:35,324 | INFO | app.websocket.ws_route | WebSocket connected for agent invoke - User: 1
+2025-10-03 20:28:05,330 | ERROR | app.websocket.ws_route | Error in agent invoke: (<CloseCode.ABNORMAL_CLOSURE: 1006>, '')
+2025-10-03 20:28:05,331 | ERROR | app.websocket.ws_route | WebSocket error for agent invoke - User: 1: Unexpected ASGI message 'websocket.send', after sending 'websocket.close' or response already completed.
+2025-10-03 20:28:05,430 | INFO | app.websocket.manager | User with id agent_invoke_1 diconnect from websocket
+2025-10-03 20:28:06,013 | INFO | app.websocket.manager | User with id agent_invoke_1 has been deleted from connections
+2025-10-03 20:28:25,642 | INFO | app.websocket.manager | User id agent_invoke_1 connection to websocket.
+2025-10-03 20:28:25,644 | INFO | app.websocket.ws_route | WebSocket connected for agent invoke - User: 1
+2025-10-03 20:31:12,841 | ERROR | app.websocket.ws_route | Error in agent invoke: (1012, None)
+2025-10-03 20:31:13,031 | ERROR | app.websocket.ws_route | WebSocket error for agent invoke - User: 1: Unexpected ASGI message 'websocket.send', after sending 'websocket.close' or response already completed.
+2025-10-03 20:31:13,037 | INFO | app.websocket.manager | User with id agent_invoke_1 diconnect from websocket
+2025-10-03 20:31:13,039 | INFO | app.websocket.manager | User with id agent_invoke_1 has been deleted from connections
+2025-10-03 20:31:13,305 | INFO | main | Redis event bus stopped
+2025-10-03 20:32:19,896 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-03 20:32:20,029 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-03 20:32:20,094 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-03 20:32:20,158 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-03 20:33:07,438 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-03 20:33:07,495 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-03 20:33:07,668 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-03 20:33:07,952 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-03 20:34:01,951 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-03 20:34:02,440 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-03 20:34:02,629 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-03 20:34:02,640 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-03 20:34:32,397 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-03 20:34:32,433 | INFO | main | Redis event bus started
+2025-10-03 20:34:46,103 | INFO | app.websocket.manager | User id agent_invoke_1 connection to websocket.
+2025-10-03 20:34:46,119 | INFO | app.websocket.ws_route | WebSocket connected for agent invoke - User: 1
+2025-10-03 20:34:49,945 | INFO | app.dependencies.redis_storage | Agent vW546 retrieved from Redis
+2025-10-03 20:37:28,803 | ERROR | app.websocket.ws_route | Error in agent invoke: (1012, None)
+2025-10-03 20:37:28,828 | ERROR | app.websocket.ws_route | WebSocket error for agent invoke - User: 1: Unexpected ASGI message 'websocket.send', after sending 'websocket.close' or response already completed.
+2025-10-03 20:37:28,832 | INFO | app.websocket.manager | User with id agent_invoke_1 diconnect from websocket
+2025-10-03 20:37:28,834 | INFO | app.websocket.manager | User with id agent_invoke_1 has been deleted from connections
+2025-10-03 20:37:30,174 | INFO | main | Redis event bus stopped
+2025-10-04 08:24:22,874 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 08:24:22,877 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 08:24:22,877 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 08:24:22,877 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 08:24:45,858 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 08:24:45,860 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 08:24:45,862 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 08:24:45,863 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 08:25:01,115 | ERROR | main | Error starting Redis event bus: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-04 08:26:57,203 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-10-04 08:27:12,249 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_69203
+2025-10-04 08:28:42,160 | ERROR | main | Error stopping Redis event bus: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-04 08:29:11,297 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 08:29:11,308 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 08:29:11,319 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 08:29:11,320 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 08:29:36,242 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 08:29:36,243 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 08:29:36,244 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 08:29:36,244 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 08:29:53,514 | ERROR | main | Error starting Redis event bus: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-04 08:30:00,101 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_96931
+2025-10-04 08:31:05,520 | ERROR | main | Error stopping Redis event bus: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-04 08:31:12,648 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 08:31:12,654 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 08:31:12,656 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 08:31:12,679 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 08:31:36,690 | ERROR | main | Error starting Redis event bus: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-04 08:31:37,026 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_Ps959
+2025-10-04 08:33:28,194 | ERROR | main | Error stopping Redis event bus: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-04 08:33:37,012 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 08:33:37,017 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 08:33:37,018 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 08:33:37,019 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 08:34:10,568 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 08:34:10,770 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 08:34:10,789 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 08:34:10,797 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 08:34:29,341 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 08:34:29,342 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 08:34:29,343 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 08:34:29,343 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 08:34:45,007 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 08:34:45,008 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 08:34:45,009 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 08:34:45,009 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 08:35:01,352 | ERROR | main | Error starting Redis event bus: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-04 08:35:09,032 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_YE921
+2025-10-04 08:35:09,142 | ERROR | app.utils.file_utils | Failed to create database for products.csv: [Errno 2] No such file or directory: 'documents/user_1/agent_YE921\\products.csv'
+2025-10-04 08:35:09,150 | ERROR | app.utils.file_utils | Error processing dataset info for products.csv: [Errno 2] No such file or directory: 'documents/user_1/agent_YE921\\products.csv'
+2025-10-04 08:35:09,157 | INFO | app.utils.file_utils | Processed dataset info for products.csv
+2025-10-04 08:36:08,116 | ERROR | main | Error stopping Redis event bus: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-04 08:36:23,008 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 08:36:23,010 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 08:36:23,011 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 08:36:23,011 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 08:36:39,915 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 08:36:39,916 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 08:36:39,917 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 08:36:39,917 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 08:36:55,147 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 08:36:55,148 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 08:36:55,149 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 08:36:55,150 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 08:37:10,728 | ERROR | main | Error starting Redis event bus: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-04 08:37:16,981 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_c9689
+2025-10-04 08:37:18,428 | INFO | app.utils.file_utils | Created database documents/user_1/agent_c9689\products.db from products.csv
+2025-10-04 08:37:18,958 | INFO | app.utils.file_utils | Processed dataset info for products.csv
+2025-10-04 08:43:37,154 | ERROR | main | Error stopping Redis event bus: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-04 08:43:45,825 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 08:43:45,827 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 08:43:45,828 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 08:43:45,830 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 08:44:11,164 | ERROR | main | Error starting Redis event bus: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-04 08:45:26,590 | ERROR | main | Error stopping Redis event bus: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-04 08:45:34,005 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 08:45:34,007 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 08:45:34,008 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 08:45:34,009 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 08:47:21,621 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 08:47:21,622 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 08:47:21,622 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 08:47:21,623 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 08:48:39,129 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 08:48:39,130 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 08:48:39,131 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 08:48:39,132 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 08:49:19,604 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 08:49:19,608 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 08:49:19,609 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 08:49:19,612 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 08:49:36,845 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 08:49:36,846 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 08:49:36,847 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 08:49:36,848 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 08:49:54,798 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 08:49:54,799 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 08:49:54,800 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 08:49:54,801 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 08:51:07,012 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 08:51:07,013 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 08:51:07,013 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 08:51:07,014 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 08:52:30,411 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 08:52:30,412 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 08:52:30,413 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 08:52:30,413 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 08:52:55,867 | ERROR | main | Error starting Redis event bus: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-04 08:57:20,645 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 08:57:20,649 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 08:57:20,649 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 08:57:20,650 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 08:57:41,943 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 08:57:41,946 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 08:57:41,949 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 08:57:41,950 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 08:57:56,789 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 08:57:56,791 | INFO | main | Redis event bus started
+2025-10-04 08:59:02,093 | INFO | main | Redis event bus stopped
+2025-10-04 10:45:25,692 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 10:45:25,697 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 10:45:25,698 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 10:45:25,698 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 10:46:25,742 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 10:46:25,743 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 10:46:25,743 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 10:46:25,744 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 10:46:49,975 | ERROR | main | Error starting Redis event bus: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-04 10:48:43,346 | INFO | main | Redis event bus stopped
+2025-10-04 10:49:03,679 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 10:49:03,688 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 10:49:03,690 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 10:49:03,691 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 10:49:36,522 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 10:49:36,527 | INFO | main | Redis event bus started
+2025-10-04 10:50:03,439 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-10-04 10:50:10,057 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_Hg020
+2025-10-04 10:50:11,332 | INFO | app.utils.file_utils | Created database documents/user_1/agent_Hg020\products.db from products.csv
+2025-10-04 10:50:11,765 | INFO | app.utils.file_utils | Processed dataset info for products.csv
+2025-10-04 10:50:39,820 | INFO | app.dependencies.redis_storage | Agent Hg020 stored in Redis
+2025-10-04 10:51:35,259 | INFO | main | Redis event bus stopped
+2025-10-04 10:52:47,916 | INFO | app.dependencies.redis_storage | Agent Hg020 retrieved from Redis
+2025-10-04 11:17:15,073 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 11:17:15,093 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 11:17:15,093 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 11:17:15,094 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 11:17:52,219 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 11:17:52,220 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 11:17:52,221 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 11:17:52,222 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 11:18:08,440 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 11:18:08,442 | INFO | main | Redis event bus started
+2025-10-04 11:19:48,418 | INFO | main | Redis event bus stopped
+2025-10-04 11:20:04,539 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 11:20:04,541 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 11:20:04,545 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 11:20:04,585 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 11:20:19,960 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 11:20:19,965 | INFO | main | Redis event bus started
+2025-10-04 11:20:30,918 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_gO822
+2025-10-04 11:20:31,941 | INFO | app.utils.file_utils | Created database documents/user_1/agent_gO822\products.db from products.csv
+2025-10-04 11:20:32,069 | INFO | app.utils.file_utils | Processed dataset info for products.csv
+2025-10-04 11:20:32,187 | INFO | app.dependencies.redis_storage | Agent gO822 stored in Redis
+2025-10-04 11:20:33,829 | INFO | app.tasks.test_task | Task Execution: user_id 1
+2025-10-04 11:20:33,852 | INFO | app.tasks.test_task | Creating Customer Service Agent for user 1
+2025-10-04 11:20:34,094 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 11:20:34,500 | INFO | app.tasks.test_task | Agent data: id='gO822' name='Customer Support Bot' avatar=None model='gpt-4o' description=None base_prompt='You are a helpful customer service agent' tone='friendly' short_term_memory=False long_term_memory=False status='active' company_name='PT. lord suroso' industry='Teknologi AI' company_description='tidak ada' address='jln.kwitang no 4, Jakarta Pusat' email='suroso@gmail.com' website=None fallback_email='siti@gmail.com'
+2025-10-04 11:20:34,839 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 11:20:34,841 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 11:20:34,830 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 11:20:35,323 | INFO | app.tasks.test_task | New agent: <Agent name=Customer Support Bot user_id=1>
+2025-10-04 11:20:35,354 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 11:20:35,384 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 11:20:35,393 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 11:20:35,741 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 11:20:36,070 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 11:20:36,076 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 11:20:36,081 | ERROR | app.tasks.test_task | Error creating Customer Service Agent: invalid literal for int() with base 10: 'gO822'
+2025-10-04 11:20:36,091 | INFO | app.utils.event_utils | Published event.agent.failure event for agent 2 for user 1
+2025-10-04 11:20:36,097 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 11:20:36,103 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 11:20:36,122 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.failure.user:1
+2025-10-04 11:20:36,120 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 11:20:36,202 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_FAILURE
+2025-10-04 11:21:38,524 | INFO | main | Redis event bus stopped
+2025-10-04 11:22:06,086 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 11:22:06,180 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 11:22:06,248 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 11:22:06,368 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 11:22:24,977 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 11:22:24,980 | INFO | main | Redis event bus started
+2025-10-04 11:22:33,621 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_z0517
+2025-10-04 11:22:33,953 | INFO | app.utils.file_utils | Created database documents/user_1/agent_z0517\products.db from products.csv
+2025-10-04 11:22:34,269 | INFO | app.utils.file_utils | Processed dataset info for products.csv
+2025-10-04 11:22:34,493 | INFO | app.dependencies.redis_storage | Agent z0517 stored in Redis
+2025-10-04 11:23:07,005 | INFO | app.tasks.test_task | Task Execution: user_id 1
+2025-10-04 11:23:07,006 | INFO | app.tasks.test_task | Creating Customer Service Agent for user 1
+2025-10-04 11:23:07,016 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 11:23:07,017 | INFO | app.tasks.test_task | Agent data: id='z0517' name='Customer Support Bot' avatar=None model='gpt-4o' description=None base_prompt='You are a helpful customer service agent' tone='friendly' short_term_memory=False long_term_memory=False status='active' company_name='PT. lord suroso' industry='Teknologi AI' company_description='tidak ada' address='jln.kwitang no 4, Jakarta Pusat' email='suroso@gmail.com' website=None fallback_email='siti@gmail.com'
+2025-10-04 11:23:07,093 | INFO | app.tasks.test_task | New agent: <Agent name=Customer Support Bot user_id=1>
+2025-10-04 11:23:07,099 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 11:23:07,101 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 11:23:07,124 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 11:23:07,134 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 11:23:07,131 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 11:23:07,150 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 11:23:07,156 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 11:23:07,206 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 11:23:07,210 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_z0517
+2025-10-04 11:23:07,217 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 11:23:07,223 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 11:23:07,211 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 11:23:07,226 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 11:23:07,243 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 11:23:07,253 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 11:23:07,243 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 11:23:07,257 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 11:23:07,276 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 11:23:07,290 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 11:23:07,322 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 11:23:07,286 | INFO | app.utils.file_utils | Saved file: documents/user_1/agent_z0517\FAQ.pdf (type: pdf)
+2025-10-04 11:23:07,466 | INFO | app.tasks.test_task | Processing pdf file for RAG: FAQ.pdf
+2025-10-04 11:23:18,436 | ERROR | app.AI.document_store.RAG | Error loading document 'FAQ.pdf': Cannot read an empty file
+2025-10-04 11:23:18,438 | ERROR | app.AI.document_store.RAG | Failed to add document 'FAQ.pdf': 500: Failed to load document 'FAQ.pdf': Cannot read an empty file
+2025-10-04 11:23:18,467 | ERROR | app.tasks.test_task | Error creating Customer Service Agent: 500: Internal server error, please try again
+2025-10-04 11:23:18,535 | INFO | app.utils.event_utils | Published event.agent.failure event for agent 2 for user 1
+2025-10-04 11:23:18,577 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 11:23:18,626 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_FAILURE
+2025-10-04 11:23:18,577 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.failure.user:1
+2025-10-04 11:28:21,885 | INFO | main | Redis event bus stopped
+2025-10-04 11:28:59,241 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 11:28:59,242 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 11:28:59,243 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 11:28:59,244 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 11:29:05,598 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 11:29:05,599 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 11:29:05,601 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 11:29:05,602 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 11:29:26,185 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 11:29:26,186 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 11:29:26,187 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 11:29:26,189 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 11:29:39,313 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 11:29:39,315 | INFO | main | Redis event bus started
+2025-10-04 11:29:41,425 | INFO | main | Redis event bus stopped
+2025-10-04 11:29:51,573 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 11:29:51,574 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 11:29:51,574 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 11:29:51,575 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 11:30:21,231 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 11:30:21,235 | INFO | main | Redis event bus started
+2025-10-04 11:30:21,422 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_vq284
+2025-10-04 11:30:21,864 | INFO | app.utils.file_utils | Created database documents/user_1/agent_vq284\products.db from products.csv
+2025-10-04 11:30:21,983 | INFO | app.utils.file_utils | Processed dataset info for products.csv
+2025-10-04 11:30:22,272 | INFO | app.dependencies.redis_storage | Agent vq284 stored in Redis
+2025-10-04 11:30:22,288 | ERROR | app.controllers.customer_service_controller | Unexpected error while starting Customer Service Agent creation: name 'task' is not defined
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\controllers\customer_service_controller.py", line 152, in create_customer_service_agent
+    "task_id": task.id,
+               ^^^^
+NameError: name 'task' is not defined
+2025-10-04 11:30:22,321 | ERROR | app.utils.error_utils | Unexpected error during starting Customer Service Agent creation: name 'task' is not defined
+2025-10-04 11:30:57,336 | INFO | main | Redis event bus stopped
+2025-10-04 11:31:05,673 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 11:31:05,674 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 11:31:05,675 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 11:31:05,675 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 11:31:20,689 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 11:31:20,691 | INFO | main | Redis event bus started
+2025-10-04 11:31:29,548 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_uc458
+2025-10-04 11:31:30,056 | INFO | app.utils.file_utils | Created database documents/user_1/agent_uc458\products.db from products.csv
+2025-10-04 11:31:30,273 | INFO | app.utils.file_utils | Processed dataset info for products.csv
+2025-10-04 11:31:31,115 | INFO | app.dependencies.redis_storage | Agent uc458 stored in Redis
+2025-10-04 11:31:31,138 | ERROR | app.controllers.customer_service_controller | Unexpected error while starting Customer Service Agent creation: name 'task' is not defined
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\controllers\customer_service_controller.py", line 153, in create_customer_service_agent
+    "task_id": task.id,
+               ^^^^
+NameError: name 'task' is not defined
+2025-10-04 11:31:31,217 | ERROR | app.utils.error_utils | Unexpected error during starting Customer Service Agent creation: name 'task' is not defined
+2025-10-04 11:32:19,526 | INFO | main | Redis event bus stopped
+2025-10-04 11:32:40,187 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 11:32:40,188 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 11:32:40,189 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 11:32:40,190 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 11:32:49,103 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 11:32:49,103 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 11:32:49,104 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 11:32:49,104 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 11:33:06,460 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 11:33:06,462 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 11:33:06,464 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 11:33:06,465 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 11:33:20,384 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 11:33:20,386 | INFO | main | Redis event bus started
+2025-10-04 11:33:29,498 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_wd062
+2025-10-04 11:33:30,709 | INFO | app.utils.file_utils | Created database documents/user_1/agent_wd062\products.db from products.csv
+2025-10-04 11:33:30,798 | INFO | app.utils.file_utils | Processed dataset info for products.csv
+2025-10-04 11:33:34,122 | INFO | app.dependencies.redis_storage | Agent wd062 stored in Redis
+2025-10-04 11:33:34,367 | ERROR | app.controllers.customer_service_controller | Unexpected error while starting Customer Service Agent creation: name 'task' is not defined
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\controllers\customer_service_controller.py", line 153, in create_customer_service_agent
+    "task_id": task.id,
+               ^^^^
+NameError: name 'task' is not defined
+2025-10-04 11:33:34,418 | ERROR | app.utils.error_utils | Unexpected error during starting Customer Service Agent creation: name 'task' is not defined
+2025-10-04 11:34:08,931 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_eE918
+2025-10-04 11:34:09,284 | INFO | app.utils.file_utils | Created database documents/user_1/agent_eE918\products.db from products.csv
+2025-10-04 11:34:09,332 | INFO | app.utils.file_utils | Processed dataset info for products.csv
+2025-10-04 11:34:09,517 | INFO | app.dependencies.redis_storage | Agent eE918 stored in Redis
+2025-10-04 11:34:11,330 | ERROR | app.controllers.customer_service_controller | Unexpected error while starting Customer Service Agent creation: name 'task' is not defined
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\controllers\customer_service_controller.py", line 153, in create_customer_service_agent
+    "task_id": task.id,
+               ^^^^
+NameError: name 'task' is not defined
+2025-10-04 11:34:11,392 | ERROR | app.utils.error_utils | Unexpected error during starting Customer Service Agent creation: name 'task' is not defined
+2025-10-04 11:35:15,881 | INFO | main | Redis event bus stopped
+2025-10-04 11:35:27,756 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 11:35:27,758 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 11:35:27,760 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 11:35:27,761 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 11:35:44,759 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 11:35:44,761 | INFO | main | Redis event bus started
+2025-10-04 11:36:08,745 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_Sn621
+2025-10-04 11:36:10,453 | INFO | app.utils.file_utils | Created database documents/user_1/agent_Sn621\products.db from products.csv
+2025-10-04 11:36:11,076 | INFO | app.utils.file_utils | Processed dataset info for products.csv
+2025-10-04 11:36:11,593 | INFO | app.dependencies.redis_storage | Agent Sn621 stored in Redis
+2025-10-04 11:36:11,667 | ERROR | app.controllers.customer_service_controller | Unexpected error while starting Customer Service Agent creation: name 'task' is not defined
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\controllers\customer_service_controller.py", line 153, in create_customer_service_agent
+    "task_id": task.id,
+               ^^^^
+NameError: name 'task' is not defined
+2025-10-04 11:36:11,684 | ERROR | app.utils.error_utils | Unexpected error during starting Customer Service Agent creation: name 'task' is not defined
+2025-10-04 11:39:03,348 | INFO | main | Redis event bus stopped
+2025-10-04 11:39:37,615 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 11:39:37,616 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 11:39:37,617 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 11:39:37,617 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 11:39:59,760 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 11:39:59,761 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 11:39:59,762 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 11:39:59,762 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 11:40:18,487 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 11:40:18,488 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 11:40:18,489 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 11:40:18,490 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 11:40:31,590 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 11:40:31,591 | INFO | main | Redis event bus started
+2025-10-04 11:40:39,910 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_Ba513
+2025-10-04 11:40:42,961 | INFO | app.utils.file_utils | Created database documents/user_1/agent_Ba513\products.db from products.csv
+2025-10-04 11:40:43,118 | INFO | app.utils.file_utils | Processed dataset info for products.csv
+2025-10-04 11:40:44,322 | INFO | app.dependencies.redis_storage | Agent Ba513 stored in Redis
+2025-10-04 11:40:44,440 | ERROR | app.controllers.customer_service_controller | Unexpected error while starting Customer Service Agent creation: name 'task' is not defined
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\controllers\customer_service_controller.py", line 171, in create_customer_service_agent
+    "task_id": task.id,
+               ^^^^
+NameError: name 'task' is not defined
+2025-10-04 11:40:44,509 | ERROR | app.utils.error_utils | Unexpected error during starting Customer Service Agent creation: name 'task' is not defined
+2025-10-04 11:41:01,612 | INFO | main | Redis event bus stopped
+2025-10-04 11:44:32,139 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 11:44:32,141 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 11:44:32,142 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 11:44:32,142 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 11:44:51,297 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 11:44:51,298 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 11:44:51,298 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 11:44:51,299 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 11:45:07,286 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 11:45:07,294 | INFO | main | Redis event bus started
+2025-10-04 11:45:21,356 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_v7879
+2025-10-04 11:45:22,822 | INFO | app.utils.file_utils | Created database documents/user_1/agent_v7879\products.db from products.csv
+2025-10-04 11:45:23,272 | INFO | app.utils.file_utils | Processed dataset info for products.csv
+2025-10-04 11:45:25,421 | INFO | app.dependencies.redis_storage | Agent v7879 stored in Redis
+2025-10-04 11:45:25,534 | ERROR | app.controllers.customer_service_controller | Unexpected error while starting Customer Service Agent creation: name 'task' is not defined
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\controllers\customer_service_controller.py", line 175, in create_customer_service_agent
+    "task_id": task.id,
+               ^^^^
+NameError: name 'task' is not defined
+2025-10-04 11:45:25,865 | ERROR | app.utils.error_utils | Unexpected error during starting Customer Service Agent creation: name 'task' is not defined
+2025-10-04 11:45:54,379 | INFO | main | Redis event bus stopped
+2025-10-04 11:46:02,800 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 11:46:02,801 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 11:46:02,802 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 11:46:02,802 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 11:46:18,853 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 11:46:18,856 | INFO | main | Redis event bus started
+2025-10-04 11:46:30,295 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_Lg980
+2025-10-04 11:46:32,053 | INFO | app.utils.file_utils | Created database documents/user_1/agent_Lg980\products.db from products.csv
+2025-10-04 11:46:32,298 | INFO | app.utils.file_utils | Processed dataset info for products.csv
+2025-10-04 11:46:34,004 | INFO | app.dependencies.redis_storage | Agent Lg980 stored in Redis
+2025-10-04 11:46:36,946 | ERROR | app.controllers.customer_service_controller | Unexpected error while starting Customer Service Agent creation: name 'task' is not defined
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\controllers\customer_service_controller.py", line 175, in create_customer_service_agent
+    "task_id": task.id,
+               ^^^^
+NameError: name 'task' is not defined
+2025-10-04 11:46:36,971 | ERROR | app.utils.error_utils | Unexpected error during starting Customer Service Agent creation: name 'task' is not defined
+2025-10-04 11:46:40,388 | INFO | main | Redis event bus stopped
+2025-10-04 16:52:37,549 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 16:52:37,556 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 16:52:37,557 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 16:52:37,557 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 16:53:10,447 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 16:53:10,452 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 16:53:10,458 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 16:53:10,621 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 16:53:45,233 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 16:53:45,248 | INFO | main | Redis event bus started
+2025-10-04 16:55:03,629 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-10-04 16:55:15,503 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_Dt435
+2025-10-04 16:55:23,716 | INFO | app.utils.file_utils | Created database documents/user_1/agent_Dt435\products.db from products.csv
+2025-10-04 16:55:23,907 | INFO | app.utils.file_utils | Processed dataset info for products.csv
+2025-10-04 16:55:24,410 | INFO | app.dependencies.redis_storage | Agent Dt435 stored in Redis
+2025-10-04 16:55:31,434 | INFO | app.tasks.test_task | Task Execution: user_id 1
+2025-10-04 16:55:31,449 | INFO | app.tasks.test_task | Creating Customer Service Agent for user 1
+2025-10-04 16:55:31,500 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 16:55:31,567 | INFO | app.tasks.test_task | Agent data: id='Dt435' name='Customer Support Bot' avatar=None model='gpt-4o' description=None base_prompt='You are a helpful customer service agent' tone='friendly' short_term_memory=False long_term_memory=False status='active' company_name='PT. lord suroso' industry='Teknologi AI' company_description='tidak ada' address='jln.kwitang no 4, Jakarta Pusat' email='suroso@gmail.com' website=None fallback_email='siti@gmail.com'
+2025-10-04 16:55:32,528 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 16:55:32,439 | INFO | app.tasks.test_task | New agent: <Agent name=Customer Support Bot user_id=1>
+2025-10-04 16:55:32,446 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 16:55:32,576 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 16:55:32,866 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 16:55:32,965 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 16:55:32,987 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 16:55:33,013 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 16:55:33,205 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 16:55:33,210 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_Dt435
+2025-10-04 16:55:33,212 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 16:55:33,224 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 16:55:33,243 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 16:55:33,383 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 16:55:33,527 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 16:55:33,548 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 16:55:33,883 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 16:55:33,903 | INFO | app.utils.file_utils | Saved file: documents/user_1/agent_Dt435\Kerangka Makalah.pdf (type: pdf)
+2025-10-04 16:55:33,886 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 16:55:33,912 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 16:55:33,975 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 16:55:33,978 | INFO | app.tasks.test_task | Processing pdf file for RAG: Kerangka Makalah.pdf
+2025-10-04 16:55:33,912 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 16:55:50,067 | INFO | app.AI.document_store.RAG | Successfully loaded document: Kerangka Makalah.pdf
+2025-10-04 16:55:53,808 | INFO | app.AI.document_store.RAG | Successfully added document 'Kerangka Makalah.pdf' with ID '14'
+2025-10-04 16:55:53,827 | INFO | app.utils.agent_utils | Added document Kerangka Makalah.pdf to agent Dt435
+2025-10-04 16:55:53,852 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 16:55:54,106 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 16:55:54,125 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 16:55:54,131 | INFO | app.utils.event_utils | Published event.agent.success event for agent 2 for user 1
+2025-10-04 16:55:54,138 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 16:55:54,166 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 16:55:54,192 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_SUCCESS
+2025-10-04 16:55:54,157 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.success.user:1
+2025-10-04 16:56:25,888 | INFO | main | Redis event bus stopped
+2025-10-04 16:56:55,387 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 16:56:55,388 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 16:56:55,389 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 16:56:55,390 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 16:57:40,576 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 16:57:40,579 | INFO | main | Redis event bus started
+2025-10-04 16:58:21,419 | INFO | main | Redis event bus stopped
+2025-10-04 16:58:35,825 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 16:58:35,826 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 16:58:35,826 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 16:58:35,827 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 16:59:07,878 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 16:59:07,879 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 16:59:07,879 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 16:59:07,880 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 16:59:39,768 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 16:59:39,771 | INFO | main | Redis event bus started
+2025-10-04 16:59:59,615 | INFO | main | Redis event bus stopped
+2025-10-04 17:00:16,786 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 17:00:16,787 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 17:00:16,788 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 17:00:16,789 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 17:00:35,088 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 17:00:35,091 | INFO | main | Redis event bus started
+2025-10-04 17:00:56,808 | INFO | main | Redis event bus stopped
+2025-10-04 17:01:06,483 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 17:01:06,484 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 17:01:06,484 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 17:01:06,485 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 17:01:29,541 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 17:01:29,543 | INFO | main | Redis event bus started
+2025-10-04 17:01:43,813 | INFO | main | Redis event bus stopped
+2025-10-04 17:02:19,507 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 17:02:19,514 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 17:02:19,524 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 17:02:19,525 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 17:02:38,000 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 17:02:38,002 | INFO | main | Redis event bus started
+2025-10-04 17:02:56,787 | INFO | main | Redis event bus stopped
+2025-10-04 17:03:42,352 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 17:03:42,355 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 17:03:42,356 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 17:03:42,356 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 17:03:44,071 | INFO | app.dependencies.redis_storage | Agent Dt435 retrieved from Redis
+2025-10-04 17:03:56,707 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 17:03:56,709 | INFO | main | Redis event bus started
+2025-10-04 17:04:27,678 | INFO | main | Redis event bus stopped
+2025-10-04 17:04:40,660 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 17:04:40,661 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 17:04:40,662 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 17:04:40,662 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 17:04:55,543 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 17:04:55,570 | INFO | main | Redis event bus started
+2025-10-04 17:05:10,126 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_f1027
+2025-10-04 17:05:10,837 | INFO | app.utils.file_utils | Created database documents/user_1/agent_f1027\products.db from products.csv
+2025-10-04 17:05:10,901 | INFO | app.utils.file_utils | Processed dataset info for products.csv
+2025-10-04 17:05:11,124 | INFO | app.dependencies.redis_storage | Agent f1027 stored in Redis
+2025-10-04 17:05:14,907 | INFO | app.tasks.test_task | Task Execution: user_id 1
+2025-10-04 17:05:14,928 | INFO | app.tasks.test_task | Creating Customer Service Agent for user 1
+2025-10-04 17:05:14,960 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 17:05:15,084 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 17:05:15,012 | INFO | app.tasks.test_task | Agent data: id='f1027' name='Customer Support Bot' avatar=None model='gpt-4o' description=None base_prompt='You are a helpful customer service agent' tone='friendly' short_term_memory=False long_term_memory=False status='active' company_name='PT. lord suroso' industry='Teknologi AI' company_description='tidak ada' address='jln.kwitang no 4, Jakarta Pusat' email='suroso@gmail.com' website=None fallback_email='siti@gmail.com'
+2025-10-04 17:05:15,089 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 17:05:15,093 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 17:05:15,135 | INFO | app.tasks.test_task | New agent: <Agent name=Customer Support Bot user_id=1>
+2025-10-04 17:05:15,217 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 17:05:15,240 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 17:05:15,247 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 17:05:15,259 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 17:05:15,511 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 17:05:15,577 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_f1027
+2025-10-04 17:05:15,581 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 17:05:15,599 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 17:05:15,591 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 17:05:15,611 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 17:05:15,623 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 17:05:15,674 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 17:05:15,609 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 17:05:15,631 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 17:05:15,778 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 17:05:15,779 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 17:05:15,795 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 17:05:15,784 | INFO | app.utils.file_utils | Saved file: documents/user_1/agent_f1027\Kerangka Makalah.pdf (type: pdf)
+2025-10-04 17:05:16,088 | INFO | app.tasks.test_task | Processing pdf file for RAG: Kerangka Makalah.pdf
+2025-10-04 17:05:22,870 | INFO | app.AI.document_store.RAG | Successfully loaded document: Kerangka Makalah.pdf
+2025-10-04 17:05:26,437 | INFO | app.AI.document_store.RAG | Successfully added document 'Kerangka Makalah.pdf' with ID '15'
+2025-10-04 17:05:26,456 | INFO | app.utils.agent_utils | Added document Kerangka Makalah.pdf to agent f1027
+2025-10-04 17:05:26,530 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 17:05:26,631 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 17:05:26,657 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 17:05:26,643 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 17:05:26,648 | INFO | app.utils.event_utils | Published event.agent.success event for agent 2 for user 1
+2025-10-04 17:05:26,680 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 17:05:26,707 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_SUCCESS
+2025-10-04 17:05:26,678 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.success.user:1
+2025-10-04 17:08:15,144 | INFO | app.websocket.manager | User id agent_invoke_1 connection to websocket.
+2025-10-04 17:08:15,286 | INFO | app.websocket.ws_route | WebSocket connected for agent invoke - User: 1
+2025-10-04 17:08:17,880 | INFO | app.dependencies.redis_storage | Agent f1027 retrieved from Redis
+2025-10-04 17:08:43,494 | INFO | app.AI.customer_service.workflow | Main agent processing user message: hai...
+2025-10-04 17:08:43,494 | INFO | app.AI.customer_service.workflow | Main agent processing user message: hai...
+2025-10-04 17:08:43,878 | WARNING | app.AI.customer_service.workflow | Attempt 1 failed: 'dict' object has no attribute 'name'. Retrying in 1.0s...
+2025-10-04 17:08:43,878 | WARNING | app.AI.customer_service.workflow | Attempt 1 failed: 'dict' object has no attribute 'name'. Retrying in 1.0s...
+2025-10-04 17:08:44,899 | WARNING | app.AI.customer_service.workflow | Attempt 2 failed: 'dict' object has no attribute 'name'. Retrying in 2.0s...
+2025-10-04 17:08:44,899 | WARNING | app.AI.customer_service.workflow | Attempt 2 failed: 'dict' object has no attribute 'name'. Retrying in 2.0s...
+2025-10-04 17:08:46,902 | ERROR | app.AI.customer_service.workflow | Max retries (3) exceeded. Last error: 'dict' object has no attribute 'name'
+2025-10-04 17:08:46,902 | ERROR | app.AI.customer_service.workflow | Max retries (3) exceeded. Last error: 'dict' object has no attribute 'name'
+2025-10-04 17:08:46,927 | ERROR | app.AI.customer_service.workflow | ai_service_error: 'dict' object has no attribute 'name'
+2025-10-04 17:08:46,927 | ERROR | app.AI.customer_service.workflow | ai_service_error: 'dict' object has no attribute 'name'
+2025-10-04 17:08:47,003 | ERROR | app.AI.customer_service.workflow | Error in main agent: 'dict' object has no attribute 'name'
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\AI\customer_service\workflow.py", line 319, in _main_agent
+    response = self._retry_with_backoff(invoke_llm, max_retries=3)
+  File "D:\Saas_Project\Backend\app\AI\customer_service\workflow.py", line 124, in _retry_with_backoff
+    raise e
+  File "D:\Saas_Project\Backend\app\AI\customer_service\workflow.py", line 118, in _retry_with_backoff
+    return func()
+  File "D:\Saas_Project\Backend\app\AI\customer_service\workflow.py", line 313, in invoke_llm
+    prompt = self.prompts.main_agent(state.user_message, self.base_prompt, self.tone, self.company_information)
+  File "D:\Saas_Project\Backend\app\AI\customer_service\prompts.py", line 92, in main_agent
+    - Nama: {company_information.name}
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'name'
+2025-10-04 17:08:47,003 | ERROR | app.AI.customer_service.workflow | Error in main agent: 'dict' object has no attribute 'name'
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\AI\customer_service\workflow.py", line 319, in _main_agent
+    response = self._retry_with_backoff(invoke_llm, max_retries=3)
+  File "D:\Saas_Project\Backend\app\AI\customer_service\workflow.py", line 124, in _retry_with_backoff
+    raise e
+  File "D:\Saas_Project\Backend\app\AI\customer_service\workflow.py", line 118, in _retry_with_backoff
+    return func()
+  File "D:\Saas_Project\Backend\app\AI\customer_service\workflow.py", line 313, in invoke_llm
+    prompt = self.prompts.main_agent(state.user_message, self.base_prompt, self.tone, self.company_information)
+  File "D:\Saas_Project\Backend\app\AI\customer_service\prompts.py", line 92, in main_agent
+    - Nama: {company_information.name}
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'name'
+2025-10-04 17:12:06,422 | ERROR | app.websocket.ws_route | Error in agent invoke: (1012, None)
+2025-10-04 17:12:06,538 | ERROR | app.websocket.ws_route | WebSocket error for agent invoke - User: 1: Unexpected ASGI message 'websocket.send', after sending 'websocket.close' or response already completed.
+2025-10-04 17:12:06,708 | INFO | app.websocket.manager | User with id agent_invoke_1 diconnect from websocket
+2025-10-04 17:12:07,003 | INFO | app.websocket.manager | User with id agent_invoke_1 has been deleted from connections
+2025-10-04 17:12:07,983 | INFO | main | Redis event bus stopped
+2025-10-04 17:12:37,667 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 17:12:37,678 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 17:12:37,691 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 17:12:37,740 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 17:13:00,853 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 17:13:00,856 | INFO | main | Redis event bus started
+2025-10-04 17:13:40,830 | INFO | main | Redis event bus stopped
+2025-10-04 17:13:50,198 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 17:13:50,199 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 17:13:50,200 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 17:13:50,200 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 17:14:30,908 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 17:14:30,973 | INFO | main | Redis event bus started
+2025-10-04 17:14:47,965 | INFO | main | Redis event bus stopped
+2025-10-04 17:15:07,503 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 17:15:07,596 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 17:15:07,738 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 17:15:07,886 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 17:15:29,557 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 17:15:29,560 | INFO | main | Redis event bus started
+2025-10-04 17:15:50,858 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_lg745
+2025-10-04 17:15:51,504 | INFO | app.utils.file_utils | Created database documents/user_1/agent_lg745\products.db from products.csv
+2025-10-04 17:15:51,894 | INFO | app.utils.file_utils | Processed dataset info for products.csv
+2025-10-04 17:15:52,690 | INFO | app.dependencies.redis_storage | Agent lg745 stored in Redis
+2025-10-04 17:15:58,429 | INFO | app.tasks.test_task | Task Execution: user_id 1
+2025-10-04 17:15:58,550 | INFO | app.tasks.test_task | Creating Customer Service Agent for user 1
+2025-10-04 17:15:58,668 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 17:15:58,708 | INFO | app.tasks.test_task | Agent data: id='lg745' name='Customer Support Bot' avatar=None model='gpt-4o' description=None base_prompt='You are a helpful customer service agent' tone='friendly' short_term_memory=False long_term_memory=False status='active' company_name='PT. lord suroso' industry='Teknologi AI' company_description='tidak ada' address='jln.kwitang no 4, Jakarta Pusat' email='suroso@gmail.com' website=None fallback_email='siti@gmail.com'
+2025-10-04 17:15:58,773 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 17:15:58,784 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 17:15:58,810 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 17:15:58,812 | INFO | app.tasks.test_task | New agent: <Agent name=Customer Support Bot user_id=1>
+2025-10-04 17:15:59,358 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 17:15:59,411 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 17:15:59,413 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 17:15:59,412 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 17:15:59,602 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 17:15:59,671 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 17:15:59,662 | INFO | app.utils.file_utils | Created directory: documents/user_1/agent_lg745
+2025-10-04 17:15:59,689 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 17:15:59,691 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 17:15:59,696 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 17:15:59,729 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 17:15:59,730 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 17:15:59,746 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+r:1
+2025-10-04 17:15:59,801 | INFO | app.events.redis_event | Sending the message to handler function
+2025-10-04 17:15:59,803 | INFO | app.events.redis_event | The handler function accepted the message: event type EventType.AGENT_CREATION_PROGRESS
+2025-10-04 17:15:59,802 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 17:15:59,794 | INFO | app.utils.file_utils | Saved file: documents/user_1/agent_lg745\Kerangka Makalah.pdf (type: pdf)
+2025-10-04 17:15:59,870 | INFO | app.tasks.test_task | Processing pdf file for RAG: Kerangka Makalah.pdf
+2025-10-04 17:16:00,500 | INFO | main | Redis event bus stopped
+2025-10-04 17:16:08,122 | INFO | app.AI.document_store.RAG | Successfully loaded document: Kerangka Makalah.pdf
+2025-10-04 17:16:11,237 | INFO | app.AI.document_store.RAG | Successfully added document 'Kerangka Makalah.pdf' with ID '16'
+2025-10-04 17:16:11,252 | INFO | app.utils.agent_utils | Added document Kerangka Makalah.pdf to agent lg745
+2025-10-04 17:16:11,385 | INFO | app.utils.event_utils | Published event.agent.progress event for agent 2 for user 1
+2025-10-04 17:16:11,423 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.progress.user:1
+2025-10-04 17:16:11,502 | INFO | app.utils.event_utils | Published event.agent.success event for agent 2 for user 1
+2025-10-04 17:16:11,535 | INFO | app.events.redis_event | User with id 1 published to channel event.agent.success.user:1
+2025-10-04 17:16:35,829 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 17:16:35,831 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 17:16:35,848 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 17:16:35,852 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 17:17:05,101 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 17:17:05,103 | INFO | main | Redis event bus started
+2025-10-04 17:17:05,121 | INFO | app.websocket.manager | User id agent_invoke_1 connection to websocket.
+2025-10-04 17:17:05,128 | INFO | app.websocket.ws_route | WebSocket connected for agent invoke - User: 1
+2025-10-04 17:17:24,509 | ERROR | app.websocket.ws_route | Error in agent invoke: (<CloseCode.ABNORMAL_CLOSURE: 1006>, '')
+2025-10-04 17:17:24,532 | ERROR | app.websocket.ws_route | WebSocket error for agent invoke - User: 1: Unexpected ASGI message 'websocket.send', after sending 'websocket.close' or response already completed.
+2025-10-04 17:17:24,597 | INFO | app.websocket.manager | User with id agent_invoke_1 diconnect from websocket
+2025-10-04 17:17:24,625 | INFO | app.websocket.manager | User with id agent_invoke_1 has been deleted from connections
+2025-10-04 17:17:28,141 | INFO | app.websocket.manager | User id agent_invoke_1 connection to websocket.
+2025-10-04 17:17:28,141 | INFO | app.websocket.ws_route | WebSocket connected for agent invoke - User: 1
+2025-10-04 17:17:31,377 | INFO | app.dependencies.redis_storage | Agent lg745 retrieved from Redis
+2025-10-04 17:17:44,828 | INFO | app.AI.customer_service.workflow | Main agent processing user message: hai...
+2025-10-04 17:17:44,828 | INFO | app.AI.customer_service.workflow | Main agent processing user message: hai...
+2025-10-04 17:17:46,649 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-10-04 17:17:46,649 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-10-04 17:17:53,635 | ERROR | app.websocket.ws_route | Error in agent invoke: (<CloseCode.ABNORMAL_CLOSURE: 1006>, '')
+2025-10-04 17:17:53,669 | ERROR | app.websocket.ws_route | WebSocket error for agent invoke - User: 1: Unexpected ASGI message 'websocket.send', after sending 'websocket.close' or response already completed.
+2025-10-04 17:17:53,671 | INFO | app.websocket.manager | User with id agent_invoke_1 diconnect from websocket
+2025-10-04 17:17:53,672 | INFO | app.websocket.manager | User with id agent_invoke_1 has been deleted from connections
+2025-10-04 17:18:11,559 | INFO | app.websocket.manager | User id agent_invoke_1 connection to websocket.
+2025-10-04 17:18:11,560 | INFO | app.websocket.ws_route | WebSocket connected for agent invoke - User: 1
+2025-10-04 17:18:16,419 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Ini nama perusahaanya apa ya?...
+2025-10-04 17:18:16,419 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Ini nama perusahaanya apa ya?...
+2025-10-04 17:18:18,426 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-10-04 17:18:18,426 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-10-04 17:18:25,778 | ERROR | app.websocket.ws_route | Error in agent invoke: (<CloseCode.ABNORMAL_CLOSURE: 1006>, '')
+2025-10-04 17:18:25,800 | ERROR | app.websocket.ws_route | WebSocket error for agent invoke - User: 1: Unexpected ASGI message 'websocket.send', after sending 'websocket.close' or response already completed.
+2025-10-04 17:18:25,805 | INFO | app.websocket.manager | User with id agent_invoke_1 diconnect from websocket
+2025-10-04 17:18:25,807 | INFO | app.websocket.manager | User with id agent_invoke_1 has been deleted from connections
+2025-10-04 17:19:06,886 | INFO | app.websocket.manager | User id agent_invoke_1 connection to websocket.
+2025-10-04 17:19:07,184 | INFO | app.websocket.ws_route | WebSocket connected for agent invoke - User: 1
+2025-10-04 17:19:10,883 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Saya mau menanyakan tentang dokument, kira kira do...
+2025-10-04 17:19:10,883 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Saya mau menanyakan tentang dokument, kira kira do...
+2025-10-04 17:19:12,095 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-10-04 17:19:12,095 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-10-04 17:19:18,193 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-10-04 17:19:18,193 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-10-04 17:19:18,199 | INFO | app.AI.customer_service.workflow | Tool message:  I'm sorry, I don't know the answer to this question as it is not included in the given context. The...
+2025-10-04 17:19:18,199 | INFO | app.AI.customer_service.workflow | Tool message:  I'm sorry, I don't know the answer to this question as it is not included in the given context. The...
+2025-10-04 17:19:20,669 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=end, tokens=881
+2025-10-04 17:19:20,669 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=end, tokens=881
+2025-10-04 17:20:32,528 | ERROR | app.websocket.ws_route | Error in agent invoke: (<CloseCode.ABNORMAL_CLOSURE: 1006>, '')
+2025-10-04 17:20:32,537 | ERROR | app.websocket.ws_route | WebSocket error for agent invoke - User: 1: Unexpected ASGI message 'websocket.send', after sending 'websocket.close' or response already completed.
+2025-10-04 17:20:32,537 | INFO | app.websocket.manager | User with id agent_invoke_1 diconnect from websocket
+2025-10-04 17:20:32,539 | INFO | app.websocket.manager | User with id agent_invoke_1 has been deleted from connections
+2025-10-04 17:20:34,863 | INFO | app.websocket.manager | User id agent_invoke_1 connection to websocket.
+2025-10-04 17:20:34,864 | INFO | app.websocket.ws_route | WebSocket connected for agent invoke - User: 1
+2025-10-04 17:20:39,094 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Apa product dengan stok paling banyak...
+2025-10-04 17:20:39,094 | INFO | app.AI.customer_service.workflow | Main agent processing user message: Apa product dengan stok paling banyak...
+2025-10-04 17:20:39,944 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-10-04 17:20:39,944 | INFO | app.AI.customer_service.workflow | Main agent response generated successfully
+2025-10-04 17:20:43,044 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-10-04 17:20:43,044 | INFO | app.AI.customer_service.workflow | Validation agent processing tool message
+2025-10-04 17:20:43,112 | INFO | app.AI.customer_service.workflow | Tool message:  Saya tidak tahu, karena tidak ada informasi yang menyebutkan tentang stok yang dimiliki oleh PT Dia...
+2025-10-04 17:20:43,112 | INFO | app.AI.customer_service.workflow | Tool message:  Saya tidak tahu, karena tidak ada informasi yang menyebutkan tentang stok yang dimiliki oleh PT Dia...
+2025-10-04 17:20:45,511 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=check_products_database, tokens=835
+2025-10-04 17:20:45,511 | INFO | app.AI.customer_service.workflow | Validation result: can_answer=False, next_step=check_products_database, tokens=835
+2025-10-04 17:20:47,827 | INFO | app.AI.customer_service.workflow | Generating query for problem: Menemukan produk yang memiliki stok paling banyak ...
+2025-10-04 17:20:47,827 | INFO | app.AI.customer_service.workflow | Generating query for problem: Menemukan produk yang memiliki stok paling banyak ...
+2025-10-04 17:20:49,509 | INFO | app.AI.customer_service.workflow | Generated query: SELECT product_name, stock FROM products ORDER BY stock DESC LIMIT 1;...
+2025-10-04 17:20:49,509 | INFO | app.AI.customer_service.workflow | Generated query: SELECT product_name, stock FROM products ORDER BY stock DESC LIMIT 1;...
+2025-10-04 17:20:49,512 | INFO | app.AI.customer_service.workflow | Target database: products
+2025-10-04 17:20:49,512 | INFO | app.AI.customer_service.workflow | Target database: products
+2025-10-04 17:20:49,520 | INFO | app.AI.customer_service.workflow | Estimated tokens: 743
+2025-10-04 17:20:49,520 | INFO | app.AI.customer_service.workflow | Estimated tokens: 743
+2025-10-04 17:20:50,062 | INFO | app.AI.customer_service.workflow | Query executed successfully, returned 1 rows
+2025-10-04 17:20:50,062 | INFO | app.AI.customer_service.workflow | Query executed successfully, returned 1 rows
+2025-10-04 17:20:50,073 | INFO | app.AI.customer_service.workflow | Generating final answer for user
+2025-10-04 17:20:50,073 | INFO | app.AI.customer_service.workflow | Generating final answer for user
+2025-10-04 17:20:53,874 | INFO | app.AI.customer_service.workflow | Final answer generated successfully
+2025-10-04 17:20:53,874 | INFO | app.AI.customer_service.workflow | Final answer generated successfully
+2025-10-04 17:21:23,610 | ERROR | app.websocket.ws_route | Error in agent invoke: (<CloseCode.ABNORMAL_CLOSURE: 1006>, '')
+2025-10-04 17:21:23,681 | ERROR | app.websocket.ws_route | WebSocket error for agent invoke - User: 1: Unexpected ASGI message 'websocket.send', after sending 'websocket.close' or response already completed.
+2025-10-04 17:21:23,682 | INFO | app.websocket.manager | User with id agent_invoke_1 diconnect from websocket
+2025-10-04 17:21:23,682 | INFO | app.websocket.manager | User with id agent_invoke_1 has been deleted from connections
+2025-10-04 17:21:28,613 | INFO | main | Redis event bus stopped
+2025-10-04 18:59:40,131 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 18:59:40,174 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 18:59:40,179 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 18:59:40,179 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 19:00:13,906 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 19:00:13,910 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 19:00:13,911 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 19:00:13,913 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-04 19:00:32,471 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-04 19:00:32,524 | INFO | main | Redis event bus started
+2025-10-04 19:01:34,292 | INFO | app.controllers.auth_controller | User khaerul@gmail.com login is successfully.
+2025-10-04 19:01:42,863 | INFO | app.controllers.user_controller | khaerul@gmail.com Get user profile is successfully
+2025-10-04 19:01:54,338 | INFO | app.controllers.agent_controller | Successfully retrieved agents for user khaerul@gmail.com
+2025-10-04 19:04:51,906 | WARNING | main | Validation error: [{'type': 'int_parsing', 'loc': ('path', 'agent_id'), 'msg': 'Input should be a valid integer, unable to parse string as an integer', 'input': 'wuAbI'}]
+2025-10-04 19:05:49,096 | INFO | main | Redis event bus stopped
+2025-10-04 19:07:48,224 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-04 19:07:48,323 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-04 19:07:48,323 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-04 19:07:48,324 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke

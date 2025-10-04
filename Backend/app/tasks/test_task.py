@@ -262,7 +262,7 @@ def create_simple_rag_agent_task(self, file_data: Optional[dict], agent_data: di
 #         db.close()
 
 @celery_app.task(bind=True, name="app.tasks.agent_task.create_customer_service_agent")
-def create_customer_service_agent_task(self, files_data: Optional[List[dict]], agent_data: dict, datasets: List[dict], user_id: int):
+def create_customer_service_agent_task(self, files_data: Optional[List[dict]], agent_data: dict, user_id: int):
     task_id = self.request.id
     db = SessionLocal()
     logger.info(f"Task Execution: user_id {user_id}")
@@ -282,8 +282,6 @@ def create_customer_service_agent_task(self, files_data: Optional[List[dict]], a
         new_agent = create_agent_entity(agent_data_obj, user_id, agent_role="customer service")
         logger.info(f"New agent: {new_agent}")
         db.add(new_agent)
-        db.flush()
-        db.refresh(new_agent)
 
 #         # Step 4: Create company information
         progress = _update_progress(self, 20, "Creating company information")
@@ -291,7 +289,7 @@ def create_customer_service_agent_task(self, files_data: Optional[List[dict]], a
         
         from app.models.company_information.company_entity import CompanyInformation
         new_company_information = CompanyInformation(
-            agent_id=new_agent.id,
+            agent_id=agent_data_obj.id,
             name=agent_data_obj.company_name,
             industry=agent_data_obj.industry,
             description=agent_data_obj.company_description,
@@ -307,15 +305,15 @@ def create_customer_service_agent_task(self, files_data: Optional[List[dict]], a
         progress = _update_progress(self, 30, "Creating agent directory")
         publish_agent_event(EventType.AGENT_CREATION_PROGRESS, user_id, 2, progress)
         
-        directory_path = create_agent_directory(user_id, int(new_agent.id))  # type: ignore
+        directory_path = create_agent_directory(user_id, agent_data_obj.id)  # type: ignore
     
 #         # Step 6: Initialize Customer Service Agent
         progress = _update_progress(self, 40, "Initializing Customer Service Agent")
         publish_agent_event(EventType.AGENT_CREATION_PROGRESS, user_id, 2, progress)
         
         from app.utils.agent_utils import initialize_customer_service_agent
-        initialized_agent = initialize_customer_service_agent(new_agent, directory_path, agent_data_obj, datasets)
-        run_async(redis_storage.store_agent(str(new_agent.id), initialized_agent))
+        # initialized_agent = initialize_customer_service_agent(new_agent, directory_path, agent_data_obj, datasets)
+        # run_async(redis_storage.store_agent(str(new_agent.id), initialized_agent))
 #         # Step 7: Handle file uploads if provided
         document_ids = []
         if files_data:
@@ -324,7 +322,7 @@ def create_customer_service_agent_task(self, files_data: Optional[List[dict]], a
             publish_agent_event(EventType.AGENT_CREATION_PROGRESS, user_id, 2, progress)
             
             document_ids = _handle_customer_service_files(
-                self, db, new_agent, files_data, directory_path, datasets
+                self, db, agent_data_obj.id, files_data, directory_path
             )
     
 #         # Step 8: Commit transaction
@@ -358,10 +356,10 @@ def create_customer_service_agent_task(self, files_data: Optional[List[dict]], a
 def _handle_customer_service_files(
     task_instance, 
     db: Session, 
-    agent: Agent, 
+    agent_id: str, 
     files_data: List[dict], 
     directory_path: str,
-    datasets: List[dict]
+    # datasets: List[dict]
 ) -> List[int]:
     """
     Handle file uploads for Customer Service Agent
@@ -387,7 +385,6 @@ def _handle_customer_service_files(
     
     try:
         from app.utils.file_utils import save_uploaded_file
-        from app.AI.utils.dataset import get_dataset
         import os
         
         for file_data in files_data:
@@ -397,7 +394,7 @@ def _handle_customer_service_files(
                 
                 # Create document record
                 post_document = Document(
-                    agent_id=int(agent.id),  # type: ignore
+                    agent_id=agent_id,  # type: ignore
                     file_name=file_data["filename"],
                     content_type=content_type,
                 )
@@ -407,47 +404,48 @@ def _handle_customer_service_files(
                 document_ids.append(int(post_document.id))  # type: ignore
                 
                 # Process CSV/Excel files for dataset info
-                if content_type in ["csv", "excel"]:
-                    logger.info(f"Processing {content_type} file: {file_data['filename']}")
-                    filename_without_ext = file_data["filename"].split('.')[0]
-                    available_databases.append(filename_without_ext)
+                # if content_type in ["csv", "excel"]:
+                #     logger.info(f"Processing {content_type} file: {file_data['filename']}")
+                #     filename_without_ext = file_data["filename"].split('.')[0]
+                #     available_databases.append(filename_without_ext)
                     
-                    # Get dataset description from user input
-                    dataset_desc = next(
-                        (d for d in datasets if d.get("filename") == filename_without_ext),
-                        None,
-                    )
+                #     # Get dataset description from user input
+                #     dataset_desc = next(
+                #         (d for d in datasets if d.get("filename") == filename_without_ext),
+                #         None,
+                #     )
                     
-                    if dataset_desc:
-                        dataset_descriptions[
-                            f"db_{filename_without_ext}_description"
-                        ] = dataset_desc.get("description", "")
+                #     if dataset_desc:
+                #         dataset_descriptions[
+                #             f"db_{filename_without_ext}_description"
+                #         ] = dataset_desc.get("description", "")
                     
-                    # Create database file
-                    db_path = os.path.join(directory_path, f"{filename_without_ext}.db")
-                    try:
-                        get_dataset(
-                            file_path,
-                            db_path,
-                            f"SELECT * FROM {filename_without_ext}",
-                            filename_without_ext,
-                        )
-                        logger.info(f"Created database {db_path} from {file_data['filename']}")
-                    except Exception as e:
-                        logger.error(f"Failed to create database for {file_data['filename']}: {str(e)}")
+                #     # Create database file
+                #     db_path = os.path.join(directory_path, f"{filename_without_ext}.db")
+                #     try:
+                #         get_dataset(
+                #             file_path,
+                #             db_path,
+                #             f"SELECT * FROM {filename_without_ext}",
+                #             filename_without_ext,
+                #         )
+                #         logger.info(f"Created database {db_path} from {file_data['filename']}")
+                #     except Exception as e:
+                #         logger.error(f"Failed to create database for {file_data['filename']}: {str(e)}")
                     
-                    # Get dataset info for detail_data
-                    detail_data_parts.append(f"Dataset {file_data['filename']}: Processed successfully")
+                #     # Get dataset info for detail_data
+                #     detail_data_parts.append(f"Dataset {file_data['filename']}: Processed successfully")
                 
                 # For PDF/TXT files, add to RAG system
-                elif content_type in ["pdf", "txt"]:
+                if content_type in ["pdf", "txt"]:
                     logger.info(f"Processing {content_type} file for RAG: {file_data['filename']}")
                     from app.utils.agent_utils import add_document_to_agent
                     add_document_to_agent(
-                        agent=agent,
+                        agent_id=agent_id,
                         filename=file_data["filename"],
                         content_type=content_type,
                         document_id=int(post_document.id),  # type: ignore
+                        directory_path=directory_path,
                     )
                 
                 # Update progress

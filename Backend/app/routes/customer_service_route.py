@@ -151,7 +151,7 @@ async def createCustomerServiceAgent(
 @limiter.limit("10/minute")
 def updateCustomerServiceAgent(
     request: Request,
-    agent_id: int,
+    agent_id: str,
     agent_data: UpdateCustomerServiceAgent,
     current_user: dict = Depends(role_required(["admin", "user"])),
     db: Session = Depends(get_db),
@@ -188,7 +188,7 @@ def updateCustomerServiceAgent(
 @limiter.limit("10/minute")
 def getCustomerServiceAgentById(
     request: Request,
-    agent_id: int,
+    agent_id: str,
     current_user: dict = Depends(role_required(["admin", "user"])),
     db: Session = Depends(get_db),
 ):
@@ -216,7 +216,7 @@ def getCustomerServiceAgentById(
 @limiter.limit("10/minute")
 def deleteCustomerServiceAgent(
     request: Request,
-    agent_id: int,
+    agent_id: str,
     current_user: dict = Depends(role_required(["admin", "user"])),
     db: Session = Depends(get_db),
 ):

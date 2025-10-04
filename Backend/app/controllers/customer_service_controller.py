@@ -25,23 +25,14 @@ from app.utils.document_utils import write_document
 from app.utils.error_utils import handle_database_error, handle_user_not_found
 from app.utils.logger import get_logger
 from app.utils.validation_utils import validate_agent_exists_and_owned
+from app.utils.file_utils import process_file
+from app.utils.file_utils import create_agent_directory
+from app.utils.agent_utils import generate_agent_id
+from app.dependencies.redis_storage import redis_storage
+from app.utils.file_utils import get_content_type
+
 
 logger = get_logger(__name__)
-
-
-def get_filename_without_extension(filename: str) -> str:
-    """Extract filename without extension"""
-    return os.path.splitext(filename)[0]
-
-
-def process_dataset_info(file_path: str, filename: str) -> str:
-    """Process dataset and get info using get_dataset_info"""
-    try:
-        filename_without_ext = get_filename_without_extension(filename)
-        return dataset.get_dataset_info(file_path, filename_without_ext)
-    except Exception as e:
-        logger.error(f"Error processing dataset info for {filename}: {str(e)}")
-        return f"Error processing dataset {filename}: {str(e)}"
 
 
 async def create_customer_service_agent(
@@ -72,46 +63,105 @@ async def create_customer_service_agent(
         user_id = current_user.get("id")
         if not user_id:
             raise handle_user_not_found(current_user.get("email", "unknown"))
+        generate_id = generate_agent_id(db)
+        directory_path = create_agent_directory(user_id, generate_id)
+        available_databases, dataset_descriptions, detail_data_parts = process_file(files, directory_path, datasets)
+        
+        company_information = CreateCompanyInformation(
+            name=agent_data.company_name,
+            industry=agent_data.industry,
+            description=agent_data.company_description,
+            address=agent_data.address,
+            email=agent_data.email,
+            website=agent_data.website,
+            fallback_email=agent_data.fallback_email,
+        )
+        
+        await redis_storage.store_agent(generate_id, {
+            "base_prompt": str(agent_data.base_prompt),
+            "tone": str(agent_data.tone),
+            "directory_path": directory_path,
+            "chromadb_path": "chroma_db",
+            "collection_name": f"agent_{generate_id}",
+            "llm_model": str(agent_data.model),
+            "short_memory": bool(agent_data.short_term_memory),
+            "long_memory": bool(agent_data.long_term_memory),
+            "company_information": company_information.dict(),
+            "status": "active",
+            "role": "customer service agent",
+            "available_databases": available_databases,
+            "detail_data": detail_data_parts,
+            "dataset_descriptions": dataset_descriptions,
+        })
 
         # Convert Pydantic model to dict untuk JSON serialization
         agent_data_dict = agent_data.dict()
+        agent_data_dict['id'] = generate_id
 
-        # Convert datasets to dict untuk JSON serialization
-        datasets_dict = [dataset.dict() for dataset in datasets]
+        # # Convert datasets to dict untuk JSON serialization
+        # datasets_dict = [dataset.dict() for dataset in datasets]
 
-        # Handle files data untuk serialization
+        # # Handle files data untuk serialization
+
         files_data = []
         if files:
             for file in files:
+                print(f"=== DEBUG FILE: {file.filename} ===")
+                print(f"File size: {file.size}")
+                print(f"Content type: {file.content_type}")
+                
                 # Read file content
-                file_content = await file.read()
-                file_data = {
-                    "filename": file.filename,
-                    "content_type": file.content_type,
-                    "content": file_content.hex(),  # Convert binary to hex string
-                    "size": len(file_content),
-                }
-                files_data.append(file_data)
-                # Reset file pointer
-                await file.seek(0)
+                content_type = get_content_type(file)
+                print(f"Detected content_type: {content_type}")
+                
 
-        print(f"files data: {files_data}")
-        print(f"agent_data: {agent_data_dict}")        
-        print(f"dataset dict: {datasets_dict}")        
-        # Import task function
+                if content_type in ["pdf", "txt"]:
+                    print("=================================================W")
+                    print(f"Processing file: {file.filename}")
+                    print("=================================================")
+                    
+                    # Check file position before reading
+                    print(f"File position before read: {file.file.tell() if hasattr(file.file, 'tell') else 'unknown'}")
+                    
+                    # RESET FILE POINTER TO BEGINNING BEFORE READING
+                    await file.seek(0)
+                    print(f"File position after seek(0): {file.file.tell() if hasattr(file.file, 'tell') else 'unknown'}")
+                    
+                    file_content = await file.read()
+                    print(f"File content length: {len(file_content)}")
+                    print(f"File content (first 100 bytes): {file_content[:100]}")
+                    
+                    if len(file_content) == 0:
+                        print("ERROR: File content is empty!")
+                        continue
+                    
+                    file_data = {
+                        "filename": file.filename,
+                        "content_type": file.content_type,
+                        "content": file_content.hex(),  # Convert binary to hex string
+                        "size": len(file_content),
+                    }
+                    files_data.append(file_data)
+                    
+                    # Reset file pointer for potential future use
+                    await file.seek(0)
+
+        # print(f"agent_data: {agent_data_dict}")        
+        # print(f"dataset dict: {datasets_dict}")        
+        # # Import task function
         from app.tasks.test_task import create_customer_service_agent_task
 
-        # # Start Celery task dengan data yang sudah di-serialize
+        # # # # Start Celery task dengan data yang sudah di-serialize
         task = create_customer_service_agent_task.delay(
             files_data=files_data,  # List of file data dicts
             agent_data=agent_data_dict,  # Dict instead of Pydantic model
-            datasets=datasets_dict,  # List of dataset dicts
+            # datasets=datasets_dict,  # List of dataset dicts
             user_id=user_id
         )
 
         # Return response dengan format yang sesuai untuk async task
         return {
-            "id": None,  # Will be set when task completes
+            "id": generate_id,  # Will be set when task completes
             "name": agent_data.name,
             "avatar": agent_data.avatar,
             "model": agent_data.model,
@@ -140,7 +190,7 @@ async def create_customer_service_agent(
 
 def update_customer_service_agent(
     db: Session,
-    agent_id: int,
+    agent_id: str,
     agent_data: UpdateCustomerServiceAgent,
     current_user: dict,
 ) -> CustomerServiceAgentOut:
@@ -334,7 +384,7 @@ def update_customer_service_agent(
 
 def get_customer_service_agent_by_id(
     db: Session,
-    agent_id: int,
+    agent_id: str,
     current_user: dict,
 ) -> dict:
     """
@@ -423,7 +473,7 @@ def get_customer_service_agent_by_id(
 
 
 def delete_customer_service_agent(
-    agent_id: int,
+    agent_id: str,
     current_user: dict,
     db: Session,
 ) -> dict:

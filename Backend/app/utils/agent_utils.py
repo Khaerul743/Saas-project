@@ -22,30 +22,99 @@ from app.models.platform.platform_entity import Platform
 from app.models.user.api_key_entity import ApiKey
 from app.models.user.user_entity import User
 from app.models.user_agent.user_agent_entity import UserAgent
+from app.models.company_information.company_model import CreateCompanyInformation
 from app.models.agent.agent_entity import Agent
 from app.models.agent.simple_rag_model import CreateSimpleRAGAgent
 from app.utils.logger import get_logger
 from app.dependencies.redis_storage import redis_storage
+from fastapi import WebSocket
+import json
 
 logger = get_logger(__name__)
 
-async def build_agent(agent_id: str):
+async def build_agent(agent_id: str, websocket: Optional[WebSocket] = None):
     get_agent = await redis_storage.get_agent(agent_id)
     if get_agent:
-        agent = SimpleRAGAI.Agent(
-            base_prompt=get_agent["base_prompt"],
-            tone=get_agent["tone"],
-            directory_path=get_agent["directory_path"],
-            chromadb_path=get_agent["chromadb_path"],
-            collection_name=get_agent["collection_name"],
-            model_llm=get_agent["model_llm"],   
-            short_memory=get_agent["short_memory"],
-        )
-        agents[agent_id] = agent
+        if get_agent["role"] == "simple RAG agent":
+            agent = SimpleRAGAI.Agent(
+                base_prompt=get_agent["base_prompt"],
+                tone=get_agent["tone"],
+                directory_path=get_agent["directory_path"],
+                chromadb_path=get_agent["chromadb_path"],
+                collection_name=get_agent["collection_name"],
+                model_llm=get_agent["model_llm"],   
+                short_memory=get_agent["short_memory"],
+                websocket=websocket,
+            )
+            agents[agent_id] = agent
+        elif get_agent["role"] == "customer service agent":
+            company_information = CreateCompanyInformation(
+                name=get_agent["company_information"]["name"],
+                industry=get_agent["company_information"]["industry"],
+                description=get_agent["company_information"]["description"],
+                address=get_agent["company_information"]["address"],
+                email=get_agent["company_information"]["email"],
+                website=get_agent["company_information"]["website"],
+                fallback_email=get_agent["company_information"]["fallback_email"],
+            )
+            agent = CustomerServiceAI.Agent(
+                base_prompt=get_agent["base_prompt"],
+                tone=get_agent["tone"],
+                llm_model=get_agent["llm_model"],
+                directory_path=get_agent["directory_path"],
+                chromadb_path=get_agent["chromadb_path"],
+                collection_name=get_agent["collection_name"],
+                available_databases=get_agent["available_databases"],
+                detail_data=get_agent["detail_data"],
+                company_information=company_information,
+                long_memory=get_agent["long_memory"],
+                short_memory=get_agent["short_memory"],
+                status=get_agent["status"],
+                **get_agent["dataset_descriptions"],
+            )
+            agents[agent_id] = agent
+        else:
+            raise Exception("Agent not found")
         return agent
     else:
         return None
 
+# app/websocket/agent_websocket_utils.py
+
+async def invoke_agent_logic(agent_id: str, user_message: str, db: Session, websocket: Optional[WebSocket] = None):
+    """
+    Helper function untuk invoke agent logic yang bisa digunakan di WebSocket
+    """
+    try:
+        # Check if agent exists in memory
+        agent = agents.get(str(agent_id))
+        check_agent_in_redis = await redis_storage.is_agent_exists(agent_id)
+        
+        if not agent and check_agent_in_redis:
+            from app.utils.agent_utils import build_agent
+            if websocket:
+                await websocket.send_text(json.dumps({
+                    "type": "progress",
+                    "message": "Building the agent...",
+                }))
+            agent = await build_agent(agent_id, websocket)
+        
+        if not agent:
+            raise Exception("Agent not found")
+        
+        # Execute agent
+        agent_response = agent.execute({"user_message": user_message, "websocket": True}, str(agent_id))
+        
+        return {
+            "response": agent_response.get("response", ""),
+            "token_usage": getattr(agent, 'token_usage', 0),
+            "response_time": getattr(agent, 'response_time', 0),
+            "model": getattr(agent, 'llm_model', 'unknown')
+        }
+        
+    except Exception as e:
+        logger.error(f"Error in agent logic: {e}")
+        raise e
 
 def generate_agent_id(db: Session):
     """
@@ -206,6 +275,8 @@ def initialize_customer_service_agent(
         logger.info(f"Customer Service AI agent already exists for agent {agent.id}")
 
 
+
+
 def add_document_to_agent(
     agent_id: str, filename: str, content_type: str, document_id: int, directory_path: str
 ) -> None:
@@ -213,7 +284,7 @@ def add_document_to_agent(
     Add document to AI agent
 
     Args:
-        agent: Agent entity
+        agent_id: Agent ID
         filename: Name of the file
         content_type: Type of content (pdf, txt)
         document_id: ID of the document in database
