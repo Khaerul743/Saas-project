@@ -81,7 +81,7 @@ async def build_agent(agent_id: str, websocket: Optional[WebSocket] = None):
 
 # app/websocket/agent_websocket_utils.py
 
-async def invoke_agent_logic(agent_id: str, user_message: str, db: Session, websocket: Optional[WebSocket] = None):
+async def invoke_agent_logic(agent_id: str, user_message: str, db: Session,generate_id="", websocket: Optional[WebSocket] = None):
     """
     Helper function untuk invoke agent logic yang bisa digunakan di WebSocket
     """
@@ -103,7 +103,7 @@ async def invoke_agent_logic(agent_id: str, user_message: str, db: Session, webs
             raise Exception("Agent not found")
         
         # Execute agent
-        agent_response = agent.execute({"user_message": user_message, "websocket": True}, str(agent_id))
+        agent_response = agent.execute({"user_message": user_message, "websocket": True}, str(agent_id+generate_id))
         
         return {
             "response": agent_response.get("response", ""),
@@ -473,7 +473,7 @@ def get_default_stats_response() -> Dict[str, Any]:
     }
 
 
-def generate_api_key(db: Session, user_id: int, agent_id: int) -> str:
+def generate_api_key(db: Session, user_id: int, agent_id: str) -> str:
     """
     Generate a new API key for agent
 
@@ -491,9 +491,12 @@ def generate_api_key(db: Session, user_id: int, agent_id: int) -> str:
     alphabet = string.ascii_letters + string.digits
     api_key = "".join(secrets.choice(alphabet) for _ in range(32))
 
-    # Create API key record
+    # Create API key record (30 days expiration)
     api_key_record = ApiKey(
-        user_id=user_id, agent_id=agent_id, key=api_key, is_active=True
+        user_id=user_id,
+        agent_id=agent_id,
+        api_key=api_key,
+        expires_at=datetime.utcnow() + timedelta(days=30),
     )
 
     db.add(api_key_record)
@@ -503,7 +506,7 @@ def generate_api_key(db: Session, user_id: int, agent_id: int) -> str:
     return api_key
 
 
-def validate_api_key(api_key: str, db: Session, agent_id: int) -> bool:
+def validate_api_key(api_key: str, db: Session, agent_id: str) -> bool:
     """
     Validate API key for agent
 
@@ -518,21 +521,22 @@ def validate_api_key(api_key: str, db: Session, agent_id: int) -> bool:
     from app.models.user.api_key_entity import ApiKey
 
     try:
-        # Use raw SQL to avoid SQLAlchemy boolean issues
-        result = db.execute(
-            text(
-                "SELECT * FROM api_keys WHERE key = :key AND agent_id = :agent_id AND is_active = true"
-            ),
-            {"key": api_key, "agent_id": agent_id},
-        ).fetchone()
-
-        api_key_record = result if result else None
+        # ORM validation: match api_key and agent_id, and not expired
+        api_key_record = (
+            db.query(ApiKey)
+            .filter(
+                ApiKey.api_key == api_key,
+                ApiKey.agent_id == agent_id,
+                ApiKey.expires_at > datetime.utcnow(),
+            )
+            .first()
+        )
 
         if api_key_record:
             logger.info(f"Valid API key for agent {agent_id}")
             return True
         else:
-            logger.warning(f"Invalid API key for agent {agent_id}")
+            logger.warning(f"Invalid or expired API key for agent {agent_id}")
             return False
 
     except Exception as e:

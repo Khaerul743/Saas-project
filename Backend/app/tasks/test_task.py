@@ -139,7 +139,7 @@ def create_simple_rag_agent_task(self, file_data: Optional[dict], agent_data: di
         # Step 7: Commit transaction
         db.commit()
 
-        progress = _update_progress(self, 100, "Agent creation is completed", "SUCCESS")
+        progress = _update_progress(self, 80, "Agent creation is completed", "SUCCESS")
         publish_agent_event(EventType.AGENT_CREATION_SUCCESS, user_id, agent_data['id'], progress)
 
         return build_task_result(

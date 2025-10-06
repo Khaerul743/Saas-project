@@ -26,7 +26,7 @@ router = APIRouter(prefix="/api/integrations", tags=["integrations"])
 
 @router.get("/{agent_id}", status_code=status.HTTP_200_OK)
 def getAllIntegrations(
-    agent_id: int,
+    agent_id: str,
     current_user: dict = Depends(role_required(["admin", "user"])),
     db: Session = Depends(get_db),
 ):
@@ -41,7 +41,7 @@ def getAllIntegrations(
 
 @router.post("/{agent_id}", status_code=status.HTTP_201_CREATED)
 async def createIntegration(
-    agent_id: int,
+    agent_id: str,
     payload: CreateIntegration,
     current_user: dict = Depends(role_required(["user", "admin"])),
     db: Session = Depends(get_db),
@@ -56,7 +56,7 @@ async def createIntegration(
 
 
 @router.put("/{agent_id}", status_code=status.HTTP_200_OK)
-async def updateIntegration(agent_id:int,payload: UpdateIntegration, current_user: dict = Depends(role_required(["admin", "user"])), db: Session = Depends(get_db)):
+async def updateIntegration(agent_id:str,payload: UpdateIntegration, current_user: dict = Depends(role_required(["admin", "user"])), db: Session = Depends(get_db)):
     try:
         updated_integration = await ic.update_integration(agent_id, payload, current_user, db)
         return success_response("Integration is successfully", updated_integration)
@@ -66,7 +66,7 @@ async def updateIntegration(agent_id:int,payload: UpdateIntegration, current_use
 @router.delete("/{integration_id}", status_code=status.HTTP_200_OK)
 def deleteIntegration(
     integration_id: int,
-    agent_id: int,
+    agent_id: str,
     current_user: dict = Depends(role_required(["admin", "user"])),
     db: Session = Depends(get_db),
 ):

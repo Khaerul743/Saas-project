@@ -20,7 +20,7 @@ from app.models.integration.integration_model import UpdateIntegration
 load_dotenv()
 logger = get_logger(__name__)
 
-def get_api_key_by_agent_id(agent_id: int, platform: str, db: Session) -> str:
+def get_api_key_by_agent_id(agent_id: str, platform: str, db: Session) -> str:
     """
     Get api_key from integration platform using agent_id and platform type
     
@@ -58,7 +58,7 @@ def get_api_key_by_agent_id(agent_id: int, platform: str, db: Session) -> str:
     return integration.platform_config.api_key
 
 async def create_integration(
-    agent_id: int, payload: CreateIntegration, current_user: dict, db: Session
+    agent_id: str, payload: CreateIntegration, current_user: dict, db: Session
 ):
     try:
         agent = validate_agent_exists_and_owned(db, agent_id, current_user.get("id"), current_user.get('email'))
@@ -139,7 +139,7 @@ async def create_integration(
         )
 
 
-def get_all_integrations(agent_id: int, current_user: dict, db: Session):
+def get_all_integrations(agent_id: str, current_user: dict, db: Session):
     try:
         # agent = (
         #     db.query(Agent)
@@ -189,7 +189,7 @@ def get_all_integrations(agent_id: int, current_user: dict, db: Session):
             detail="Internal server error, please try again later",
         )
 
-async def update_integration(agent_id: int, payload: UpdateIntegration, current_user: dict, db: Session):
+async def update_integration(agent_id: str, payload: UpdateIntegration, current_user: dict, db: Session):
     try:
         new_api_key = payload.api_key
         agent = validate_agent_exists_and_owned(db, agent_id, current_user.get("id"), current_user.get('email'))
@@ -249,7 +249,7 @@ async def update_integration(agent_id: int, payload: UpdateIntegration, current_
         )
 
 async def delete_integration(
-    agent_id: int, integration_id: int, current_user: dict, db: Session
+    agent_id: str, integration_id: int, current_user: dict, db: Session
 ):
     try:
         agent = validate_agent_exists_and_owned(db, agent_id, current_user.get("id"), current_user.get('email'))

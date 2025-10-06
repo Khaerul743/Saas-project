@@ -24,7 +24,7 @@ router = APIRouter(prefix="/api/history", tags=["history"])
 
 @router.get("/messages/{user_agent_id}")
 def getAllMessageByThreadId(
-    user_agent_id: int,
+    user_agent_id: str,
     current_user: dict = Depends(role_required(["admin", "user"])),
     db: Session = Depends(get_db),
 ):

@@ -12,6 +12,7 @@ from app.services.telegram import send_message
 from app.utils.logger import get_logger
 from app.utils.message_utils import safe_message_length
 from app.utils.agent_utils import validate_api_key
+from app.utils.agent_utils import invoke_agent_logic
 
 logger = get_logger(__name__)
 
@@ -153,7 +154,7 @@ async def telegram_handler(data: dict, db: Session):
             detail="Internal server error, please try again later.",
         )
 
-def api_handler(api_key: str, agent_id: int, data: dict, db: Session):
+async def api_handler(api_key: str, agent_id: str, data: dict, db: Session):
     username = data.get("username")
     unique_id = data.get("unique_id")
     user_message = data.get("user_message")
@@ -165,26 +166,28 @@ def api_handler(api_key: str, agent_id: int, data: dict, db: Session):
                 detail="Invalid API key.",
             )
 
-        agent = agents.get(str(agent_id))
-        if not agent:
-            logger.warning(f"Agent not found")
-            raise HTTPException(
-                status_code=status.HTTP_200_OK,
-                detail="Agent not found.",
-            )
+        # agent = agents.get(str(agent_id))
+        # if not agent:
+        #     logger.warning(f"Agent not found")
+        #     raise HTTPException(
+        #         status_code=status.HTTP_200_OK,
+        #         detail="Agent not found.",
+        #     )
         
-        if agent.status == "non-active":
-            logger.warning(f"Agent is not active: {agent_id}")
-            return {
-                "username": username,
-                "user_message": user_message,
-                "response": "Sorry, I'm not active right now. Please try again later.",
-            }
+        # if agent.status == "non-active":
+        #     logger.warning(f"Agent is not active: {agent_id}")
+        #     return {
+        #         "username": username,
+        #         "user_message": user_message,
+        #         "response": "Sorry, I'm not active right now. Please try again later.",
+        #     }
 
         generate_id = str(unique_id) + str(agent_id)
-        agent_response = agent.execute(
-            {"user_message": user_message, "total_token": 0}, generate_id
-        )
+        response = await invoke_agent_logic(agent_id, str(user_message), db, generate_id)
+
+        # agent_response = agent.execute(
+        #     {"user_message": user_message, "total_token": 0}, generate_id
+        # )
 
         user_agent = (
             db.query(UserAgent).filter(UserAgent.id == str(generate_id)).first()
@@ -204,21 +207,21 @@ def api_handler(api_key: str, agent_id: int, data: dict, db: Session):
         
         new_history_message = HistoryMessage(
             user_agent_id=user_agent_id,
-            user_message=safe_message_length(user_message),
-            response=safe_message_length(agent_response.get("response", "")),
+            user_message=safe_message_length(str(user_message)),
+            response=safe_message_length(response.get("response", "")),
         )
         db.add(new_history_message)
         db.flush()
         
         history_message_id = new_history_message.id
-        response_time = agent.response_time
-        token_usage = agent.token_usage
+        response_time = response.get("response_time", 0)
+        token_usage = response.get("token_usage", 0)
 
         new_metadata = Metadata(
             history_message_id=history_message_id,
             total_tokens=token_usage,
             response_time=response_time,
-            model=agent.llm_model,
+            model=response.get("model", "unknown"),
         )
         db.add(new_metadata)
         db.commit()
@@ -226,7 +229,7 @@ def api_handler(api_key: str, agent_id: int, data: dict, db: Session):
         return {
             "username": username,
             "user_message": user_message,
-            "response": agent_response.get("response", ""),
+            "response": response.get("response", ""),
         }
     except HTTPException:
         db.rollback()

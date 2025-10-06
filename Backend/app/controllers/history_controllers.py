@@ -15,7 +15,7 @@ logger = get_logger(__name__)
 
 
 
-def get_all_messages_by_threadId(user_agent_id: int, current_user: dict, db: Session):
+def get_all_messages_by_threadId(user_agent_id: str, current_user: dict, db: Session):
     try:
         agent = db.query(UserAgent).filter(UserAgent.id == user_agent_id).first()
         if not agent:

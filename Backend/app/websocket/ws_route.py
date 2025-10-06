@@ -11,6 +11,8 @@ from app.models.agent.agent_entity import Agent
 from app.models.history_message.history_entity import HistoryMessage
 from app.models.history_message.metadata_entity import Metadata
 from app.utils.agent_utils import invoke_agent_logic
+from app.models.integration.integration_model import CreateIntegration
+from app.utils.integration_utils import add_integration, platform_integration
 
 
 logger = get_logger(__name__)
@@ -27,6 +29,43 @@ async def agent_progress(user_id: str, websocket: WebSocket):
                 data = await websocket.receive_text()
                 message = json.loads(data)
                 print(f"Message from user id {user_id}, data {message}")
+                if message["type"] == "add_integration":
+                    agent_id = message["agent_id"]
+                    api_key = message.get("api_key", None)
+                    try:
+                        integration_payload = CreateIntegration(
+                            platform=message["platform"],
+                            status=message["status"],
+                            api_key=api_key
+                        )
+                    except Exception as e:
+                        logger.error(f"Error adding integration: {e}")
+                        await websocket.send_text(json.dumps({
+                            "type": "error",
+                            "status": f"Error adding integration: {e}"
+                        }))
+                        continue
+                    
+                    new_integration = add_integration(agent_id, integration_payload.platform, integration_payload.status)
+                    await websocket.send_text(json.dumps({
+                        "type": "progress",
+                        "status": "Integration is being added"
+                    }))
+                    logger.info(f"Integration is being added: {new_integration}")
+                    response = await platform_integration(agent_id, int(user_id), int(new_integration.id), integration_payload.platform, api_key)
+                    if not response.get("status"):
+                        logger.error(f"Error adding integration: {response.get('response')}")
+                        await websocket.send_text(json.dumps({
+                            "type": "error",
+                            "status": response.get("response")
+                        }))
+                        continue
+
+                    await websocket.send_text(json.dumps({
+                        "type": "success",
+                        "status": response.get("response")
+                    }))
+                    logger.info(f"Integration added successfully: {new_integration}")
             except WebSocketDisconnect:
                 break
     except WebSocketDisconnect:

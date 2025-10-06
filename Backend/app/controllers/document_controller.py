@@ -18,7 +18,7 @@ agents: Dict[str, Any] = {}
 
 
 def get_documents_by_agent(
-    agent_id: int, current_user: dict, db: Session
+    agent_id: str, current_user: dict, db: Session
 ) -> List[Document]:
     try:
         # agent = (
@@ -63,7 +63,7 @@ def get_documents_by_agent(
 
 async def document_store(
     file: UploadFile,
-    agent_id: int,
+    agent_id: str,
     current_user: dict,
     db: Session,
     background_tasks: BackgroundTasks = None,
@@ -170,7 +170,7 @@ async def document_store(
         )
 
 
-def document_delete(document_id: int, agent_id: int, current_user: dict, db: Session):
+def document_delete(document_id: int, agent_id: str, current_user: dict, db: Session):
     try:
         agent = validate_agent_exists_and_owned(db, agent_id, current_user.get("id"), current_user.get('email'))
         document = (

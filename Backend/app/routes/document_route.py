@@ -23,7 +23,7 @@ router = APIRouter(prefix="/api/documents", tags=["agents"])
 
 @router.get("/{agent_id}", status_code=status.HTTP_200_OK)
 def getAllDocumentByAgentId(
-    agent_id: int,
+    agent_id: str,
     current_user: dict = Depends(role_required(["admin", "user"])),
     db: Session = Depends(get_db),
 ):
@@ -39,7 +39,7 @@ def getAllDocumentByAgentId(
 @router.post("", status_code=status.HTTP_201_CREATED)
 async def documentStore(
     file: UploadFile = File(...),
-    agent_id: int = Form(...),
+    agent_id: str = Form(...),
     current_user: dict = Depends(role_required(["admin", "user"])),
     db: Session = Depends(get_db),
     background_tasks: BackgroundTasks = None,
@@ -65,7 +65,7 @@ async def documentStore(
 @router.delete("/{document_id}", status_code=status.HTTP_200_OK)
 def deleteDocument(
     document_id: int,
-    agent_id: int,
+    agent_id: str,
     current_user: dict = Depends(role_required(["admin", "user"])),
     db: Session = Depends(get_db),
 ):

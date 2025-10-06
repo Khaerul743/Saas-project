@@ -56,7 +56,7 @@ async def telegram_webhook(
 
 @router.post("/agent/webhook/{agent_id}", status_code=200)
 async def agent_webhook(
-    agent_id: int,api_key: str, request: Request, db: Session = Depends(get_db)
+    agent_id: str,api_key: str, request: Request, db: Session = Depends(get_db)
 ):
     try:
         payload = await request.json()
@@ -72,7 +72,7 @@ async def agent_webhook(
             "unique_id": unique_id,
             "user_message": user_message,
         }
-        response = pc.api_handler(api_key, agent_id, data, db)
+        response = await pc.api_handler(api_key, agent_id, data, db)
         return success_response("Successfully sent the message", response)
         
     except Exception as e:
