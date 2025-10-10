@@ -28,6 +28,7 @@ class Agent:
         long_memory: bool = False,
         short_memory: bool = False,
         status: str = "active",
+        websocket: Optional[WebSocket] = None,
         **kwargs,
     ):
         self.status = status
@@ -50,6 +51,7 @@ class Agent:
             directory_path=directory_path,  # ✅ Pass directory_path to workflow
             short_memory=short_memory,
             long_memory=long_memory,
+            websocket=websocket,
             **kwargs,
         )
         self._history_messages = None

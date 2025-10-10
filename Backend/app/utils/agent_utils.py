@@ -70,6 +70,7 @@ async def build_agent(agent_id: str, websocket: Optional[WebSocket] = None):
                 long_memory=get_agent["long_memory"],
                 short_memory=get_agent["short_memory"],
                 status=get_agent["status"],
+                websocket=websocket,
                 **get_agent["dataset_descriptions"],
             )
             agents[agent_id] = agent

@@ -104,6 +104,7 @@ class AgentState(BaseModel):
     data: str = "data:"
     query_again: bool = False
     next_query_desc: Optional[str] = "none"
+    websocket: bool = False
 
 
 if __name__ == "__main__":
