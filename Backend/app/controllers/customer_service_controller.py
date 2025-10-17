@@ -10,27 +10,24 @@ from sqlalchemy.orm import Session
 from app.AI import customer_service as AI
 from app.AI.utils import dataset
 from app.controllers.document_controller import agents
+from app.dependencies.redis_storage import redis_storage
 from app.models.agent.agent_entity import Agent
 from app.models.agent.customer_service_model import (
     CreateCustomerServiceAgent,
-    CustomerServiceAgentOut,
     CustomerServiceAgentAsyncResponse,
+    CustomerServiceAgentOut,
     DatasetDescription,
     UpdateCustomerServiceAgent,
 )
 from app.models.company_information.company_entity import CompanyInformation
 from app.models.company_information.company_model import CreateCompanyInformation
 from app.models.document.document_entity import Document
+from app.utils.agent_utils import generate_agent_id
 from app.utils.document_utils import write_document
 from app.utils.error_utils import handle_database_error, handle_user_not_found
+from app.utils.file_utils import create_agent_directory, get_content_type, process_file
 from app.utils.logger import get_logger
 from app.utils.validation_utils import validate_agent_exists_and_owned
-from app.utils.file_utils import process_file
-from app.utils.file_utils import create_agent_directory
-from app.utils.agent_utils import generate_agent_id
-from app.dependencies.redis_storage import redis_storage
-from app.utils.file_utils import get_content_type
-
 
 logger = get_logger(__name__)
 
@@ -65,8 +62,10 @@ async def create_customer_service_agent(
             raise handle_user_not_found(current_user.get("email", "unknown"))
         generate_id = generate_agent_id(db)
         directory_path = create_agent_directory(user_id, generate_id)
-        available_databases, dataset_descriptions, detail_data_parts = process_file(files, directory_path, datasets)
-        
+        available_databases, dataset_descriptions, detail_data_parts = process_file(
+            files, directory_path, datasets
+        )
+
         company_information = CreateCompanyInformation(
             name=agent_data.company_name,
             industry=agent_data.industry,
@@ -76,30 +75,31 @@ async def create_customer_service_agent(
             website=agent_data.website,
             fallback_email=agent_data.fallback_email,
         )
-        
-        await redis_storage.store_agent(generate_id, {
-            "base_prompt": str(agent_data.base_prompt),
-            "tone": str(agent_data.tone),
-            "directory_path": directory_path,
-            "chromadb_path": "chroma_db",
-            "collection_name": f"agent_{generate_id}",
-            "llm_model": str(agent_data.model),
-            "short_memory": bool(agent_data.short_term_memory),
-            "long_memory": bool(agent_data.long_term_memory),
-            "company_information": company_information.dict(),
-            "status": "active",
-            "role": "customer service agent",
-            "available_databases": available_databases,
-            "detail_data": detail_data_parts,
-            "dataset_descriptions": dataset_descriptions,
-        })
+
+        # Store data agent ke redis
+        await redis_storage.store_agent(
+            generate_id,
+            {
+                "base_prompt": str(agent_data.base_prompt),
+                "tone": str(agent_data.tone),
+                "directory_path": directory_path,
+                "chromadb_path": "chroma_db",
+                "collection_name": f"agent_{generate_id}",
+                "llm_model": str(agent_data.model),
+                "short_memory": bool(agent_data.short_term_memory),
+                "long_memory": bool(agent_data.long_term_memory),
+                "company_information": company_information.dict(),
+                "status": "active",
+                "role": "customer service agent",
+                "available_databases": available_databases,
+                "detail_data": detail_data_parts,
+                "dataset_descriptions": dataset_descriptions,
+            },
+        )
 
         # Convert Pydantic model to dict untuk JSON serialization
         agent_data_dict = agent_data.dict()
-        agent_data_dict['id'] = generate_id
-
-        # # Convert datasets to dict untuk JSON serialization
-        # datasets_dict = [dataset.dict() for dataset in datasets]
+        agent_data_dict["id"] = generate_id
 
         # # Handle files data untuk serialization
 
@@ -109,32 +109,35 @@ async def create_customer_service_agent(
                 print(f"=== DEBUG FILE: {file.filename} ===")
                 print(f"File size: {file.size}")
                 print(f"Content type: {file.content_type}")
-                
+
                 # Read file content
                 content_type = get_content_type(file)
                 print(f"Detected content_type: {content_type}")
-                
 
                 if content_type in ["pdf", "txt"]:
                     print("=================================================W")
                     print(f"Processing file: {file.filename}")
                     print("=================================================")
-                    
+
                     # Check file position before reading
-                    print(f"File position before read: {file.file.tell() if hasattr(file.file, 'tell') else 'unknown'}")
-                    
+                    print(
+                        f"File position before read: {file.file.tell() if hasattr(file.file, 'tell') else 'unknown'}"
+                    )
+
                     # RESET FILE POINTER TO BEGINNING BEFORE READING
                     await file.seek(0)
-                    print(f"File position after seek(0): {file.file.tell() if hasattr(file.file, 'tell') else 'unknown'}")
-                    
+                    print(
+                        f"File position after seek(0): {file.file.tell() if hasattr(file.file, 'tell') else 'unknown'}"
+                    )
+
                     file_content = await file.read()
                     print(f"File content length: {len(file_content)}")
                     print(f"File content (first 100 bytes): {file_content[:100]}")
-                    
+
                     if len(file_content) == 0:
                         print("ERROR: File content is empty!")
                         continue
-                    
+
                     file_data = {
                         "filename": file.filename,
                         "content_type": file.content_type,
@@ -142,12 +145,12 @@ async def create_customer_service_agent(
                         "size": len(file_content),
                     }
                     files_data.append(file_data)
-                    
+
                     # Reset file pointer for potential future use
                     await file.seek(0)
 
-        # print(f"agent_data: {agent_data_dict}")        
-        # print(f"dataset dict: {datasets_dict}")        
+        # print(f"agent_data: {agent_data_dict}")
+        # print(f"dataset dict: {datasets_dict}")
         # # Import task function
         from app.tasks.test_task import create_customer_service_agent_task
 
@@ -156,7 +159,7 @@ async def create_customer_service_agent(
             files_data=files_data,  # List of file data dicts
             agent_data=agent_data_dict,  # Dict instead of Pydantic model
             # datasets=datasets_dict,  # List of dataset dicts
-            user_id=user_id
+            user_id=user_id,
         )
 
         # Return response dengan format yang sesuai untuk async task
@@ -188,7 +191,7 @@ async def create_customer_service_agent(
         )
 
 
-def update_customer_service_agent(
+async def update_customer_service_agent(
     db: Session,
     agent_id: str,
     agent_data: UpdateCustomerServiceAgent,
@@ -347,12 +350,25 @@ def update_customer_service_agent(
             # Log error but don't fail the update
             logger.warning(f"Failed to update agent object: {str(agent_update_error)}")
 
+        # Update agent data in Redis storage if exists
+        try:
+            update_redis = await redis_storage.update_customer_service_agent(
+                agent_id, update_data
+            )
+            if update_redis:
+                logger.info(f"Updated agent {agent_id} in Redis storage")
+            else:
+                logger.info(
+                    f"Agent {agent_id} not found in Redis storage, skipping Redis update"
+                )
+        except Exception as redis_error:
+            # Log error but don't fail the update
+            logger.warning(f"Failed to update agent in Redis: {str(redis_error)}")
+
         logger.info(
             f"Customer Service Agent '{agent.name}' (ID: {agent.id}) updated successfully by user "
             f"{current_user.get('email')}"
         )
-
-        print(f"agents: {agents[agent_id_str].company_information}")
 
         return CustomerServiceAgentOut(
             id=agent.id,

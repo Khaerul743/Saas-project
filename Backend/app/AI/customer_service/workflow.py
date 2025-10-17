@@ -1,45 +1,47 @@
+import json
 import os
 import re
 import time
 from typing import List, Optional
 
+import tiktoken
+from fastapi import WebSocket
 from langchain_core.messages import AIMessage, HumanMessage
 from langchain_openai import ChatOpenAI
-from langgraph.checkpoint.memory import MemorySaver
+from langgraph.checkpoint.redis import RedisSaver
 from langgraph.graph import END, START, StateGraph
 from langgraph.prebuilt import ToolNode
-import tiktoken
-from app.models.company_information.company_model import CreateCompanyInformation
+
 from app.AI.customer_service.models import (
     AgentState,
     StructuredOutputGenerateQuery,
     StructuredOutputIdentifyNextStep,
     StructuredOutputTrustLevelCheck,
-    StructuredOutputValidationAgent,
     create_validation_agent_model,
 )
-from app.utils.logger import get_logger
 from app.AI.customer_service.prompts import AgentPromptControl
 from app.AI.customer_service.tools import AgentTools
 from app.AI.utils.dataset import get_dataset
 from app.AI.utils.history import get_history_messages
-from fastapi import WebSocket
+from app.dependencies.redis_storage import redis_storage
 from app.events.loop_manager import run_async
-import json
+from app.models.company_information.company_model import CreateCompanyInformation
+from app.utils.logger import get_logger
+from app.websocket.manager import ws_manager
 
 
 class Workflow:
     def __init__(
         self,
-        base_prompt:str,
-        tone:str,
+        base_prompt: str,
+        tone: str,
         tools,
         available_databases: List[str],
         detail_data: str,
         company_information: CreateCompanyInformation,
         directory_path: str = None,
         long_memory: bool = False,
-        short_memory: bool = False, 
+        short_memory: bool = False,
         websocket: Optional[WebSocket] = None,
         **kwargs,
     ):
@@ -60,7 +62,7 @@ class Workflow:
         self.provider_port = os.environ.get("PROVIDER_PORT")
         self.short_memory = short_memory
         self.long_memory = long_memory
-        self.checkpointer = MemorySaver()
+        self.checkpointer = RedisSaver(redis_url=redis_storage.redis_url)
         self.prompts = AgentPromptControl(
             is_include_memory=long_memory,
             memory_provider=self.memory_provider,
@@ -71,7 +73,7 @@ class Workflow:
         self.websocket = websocket
         self.validation_agent_model = create_validation_agent_model(available_databases)
         self.logger = get_logger(__name__)
-        
+
         # Initialize tokenizer for token counting
         try:
             self.tokenizer = tiktoken.encoding_for_model("gpt-4o-mini")
@@ -81,13 +83,20 @@ class Workflow:
 
         self.build = self._build_workflow()
 
-    def _send_websocket_message(self, message: str):
-        if self.websocket:
-            if self.websocket:
-                run_async(self.websocket.send_text(json.dumps({
-                    "type": "reasoning",
-                    "message": message,
-                })))
+    def _send_websocket_message(
+        self, include_ws: bool, message: str, user_id: Optional[str] = None
+    ):
+        if include_ws:
+            if user_id:
+                run_async(
+                    ws_manager.send_to_user(
+                        f"invoke_agent_{str(user_id)}",
+                        {
+                            "type": "reasoning",
+                            "message": message,
+                        },
+                    )
+                )
 
     def _validate_user_input(self, user_message: str) -> bool:
         """Validate user input for security and format"""
@@ -150,18 +159,22 @@ class Workflow:
             # Fallback: rough estimation (1 token ≈ 4 characters)
             return len(text) // 4
 
-    def _estimate_structured_output_tokens(self, prompt: str, response_content: str = "") -> int:
+    def _estimate_structured_output_tokens(
+        self, prompt: str, response_content: str = ""
+    ) -> int:
         """Estimate tokens for structured output calls"""
         try:
             # Estimate input tokens from prompt
             input_tokens = self._estimate_tokens(prompt)
-            
+
             # Estimate output tokens from response content
-            output_tokens = self._estimate_tokens(response_content) if response_content else 50
-            
+            output_tokens = (
+                self._estimate_tokens(response_content) if response_content else 50
+            )
+
             # Add overhead for structured output formatting
             overhead_tokens = 20
-            
+
             return input_tokens + output_tokens + overhead_tokens
         except Exception as e:
             self.logger.warning(f"Error estimating structured output tokens: {str(e)}")
@@ -221,40 +234,43 @@ class Workflow:
         graph.add_conditional_edges(
             "agent_generate_query",
             self._query_again,
-            {"agent_generate_query": "agent_generate_query", "end": "agent_answer_query"},
+            {
+                "agent_generate_query": "agent_generate_query",
+                "end": "agent_answer_query",
+            },
         )
         graph.add_edge("agent_answer_query", END)
-        # graph.add_edge(START, "main_agent")
-        # graph.add_edge("main_agent", END)
         return graph.compile(checkpointer=self.checkpointer)
 
     def _trust_level_check(self, state: AgentState):
-        print("\n" + "="*60)
+        print("\n" + "=" * 60)
         print("🔍 TRUST LEVEL CHECK")
-        print("="*60)
+        print("=" * 60)
         history_messages = get_history_messages(state.messages)
-        if len(history_messages) >8:
+        if len(history_messages) > 8:
             prompt = self.prompts.trust_level_check(history_messages)
             llm = self.llm_for_reasoning.with_structured_output(
                 StructuredOutputTrustLevelCheck
             )
             response = llm.invoke(prompt)
-            
+
             # Estimate tokens for structured output
             estimated_tokens = self._estimate_structured_output_tokens(
-                str(prompt), 
-                f"trust_level: {response.trust_level}, message: {response.message}, problem: {response.problem}"
+                str(prompt),
+                f"trust_level: {response.trust_level}, message: {response.message}, problem: {response.problem}",
             )
 
-        if self.websocket:
-            if state.websocket:
-                self._send_websocket_message(f"I am checking the trust level and the trust level is {response.trust_level}%, {response.message}, {response.problem}")
-            
+            self._send_websocket_message(
+                state.include_ws,
+                f"I am checking the trust level and the trust level is {response.trust_level}%, {response.message}, {response.problem}",
+                state.user_id,
+            )
+
             print(f"📊 Trust Level: {response.trust_level}%")
             print(f"💬 Message: {response.message}")
             print(f"🎯 Problem: {response.problem}")
             print(f"🔢 Estimated Tokens: {estimated_tokens}")
-            print("="*60)
+            print("=" * 60)
             return {
                 "trust_level": response.trust_level,
                 "message_for_user": response.message,
@@ -299,12 +315,16 @@ class Workflow:
 
     def _main_agent(self, state: AgentState):
         try:
-            if self.websocket:
-                if state.websocket:
-                    self._send_websocket_message("Main agent is processing user message...")
+            self._send_websocket_message(
+                state.include_ws,
+                "Main agent is processing user message...",
+                state.user_id,
+            )
+
             self.logger.info(
                 f"Main agent processing user message: {state.user_message[:50]}..."
             )
+            print(f"Company Information: {self.company_information}")
             print(f"detail_data: {self.detail_data}")
             print(f"available_databases: {self.available_databases}")
             print(f"kwargs: {self.kwargs}")
@@ -330,7 +350,12 @@ class Workflow:
 
             # Generate prompt and invoke LLM with retry mechanism
             def invoke_llm():
-                prompt = self.prompts.main_agent(state.user_message, self.base_prompt, self.tone, self.company_information)
+                prompt = self.prompts.main_agent(
+                    state.user_message,
+                    self.base_prompt,
+                    self.tone,
+                    self.company_information,
+                )
                 print(f"prompt: {prompt}")
                 messages = [prompt[0]] + all_previous_messages + [prompt[1]]
                 llm = self.llm_for_reasoning.bind_tools([self.tools.get_document])
@@ -391,7 +416,9 @@ class Workflow:
                     "total_token": state.total_token,
                 }
 
-            tool_message = str(state.messages[-1].content) if state.messages[-1].content else ""
+            tool_message = (
+                str(state.messages[-1].content) if state.messages[-1].content else ""
+            )
             self.logger.info(f"Tool message: {tool_message[:100]}...")
 
             # Invoke LLM with retry mechanism
@@ -407,14 +434,18 @@ class Workflow:
             response = self._retry_with_backoff(invoke_validation, max_retries=2)
             print(f"response: {response}")
             # Estimate tokens for structured output
-            prompts = self.prompts.agent_validation(state.user_message, tool_message, self.detail_data, **self.kwargs)
+            prompts = self.prompts.agent_validation(
+                state.user_message, tool_message, self.detail_data, **self.kwargs
+            )
             estimated_tokens = self._estimate_structured_output_tokens(
                 str(prompts),
-                f"can_answer: {response.can_answer}, reasoning: {response.reasoning}, next_step: {response.next_step}"
+                f"can_answer: {response.can_answer}, reasoning: {response.reasoning}, next_step: {response.next_step}",
             )
-            if self.websocket:
-                if state.websocket:
-                    self._send_websocket_message(f"{"I can answer the question" if response.can_answer else "I cannot answer the question"} and the reason is {response.reasoning} and the next step is {response.next_step}")
+            self._send_websocket_message(
+                state.include_ws,
+                f"{'I can answer the question' if response.can_answer else 'I cannot answer the question'} and the reason is {response.reasoning} and the next step is {response.next_step}",
+                state.user_id,
+            )
 
             self.logger.info(
                 f"Validation result: can_answer={response.can_answer}, next_step={response.next_step}, tokens={estimated_tokens}"
@@ -422,7 +453,7 @@ class Workflow:
             return {
                 "can_answer": response.can_answer,
                 "reason": response.reasoning,
-                "response":tool_message,
+                "response": tool_message,
                 "next_step": response.next_step,
                 "total_token": state.total_token + estimated_tokens,
             }
@@ -437,9 +468,9 @@ class Workflow:
             }
 
     def _next_step(self, state: AgentState):
-        if self.websocket:
-            if state.websocket:
-                self._send_websocket_message("I am identifying the next step...")
+        self._send_websocket_message(
+            state.include_ws, "I am identifying the next step...", state.user_id
+        )
         if state.can_answer or state.next_step == "end":
             return "end"
         print(f"state.next_step: {state.next_step}")
@@ -447,9 +478,9 @@ class Workflow:
         return state.next_step
 
     def _agent_identify_next_step(self, state: AgentState):
-        print("\n" + "="*60)
+        print("\n" + "=" * 60)
         print("🧠 AGENT IDENTIFY NEXT STEP")
-        print("="*60)
+        print("=" * 60)
 
         prompt = self.prompts.agent_identify_next_step(
             state.user_message, self.detail_data, state.reason
@@ -458,20 +489,23 @@ class Workflow:
             StructuredOutputIdentifyNextStep
         )
         response = llm.invoke(prompt)
-        if self.websocket:
-            if state.websocket:
-                self._send_websocket_message(f"let me check the problem and the problem is {response.problem} and the problem solving is {response.problem_solving}")
+
+        self._send_websocket_message(
+            state.include_ws,
+            f"let me check the problem and the problem is {response.problem} and the problem solving is {response.problem_solving}",
+            state.user_id,
+        )
 
         # Estimate tokens for structured output
         estimated_tokens = self._estimate_structured_output_tokens(
             str(prompt),
-            f"problem: {response.problem}, problem_solving: {response.problem_solving}"
+            f"problem: {response.problem}, problem_solving: {response.problem_solving}",
         )
-        
+
         print(f"🎯 Problem: {response.problem}")
         print(f"💡 Problem Solving: {response.problem_solving}")
         print(f"🔢 Estimated Tokens: {estimated_tokens}")
-        print("="*60)
+        print("=" * 60)
         return {
             "problem": response.problem,
             "problem_solving": response.problem_solving,
@@ -501,19 +535,23 @@ class Workflow:
             response = self._retry_with_backoff(generate_query, max_retries=2)
             print(f"response: {response}")
             # Estimate tokens for structured output
-            prompt = self.prompts.agent_generate_query(state.problem, problem_solving, self.detail_data)
+            prompt = self.prompts.agent_generate_query(
+                state.problem, problem_solving, self.detail_data
+            )
             estimated_tokens = self._estimate_structured_output_tokens(
                 str(prompt),
-                f"query: {response.query}, db_name: {response.db_name}, file_path: {response.file_path}, query_again: {response.query_again}, next_query_desc: {response.next_query_desc}"
+                f"query: {response.query}, db_name: {response.db_name}, file_path: {response.file_path}, query_again: {response.query_again}, next_query_desc: {response.next_query_desc}",
             )
 
             self.logger.info(f"Generated query: {response.query[:100]}...")
             self.logger.info(f"Target database: {response.db_name}")
             self.logger.info(f"Estimated tokens: {estimated_tokens}")
 
-            if self.websocket:
-                if state.websocket:
-                    self._send_websocket_message(f"Let me query the database and the query is {response.query}")
+            self._send_websocket_message(
+                state.include_ws,
+                f"Let me query the database and the query is {response.query}",
+                state.user_id,
+            )
 
             # Execute database query with comprehensive error handling
             try:
@@ -531,9 +569,11 @@ class Workflow:
                     result_str = "Tidak ada data yang ditemukan untuk query ini."
                 else:
                     result_str = result_df.to_string(index=True)
-                    if self.websocket:
-                        if state.websocket:
-                            self._send_websocket_message(f"Got it, the result is {result_str}")
+                    self._send_websocket_message(
+                        state.include_ws,
+                        f"Got it, the result is {result_str}",
+                        state.user_id,
+                    )
                     self.logger.info(
                         f"Query executed successfully, returned {len(result_df)} rows"
                     )
@@ -579,15 +619,17 @@ class Workflow:
             }
 
     def _query_again(self, state: AgentState):
-        print("\n" + "="*60)
+        print("\n" + "=" * 60)
         print("🔄 QUERY AGAIN CHECK")
-        print("="*60)
-        if self.websocket:
-            if state.websocket:
-                self._send_websocket_message("Let me check if I need to query the database again...")
+        print("=" * 60)
+        self._send_websocket_message(
+            state.include_ws,
+            "Let me check if I need to query the database again...",
+            state.user_id,
+        )
         if self.retry > 5:
             print("❌ Max retry limit reached (5)")
-            print("="*60)
+            print("=" * 60)
             return "end"
         if state.query_again:
             print(f"✅ Query again requested - Retry #{self.retry + 1}")
@@ -600,9 +642,9 @@ class Workflow:
 
     def _agent_answer_query(self, state: AgentState):
         try:
-            if self.websocket:
-                if state.websocket:
-                    self._send_websocket_message("No more queries needed")
+            self._send_websocket_message(
+                state.include_ws, "No more queries needed", state.user_id
+            )
             self.logger.info("Generating final answer for user")
 
             if not state.result or state.result.strip() == "":
@@ -624,9 +666,12 @@ class Workflow:
                 return llm.invoke(prompt)
 
             response = self._retry_with_backoff(generate_answer, max_retries=2)
-            if self.websocket:
-                if state.websocket:
-                    self._send_websocket_message(f"I have generated the final answer and the answer is {response.content}")
+            self._send_websocket_message(
+                state.include_ws,
+                f"I have generated the final answer and the answer is {response.content}",
+                state.user_id,
+            )
+
             if self.prompts.is_include_memory:
                 message = [
                     HumanMessage(content=state.user_message),

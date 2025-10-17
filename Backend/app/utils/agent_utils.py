@@ -2,18 +2,24 @@
 Agent operations utilities
 """
 
+import json
 import secrets
 import string
 from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional
 
+from fastapi import WebSocket
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
-from app.AI import simple_RAG_agent as SimpleRAGAI
 from app.AI import customer_service as CustomerServiceAI
+from app.AI import simple_RAG_agent as SimpleRAGAI
 from app.controllers.document_controller import agents
+from app.dependencies.redis_storage import redis_storage
+from app.models.agent.agent_entity import Agent
+from app.models.agent.simple_rag_model import CreateSimpleRAGAgent
 from app.models.company_information.company_entity import CompanyInformation
+from app.models.company_information.company_model import CreateCompanyInformation
 from app.models.document.document_entity import Document
 from app.models.history_message.history_entity import HistoryMessage
 from app.models.history_message.metadata_entity import Metadata
@@ -22,17 +28,13 @@ from app.models.platform.platform_entity import Platform
 from app.models.user.api_key_entity import ApiKey
 from app.models.user.user_entity import User
 from app.models.user_agent.user_agent_entity import UserAgent
-from app.models.company_information.company_model import CreateCompanyInformation
-from app.models.agent.agent_entity import Agent
-from app.models.agent.simple_rag_model import CreateSimpleRAGAgent
 from app.utils.logger import get_logger
-from app.dependencies.redis_storage import redis_storage
-from fastapi import WebSocket
-import json
+from app.websocket.manager import ws_manager
 
 logger = get_logger(__name__)
 
-async def build_agent(agent_id: str, websocket: Optional[WebSocket] = None):
+
+async def build_agent(agent_id: str):
     get_agent = await redis_storage.get_agent(agent_id)
     if get_agent:
         if get_agent["role"] == "simple RAG agent":
@@ -42,9 +44,8 @@ async def build_agent(agent_id: str, websocket: Optional[WebSocket] = None):
                 directory_path=get_agent["directory_path"],
                 chromadb_path=get_agent["chromadb_path"],
                 collection_name=get_agent["collection_name"],
-                model_llm=get_agent["model_llm"],   
+                model_llm=get_agent["model_llm"],
                 short_memory=get_agent["short_memory"],
-                websocket=websocket,
             )
             agents[agent_id] = agent
         elif get_agent["role"] == "customer service agent":
@@ -70,7 +71,6 @@ async def build_agent(agent_id: str, websocket: Optional[WebSocket] = None):
                 long_memory=get_agent["long_memory"],
                 short_memory=get_agent["short_memory"],
                 status=get_agent["status"],
-                websocket=websocket,
                 **get_agent["dataset_descriptions"],
             )
             agents[agent_id] = agent
@@ -80,9 +80,18 @@ async def build_agent(agent_id: str, websocket: Optional[WebSocket] = None):
     else:
         return None
 
+
 # app/websocket/agent_websocket_utils.py
 
-async def invoke_agent_logic(agent_id: str, user_message: str, db: Session,generate_id="", websocket: Optional[WebSocket] = None):
+
+async def invoke_agent_logic(
+    user_id: str,
+    agent_id: str,
+    user_message: str,
+    db: Session,
+    generate_id="",
+    include_ws: bool = False,
+):
     """
     Helper function untuk invoke agent logic yang bisa digunakan di WebSocket
     """
@@ -90,67 +99,85 @@ async def invoke_agent_logic(agent_id: str, user_message: str, db: Session,gener
         # Check if agent exists in memory
         agent = agents.get(str(agent_id))
         check_agent_in_redis = await redis_storage.is_agent_exists(agent_id)
-        
+
         if not agent and check_agent_in_redis:
             from app.utils.agent_utils import build_agent
-            if websocket:
-                await websocket.send_text(json.dumps({
-                    "type": "progress",
-                    "message": "Building the agent...",
-                }))
-            agent = await build_agent(agent_id, websocket)
-        
+
+            if include_ws:
+                await ws_manager.send_to_user(
+                    f"invoke_agent_{str(user_id)}",
+                    {
+                        "type": "progress",
+                        "message": "Building the agent...",
+                    },
+                )
+            agent = await build_agent(agent_id)
+
         if not agent:
             raise Exception("Agent not found")
-        
+
         # Execute agent
-        agent_response = agent.execute({"user_message": user_message, "websocket": True}, str(agent_id+generate_id))
-        
+        agent_response = agent.execute(
+            {
+                "user_message": user_message,
+                "include_ws": include_ws,
+                "user_id": user_id,
+            },
+            str(agent_id + generate_id),
+        )
+
         return {
             "response": agent_response.get("response", ""),
-            "token_usage": getattr(agent, 'token_usage', 0),
-            "response_time": getattr(agent, 'response_time', 0),
-            "model": getattr(agent, 'llm_model', 'unknown')
+            "token_usage": getattr(agent, "token_usage", 0),
+            "response_time": getattr(agent, "response_time", 0),
+            "model": getattr(agent, "llm_model", "unknown"),
         }
-        
+
     except Exception as e:
         logger.error(f"Error in agent logic: {e}")
+
         raise e
+
 
 def generate_agent_id(db: Session):
     """
     Generate a unique agent ID with improved collision handling
-    
+
     Args:
         db: Database session
-        
+
     Returns:
         str: Unique agent ID
     """
     import time
+
     max_attempts = 10
-    
+
     for attempt in range(max_attempts):
         # Generate ID with timestamp component to reduce collision probability
-        timestamp_suffix = str(int(time.time() * 1000))[-3:]  # Last 3 digits of timestamp
-        random_part = ''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(2))
+        timestamp_suffix = str(int(time.time() * 1000))[
+            -3:
+        ]  # Last 3 digits of timestamp
+        random_part = "".join(
+            secrets.choice(string.ascii_letters + string.digits) for _ in range(2)
+        )
         id = random_part + timestamp_suffix
-        
+
         # Check if ID exists
         is_exists = db.query(Agent).filter(Agent.id == id).first()
         if not is_exists:
             return id
-            
+
         # If collision occurs, wait a bit and try again
         time.sleep(0.001)  # 1ms delay
-    
+
     # Fallback: use UUID if all attempts fail
     import uuid
+
     return str(uuid.uuid4())[:8]
 
-def create_agent_entity(
-    agent_data_obj, user_id: int, agent_role: str
-) -> Agent:
+
+def create_agent_entity(agent_data_obj, user_id: int, agent_role: str) -> Agent:
     """
     Create Agent entity
 
@@ -208,12 +235,8 @@ def initialize_simple_rag_agent(agent: Agent, directory_path: str):
         logger.info(f"AI agent already exists for agent {agent.id}")
 
 
-
 def initialize_customer_service_agent(
-    agent: Agent, 
-    directory_path: str, 
-    agent_data_obj,
-    datasets: List[dict]
+    agent: Agent, directory_path: str, agent_data_obj, datasets: List[dict]
 ):
     """
     Initialize Customer Service AI agent instance in memory
@@ -239,10 +262,15 @@ def initialize_customer_service_agent(
             if dataset.get("filename"):
                 filename_without_ext = dataset["filename"]
                 available_databases.append(filename_without_ext)
-                dataset_descriptions[f"db_{filename_without_ext}_description"] = dataset.get("description", "")
+                dataset_descriptions[f"db_{filename_without_ext}_description"] = (
+                    dataset.get("description", "")
+                )
 
         # Create company information
-        from app.models.company_information.company_model import CreateCompanyInformation
+        from app.models.company_information.company_model import (
+            CreateCompanyInformation,
+        )
+
         company_information = CreateCompanyInformation(
             name=agent_data_obj.company_name,
             industry=agent_data_obj.industry,
@@ -252,7 +280,7 @@ def initialize_customer_service_agent(
             website=agent_data_obj.website,
             fallback_email=agent_data_obj.fallback_email,
         )
-        
+
         # Initialize Customer Service Agent
         customer_service_agent = CustomerServiceAI.Agent(
             base_prompt=str(agent.base_prompt),
@@ -276,10 +304,12 @@ def initialize_customer_service_agent(
         logger.info(f"Customer Service AI agent already exists for agent {agent.id}")
 
 
-
-
 def add_document_to_agent(
-    agent_id: str, filename: str, content_type: str, document_id: int, directory_path: str
+    agent_id: str,
+    filename: str,
+    content_type: str,
+    document_id: int,
+    directory_path: str,
 ) -> None:
     """
     Add document to AI agent
@@ -293,16 +323,22 @@ def add_document_to_agent(
 
     agent_id_str = str(agent_id)
     from app.AI.document_store.RAG import RAGSystem
-    rag = RAGSystem(chroma_directiory="chroma_db", collection_name=f"agent_{agent_id_str}")
-    rag.add_document_collection(directory_path=directory_path, file_name=filename, file_type=content_type, doc_id=str(document_id))
+
+    rag = RAGSystem(
+        chroma_directiory="chroma_db", collection_name=f"agent_{agent_id_str}"
+    )
+    rag.add_document_collection(
+        directory_path=directory_path,
+        file_name=filename,
+        file_type=content_type,
+        doc_id=str(document_id),
+    )
     logger.info(f"Added document {filename} to agent {agent_id_str}")
     print(f"=================================================")
     print(f"Added document {filename} to agent {agent_id_str}")
     print(f"directory_path: {directory_path}")
     print(f"collection_name: {f'agent_{agent_id_str}'}")
     print(f"=================================================")
-
-
 
 
 def build_task_result(

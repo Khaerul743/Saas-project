@@ -1,22 +1,23 @@
+import json
 import os
 from typing import Any, Dict, Optional
 
 from dotenv import load_dotenv
+from fastapi import WebSocket
 from langchain_core.messages import AIMessage, HumanMessage
-from langchain_core.messages.base import BaseMessage
 from langchain_openai import ChatOpenAI
-from langgraph.checkpoint.memory import MemorySaver
+from langgraph.checkpoint.redis import RedisSaver
 from langgraph.graph import END, START, StateGraph
-from langgraph.graph.state import CompiledStateGraph
 from langgraph.prebuilt import ToolNode
 
 from app.AI.document_store.RAG import RAGSystem
 from app.AI.simple_RAG_agent.models import AgentState
 from app.AI.simple_RAG_agent.prompts import AgentPromptControl
 from app.AI.simple_RAG_agent.tools import AgentTools
+from app.dependencies.redis_storage import redis_storage
 from app.events.loop_manager import run_async
-import json
-from fastapi import WebSocket
+from app.websocket.manager import ws_manager
+
 load_dotenv()
 
 
@@ -31,7 +32,6 @@ class Workflow:
         tone: str,
         include_memory: bool = False,
         short_memory: bool = False,
-        websocket: Optional[WebSocket] = None,
     ):
         self.base_prompt = base_prompt
         self.tone = tone
@@ -48,13 +48,13 @@ class Workflow:
             provider_host=self.provider_host,
             provider_port=self.provider_port,
         )
-        self.memory = MemorySaver()
+        self.state_saver = RedisSaver(redis_url=redis_storage.redis_url)
         self.short_memory = short_memory
         self.tools = AgentTools(self.chromadb_path, self.collection_name)
         self.build = self._build_workflow()
         self.rag = RAGSystem(self.chromadb_path, self.collection_name)
         self.directiory_path = directory_path
-        self.websocket = websocket
+
     def _build_workflow(self):
         graph = StateGraph(AgentState)
         graph.add_node("main_agent", self._main_agent)
@@ -80,7 +80,7 @@ class Workflow:
         graph.add_edge("get_document", "answer_rag_question")
         graph.add_edge("answer_rag_question", END)
 
-        return graph.compile(checkpointer=self.memory)
+        return graph.compile(checkpointer=self.state_saver)
 
     def _checking_message_type(self, state: AgentState):
         if state.is_include_document and os.path.exists(
@@ -131,9 +131,19 @@ class Workflow:
                 formatted.append(data)
         return formatted
 
+    def _send_ws_message(
+        self, include_ws: bool, message: Dict[str, Any], user_id: Optional[str] = None
+    ):
+        if include_ws:
+            if user_id:
+                run_async(
+                    ws_manager.send_to_user(f"invoke_agent_{user_id}", message=message)
+                )
+
     def _main_agent(self, state: AgentState) -> Dict[str, Any]:
-        prompt = self.prompts.main_agent(state.user_message, self.base_prompt, self.tone)
-        print(f"prompt: {prompt}")
+        prompt = self.prompts.main_agent(
+            state.user_message, self.base_prompt, self.tone
+        )
         all_previous_messages = []
         if self.short_memory:
             all_previous_messages = state.messages
@@ -151,15 +161,16 @@ class Workflow:
             self.prompts.memory.add_context(formatted_message, self.prompts.memory_id)
         total_tokens = response.usage_metadata["total_tokens"]
 
-        if state.websocket:
-            if self.websocket:
-                run_async(self.websocket.send_text(json.dumps({
-                    "type": "reasoning",
-                    "message": "Agent is reasoning...",
-                })))
-        
         # print(f"AI: {response.content}")
-        print(f"state: {state.messages} ")
+        self._send_ws_message(
+            state.include_ws,
+            {
+                "type": "reasoning",
+                "message": "Agent is reasoning...",
+            },
+            state.user_id,
+        )
+
         return {
             "messages": state.messages
             + [HumanMessage(content=state.user_message)]
@@ -171,12 +182,14 @@ class Workflow:
     def _should_continue(self, state: AgentState):
         last_message = state.messages[-1]
         if isinstance(last_message, AIMessage) and last_message.tool_calls:
-            if state.websocket:
-                if self.websocket:
-                    run_async(self.websocket.send_text(json.dumps({
-                        "type": "reasoning",
-                        "message": "Agent using the tool...",
-                    })))
+            self._send_ws_message(
+                state.include_ws,
+                {
+                    "type": "reasoning",
+                    "message": "Agent using the tool...",
+                },
+                state.user_id,
+            )
             return "tool_call"
         return "end"
 
@@ -194,7 +207,6 @@ class Workflow:
             "response": response.content,
             "total_token": state.total_token + total_tokens,
         }
-    
 
     def run(self, state: Dict, thread_id: str):
         return self.build.invoke(

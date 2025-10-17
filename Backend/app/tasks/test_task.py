@@ -268,14 +268,13 @@ def create_customer_service_agent_task(self, files_data: Optional[List[dict]], a
     logger.info(f"Task Execution: user_id {user_id}")
     
     try:
-        logger.info(f"Creating Customer Service Agent for user {user_id}")
-        # Step 1: Initialize task
-        progress = _update_progress(self, 10, status="Initialize Customer Service Agent")
-        publish_agent_event(EventType.AGENT_CREATION_PROGRESS, user_id, 2, progress)
-
-        # Step 2: Parse agent data
         from app.models.agent.customer_service_model import CreateCustomerServiceAgent
+        # Step 2: Parse agent data
         agent_data_obj = CreateCustomerServiceAgent(**agent_data)
+        logger.info(f"Creating Customer Service Agent for user {user_id}")
+        progress = _update_progress(self, 10, status="Initialize Customer Service Agent")
+        publish_agent_event(EventType.AGENT_CREATION_PROGRESS, user_id, agent_data_obj.id, progress)
+
         logger.info(f"Agent data: {agent_data_obj}")
 
 #         # Step 3: Create agent entity
@@ -285,7 +284,7 @@ def create_customer_service_agent_task(self, files_data: Optional[List[dict]], a
 
 #         # Step 4: Create company information
         progress = _update_progress(self, 20, "Creating company information")
-        publish_agent_event(EventType.AGENT_CREATION_PROGRESS, user_id, 2, progress)
+        publish_agent_event(EventType.AGENT_CREATION_PROGRESS, user_id, agent_data_obj.id, progress)
         
         from app.models.company_information.company_entity import CompanyInformation
         new_company_information = CompanyInformation(
@@ -303,13 +302,13 @@ def create_customer_service_agent_task(self, files_data: Optional[List[dict]], a
 
 #         # Step 5: Create agent directory
         progress = _update_progress(self, 30, "Creating agent directory")
-        publish_agent_event(EventType.AGENT_CREATION_PROGRESS, user_id, 2, progress)
+        publish_agent_event(EventType.AGENT_CREATION_PROGRESS, user_id, agent_data_obj.id, progress)
         
         directory_path = create_agent_directory(user_id, agent_data_obj.id)  # type: ignore
     
 #         # Step 6: Initialize Customer Service Agent
         progress = _update_progress(self, 40, "Initializing Customer Service Agent")
-        publish_agent_event(EventType.AGENT_CREATION_PROGRESS, user_id, 2, progress)
+        publish_agent_event(EventType.AGENT_CREATION_PROGRESS, user_id, agent_data_obj.id, progress)
         
         from app.utils.agent_utils import initialize_customer_service_agent
         # initialized_agent = initialize_customer_service_agent(new_agent, directory_path, agent_data_obj, datasets)
@@ -319,22 +318,22 @@ def create_customer_service_agent_task(self, files_data: Optional[List[dict]], a
         if files_data:
             print("=============================================================================================================================\n")
             progress = _update_progress(self, 60, "Processing uploaded files")
-            publish_agent_event(EventType.AGENT_CREATION_PROGRESS, user_id, 2, progress)
+            publish_agent_event(EventType.AGENT_CREATION_PROGRESS, user_id, agent_data_obj.id, progress)
             
             document_ids = _handle_customer_service_files(
                 self, db, agent_data_obj.id, files_data, directory_path
             )
     
 #         # Step 8: Commit transaction
-        progress = _update_progress(self, 90, "Committing transaction")
-        publish_agent_event(EventType.AGENT_CREATION_PROGRESS, user_id, 2, progress)
+        progress = _update_progress(self, 70, "Committing transaction")
+        publish_agent_event(EventType.AGENT_CREATION_PROGRESS, user_id, agent_data_obj.id, progress)
         
         db.commit()
         db.refresh(new_agent)
 
 #         # Step 9: Success
-        progress = _update_progress(self, 100, "Customer Service Agent creation completed", "SUCCESS")
-        publish_agent_event(EventType.AGENT_CREATION_SUCCESS, user_id, 2, progress)
+        progress = _update_progress(self, 80, "Customer Service Agent creation completed", "SUCCESS")
+        publish_agent_event(EventType.AGENT_CREATION_SUCCESS, user_id, agent_data_obj.id, progress)
         
         return build_task_result(
             agent=new_agent,
@@ -347,7 +346,7 @@ def create_customer_service_agent_task(self, files_data: Optional[List[dict]], a
         db.rollback()
         logger.error(f"Error creating Customer Service Agent: {str(e)}")
         progress = _update_progress(self, 100, "Customer Service Agent creation failed", "FAILURE")
-        publish_agent_event(EventType.AGENT_CREATION_FAILURE, user_id, 2, progress)
+        publish_agent_event(EventType.AGENT_CREATION_FAILURE, user_id, agent_data_obj.id, progress)
         raise e
     finally:
         db.close()

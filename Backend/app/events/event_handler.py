@@ -27,14 +27,16 @@ async def send_agent_success(message: Dict[str, Any]):
         logger.error(f"Error while send agent success: {e}")
         raise e
 
+
 async def send_agent_failure(message: Dict[str, Any]):
     try:
         user_id = str(message.get("user_id"))
-        payload= message.get("payload", {})
+        payload = message.get("payload", {})
         await ws_manager.send_to_user(user_id, payload)
     except Exception as e:
         logger.error(f"Error while send agent failure: {e}")
         raise e
+
 
 async def send_agent_invoke(message: Dict[str, Any]):
     try:

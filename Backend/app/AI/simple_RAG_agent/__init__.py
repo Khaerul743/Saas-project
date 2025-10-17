@@ -2,11 +2,13 @@ import os
 import time
 from typing import Any, Dict, Optional
 
+from fastapi import WebSocket
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 
 from app.AI.simple_RAG_agent.workflow import Workflow
+from app.dependencies.redis_storage import redis_storage
 from app.utils.logger import get_logger
-from fastapi import WebSocket
+
 logger = get_logger(__name__)
 
 
@@ -22,9 +24,7 @@ class Agent:
         status: str = "active",
         include_memory=False,
         short_memory=False,
-        websocket: Optional[WebSocket] = None,
     ):
-        self.websocket = websocket
         self.status = status
         self.directory_path = directory_path
         self.llm_model = model_llm
@@ -41,7 +41,6 @@ class Agent:
             short_memory=self.short_memory,
             base_prompt=self.base_prompt,
             tone=self.tone,
-            websocket=self.websocket,
         )
         self._history_messages = None
         self.response_time = None
@@ -56,17 +55,15 @@ class Agent:
         self._history_messages = result["messages"]
         return result
 
-    def add_document(
-        self, file_name: str, file_type: str, document_id: str
-    ):
+    def add_document(self, file_name: str, file_type: str, document_id: str):
         """
         Add a document to the RAG system.
-        
+
         Args:
             file_name: Name of the file to add
             file_type: Type of the file ('txt' or 'pdf')
             document_id: Unique identifier for the document
-            
+
         Raises:
             HTTPException: If document loading or addition fails
         """
@@ -74,29 +71,33 @@ class Agent:
             # Ensure directory exists
             if not os.path.exists(self.directory_path + "/"):
                 os.makedirs(self.directory_path, exist_ok=True)
-            
+
             # Load document using RAG system
             documents = self.workflow.rag.load_single_document(
                 self.directory_path, file_name, file_type
             )
-            
+
             # Add documents to the RAG system
             self.workflow.rag.add_documents(documents, document_id)
-            
-            logger.info(f"Successfully added document '{file_name}' with ID '{document_id}'")
-            
+
+            logger.info(
+                f"Successfully added document '{file_name}' with ID '{document_id}'"
+            )
+
         except Exception as e:
             logger.error(f"Failed to add document '{file_name}': {str(e)}")
             # Re-raise with more context
-            raise Exception(f"Failed to add document '{file_name}' to RAG system: {str(e)}") from e
+            raise Exception(
+                f"Failed to add document '{file_name}' to RAG system: {str(e)}"
+            ) from e
 
     def delete_document(self, document_id: str):
         """
         Delete a document from the RAG system.
-        
+
         Args:
             document_id: Unique identifier of the document to delete
-            
+
         Raises:
             Exception: If document deletion fails
         """
@@ -105,6 +106,43 @@ class Agent:
             logger.info(f"Successfully deleted document with ID '{document_id}'")
         except Exception as e:
             logger.error(f"Failed to delete document '{document_id}': {str(e)}")
+            raise
+
+    def update(self, data: Dict[str, Any]):
+        """
+        Update agent attributes. Allowed keys: base_prompt, status, model_llm, include_memory, short_memory, tone.
+        """
+        try:
+            allowed_keys = {
+                "base_prompt",
+                "status",
+                "model_llm",
+                "include_memory",
+                "short_memory",
+                "tone",
+            }
+            for key, value in data.items():
+                if key not in allowed_keys:
+                    continue
+                if key == "base_prompt":
+                    self.base_prompt = value
+                    self.workflow.base_prompt = value
+                elif key == "status":
+                    self.status = value
+                elif key == "model_llm":
+                    self.llm_model = value
+                    self.workflow.model_llm = value
+                elif key == "include_memory":
+                    self.workflow.include_memory = value
+                elif key == "short_memory":
+                    self.short_memory = value
+                    self.workflow.short_memory = value
+                elif key == "tone":
+                    self.tone = value
+                    self.workflow.tone = value
+            logger.info(f"Agent updated with: {data}")
+        except Exception as e:
+            logger.error(f"Error while update agent: {e}")
             raise
 
     def update_base_prompt(self, new_base_prompt: str):

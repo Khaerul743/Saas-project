@@ -22,8 +22,8 @@ from app.controllers.simple_rag_controller import (
 from app.middlewares.RBAC import role_required
 from app.models.agent.simple_rag_model import (
     CreateSimpleRAGAgent,
-    SimpleRAGAgentResponse,
     SimpleRAGAgentAsyncResponse,
+    SimpleRAGAgentResponse,
     UpdateSimpleRAGAgent,
 )
 from app.utils.response import success_response
@@ -31,7 +31,9 @@ from app.utils.response import success_response
 router = APIRouter(prefix="/api/agents/simple-rag", tags=["simple-rag-agents"])
 
 
-@router.post("", response_model=SimpleRAGAgentAsyncResponse, status_code=status.HTTP_202_ACCEPTED)
+@router.post(
+    "", response_model=SimpleRAGAgentAsyncResponse, status_code=status.HTTP_202_ACCEPTED
+)
 @limiter.limit("10/minute")
 async def createSimpleRAGAgent(
     request: Request,
@@ -58,41 +60,37 @@ async def createSimpleRAGAgent(
     try:
         # Parse agent data from form
         parsed_data = json.loads(agent_data)
-        
+
         # Validate required fields for Simple RAG Agent
         if not parsed_data.get("base_prompt"):
             raise ValueError("base_prompt is required for Simple RAG Agent")
         if not parsed_data.get("tone"):
             raise ValueError("tone is required for Simple RAG Agent")
-        
+
         # Set default role
         parsed_data["role"] = "simple RAG agent"
-        
+
         created_agent = await create_simple_rag_agent(
-            db,
-            file,
-            CreateSimpleRAGAgent(**parsed_data),
-            current_user
+            db, file, CreateSimpleRAGAgent(**parsed_data), current_user
         )
-        
+
         # Return async response directly (no need for success_response wrapper)
         return created_agent
 
     except ValueError as e:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=str(e)
-        )
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
     except Exception as e:
         # This will be handled by the global error handler middleware
         raise
 
 
-@router.put("/{agent_id}", response_model=SimpleRAGAgentResponse, status_code=status.HTTP_200_OK)
+@router.put(
+    "/{agent_id}", response_model=SimpleRAGAgentResponse, status_code=status.HTTP_200_OK
+)
 @limiter.limit("10/minute")
-def updateSimpleRAGAgent(
+async def updateSimpleRAGAgent(
     request: Request,
-    agent_id: int,
+    agent_id: str,
     agent_data: UpdateSimpleRAGAgent,
     current_user: dict = Depends(role_required(["admin", "user"])),
     db: Session = Depends(get_db),
@@ -112,12 +110,13 @@ def updateSimpleRAGAgent(
     """
     try:
         # Update Simple RAG Agent using controller
-        updated_agent = update_simple_rag_agent(db, agent_id, agent_data, current_user)
+        updated_agent = await update_simple_rag_agent(
+            db, agent_id, agent_data, current_user
+        )
 
         # Return success response
         return success_response(
-            message="Simple RAG Agent updated successfully", 
-            data=updated_agent
+            message="Simple RAG Agent updated successfully", data=updated_agent
         )
 
     except Exception as e:

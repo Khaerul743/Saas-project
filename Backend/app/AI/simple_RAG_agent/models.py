@@ -1,9 +1,9 @@
 from typing import Annotated, Any, Optional, Sequence
 
+from fastapi import WebSocket
 from langchain_core.messages import BaseMessage
 from langgraph.graph import add_messages
 from pydantic import BaseModel, Field
-from fastapi import WebSocket
 
 
 class AgentState(BaseModel):
@@ -17,4 +17,5 @@ class AgentState(BaseModel):
     total_token: Optional[int] = 0
     # can_answer: bool = False
     reason: Optional[str] = "none"
-    websocket: bool = False
+    include_ws: bool = False
+    user_id: Optional[str] = None

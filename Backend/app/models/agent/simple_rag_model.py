@@ -18,6 +18,7 @@ class SimpleRAGAgentBase(BaseModel):
 
 class CreateSimpleRAGAgent(SimpleRAGAgentBase):
     """Model for creating a Simple RAG Agent"""
+
     id: Optional[str] = None
 
 
@@ -46,6 +47,7 @@ class SimpleRAGAgentResponse(BaseModel):
 
 class SimpleRAGAgentAsyncResponse(BaseModel):
     """Response model for async Simple RAG Agent creation"""
+
     id: Optional[str] = None
     name: str
     avatar: Optional[str] = None

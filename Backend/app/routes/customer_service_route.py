@@ -25,21 +25,25 @@ from app.controllers.customer_service_controller import (
 from app.middlewares.RBAC import role_required
 from app.models.agent.customer_service_model import (
     CreateCustomerServiceAgent,
-    CustomerServiceAgentResponse,
     CustomerServiceAgentAsyncResponse,
+    CustomerServiceAgentResponse,
     DatasetDescription,
     UpdateCustomerServiceAgent,
 )
 from app.utils.response import success_response
 
-router = APIRouter(prefix="/api/agents/customer-service", tags=["customer-service-agents"])
+router = APIRouter(
+    prefix="/api/agents/customer-service", tags=["customer-service-agents"]
+)
 
 
 @router.post("", status_code=status.HTTP_201_CREATED)
 @limiter.limit("10/minute")
 async def createCustomerServiceAgent(
     request: Request,
-    files: List[UploadFile] = File(..., description="List of files (documents and datasets)"),
+    files: List[UploadFile] = File(
+        ..., description="List of files (documents and datasets)"
+    ),
     agent_data: str = Form(..., description="Agent creation data as JSON string"),
     datasets: str = Form(..., description="Dataset descriptions as JSON string"),
     current_user: dict = Depends(role_required(["admin", "user"])),
@@ -59,7 +63,7 @@ async def createCustomerServiceAgent(
 
     Returns:
         CustomerServiceAgentResponse: Success response with created Customer Service Agent data
-        
+
     Example:
         agent_data: {
             "name": "Customer Support Bot",
@@ -70,14 +74,14 @@ async def createCustomerServiceAgent(
             "long_term_memory": true,
             "status": "active"
         }
-        
+
         datasets: [
             {
                 "filename": "products",
                 "description": "Database produk berisi informasi tentang produk perusahaan"
             },
             {
-                "filename": "orders", 
+                "filename": "orders",
                 "description": "Database pesanan berisi informasi tentang pesanan pelanggan"
             }
         ]
@@ -85,39 +89,45 @@ async def createCustomerServiceAgent(
     try:
         # Parse agent data from form
         parsed_agent_data = json.loads(agent_data)
-        
+
         # Parse datasets from form
         parsed_datasets = json.loads(datasets)
-        
+
         # Validate required fields for Customer Service Agent
         if not parsed_agent_data.get("base_prompt"):
             raise ValueError("base_prompt is required for Customer Service Agent")
         if not parsed_agent_data.get("tone"):
             raise ValueError("tone is required for Customer Service Agent")
-        
+
         # Validate files
         if not files:
             raise ValueError("At least one file is required (document or dataset)")
-        
+
         # Validate datasets
         if not parsed_datasets:
-            raise ValueError("Dataset descriptions are required for Customer Service Agent")
-        
+            raise ValueError(
+                "Dataset descriptions are required for Customer Service Agent"
+            )
+
         # Validate that dataset descriptions match uploaded CSV/Excel files
-        csv_excel_files = [f for f in files if f.filename.lower().endswith(('.csv', '.xlsx', '.xls'))]
+        csv_excel_files = [
+            f for f in files if f.filename.lower().endswith((".csv", ".xlsx", ".xls"))
+        ]
         dataset_filenames = [d.get("filename") for d in parsed_datasets]
-        
+
         for file in csv_excel_files:
-            filename_without_ext = file.filename.rsplit('.', 1)[0]
+            filename_without_ext = file.filename.rsplit(".", 1)[0]
             if filename_without_ext not in dataset_filenames:
-                raise ValueError(f"Dataset description missing for file: {file.filename}")
-        
+                raise ValueError(
+                    f"Dataset description missing for file: {file.filename}"
+                )
+
         # Set default role
         parsed_agent_data["role"] = "customer service"
-        
+
         # Convert datasets to DatasetDescription objects
         dataset_objects = [DatasetDescription(**d) for d in parsed_datasets]
-        
+
         created_agent = await create_customer_service_agent(
             db,
             files,
@@ -125,31 +135,31 @@ async def createCustomerServiceAgent(
             dataset_objects,
             current_user,
         )
-        
+
         # Return success response
         return success_response(
-            message="Customer Service Agent created successfully",
-            data=created_agent
+            message="Customer Service Agent created successfully", data=created_agent
         )
 
     except ValueError as e:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=str(e)
-        )
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
     except json.JSONDecodeError as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Invalid JSON format: {str(e)}"
+            detail=f"Invalid JSON format: {str(e)}",
         )
     except Exception as e:
         # This will be handled by the global error handler middleware
         raise
 
 
-@router.put("/{agent_id}", response_model=CustomerServiceAgentResponse, status_code=status.HTTP_200_OK)
+@router.put(
+    "/{agent_id}",
+    response_model=CustomerServiceAgentResponse,
+    status_code=status.HTTP_200_OK,
+)
 @limiter.limit("10/minute")
-def updateCustomerServiceAgent(
+async def updateCustomerServiceAgent(
     request: Request,
     agent_id: str,
     agent_data: UpdateCustomerServiceAgent,
@@ -171,12 +181,13 @@ def updateCustomerServiceAgent(
     """
     try:
         # Update Customer Service Agent using controller
-        updated_agent = update_customer_service_agent(db, agent_id, agent_data, current_user)
+        updated_agent = await update_customer_service_agent(
+            db, agent_id, agent_data, current_user
+        )
 
         # Return success response
         return success_response(
-            message="Customer Service Agent updated successfully", 
-            data=updated_agent
+            message="Customer Service Agent updated successfully", data=updated_agent
         )
 
     except Exception as e:
