@@ -6,7 +6,7 @@
 # from typing import Optional
 
 from app.events.redis_event import Event, EventType, event_bus
-from app.utils.logger import get_logger
+from app.dependencies.logger import get_logger
 from app.events.loop_manager import run_async
 from typing import Optional
 
@@ -20,8 +20,20 @@ def publish_agent_event(
     payload: dict,
 ):
     """Publish agent event"""
-    logger.info(f"Published {event_type.value} event for agent {agent_id} for user {user_id}")
-    run_async(event_bus.publish(Event(event_type=event_type, user_id=user_id, agent_id=agent_id, payload=payload)))
+    logger.info(
+        f"Published {event_type.value} event for agent {agent_id} for user {user_id}"
+    )
+    run_async(
+        event_bus.publish(
+            Event(
+                event_type=event_type,
+                user_id=user_id,
+                agent_id=agent_id,
+                payload=payload,
+            )
+        )
+    )
+
 
 # def _get_or_create_event_loop():
 #     """Get existing event loop or create new one safely"""
@@ -65,7 +77,7 @@ def publish_agent_event(
 # ) -> bool:
 #     """
 #     Publish agent-related event to Redis event bus
-    
+
 #     Args:
 #         event_type: Type of event to publish
 #         user_id: ID of the user
@@ -73,7 +85,7 @@ def publish_agent_event(
 #         data: Event data payload
 #         status: Status of the operation
 #         task_id: Optional task ID for WebSocket routing
-        
+
 #     Returns:
 #         bool: True if event was published successfully, False otherwise
 #     """
@@ -81,15 +93,15 @@ def publish_agent_event(
 #         # Ensure event bus is running
 #         if not _ensure_event_bus_running():
 #             return False
-        
+
 #         # Get or create event loop
 #         loop = _get_or_create_event_loop()
-        
+
 #         # Add task_id to data if provided
 #         event_data = {**data, "status": status}
 #         if task_id:
 #             event_data["task_id"] = task_id
-        
+
 #         # Create and publish event
 #         event = Event(
 #             event_type=event_type,
@@ -98,11 +110,11 @@ def publish_agent_event(
 #             user_id=user_id,
 #             agent_id=agent_id,
 #         )
-        
+
 #         loop.run_until_complete(event_bus.publish(event))
 #         logger.info(f"Published {event_type.value} event for agent {agent_id}")
 #         return True
-        
+
 #     except Exception as e:
 #         logger.error(f"Failed to publish {event_type.value} event: {e}")
 #         return False
@@ -137,7 +149,7 @@ def publish_agent_event(
 #     data = {"agent_id": agent_id}
 #     if additional_data:
 #         data.update(additional_data)
-    
+
 #     return publish_agent_event(
 #         event_type=EventType.AGENT_CREATION_SUCCESS,
 #         user_id=user_id,
@@ -159,7 +171,7 @@ def publish_agent_event(
 #     data = {"error": error_message}
 #     if additional_data:
 #         data.update(additional_data)
-    
+
 #     return publish_agent_event(
 #         event_type=EventType.AGENT_CREATION_FAILED,
 #         user_id=user_id,

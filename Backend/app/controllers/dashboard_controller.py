@@ -11,7 +11,7 @@ from app.models.history_message.history_entity import HistoryMessage
 from app.models.history_message.metadata_entity import Metadata
 from app.models.user.user_entity import User
 from app.models.user_agent.user_agent_entity import UserAgent
-from app.utils.logger import get_logger
+from app.dependencies.logger import get_logger
 from app.utils.validation_utils import validate_user_exists
 from app.utils.calculate import (
     calculate_dashboard_overview,
@@ -27,9 +27,10 @@ logger = get_logger(__name__)
 def dashboard_overview(current_user: dict, db: Session):
     try:
         # --- Validasi user ---
-        user = validate_user_exists(db, current_user.get("id"), current_user.get('email'))
+        user = validate_user_exists(
+            db, current_user.get("id"), current_user.get("email")
+        )
 
-        
         # return overview
         # --- Query user + relasi agents, tapi ambil kolom yang diperlukan saja ---
         user_with_agents = (
@@ -88,7 +89,9 @@ def token_usage_trend(
     """
     try:
         # 1) validate user
-        user = validate_user_exists(db, current_user.get("id"), current_user.get('email'))
+        user = validate_user_exists(
+            db, current_user.get("id"), current_user.get("email")
+        )
 
         # 2) decide grouping expression (MySQL-friendly)
         # - day  -> DATE(created_at)
@@ -155,10 +158,13 @@ def get_conversation_trend(
 ):
     try:
         # validasi user
-        user = validate_user_exists(db, current_user.get("id"), current_user.get('email'))
+        user = validate_user_exists(
+            db, current_user.get("id"), current_user.get("email")
+        )
 
         # tentukan grouping
         from sqlalchemy import Date, cast
+
         if group_by == "day":
             group_expr = cast(HistoryMessage.created_at, Date)
         elif group_by == "week":
@@ -215,8 +221,10 @@ def total_tokens_per_agent(current_user: dict, db: Session):
     Ambil total tokens untuk setiap agent yang dimiliki user
     """
     try:
-        user = validate_user_exists(db, current_user.get("id"), current_user.get('email'))
-        
+        user = validate_user_exists(
+            db, current_user.get("id"), current_user.get("email")
+        )
+
         # Aggregate total_tokens per agent
         results = (
             db.query(
@@ -232,7 +240,7 @@ def total_tokens_per_agent(current_user: dict, db: Session):
             .order_by(Agent.id)
             .all()
         )
-        
+
         # --- Format results menggunakan utility function ---
         agents_tokens = format_total_tokens_per_agent_data(results)
 

@@ -4,7 +4,7 @@ from typing import Any, Dict
 from redis.asyncio import Redis
 
 from app.configs.config import settings
-from app.utils.logger import get_logger
+from app.dependencies.logger import get_logger
 
 logger = get_logger(__name__)
 

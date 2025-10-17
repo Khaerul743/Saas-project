@@ -7,7 +7,7 @@ from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 
 from app.AI.simple_RAG_agent.workflow import Workflow
 from app.dependencies.redis_storage import redis_storage
-from app.utils.logger import get_logger
+from app.dependencies.logger import get_logger
 
 logger = get_logger(__name__)
 

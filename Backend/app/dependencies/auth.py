@@ -2,7 +2,7 @@ from typing import Optional
 
 from fastapi import Cookie, HTTPException, status
 
-from app.utils.logger import get_logger
+from app.dependencies.logger import get_logger
 from app.utils.security import decode_access_token
 
 logger = get_logger(__name__)

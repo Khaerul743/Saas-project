@@ -11,7 +11,7 @@ from app.models.user.user_model import (
     UserUpdate,
 )
 from app.utils.hash import hash_password
-from app.utils.logger import get_logger
+from app.dependencies.logger import get_logger
 
 logger = get_logger(__name__)
 

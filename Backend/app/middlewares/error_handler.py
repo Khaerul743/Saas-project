@@ -6,7 +6,7 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.exc import SQLAlchemyError
 from starlette.middleware.base import BaseHTTPMiddleware
 
-from app.utils.logger import get_logger
+from app.dependencies.logger import get_logger
 
 logger: Logger = get_logger(__name__)
 

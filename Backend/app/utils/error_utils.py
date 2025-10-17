@@ -6,20 +6,22 @@ from typing import Optional
 from fastapi import HTTPException, status
 from sqlalchemy.exc import SQLAlchemyError
 
-from app.utils.logger import get_logger
+from app.dependencies.logger import get_logger
 
 logger = get_logger(__name__)
 
 
-def handle_database_error(error: Exception, operation: str, user_email: Optional[str] = None) -> HTTPException:
+def handle_database_error(
+    error: Exception, operation: str, user_email: Optional[str] = None
+) -> HTTPException:
     """
     Handle database errors consistently across controllers.
-    
+
     Args:
         error: The database error that occurred
         operation: Description of the operation that failed
         user_email: Optional user email for logging
-        
+
     Returns:
         HTTPException with appropriate error details
     """
@@ -40,10 +42,10 @@ def handle_database_error(error: Exception, operation: str, user_email: Optional
 def handle_user_not_found(user_email: str) -> HTTPException:
     """
     Handle user not found errors consistently.
-    
+
     Args:
         user_email: Email of the user that was not found
-        
+
     Returns:
         HTTPException for user not found
     """
@@ -57,11 +59,11 @@ def handle_user_not_found(user_email: str) -> HTTPException:
 def handle_agent_not_found(agent_id: str, user_email: str) -> HTTPException:
     """
     Handle agent not found errors consistently.
-    
+
     Args:
         agent_id: ID of the agent that was not found
         user_email: Email of the user making the request
-        
+
     Returns:
         HTTPException for agent not found
     """
@@ -75,11 +77,11 @@ def handle_agent_not_found(agent_id: str, user_email: str) -> HTTPException:
 def handle_validation_error(field: str, value: str) -> HTTPException:
     """
     Handle validation errors consistently.
-    
+
     Args:
         field: Name of the field that failed validation
         value: Value that failed validation
-        
+
     Returns:
         HTTPException for validation error
     """

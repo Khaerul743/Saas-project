@@ -1,10 +1,11 @@
 """
 File operations utilities for agent tasks
 """
+
 import os
 from typing import Dict, Optional, Tuple, List
 
-from app.utils.logger import get_logger
+from app.dependencies.logger import get_logger
 
 logger = get_logger(__name__)
 
@@ -12,11 +13,11 @@ logger = get_logger(__name__)
 def create_agent_directory(user_id: int, agent_id: str) -> str:
     """
     Create directory for agent documents
-    
+
     Args:
         user_id: ID of the user
         agent_id: ID of the agent
-        
+
     Returns:
         str: Path to the created directory
     """
@@ -30,45 +31,48 @@ def create_agent_directory(user_id: int, agent_id: str) -> str:
 def save_uploaded_file(file_data: Dict, directory_path: str) -> Tuple[str, str]:
     """
     Save uploaded file to directory
-    
+
     Args:
         file_data: File data dictionary containing filename, content, content_type
         directory_path: Directory to save the file
-        
+
     Returns:
         Tuple[str, str]: (file_path, content_type)
-        
+
     Raises:
         Exception: If file saving fails
     """
     try:
         # Create file path
         file_path = os.path.join(directory_path, file_data["filename"])
-        
+
         # Write file content from hex string
         file_content = bytes.fromhex(file_data["content"])
         with open(file_path, "wb") as f:
             f.write(file_content)
-        
+
         # Determine content type based on file extension and MIME type
         filename = file_data["filename"].lower()
         mime_type = file_data.get("content_type", "").lower()
-        
-        if filename.endswith('.pdf') or mime_type == "application/pdf":
+
+        if filename.endswith(".pdf") or mime_type == "application/pdf":
             content_type = "pdf"
-        elif filename.endswith('.csv') or mime_type == "text/csv":
+        elif filename.endswith(".csv") or mime_type == "text/csv":
             content_type = "csv"
-        elif filename.endswith(('.xlsx', '.xls')) or mime_type in ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/vnd.ms-excel"]:
+        elif filename.endswith((".xlsx", ".xls")) or mime_type in [
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "application/vnd.ms-excel",
+        ]:
             content_type = "excel"
-        elif filename.endswith('.txt') or mime_type == "text/plain":
+        elif filename.endswith(".txt") or mime_type == "text/plain":
             content_type = "txt"
         else:
             # Default to txt for unknown types
             content_type = "txt"
-        
+
         logger.info(f"Saved file: {file_path} (type: {content_type})")
         return file_path, content_type
-        
+
     except Exception as e:
         logger.error(f"Failed to save file {file_data.get('filename', 'unknown')}: {e}")
         raise e
@@ -77,7 +81,7 @@ def save_uploaded_file(file_data: Dict, directory_path: str) -> Tuple[str, str]:
 def cleanup_file_on_error(file_path: str) -> None:
     """
     Remove file if it exists (for rollback purposes)
-    
+
     Args:
         file_path: Path to the file to remove
     """
@@ -89,13 +93,12 @@ def cleanup_file_on_error(file_path: str) -> None:
         logger.error(f"Failed to remove file {file_path} during rollback: {e}")
 
 
-
-
-#Customer Service Agent
+# Customer Service Agent
 from fastapi import UploadFile, HTTPException, status
 from app.models.agent.customer_service_model import DatasetDescription
 from app.utils.document_utils import write_document
 from app.AI.utils import dataset
+
 
 def get_filename_without_extension(filename: str) -> str:
     """Extract filename without extension"""
@@ -115,18 +118,20 @@ def process_dataset_info(file_path: str, filename: str) -> str:
 def get_content_type(file: UploadFile) -> str:
     filename = file.filename.lower()
 
-    if file.content_type == "application/pdf" or filename.endswith('.pdf'):
+    if file.content_type == "application/pdf" or filename.endswith(".pdf"):
         content_type = "pdf"
-    elif file.content_type == "text/plain" or filename.endswith('.txt'):
+    elif file.content_type == "text/plain" or filename.endswith(".txt"):
         content_type = "txt"
-    elif (file.content_type == "text/csv" or 
-          file.content_type == "application/csv" or 
-          filename.endswith('.csv')):
+    elif (
+        file.content_type == "text/csv"
+        or file.content_type == "application/csv"
+        or filename.endswith(".csv")
+    ):
         content_type = "csv"
-    elif (file.content_type in [
-            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-            "application/vnd.ms-excel"
-        ] or filename.endswith(('.xlsx', '.xls'))):
+    elif file.content_type in [
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.ms-excel",
+    ] or filename.endswith((".xlsx", ".xls")):
         content_type = "excel"
     else:
         raise HTTPException(
@@ -135,7 +140,10 @@ def get_content_type(file: UploadFile) -> str:
         )
     return content_type
 
-def process_file(files: List[UploadFile], directory_path: str, datasets: List[DatasetDescription]):
+
+def process_file(
+    files: List[UploadFile], directory_path: str, datasets: List[DatasetDescription]
+):
     available_databases = []
     dataset_descriptions = {}
     detail_data_parts = []
@@ -143,14 +151,17 @@ def process_file(files: List[UploadFile], directory_path: str, datasets: List[Da
         file_path = os.path.join(directory_path, file.filename)
         content_type = write_document(file, directory_path)
         if content_type in ["csv", "excel"]:
-
             filename_without_ext = get_filename_without_extension(file.filename)
             available_databases.append(filename_without_ext)
 
-            dataset_desc = next((d for d in datasets if d.filename == filename_without_ext), None)
+            dataset_desc = next(
+                (d for d in datasets if d.filename == filename_without_ext), None
+            )
             if dataset_desc:
-                dataset_descriptions[f"db_{filename_without_ext}_description"] = dataset_desc.description
-            
+                dataset_descriptions[f"db_{filename_without_ext}_description"] = (
+                    dataset_desc.description
+                )
+
             # Create database file in the same directory as documents
             db_path = os.path.join(directory_path, f"{filename_without_ext}.db")
             try:
@@ -163,16 +174,18 @@ def process_file(files: List[UploadFile], directory_path: str, datasets: List[Da
                 logger.info(f"Created database {db_path} from {file.filename}")
             except Exception as e:
                 logger.error(f"Failed to create database for {file.filename}: {str(e)}")
-            
+
             # Get dataset info for detail_data
             try:
                 dataset_info = process_dataset_info(file_path, file.filename)
                 detail_data_parts.append(dataset_info)
                 logger.info(f"Processed dataset info for {file.filename}")
             except Exception as e:
-                logger.warning(f"Could not process dataset info for {file.filename}: {str(e)}")
-                detail_data_parts.append(f"Dataset {file.filename}: Unable to process dataset information")
-        
-    return available_databases, dataset_descriptions, detail_data_parts
+                logger.warning(
+                    f"Could not process dataset info for {file.filename}: {str(e)}"
+                )
+                detail_data_parts.append(
+                    f"Dataset {file.filename}: Unable to process dataset information"
+                )
 
-            
+    return available_databases, dataset_descriptions, detail_data_parts

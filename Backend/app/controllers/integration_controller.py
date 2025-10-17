@@ -12,40 +12,39 @@ from app.models.integration.integration_entity import Integration
 from app.models.integration.integration_model import CreateIntegration, IntegrationOut
 from app.models.platform.platform_entity import Platform
 from app.services.telegram import set_webhook
-from app.utils.logger import get_logger
+from app.dependencies.logger import get_logger
 from app.utils.validation_utils import validate_agent_exists_and_owned
 from app.utils.agent_utils import generate_api_key, validate_api_key
 from app.services.telegram import delete_webhook
 from app.models.integration.integration_model import UpdateIntegration
+
 load_dotenv()
 logger = get_logger(__name__)
+
 
 def get_api_key_by_agent_id(agent_id: str, platform: str, db: Session) -> str:
     """
     Get api_key from integration platform using agent_id and platform type
-    
+
     Args:
         agent_id: The agent ID
         platform: The platform type (telegram, api, etc.)
         db: Database session
-        
+
     Returns:
         str: The api_key from the platform
-        
+
     Raises:
         HTTPException: If integration not found
     """
     integration = (
         db.query(Integration)
         .join(Platform, Integration.id == Platform.integration_id)
-        .filter(
-            Integration.agent_id == agent_id,
-            Integration.platform == platform
-        )
+        .filter(Integration.agent_id == agent_id, Integration.platform == platform)
         .options(joinedload(Integration.platform_config))
         .first()
     )
-    
+
     if not integration:
         logger.warning(
             f"Integration not found: agent ID {agent_id} with platform {platform}"
@@ -54,14 +53,17 @@ def get_api_key_by_agent_id(agent_id: str, platform: str, db: Session) -> str:
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Integration not found",
         )
-    
+
     return integration.platform_config.api_key
+
 
 async def create_integration(
     agent_id: str, payload: CreateIntegration, current_user: dict, db: Session
 ):
     try:
-        agent = validate_agent_exists_and_owned(db, agent_id, current_user.get("id"), current_user.get('email'))
+        agent = validate_agent_exists_and_owned(
+            db, agent_id, current_user.get("id"), current_user.get("email")
+        )
         # agent = db.query(Agent).filter(
         #     Agent.id == agent_id, Agent.user_id == current_user.get("id")
         # )
@@ -83,9 +85,9 @@ async def create_integration(
         if payload.platform == "telegram":
             integration_id = new_integration.id
             platform_integration = Platform(
-                integration_id=integration_id, 
+                integration_id=integration_id,
                 platform_type="telegram",
-                api_key=payload.api_key
+                api_key=payload.api_key,
             )
             db.add(platform_integration)
             db.flush()
@@ -95,13 +97,11 @@ async def create_integration(
                     status_code=status.HTTP_400_BAD_REQUEST,
                     detail=webhook.get("response"),
                 )
-        
+
         if payload.platform == "api":
             api_key = generate_api_key(db, current_user.get("id"), agent_id)
             platform_integration = Platform(
-                integration_id=new_integration.id, 
-                platform_type="api",
-                api_key=api_key
+                integration_id=new_integration.id, platform_type="api", api_key=api_key
             )
             db.add(platform_integration)
             db.flush()
@@ -153,7 +153,9 @@ def get_all_integrations(agent_id: str, current_user: dict, db: Session):
         #     raise HTTPException(
         #         status_code=status.HTTP_404_NOT_FOUND, detail="Agent not found"
         #     )
-        agent = validate_agent_exists_and_owned(db, agent_id, current_user.get("id"), current_user.get('email'))
+        agent = validate_agent_exists_and_owned(
+            db, agent_id, current_user.get("id"), current_user.get("email")
+        )
         # Use joinedload to prevent n+1 problem if you need related objects
 
         integrations = (
@@ -189,21 +191,26 @@ def get_all_integrations(agent_id: str, current_user: dict, db: Session):
             detail="Internal server error, please try again later",
         )
 
-async def update_integration(agent_id: str, payload: UpdateIntegration, current_user: dict, db: Session):
+
+async def update_integration(
+    agent_id: str, payload: UpdateIntegration, current_user: dict, db: Session
+):
     try:
         new_api_key = payload.api_key
-        agent = validate_agent_exists_and_owned(db, agent_id, current_user.get("id"), current_user.get('email'))
-        
+        agent = validate_agent_exists_and_owned(
+            db, agent_id, current_user.get("id"), current_user.get("email")
+        )
+
         # Get the current api_key using helper function
         old_api_key = get_api_key_by_agent_id(agent_id, payload.platform, db)
-        
+
         # Relational query to fetch integration with platform data using agent_id
         integration = (
             db.query(Integration)
             .join(Platform, Integration.id == Platform.integration_id)
             .filter(
                 Integration.agent_id == agent_id,
-                Integration.platform == payload.platform
+                Integration.platform == payload.platform,
             )
             .options(joinedload(Integration.platform_config))
             .first()
@@ -225,7 +232,7 @@ async def update_integration(agent_id: str, payload: UpdateIntegration, current_
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Platform not supported",
             )
-        
+
         # Update the api_key in platform
         integration.platform_config.api_key = new_api_key
 
@@ -248,11 +255,14 @@ async def update_integration(agent_id: str, payload: UpdateIntegration, current_
             detail="Internal server error, please try again later",
         )
 
+
 async def delete_integration(
     agent_id: str, integration_id: int, current_user: dict, db: Session
 ):
     try:
-        agent = validate_agent_exists_and_owned(db, agent_id, current_user.get("id"), current_user.get('email'))
+        agent = validate_agent_exists_and_owned(
+            db, agent_id, current_user.get("id"), current_user.get("email")
+        )
         # agent = (
         #     db.query(Agent)
         #     .filter(Agent.id == agent_id, Agent.user_id == current_user.get("id"))

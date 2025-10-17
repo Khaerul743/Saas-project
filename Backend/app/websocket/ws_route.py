@@ -12,7 +12,7 @@ from app.models.integration.integration_model import CreateIntegration
 from app.models.user_agent.user_agent_entity import UserAgent
 from app.utils.agent_utils import invoke_agent_logic
 from app.utils.integration_utils import add_integration, platform_integration
-from app.utils.logger import get_logger
+from app.dependencies.logger import get_logger
 from app.websocket.manager import ws_manager
 
 logger = get_logger(__name__)

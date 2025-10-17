@@ -50,7 +50,7 @@ from app.routes import (
     task_route,
     user_route,
 )
-from app.utils.logger import get_logger
+from app.dependencies.logger import get_logger
 from app.utils.response import error_response
 from app.websocket import ws_route
 
@@ -168,6 +168,7 @@ async def root():
 @app.get("/health")
 async def health_check():
     return {"status": "healthy", "version": settings.VERSION}
+
 
 if __name__ == "__main__":
     uvicorn.run(

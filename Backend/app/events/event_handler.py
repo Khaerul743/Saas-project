@@ -1,7 +1,7 @@
 from typing import Any, Dict
 
 from app.events.redis_event import EventType, event_bus
-from app.utils.logger import get_logger
+from app.dependencies.logger import get_logger
 from app.websocket.manager import ws_manager
 
 logger = get_logger(__name__)

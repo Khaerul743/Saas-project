@@ -1,7 +1,7 @@
 from fastapi import Depends, HTTPException, status
 
 from app.dependencies.auth import get_current_user  # ambil user dari cookie (JWT)
-from app.utils.logger import get_logger
+from app.dependencies.logger import get_logger
 
 logger = get_logger(__name__)
 

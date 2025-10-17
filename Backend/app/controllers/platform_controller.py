@@ -9,7 +9,7 @@ from app.models.integration.integration_entity import Integration
 from app.models.platform.platform_entity import Platform
 from app.models.user_agent.user_agent_entity import UserAgent
 from app.services.telegram import send_message
-from app.utils.logger import get_logger
+from app.dependencies.logger import get_logger
 from app.utils.message_utils import safe_message_length
 from app.utils.agent_utils import validate_api_key
 from app.utils.agent_utils import invoke_agent_logic
@@ -34,7 +34,10 @@ async def telegram_handler(data: dict, db: Session):
         platform = (
             db.query(Platform)
             .options(joinedload(Platform.integration))  # eager load Integration
-            .filter(Platform.integration_id == telegram_id, Platform.platform_type == "telegram")
+            .filter(
+                Platform.integration_id == telegram_id,
+                Platform.platform_type == "telegram",
+            )
             .first()
         )
 
@@ -72,11 +75,14 @@ async def telegram_handler(data: dict, db: Session):
                 status_code=status.HTTP_200_OK,
                 detail="Agent not found.",
             )
-        
 
         api_key = platform.api_key
         if agent.status == "non-active":
-            await send_message(str(api_key), chat_id, "Sorry, I'm not available right now. Please try again later.")
+            await send_message(
+                str(api_key),
+                chat_id,
+                "Sorry, I'm not available right now. Please try again later.",
+            )
             logger.warning(f"Agent is not active: {agent_id}")
             raise HTTPException(
                 status_code=status.HTTP_200_OK,
@@ -127,7 +133,11 @@ async def telegram_handler(data: dict, db: Session):
 
         db.add(new_metadata)
 
-        response = await send_message(str(api_key), chat_id, safe_message_length(agent_response.get("response", ""), max_length=4096))
+        response = await send_message(
+            str(api_key),
+            chat_id,
+            safe_message_length(agent_response.get("response", ""), max_length=4096),
+        )
         if not response.get("status"):
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
@@ -154,6 +164,7 @@ async def telegram_handler(data: dict, db: Session):
             detail="Internal server error, please try again later.",
         )
 
+
 async def api_handler(api_key: str, agent_id: str, data: dict, db: Session):
     username = data.get("username")
     unique_id = data.get("unique_id")
@@ -173,7 +184,7 @@ async def api_handler(api_key: str, agent_id: str, data: dict, db: Session):
         #         status_code=status.HTTP_200_OK,
         #         detail="Agent not found.",
         #     )
-        
+
         # if agent.status == "non-active":
         #     logger.warning(f"Agent is not active: {agent_id}")
         #     return {
@@ -183,7 +194,9 @@ async def api_handler(api_key: str, agent_id: str, data: dict, db: Session):
         #     }
 
         generate_id = str(unique_id) + str(agent_id)
-        response = await invoke_agent_logic(agent_id, str(user_message), db, generate_id)
+        response = await invoke_agent_logic(
+            agent_id, str(user_message), db, generate_id
+        )
 
         # agent_response = agent.execute(
         #     {"user_message": user_message, "total_token": 0}, generate_id
@@ -204,7 +217,7 @@ async def api_handler(api_key: str, agent_id: str, data: dict, db: Session):
             user_agent_id = new_user_agent.id
         else:
             user_agent_id = user_agent.id
-        
+
         new_history_message = HistoryMessage(
             user_agent_id=user_agent_id,
             user_message=safe_message_length(str(user_message)),
@@ -212,7 +225,7 @@ async def api_handler(api_key: str, agent_id: str, data: dict, db: Session):
         )
         db.add(new_history_message)
         db.flush()
-        
+
         history_message_id = new_history_message.id
         response_time = response.get("response_time", 0)
         token_usage = response.get("token_usage", 0)
@@ -236,9 +249,10 @@ async def api_handler(api_key: str, agent_id: str, data: dict, db: Session):
         raise
 
     except Exception as e:
-        logger.error(f"Unexpected error while sending api message: {str(e)}", exc_info=True)
+        logger.error(
+            f"Unexpected error while sending api message: {str(e)}", exc_info=True
+        )
         raise HTTPException(
             status_code=status.HTTP_200_OK,
             detail="Internal server error, please try again later.",
         )
-    

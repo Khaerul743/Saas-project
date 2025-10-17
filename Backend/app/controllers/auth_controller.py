@@ -14,7 +14,7 @@ from app.utils.auth_utils import (
 )
 
 from app.utils.hash import hash_password, verify_password
-from app.utils.logger import get_logger
+from app.dependencies.logger import get_logger
 from app.utils.security import create_access_token
 
 logger = get_logger(__name__)

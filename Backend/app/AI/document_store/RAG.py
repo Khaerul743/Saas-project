@@ -204,7 +204,7 @@ from langchain.llms import OpenAI
 from langchain.schema import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-from app.utils.logger import get_logger
+from app.dependencies.logger import get_logger
 
 logger = get_logger(__name__)
 
@@ -247,15 +247,15 @@ class RAGSystem:
     ) -> List[Document]:
         """
         Load a single document from the specified directory.
-        
+
         Args:
             directory_path: Path to the directory containing the document
             file_name: Name of the file to load
             file_type: Type of the file ('txt' or 'pdf')
-            
+
         Returns:
             List[Document]: List of loaded documents
-            
+
         Raises:
             HTTPException: If file type is not supported or loading fails
         """
@@ -264,9 +264,9 @@ class RAGSystem:
             if file_type not in ["txt", "pdf"]:
                 raise HTTPException(
                     status_code=400,
-                    detail=f"Unsupported file type: {file_type}. Only 'txt' and 'pdf' are supported."
+                    detail=f"Unsupported file type: {file_type}. Only 'txt' and 'pdf' are supported.",
                 )
-            
+
             # Create appropriate loader based on file type
             if file_type == "txt":
                 loader = DirectoryLoader(
@@ -276,19 +276,19 @@ class RAGSystem:
                 loader = DirectoryLoader(
                     directory_path, glob=f"{file_name}", loader_cls=PyPDFLoader
                 )
-            
+
             # Load documents
             documents: List[Document] = loader.load()
-            
+
             if not documents:
                 raise HTTPException(
                     status_code=404,
-                    detail=f"Document '{file_name}' not found or could not be loaded."
+                    detail=f"Document '{file_name}' not found or could not be loaded.",
                 )
-            
+
             logger.info(f"Successfully loaded document: {file_name}")
             return documents
-            
+
         except HTTPException:
             # Re-raise HTTP exceptions as they are already properly formatted
             raise
@@ -296,7 +296,7 @@ class RAGSystem:
             logger.error(f"Error loading document '{file_name}': {str(e)}")
             raise HTTPException(
                 status_code=500,
-                detail=f"Failed to load document '{file_name}': {str(e)}"
+                detail=f"Failed to load document '{file_name}': {str(e)}",
             )
 
     def load_documents(self, directory: str) -> List[Document]:
@@ -380,12 +380,13 @@ class RAGSystem:
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail="Internal server error, please try again",
             )
-    
 
-    def add_document_collection(self, directory_path: str, file_name: str, file_type: str, doc_id: str):
+    def add_document_collection(
+        self, directory_path: str, file_name: str, file_type: str, doc_id: str
+    ):
         """
         Add a document to the RAG system.
-        
+
         Args:
             directory_path: Path to the directory containing the document
             file_name: Name of the file to load
@@ -396,15 +397,13 @@ class RAGSystem:
             # Ensure directory exists
             if not os.path.exists(directory_path + "/"):
                 os.makedirs(directory_path, exist_ok=True)
-            
+
             # Load document using RAG system
-            documents = self.load_single_document(
-                directory_path, file_name, file_type
-            )
-            
+            documents = self.load_single_document(directory_path, file_name, file_type)
+
             # Add documents to the RAG system
             self.add_documents(documents, doc_id)
-            
+
             logger.info(f"Successfully added document '{file_name}' with ID '{doc_id}'")
         except Exception as e:
             logger.error(f"Failed to add document '{file_name}': {str(e)}")

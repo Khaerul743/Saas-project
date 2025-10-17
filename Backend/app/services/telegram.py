@@ -4,7 +4,7 @@ import os
 import aiohttp
 from dotenv import load_dotenv
 
-from app.utils.logger import get_logger
+from app.dependencies.logger import get_logger
 
 load_dotenv()
 
@@ -22,8 +22,7 @@ async def set_webhook(api_key: str, integration_id):
     try:
         timeout = aiohttp.ClientTimeout(total=15)  # 15 second timeout
         async with aiohttp.ClientSession(
-            connector=aiohttp.TCPConnector(ssl=False),
-            timeout=timeout
+            connector=aiohttp.TCPConnector(ssl=False), timeout=timeout
         ) as session:
             async with session.post(url, json=payload) as response:
                 resp_json = await response.json()
@@ -54,8 +53,7 @@ async def send_message(api_key: str, chat_id, message: str):
     try:
         timeout = aiohttp.ClientTimeout(total=10)  # 10 second timeout for messages
         async with aiohttp.ClientSession(
-            connector=aiohttp.TCPConnector(ssl=False),
-            timeout=timeout
+            connector=aiohttp.TCPConnector(ssl=False), timeout=timeout
         ) as session:
             async with session.post(url, json=payload) as response:
                 resp_json = await response.json()
@@ -78,10 +76,13 @@ async def send_message(api_key: str, chat_id, message: str):
             "response": "Internal server error, please try again later.",
         }
 
+
 async def delete_webhook(api_key: str):
     url = f"https://api.telegram.org/bot{api_key}/deleteWebhook"
     try:
-        async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=False)) as session:
+        async with aiohttp.ClientSession(
+            connector=aiohttp.TCPConnector(ssl=False)
+        ) as session:
             async with session.get(url) as response:
                 resp_json = await response.json()
                 if response.status == 200 and resp_json.get("ok"):
@@ -103,6 +104,6 @@ async def delete_webhook(api_key: str):
             "response": "Internal server error, please try again later.",
         }
 
+
 # Example usage:
 # asyncio.run(set_webhook("your_api_key", "your_integration_id"))
-

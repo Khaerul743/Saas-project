@@ -10,8 +10,9 @@ from starlette.concurrency import run_in_threadpool
 from app.AI import simple_RAG_agent as AI
 from app.models.agent.agent_entity import Agent
 from app.models.document.document_entity import Document
-from app.utils.logger import get_logger
+from app.dependencies.logger import get_logger
 from app.utils.validation_utils import validate_agent_exists_and_owned
+
 logger = get_logger(__name__)
 
 agents: Dict[str, Any] = {}
@@ -34,7 +35,9 @@ def get_documents_by_agent(
         #         status_code=status.HTTP_404_NOT_FOUND,
         #         detail="Agent not found",
         #     )
-        agent = validate_agent_exists_and_owned(db, agent_id, current_user.get("id"), current_user.get('email'))
+        agent = validate_agent_exists_and_owned(
+            db, agent_id, current_user.get("id"), current_user.get("email")
+        )
 
         documents = db.query(Document).filter(Document.agent_id == agent_id).all()
         if not documents:
@@ -91,7 +94,9 @@ async def document_store(
         #     raise HTTPException(
         #         status_code=status.HTTP_404_NOT_FOUND, detail="Agent not found"
         #     )
-        agent = validate_agent_exists_and_owned(db, agent_id, current_user.get("id"), current_user.get('email'))
+        agent = validate_agent_exists_and_owned(
+            db, agent_id, current_user.get("id"), current_user.get("email")
+        )
 
         document = (
             db.query(Document)
@@ -172,7 +177,9 @@ async def document_store(
 
 def document_delete(document_id: int, agent_id: str, current_user: dict, db: Session):
     try:
-        agent = validate_agent_exists_and_owned(db, agent_id, current_user.get("id"), current_user.get('email'))
+        agent = validate_agent_exists_and_owned(
+            db, agent_id, current_user.get("id"), current_user.get("email")
+        )
         document = (
             db.query(Document)
             .filter(Document.id == document_id, Document.agent_id == agent_id)
@@ -190,27 +197,27 @@ def document_delete(document_id: int, agent_id: str, current_user: dict, db: Ses
             )
         directory_path = f"documents/user_{current_user.get('id')}/agent_{agent_id}"
         file_path = os.path.join(directory_path, document.file_name)
-        
+
         try:
             # Try to delete from RAG system first
             agents[str(current_user.get("id"))].delete_document(str(document.id))
-            
+
             # If RAG deletion succeeds, delete from database
             db.delete(document)
             db.commit()
-            
+
             # Finally, remove physical file
             if os.path.exists(file_path):
                 os.remove(file_path)
                 logger.info(f"Removed physical file: {file_path}")
-                
+
         except Exception as e:
             # If RAG deletion fails, rollback database transaction
             db.rollback()
             logger.error(f"Failed to delete document from RAG system: {str(e)}")
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=f"Failed to delete document from RAG system: {str(e)}"
+                detail=f"Failed to delete document from RAG system: {str(e)}",
             )
         logger.info(
             f"Document '{document.file_name}' (ID: {document.id}) deleted successfully by user {current_user.get('email')}"
