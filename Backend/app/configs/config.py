@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     REDIS_HOST: str
     REDIS_PORT: int
     REDIS_DB: int
-    
+
     OPENAI_API_KEY: str
     THIS_APP_URL: str
     FRONTEND_URL: str = "http://localhost:3000"
@@ -28,6 +28,14 @@ class Settings(BaseSettings):
     def DATABASE_URL(self) -> str:
         return (
             f"mysql+pymysql://{self.DB_USER}:{self.DB_PASSWORD}"
+            f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+        )
+
+    @property
+    def ASYNC_DATABASE_URL(self) -> str:
+        """Async version for async SQLAlchemy engine."""
+        return (
+            f"mysql+aiomysql://{self.DB_USER}:{self.DB_PASSWORD}"
             f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
         )
 
