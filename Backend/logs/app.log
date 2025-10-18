@@ -4456,3 +4456,82 @@ TypeError: 'CreateCustomerServiceAgent' object is not subscriptable
 2025-10-18 08:53:53,425 | INFO | app.configs.database | Database tables created successfully
 2025-10-18 08:53:53,428 | INFO | main | Database tables initialized
 2025-10-18 08:53:57,477 | ERROR | main | Error during startup: Error 22 connecting to localhost:6379. The remote computer refused the network connection.
+2025-10-18 08:58:59,021 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-18 08:58:59,045 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-18 08:58:59,046 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-18 08:58:59,049 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-18 08:59:00,129 | INFO | app.configs.database | Database tables created successfully
+2025-10-18 08:59:00,138 | INFO | main | Database tables initialized
+2025-10-18 08:59:00,768 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-18 08:59:00,824 | INFO | main | Redis event bus started
+2025-10-18 09:01:47,738 | INFO | app.services.auth_service | New user registered with email: peler@gmail.com
+2025-10-18 09:02:11,922 | WARNING | app.services.auth_service | Email is already in use: peler@gmail.com
+2025-10-18 09:02:12,117 | ERROR | app.controllers.auth_controller | Unexpected error while registering user 400: Email is already in use.
+2025-10-18 09:14:01,066 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-18 09:14:01,099 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-18 09:14:01,119 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-18 09:14:01,183 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-18 09:14:02,356 | INFO | app.configs.database | Database tables created successfully
+2025-10-18 09:14:02,384 | INFO | main | Database tables initialized
+2025-10-18 09:14:02,558 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-18 09:14:02,559 | INFO | main | Redis event bus started
+2025-10-18 09:14:15,769 | ERROR | app.services.auth_service | Unexpected error during user registration: 400: {'error': 'PASSWORD_TOO_WEAK', 'message': 'Password must contain at least one uppercase letter', 'field': 'password'}
+2025-10-18 09:14:15,888 | ERROR | app.controllers.auth_controller | Registration failed - database error: {'error': 'DATABASE_ERROR', 'message': 'Database user creation failed: An unexpected error occurred', 'field': 'database'}
+2025-10-18 09:15:18,077 | ERROR | app.services.auth_service | Unexpected error during user registration: 400: {'error': 'PASSWORD_TOO_WEAK', 'message': 'Password must contain at least one uppercase letter', 'field': 'password'}
+2025-10-18 09:15:18,079 | ERROR | app.controllers.auth_controller | Registration failed - database error: {'error': 'DATABASE_ERROR', 'message': 'Database user creation failed: An unexpected error occurred', 'field': 'database'}
+2025-10-18 09:20:15,520 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-18 09:20:15,522 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-18 09:20:15,523 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-18 09:20:15,524 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-18 09:20:16,196 | INFO | app.configs.database | Database tables created successfully
+2025-10-18 09:20:16,199 | INFO | main | Database tables initialized
+2025-10-18 09:20:16,322 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-18 09:20:16,325 | INFO | main | Redis event bus started
+2025-10-18 09:20:27,333 | ERROR | app.services.auth_service | Unexpected error during user registration: 400: {'error': 'PASSWORD_TOO_WEAK', 'message': 'Password must contain at least one uppercase letter', 'field': 'password'}
+2025-10-18 09:20:27,538 | ERROR | app.controllers.auth_controller | Registration failed - database error: {'error': 'DATABASE_ERROR', 'message': 'Database user creation failed: An unexpected error occurred', 'field': 'database'}
+2025-10-18 09:22:00,476 | INFO | main | Redis event bus stopped
+2025-10-18 09:33:08,638 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-18 09:33:08,643 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-18 09:33:08,665 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-18 09:33:08,790 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-18 09:33:11,997 | INFO | app.configs.database | Database tables created successfully
+2025-10-18 09:33:12,090 | INFO | main | Database tables initialized
+2025-10-18 09:33:13,532 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-18 09:33:13,534 | INFO | main | Redis event bus started
+2025-10-18 09:33:22,825 | WARNING | app.controllers.auth_controller | Registration failed - validation error: {'error': 'PASSWORD_TOO_WEAK', 'message': 'Password must contain at least one uppercase letter', 'field': 'password'}
+2025-10-18 09:33:44,152 | WARNING | app.controllers.auth_controller | Registration failed - validation error: {'error': 'PASSWORD_TOO_WEAK', 'message': 'Password must contain at least one special character', 'field': 'password'}
+2025-10-18 09:35:24,172 | INFO | main | Redis event bus stopped
+2025-10-18 09:36:22,815 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-18 09:36:22,819 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-18 09:36:22,821 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-18 09:36:22,825 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-18 09:36:23,801 | INFO | app.configs.database | Database tables created successfully
+2025-10-18 09:36:23,807 | INFO | main | Database tables initialized
+2025-10-18 09:36:23,926 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-18 09:36:23,928 | INFO | main | Redis event bus started
+2025-10-18 09:36:33,066 | WARNING | app.services.auth_service | Registration attempt with existing email: peler@gmail.com
+2025-10-18 09:36:33,067 | WARNING | app.controllers.auth_controller | Registration failed - email already exists: peler@gmail.com
+2025-10-18 09:36:52,601 | WARNING | app.services.auth_service | Registration attempt with existing email: peler@gmail.com
+2025-10-18 09:36:52,603 | WARNING | app.controllers.auth_controller | Registration failed - email already exists: peler@gmail.com
+2025-10-18 13:08:58,050 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-18 13:08:58,053 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-18 13:08:58,053 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-18 13:08:58,054 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-18 13:08:59,363 | INFO | app.configs.database | Database tables created successfully
+2025-10-18 13:08:59,367 | INFO | main | Database tables initialized
+2025-10-18 13:09:03,428 | ERROR | main | Error during startup: Error 22 connecting to localhost:6379. The remote computer refused the network connection.
+2025-10-18 13:11:17,691 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-18 13:11:17,702 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-18 13:11:17,703 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-18 13:11:17,703 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-18 13:11:18,504 | INFO | app.configs.database | Database tables created successfully
+2025-10-18 13:11:18,508 | INFO | main | Database tables initialized
+2025-10-18 13:11:18,536 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-18 13:11:18,544 | INFO | main | Redis event bus started
+2025-10-18 13:12:51,117 | WARNING | app.services.auth_service | Registration attempt with existing email: peler@gmail.com
+2025-10-18 13:12:51,123 | WARNING | app.controllers.auth_controller | Registration failed - email already exists: peler@gmail.com
+2025-10-18 13:13:01,517 | INFO | app.services.auth_service | New user registered successfully: peleri@gmail.com
+2025-10-18 13:13:01,518 | INFO | app.controllers.auth_controller | User registration successful: peleri@gmail.com
+2025-10-18 13:13:11,081 | INFO | app.services.auth_service | User authenticated successfully: khaerul@gmail.com
+2025-10-18 13:13:11,082 | INFO | app.controllers.auth_controller | User is authenticated: email khaerul@gmail.com
+2025-10-18 13:14:47,776 | INFO | main | Redis event bus stopped
