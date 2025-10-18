@@ -10,11 +10,13 @@ from app.controllers.company_information_controller import (
     update_company_information,
     update_company_information_by_agent_id,
 )
-from app.middlewares.RBAC import role_required
+from app.middlewares.auth_dependencies import role_required
 from app.models.company_information.company_model import UpdateCompanyInformation
 from app.utils.response import success_response
 
-router = APIRouter(prefix="/api/agent/company-information", tags=["company-information"])
+router = APIRouter(
+    prefix="/api/agent/company-information", tags=["company-information"]
+)
 
 
 @router.get("", status_code=status.HTTP_200_OK)
@@ -26,18 +28,20 @@ def getAllCompanyInformation(
 ):
     """
     Get all company information for the authenticated user's agents.
-    
+
     Args:
         request: FastAPI request object
         current_user: Current authenticated user (from JWT token)
         db: Database session
-        
+
     Returns:
         ResponseAPI: Success response with list of company information
     """
     try:
         company_infos = get_all_company_information(db, current_user)
-        return success_response("Getting all company information is successfully", company_infos)
+        return success_response(
+            "Getting all company information is successfully", company_infos
+        )
     except Exception as e:
         # This will be handled by the global error handler middleware
         raise
@@ -53,19 +57,21 @@ def getCompanyInformationByAgentId(
 ):
     """
     Get company information for a specific agent.
-    
+
     Args:
         request: FastAPI request object
         agent_id: ID of the agent
         current_user: Current authenticated user (from JWT token)
         db: Database session
-        
+
     Returns:
         ResponseAPI: Success response with company information data
     """
     try:
         company_info = get_company_information_by_agent_id(db, agent_id, current_user)
-        return success_response("Getting company information is successfully", company_info)
+        return success_response(
+            "Getting company information is successfully", company_info
+        )
     except Exception as e:
         # This will be handled by the global error handler middleware
         raise
@@ -81,19 +87,21 @@ def getCompanyInformationById(
 ):
     """
     Get company information by its ID.
-    
+
     Args:
         request: FastAPI request object
         company_info_id: ID of the company information
         current_user: Current authenticated user (from JWT token)
         db: Database session
-        
+
     Returns:
         ResponseAPI: Success response with company information data
     """
     try:
         company_info = get_company_information_by_id(db, company_info_id, current_user)
-        return success_response("Getting company information is successfully", company_info)
+        return success_response(
+            "Getting company information is successfully", company_info
+        )
     except Exception as e:
         # This will be handled by the global error handler middleware
         raise
@@ -110,20 +118,24 @@ def updateCompanyInformation(
 ):
     """
     Update company information by its ID.
-    
+
     Args:
         request: FastAPI request object
         company_info_id: ID of the company information to update
         update_data: Update data for company information
         current_user: Current authenticated user (from JWT token)
         db: Database session
-        
+
     Returns:
         ResponseAPI: Success response with updated company information data
     """
     try:
-        updated_company_info = update_company_information(db, company_info_id, update_data, current_user)
-        return success_response("Company information updated successfully", updated_company_info)
+        updated_company_info = update_company_information(
+            db, company_info_id, update_data, current_user
+        )
+        return success_response(
+            "Company information updated successfully", updated_company_info
+        )
     except Exception as e:
         # This will be handled by the global error handler middleware
         raise
@@ -140,20 +152,24 @@ def updateCompanyInformationByAgentId(
 ):
     """
     Update company information for a specific agent.
-    
+
     Args:
         request: FastAPI request object
         agent_id: ID of the agent
         update_data: Update data for company information
         current_user: Current authenticated user (from JWT token)
         db: Database session
-        
+
     Returns:
         ResponseAPI: Success response with updated company information data
     """
     try:
-        updated_company_info = update_company_information_by_agent_id(db, agent_id, update_data, current_user)
-        return success_response("Company information updated successfully", updated_company_info)
+        updated_company_info = update_company_information_by_agent_id(
+            db, agent_id, update_data, current_user
+        )
+        return success_response(
+            "Company information updated successfully", updated_company_info
+        )
     except Exception as e:
         # This will be handled by the global error handler middleware
         raise

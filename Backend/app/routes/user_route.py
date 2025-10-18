@@ -5,7 +5,7 @@ from app.configs.database import get_db
 from app.configs.limiter import limiter
 from app.controllers import user_controller
 from app.dependencies.auth import get_current_user
-from app.middlewares.RBAC import role_required
+from app.middlewares.auth_dependencies import role_required
 from app.models.user.user_model import (
     UpdateDetail,
     UpdateUserPlan,

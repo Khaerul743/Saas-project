@@ -4535,3 +4535,102 @@ TypeError: 'CreateCustomerServiceAgent' object is not subscriptable
 2025-10-18 13:13:11,081 | INFO | app.services.auth_service | User authenticated successfully: khaerul@gmail.com
 2025-10-18 13:13:11,082 | INFO | app.controllers.auth_controller | User is authenticated: email khaerul@gmail.com
 2025-10-18 13:14:47,776 | INFO | main | Redis event bus stopped
+2025-10-18 20:07:52,814 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-18 20:07:52,818 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-18 20:07:52,819 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-18 20:07:52,820 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-18 20:23:22,963 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-18 20:23:22,967 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-18 20:23:22,968 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-18 20:23:22,968 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-18 20:23:24,300 | INFO | app.configs.database | Database tables created successfully
+2025-10-18 20:23:24,304 | INFO | main | Database tables initialized
+2025-10-18 20:23:24,598 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-18 20:23:24,602 | INFO | main | Redis event bus started
+2025-10-18 20:26:08,238 | INFO | app.services.auth_service | User authenticated successfully: khaerul@gmail.com
+2025-10-18 20:26:08,283 | INFO | app.controllers.auth_controller | User is authenticated: email khaerul@gmail.com
+2025-10-18 20:26:08,311 | ERROR | app.middlewares.error_handler | Unexpected error: 1 validation errors:
+  {'type': 'missing', 'loc': ('response', 'data', 'name'), 'msg': 'Field required', 'input': {'username': 'khaerul', 'email': 'khaerul@gmail.com', 'plan': 'free'}}
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 328, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 177, in serialize_response
+    raise ResponseValidationError(
+        errors=_normalize_errors(errors), body=response_content
+    )
+fastapi.exceptions.ResponseValidationError: 1 validation errors:
+  {'type': 'missing', 'loc': ('response', 'data', 'name'), 'msg': 'Field required', 'input': {'username': 'khaerul', 'email': 'khaerul@gmail.com', 'plan': 'free'}}
+
+2025-10-18 20:27:22,851 | WARNING | main | Validation error: [{'type': 'missing', 'loc': ('body', 'name'), 'msg': 'Field required', 'input': {'username': 'khaerul', 'email': 'peleri@gmail.com', 'password': '12345678'}}]
+2025-10-18 20:27:45,344 | WARNING | app.services.auth_service | Registration attempt with existing email: peleri@gmail.com
+2025-10-18 20:27:45,426 | WARNING | app.controllers.auth_controller | Registration failed - email already exists: peleri@gmail.com
+2025-10-18 20:28:02,064 | INFO | app.services.auth_service | New user registered successfully: pelerii@gmail.com
+2025-10-18 20:28:02,072 | INFO | app.controllers.auth_controller | User registration successful: pelerii@gmail.com
+2025-10-18 20:30:41,279 | INFO | main | Redis event bus stopped
+2025-10-18 20:30:57,432 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-18 20:30:57,437 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-18 20:30:57,440 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-18 20:30:57,440 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-18 20:30:59,825 | INFO | app.configs.database | Database tables created successfully
+2025-10-18 20:30:59,828 | INFO | main | Database tables initialized
+2025-10-18 20:30:59,899 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-18 20:30:59,903 | INFO | main | Redis event bus started
+2025-10-18 20:31:29,263 | INFO | app.services.auth_service | User authenticated successfully: khaerul@gmail.com
+2025-10-18 20:31:29,270 | INFO | app.controllers.auth_controller | User is authenticated: email khaerul@gmail.com
+2025-10-18 20:32:23,287 | INFO | main | Redis event bus stopped
+2025-10-18 21:03:13,483 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-18 21:03:13,486 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-18 21:03:13,487 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-18 21:03:13,488 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-18 21:03:15,550 | INFO | app.configs.database | Database tables created successfully
+2025-10-18 21:03:15,554 | INFO | main | Database tables initialized
+2025-10-18 21:03:15,787 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-18 21:03:15,790 | INFO | main | Redis event bus started
+2025-10-18 21:03:31,214 | INFO | app.services.auth_service | User authenticated successfully: khaerul@gmail.com
+2025-10-18 21:03:31,398 | INFO | app.controllers.auth_controller | User is authenticated: email khaerul@gmail.com
+2025-10-18 21:03:44,246 | INFO | app.controllers.auth_controller | User khaerul@gmail.com logout successfully
+2025-10-18 21:19:38,227 | INFO | main | Redis event bus stopped

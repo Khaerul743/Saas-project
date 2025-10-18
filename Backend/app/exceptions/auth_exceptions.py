@@ -111,3 +111,14 @@ class ValidationException(AuthException):
         super().__init__(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=detail
         )
+
+
+class RemoveTokenError(AuthException):
+    def __init__(self, message: str = "Internal server error, please try again later."):
+        super().__init__(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={
+                "error": "REMOVE_TOKEN_FAILED",
+                "message": message,
+            },
+        )

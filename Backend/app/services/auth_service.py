@@ -1,3 +1,5 @@
+from typing import Literal
+
 from fastapi import Response
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -10,10 +12,11 @@ from app.exceptions import (
     InvalidCredentialsException,
     InvalidEmailFormatException,
     PasswordTooWeakException,
+    RemoveTokenError,
     ValidationException,
 )
-from app.models.auth.auth_model import AuthIn, AuthOut, RegisterModel
 from app.repository.user_repository import UserRepository
+from app.schema.auth_schema import AuthOutData, LoginIn, RegisterIn
 from app.utils.hash import HashingPassword
 from app.utils.security import JWTHandler
 from app.utils.validation import validate_register_data
@@ -26,8 +29,12 @@ class AuthService:
         self.jwt = JWTHandler()
         self.hash = HashingPassword()
         self.logger = get_logger(__name__)
+        self.key = "access_token"
+        self.httponly = True
+        self.secure = False
+        self.samesite: Literal["lax", "strict", "none"] = "lax"
 
-    async def register_user(self, payload: RegisterModel):
+    async def register_user(self, payload: RegisterIn) -> AuthOutData:
         """
         Register a new user with proper validation and error handling.
 
@@ -48,7 +55,7 @@ class AuthService:
                 f"Validating registration data for email: {payload.email}"
             )
             validated_data = validate_register_data(
-                payload.email, payload.password, payload.username
+                payload.email, payload.password, payload.name
             )
             self.logger.debug("Validation passed successfully")
 
@@ -73,12 +80,13 @@ class AuthService:
             )
 
             self.logger.info(f"New user registered successfully: {email}")
-            return {
-                "id": new_user.id,
-                "name": new_user.name,
-                "email": new_user.email,
-                "plan": new_user.plan,
-            }
+            return AuthOutData(name=str(new_user.name), email=str(new_user.email))
+            # return {
+            #     "id": new_user.id,
+            #     "name": new_user.name,
+            #     "email": new_user.email,
+            #     "plan": new_user.plan,
+            # }
 
         except EmailAlreadyExistsException as e:
             # Email already exists
@@ -105,7 +113,9 @@ class AuthService:
             self.logger.error(f"Exception args: {e.args}")
             raise DatabaseException("user creation", "An unexpected error occurred")
 
-    async def authenticate_user(self, response: Response, payload: AuthIn):
+    async def authenticate_user(
+        self, response: Response, payload: LoginIn
+    ) -> AuthOutData:
         """
         Authenticate user with email and password.
 
@@ -139,16 +149,16 @@ class AuthService:
             data = {"id": user.id, "email": user.email, "role": user.role}
             access_token = self.jwt.create_access_token(data)
             response.set_cookie(
-                key="access_token",
+                key=self.key,
                 value=access_token,
-                httponly=True,
-                secure=False,  # True (HTTPS)
-                samesite="lax",
+                httponly=self.httponly,
+                secure=self.secure,  # True (HTTPS)
+                samesite=self.samesite,
                 max_age=3600,  # One hour
             )
 
             self.logger.info(f"User authenticated successfully: {email}")
-            return user
+            return AuthOutData(name=str(user.name), email=str(user.email))
 
         except (EmailNotFoundException, InvalidCredentialsException):
             # Re-raise custom exceptions
@@ -161,3 +171,16 @@ class AuthService:
             raise DatabaseException(
                 "user authentication", "An unexpected error occurred"
             )
+
+    def remove_access_token(self, response: Response, current_user: dict):
+        try:
+            response.delete_cookie(
+                self.key,
+                httponly=self.httponly,
+                secure=self.secure,
+                samesite=self.samesite,
+            )
+            return current_user
+        except Exception as e:
+            self.logger.error(f"Unexpected error while user logout: {str(e)}")
+            raise RemoveTokenError()

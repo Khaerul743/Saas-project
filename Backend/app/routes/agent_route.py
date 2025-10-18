@@ -24,10 +24,11 @@ from app.controllers.agent_controller import (
     invoke_agent,
 )
 from app.controllers.document_controller import document_store
-from app.middlewares.RBAC import role_required
+from app.middlewares.auth_dependencies import role_required
 from app.models.agent.agent_model import CreateAgent, ResponseAPI, UpdateAgent
 from app.utils.response import success_response
 from app.models.agent.agent_model import AgentInvoke
+
 router = APIRouter(prefix="/api/agents", tags=["agents"])
 
 
@@ -102,6 +103,7 @@ def deleteAgent(
         # This will be handled by the global error handler middleware
         raise
 
+
 @router.get("/users", status_code=status.HTTP_200_OK)
 def getAllUserAgent(
     current_user: dict = Depends(role_required(["user", "admin"])),
@@ -113,8 +115,14 @@ def getAllUserAgent(
     except:
         raise
 
+
 @router.post("/invoke/{agent_id}")
-async def invokeAgent(agent_id: str, agent_invoke: AgentInvoke, current_user: dict = Depends(role_required(["admin", "user"])), db: Session = Depends(get_db)):
+async def invokeAgent(
+    agent_id: str,
+    agent_invoke: AgentInvoke,
+    current_user: dict = Depends(role_required(["admin", "user"])),
+    db: Session = Depends(get_db),
+):
     try:
         response = await invoke_agent(agent_id, agent_invoke, current_user, db)
         return success_response("Invoke agent is successfully", response)

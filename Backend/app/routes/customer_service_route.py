@@ -22,7 +22,7 @@ from app.controllers.customer_service_controller import (
     get_customer_service_agent_by_id,
     update_customer_service_agent,
 )
-from app.middlewares.RBAC import role_required
+from app.middlewares.auth_dependencies import role_required
 from app.models.agent.customer_service_model import (
     CreateCustomerServiceAgent,
     CustomerServiceAgentAsyncResponse,

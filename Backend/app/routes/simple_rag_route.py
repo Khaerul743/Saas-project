@@ -19,7 +19,7 @@ from app.controllers.simple_rag_controller import (
     delete_simple_rag_agent,
     update_simple_rag_agent,
 )
-from app.middlewares.RBAC import role_required
+from app.middlewares.auth_dependencies import role_required
 from app.models.agent.simple_rag_model import (
     CreateSimpleRAGAgent,
     SimpleRAGAgentAsyncResponse,

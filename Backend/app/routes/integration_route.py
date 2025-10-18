@@ -15,7 +15,7 @@ from sqlalchemy.orm import Session
 from app.configs.database import get_db
 from app.configs.limiter import limiter
 from app.controllers import integration_controller as ic
-from app.middlewares.RBAC import role_required
+from app.middlewares.auth_dependencies import role_required
 from app.models.integration.integration_model import CreateIntegration
 from app.utils.response import success_response
 from app.models.integration.integration_model import UpdateIntegration
@@ -56,12 +56,20 @@ async def createIntegration(
 
 
 @router.put("/{agent_id}", status_code=status.HTTP_200_OK)
-async def updateIntegration(agent_id:str,payload: UpdateIntegration, current_user: dict = Depends(role_required(["admin", "user"])), db: Session = Depends(get_db)):
+async def updateIntegration(
+    agent_id: str,
+    payload: UpdateIntegration,
+    current_user: dict = Depends(role_required(["admin", "user"])),
+    db: Session = Depends(get_db),
+):
     try:
-        updated_integration = await ic.update_integration(agent_id, payload, current_user, db)
+        updated_integration = await ic.update_integration(
+            agent_id, payload, current_user, db
+        )
         return success_response("Integration is successfully", updated_integration)
     except:
         raise
+
 
 @router.delete("/{integration_id}", status_code=status.HTTP_200_OK)
 def deleteIntegration(

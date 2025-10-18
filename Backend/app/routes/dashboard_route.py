@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 from app.configs.database import get_db
 from app.configs.limiter import limiter
 from app.controllers import dashboard_controller as dc
-from app.middlewares.RBAC import role_required
+from app.middlewares.auth_dependencies import role_required
 from app.utils.response import success_response
 
 router = APIRouter(prefix="/api/dashboard", tags=["agents"])

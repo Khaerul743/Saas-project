@@ -1,6 +1,7 @@
 """
 Custom exceptions package.
 """
+
 from app.exceptions.auth_exceptions import (
     AuthException,
     DatabaseException,
@@ -9,16 +10,18 @@ from app.exceptions.auth_exceptions import (
     InvalidCredentialsException,
     InvalidEmailFormatException,
     PasswordTooWeakException,
+    RemoveTokenError,
     ValidationException,
 )
 
 __all__ = [
     "AuthException",
     "EmailAlreadyExistsException",
-    "EmailNotFoundException", 
+    "EmailNotFoundException",
     "InvalidCredentialsException",
     "PasswordTooWeakException",
     "InvalidEmailFormatException",
     "DatabaseException",
     "ValidationException",
+    "RemoveTokenError",
 ]
