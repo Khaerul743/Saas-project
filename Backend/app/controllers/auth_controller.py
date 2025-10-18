@@ -2,44 +2,48 @@
 from datetime import datetime
 
 from fastapi import HTTPException, Response, status
+from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Session
 
+from app.dependencies.logger import get_logger
 from app.events.redis_event import Event, EventType, event_bus
-from app.models.auth.auth_model import AuthIn
+from app.models.auth.auth_model import AuthIn, RegisterModel
 from app.models.user.user_entity import User
+from app.services.auth_service import AuthService
 from app.utils.auth_utils import (
     email_exists_handler,
     email_not_found_handler,
     invalid_credentials_handler,
 )
-
 from app.utils.hash import hash_password, verify_password
-from app.dependencies.logger import get_logger
 from app.utils.security import create_access_token
 
 logger = get_logger(__name__)
 
 
-def registerHandler(db, payload):
+async def registerHandler(db: AsyncSession, payload: RegisterModel):
     """
     Register and create new user.
     """
-    user = db.query(User).filter(User.email == payload.email).first()
-    if user:
-        email_exists_handler(logger, payload.email)
+    # user = db.query(User).filter(User.email == payload.email).first()
+    # if user:
+    #     email_exists_handler(logger, payload.email)
 
-    hashed_password = hash_password(payload.password)
-    db_user = User(
-        name=payload.username,
-        email=payload.email,
-        password=hashed_password,
-    )
+    # hashed_password = hash_password(payload.password)
+    # db_user = User(
+    #     name=payload.username,
+    #     email=payload.email,
+    #     password=hashed_password,
+    # )
     try:
-        db.add(db_user)
-        db.commit()
-        db.refresh(db_user)
-        logger.info(f"New user registered with email: {payload.email}")
-        return db_user
+        #     db.add(db_user)
+        #     db.commit()
+        #     db.refresh(db_user)
+        #     logger.info(f"New user registered with email: {payload.email}")
+        #     return db_user
+        auth = AuthService(db)
+        new_user = await auth.register_user(payload)
+        return new_user
     except Exception as e:
         logger.error(f"Unexpected error while registering user {str(e)}")
         raise HTTPException(

@@ -4433,3 +4433,26 @@ TypeError: 'CreateCustomerServiceAgent' object is not subscriptable
 2025-10-17 11:46:20,807 | INFO | app.websocket.manager | Sending message to user with id invoke_agent_1: the message is {'type': 'reasoning', 'message': 'I have generated the final answer and the answer is Tentu! Berdasarkan data yang kami miliki, produk dengan stok paling banyak adalah:\n\n**Nama Produk:** Mie Instan Rasa Ayam Bawang (1 Dus)  \n**Jumlah Stok:** 500 unit  \n\nProduk ini memiliki stok yang cukup melimpah, sehingga sangat tersedia untuk kebutuhan Anda. Jika Anda mencari sesuatu yang praktis dan lezat, mie instan ini bisa menjadi pilihan yang tepat. \n\nJika ada pertanyaan lebih lanjut atau jika Anda perlu informasi tambahan, silakan beri tahu kami!'}
 2025-10-17 11:46:20,807 | INFO | app.AI.customer_service.workflow | Final answer generated successfully
 2025-10-17 11:46:20,926 | INFO | app.websocket.manager | Sending message to user with id invoke_agent_1: the message is {'type': 'response', 'agent_id': '8H287', 'user_message': 'Apa product dengan stok paling banyak?', 'response': 'Tentu! Berdasarkan data yang kami miliki, produk dengan stok paling banyak adalah:\n\n**Nama Produk:** Mie Instan Rasa Ayam Bawang (1 Dus)  \n**Jumlah Stok:** 500 unit  \n\nProduk ini memiliki stok yang cukup melimpah, sehingga sangat tersedia untuk kebutuhan Anda. Jika Anda mencari sesuatu yang praktis dan lezat, mie instan ini bisa menjadi pilihan yang tepat. \n\nJika ada pertanyaan lebih lanjut atau jika Anda perlu informasi tambahan, silakan beri tahu kami!', 'status': 'completed'}
+2025-10-18 08:34:48,447 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-18 08:34:48,449 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-18 08:34:48,450 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-18 08:34:48,450 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-18 08:36:10,404 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-18 08:36:10,405 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-18 08:36:10,406 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-18 08:36:10,407 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-18 08:37:07,214 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-18 08:37:07,215 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-18 08:37:07,216 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-18 08:37:07,217 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-18 08:37:19,925 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-18 08:37:19,926 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-18 08:37:19,927 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-18 08:37:19,927 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-18 08:53:51,762 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-18 08:53:51,764 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-18 08:53:51,764 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-18 08:53:51,765 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-18 08:53:53,425 | INFO | app.configs.database | Database tables created successfully
+2025-10-18 08:53:53,428 | INFO | main | Database tables initialized
+2025-10-18 08:53:57,477 | ERROR | main | Error during startup: Error 22 connecting to localhost:6379. The remote computer refused the network connection.

@@ -4,7 +4,7 @@ from pydantic_settings import BaseSettings
 class Settings(BaseSettings):
     PROJECT_NAME: str = "Saas Project"
     VERSION: str = "1.0.0"
-    DEBUG: bool = True
+    DEBUG: bool = False
 
     DB_USER: str
     DB_PASSWORD: str

@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, Response, status
+from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Session
 
 from app.configs.database import get_db
@@ -11,11 +12,13 @@ router = APIRouter(prefix="/api", tags=["auth"])
 
 
 @router.post("/register", response_model=AuthOut, status_code=status.HTTP_201_CREATED)
-def register(response: Response, payload: RegisterModel, db: Session = Depends(get_db)):
-    user = registerHandler(db, payload)
+async def register(
+    response: Response, payload: RegisterModel, db: AsyncSession = Depends(get_db)
+):
+    user = await registerHandler(db, payload)
     return success_response(
         "Register is successfully",
-        {"username": user.name, "email": user.email, "plan": user.plan},
+        user,
     )
 
 
