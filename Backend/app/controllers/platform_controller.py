@@ -9,7 +9,7 @@ from app.models.integration.integration_entity import Integration
 from app.models.platform.platform_entity import Platform
 from app.models.user_agent.user_agent_entity import UserAgent
 from app.services.telegram import send_message
-from app.dependencies.logger import get_logger
+from app.core.logger import get_logger
 from app.utils.message_utils import safe_message_length
 from app.utils.agent_utils import validate_api_key
 from app.utils.agent_utils import invoke_agent_logic

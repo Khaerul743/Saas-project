@@ -5,7 +5,7 @@ Utility functions for calculations and data processing.
 from typing import Dict, List, Any
 
 from app.models.agent.agent_entity import Agent
-from app.dependencies.logger import get_logger
+from app.core.logger import get_logger
 
 logger = get_logger(__name__)
 

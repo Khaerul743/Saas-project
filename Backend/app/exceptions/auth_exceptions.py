@@ -4,16 +4,12 @@ Custom exceptions for authentication operations.
 
 from typing import Optional
 
-from fastapi import HTTPException, status
+from fastapi import status
+
+from app.exceptions import BaseCustomeException
 
 
-class AuthException(HTTPException):
-    """Base exception for authentication errors."""
-
-    pass
-
-
-class EmailAlreadyExistsException(AuthException):
+class EmailAlreadyExistsException(BaseCustomeException):
     """Exception raised when email is already registered."""
 
     def __init__(self, email: str):
@@ -28,7 +24,7 @@ class EmailAlreadyExistsException(AuthException):
         )
 
 
-class EmailNotFoundException(AuthException):
+class EmailNotFoundException(BaseCustomeException):
     """Exception raised when email is not found."""
 
     def __init__(self, email: str):
@@ -43,7 +39,7 @@ class EmailNotFoundException(AuthException):
         )
 
 
-class InvalidCredentialsException(AuthException):
+class InvalidCredentialsException(BaseCustomeException):
     """Exception raised when credentials are invalid."""
 
     def __init__(self, email: str):
@@ -57,7 +53,7 @@ class InvalidCredentialsException(AuthException):
         )
 
 
-class PasswordTooWeakException(AuthException):
+class PasswordTooWeakException(BaseCustomeException):
     """Exception raised when password doesn't meet requirements."""
 
     def __init__(self, message: str = "Password does not meet security requirements"):
@@ -71,7 +67,7 @@ class PasswordTooWeakException(AuthException):
         )
 
 
-class InvalidEmailFormatException(AuthException):
+class InvalidEmailFormatException(BaseCustomeException):
     """Exception raised when email format is invalid."""
 
     def __init__(self, email: str):
@@ -86,21 +82,7 @@ class InvalidEmailFormatException(AuthException):
         )
 
 
-class DatabaseException(AuthException):
-    """Exception raised when database operation fails."""
-
-    def __init__(self, operation: str, message: str = "Database operation failed"):
-        super().__init__(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail={
-                "error": "DATABASE_ERROR",
-                "message": f"Database {operation} failed: {message}",
-                "field": "database",
-            },
-        )
-
-
-class ValidationException(AuthException):
+class ValidationException(BaseCustomeException):
     """Exception raised when input validation fails."""
 
     def __init__(self, field: str, message: str, value: Optional[str] = None):
@@ -113,7 +95,7 @@ class ValidationException(AuthException):
         )
 
 
-class RemoveTokenError(AuthException):
+class RemoveTokenError(BaseCustomeException):
     def __init__(self, message: str = "Internal server error, please try again later."):
         super().__init__(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

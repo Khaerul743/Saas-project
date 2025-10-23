@@ -9,7 +9,7 @@ from app.models.history_message.history_model import HistoryOut
 from app.models.history_message.metadata_entity import Metadata
 from app.models.user.user_entity import User
 from app.models.user_agent.user_agent_entity import UserAgent
-from app.dependencies.logger import get_logger
+from app.core.logger import get_logger
 
 logger = get_logger(__name__)
 

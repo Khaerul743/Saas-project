@@ -26,7 +26,7 @@ from app.AI.utils.history import get_history_messages
 from app.dependencies.redis_storage import redis_storage
 from app.events.loop_manager import run_async
 from app.models.company_information.company_model import CreateCompanyInformation
-from app.dependencies.logger import get_logger
+from app.core.logger import get_logger
 from app.websocket.manager import ws_manager
 
 

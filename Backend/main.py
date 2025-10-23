@@ -10,9 +10,10 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from app.configs.config import settings
 from app.configs.database import create_tables
 from app.configs.limiter import limiter
-from app.dependencies.logger import get_logger
+from app.core.logger import get_logger
 from app.events import event_handler
 from app.events.redis_event import event_bus
+from app.middlewares.context_middleware import ContextMiddleware
 from app.middlewares.error_handler import ErrorHandlerMiddleware
 from app.middlewares.limiter_handler import rate_limit_exceeded_handler
 
@@ -33,7 +34,7 @@ from app.routes import (
     # platform_route,
     # simple_rag_route,
     # task_route,
-    # user_route,
+    user_route,
 )
 from app.utils.response import error_response
 
@@ -71,13 +72,16 @@ app.add_middleware(
 app.add_middleware(ErrorHandlerMiddleware)
 app.add_middleware(SlowAPIMiddleware)
 
+# Context
+app.add_middleware(ContextMiddleware)
+
 # tambahin limiter ke state
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, rate_limit_exceeded_handler)
 
 
 # Routes
-# app.include_router(user_route.router)
+app.include_router(user_route.router)
 app.include_router(auth_route.router)
 # app.include_router(agent_route.router)  # General agent routes (get all, etc.)
 # app.include_router(simple_rag_route.router)  # Simple RAG Agent specific routes
@@ -102,7 +106,7 @@ async def startup_event():
         # Initialize database tables
         await create_tables()
         logger.info("Database tables initialized")
-        
+
         # Start Redis event bus
         await event_bus.start()
         logger.info("Redis event bus started")

@@ -2,7 +2,7 @@ from typing import Any, Dict, List
 
 from fastapi import WebSocket
 
-from app.dependencies.logger import get_logger
+from app.core.logger import get_logger
 
 logger = get_logger(__name__)
 

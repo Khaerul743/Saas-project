@@ -26,7 +26,7 @@ from app.utils.agent_utils import generate_agent_id
 from app.utils.document_utils import write_document
 from app.utils.error_utils import handle_database_error, handle_user_not_found
 from app.utils.file_utils import create_agent_directory, get_content_type, process_file
-from app.dependencies.logger import get_logger
+from app.core.logger import get_logger
 from app.utils.validation_utils import validate_agent_exists_and_owned
 
 logger = get_logger(__name__)

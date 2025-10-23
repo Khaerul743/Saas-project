@@ -8,7 +8,7 @@ from typing import Any, Callable, Dict, List
 from redis import asyncio as ioredis
 
 from app.configs.config import settings
-from app.dependencies.logger import get_logger
+from app.core.logger import get_logger
 from app.websocket.manager import ws_manager
 
 logger = get_logger(__name__)

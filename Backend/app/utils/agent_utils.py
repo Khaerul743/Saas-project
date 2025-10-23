@@ -28,7 +28,7 @@ from app.models.platform.platform_entity import Platform
 from app.models.user.api_key_entity import ApiKey
 from app.models.user.user_entity import User
 from app.models.user_agent.user_agent_entity import UserAgent
-from app.dependencies.logger import get_logger
+from app.core.logger import get_logger
 from app.websocket.manager import ws_manager
 
 logger = get_logger(__name__)

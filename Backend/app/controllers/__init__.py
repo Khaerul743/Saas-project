@@ -1,6 +1,6 @@
 from fastapi import HTTPException, status
 
-from app.dependencies.logger import get_logger
+from app.core.logger import get_logger
 
 
 class BaseController:

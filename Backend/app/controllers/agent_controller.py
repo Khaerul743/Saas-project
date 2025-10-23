@@ -40,7 +40,7 @@ from app.utils.error_utils import (
     handle_database_error,
     handle_user_not_found,
 )
-from app.dependencies.logger import get_logger
+from app.core.logger import get_logger
 from app.utils.validation_utils import (
     validate_agent_exists_and_owned,
     validate_user_exists,

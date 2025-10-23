@@ -6,7 +6,7 @@ from app.configs.database import SessionLocal
 from app.events.loop_manager import run_async
 from app.events.redis_event import Event, EventType, event_bus
 from app.tasks import celery_app
-from app.dependencies.logger import get_logger
+from app.core.logger import get_logger
 from app.utils.event_utils import publish_agent_event
 from app.utils.agent_utils import (
     add_document_to_agent,

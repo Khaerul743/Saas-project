@@ -4,7 +4,7 @@ import os
 import aiohttp
 from dotenv import load_dotenv
 
-from app.dependencies.logger import get_logger
+from app.core.logger import get_logger
 
 load_dotenv()
 

@@ -10,7 +10,7 @@ from starlette.concurrency import run_in_threadpool
 from app.AI import simple_RAG_agent as AI
 from app.models.agent.agent_entity import Agent
 from app.models.document.document_entity import Document
-from app.dependencies.logger import get_logger
+from app.core.logger import get_logger
 from app.utils.validation_utils import validate_agent_exists_and_owned
 
 logger = get_logger(__name__)

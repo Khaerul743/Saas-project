@@ -204,7 +204,7 @@ from langchain.llms import OpenAI
 from langchain.schema import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-from app.dependencies.logger import get_logger
+from app.core.logger import get_logger
 
 logger = get_logger(__name__)
 

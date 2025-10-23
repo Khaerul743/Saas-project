@@ -6,7 +6,7 @@ from typing import Optional
 from fastapi import HTTPException, status
 from sqlalchemy.exc import SQLAlchemyError
 
-from app.dependencies.logger import get_logger
+from app.core.logger import get_logger
 
 logger = get_logger(__name__)
 

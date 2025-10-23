@@ -4634,3 +4634,438 @@ fastapi.exceptions.ResponseValidationError: 1 validation errors:
 2025-10-18 21:03:31,398 | INFO | app.controllers.auth_controller | User is authenticated: email khaerul@gmail.com
 2025-10-18 21:03:44,246 | INFO | app.controllers.auth_controller | User khaerul@gmail.com logout successfully
 2025-10-18 21:19:38,227 | INFO | main | Redis event bus stopped
+2025-10-19 08:50:43,012 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-19 08:50:43,015 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-19 08:50:43,015 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-19 08:50:43,016 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-19 08:50:44,392 | INFO | app.configs.database | Database tables created successfully
+2025-10-19 08:50:44,396 | INFO | main | Database tables initialized
+2025-10-19 08:50:48,476 | ERROR | main | Error during startup: Error 22 connecting to localhost:6379. The remote computer refused the network connection.
+2025-10-19 08:53:19,453 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-19 08:53:19,456 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-19 08:53:19,458 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-19 08:53:19,459 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-19 08:53:20,209 | INFO | app.configs.database | Database tables created successfully
+2025-10-19 08:53:20,221 | INFO | main | Database tables initialized
+2025-10-19 08:53:20,304 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-19 08:53:20,306 | INFO | main | Redis event bus started
+2025-10-19 08:54:23,401 | INFO | app.services.auth_service | User authenticated successfully: khaerul@gmail.com
+2025-10-19 08:54:23,440 | INFO | app.controllers | User is authenticated: email khaerul@gmail.com
+2025-10-19 08:55:36,193 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-19 08:55:36,197 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-19 08:55:36,199 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-19 08:55:36,206 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-19 08:55:37,747 | INFO | app.configs.database | Database tables created successfully
+2025-10-19 08:55:37,750 | INFO | main | Database tables initialized
+2025-10-19 08:55:37,822 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-19 08:55:37,824 | INFO | main | Redis event bus started
+2025-10-19 08:55:43,834 | WARNING | app.middlewares.auth_middleware | Permission denied for role user: khaerul@gmail.com
+2025-10-19 08:56:16,650 | INFO | main | Redis event bus stopped
+2025-10-19 08:56:22,302 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-19 08:56:22,304 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-19 08:56:22,306 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-19 08:56:22,307 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-19 08:56:22,919 | INFO | app.configs.database | Database tables created successfully
+2025-10-19 08:56:22,922 | INFO | main | Database tables initialized
+2025-10-19 08:56:22,944 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-19 08:56:22,950 | INFO | main | Redis event bus started
+2025-10-19 08:56:27,903 | ERROR | app.services.user_service | Error while getting all users: id
+2025-10-19 08:56:27,907 | ERROR | app.controllers | Unexpected error: id
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\result.py", line 199, in _key_not_found
+    self._key_fallback(key, None)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\result.py", line 138, in _key_fallback
+    raise KeyError(key) from err
+KeyError: 'id'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\controllers\user_controller.py", line 29, in get_all_users
+    data_users = await self.user_service.get_all_users(page, limit)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\app\services\user_service.py", line 21, in get_all_users
+    id=u.id,
+       ^^^^
+  File "lib/sqlalchemy/cyextension/resultproxy.pyx", line 66, in sqlalchemy.cyextension.resultproxy.BaseRow.__getattr__
+  File "lib/sqlalchemy/cyextension/resultproxy.pyx", line 63, in sqlalchemy.cyextension.resultproxy.BaseRow._get_by_key_impl
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\result.py", line 201, in _key_not_found
+    raise AttributeError(ke.args[0]) from ke
+AttributeError: id
+2025-10-19 08:57:19,595 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-19 08:57:19,596 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-19 08:57:19,598 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-19 08:57:19,599 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-19 08:57:20,572 | INFO | app.configs.database | Database tables created successfully
+2025-10-19 08:57:20,576 | INFO | main | Database tables initialized
+2025-10-19 08:57:20,956 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-19 08:57:20,958 | INFO | main | Redis event bus started
+2025-10-19 08:57:28,518 | ERROR | app.services.user_service | Error while getting all users: 1 validation error for DataUserSchema
+company_name
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/string_type
+2025-10-19 08:57:28,524 | ERROR | app.controllers | Unexpected error: 1 validation error for DataUserSchema
+company_name
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/string_type
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\controllers\user_controller.py", line 29, in get_all_users
+    data_users = await self.user_service.get_all_users(page, limit)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\app\services\user_service.py", line 20, in get_all_users
+    DataUserSchema(
+    ~~~~~~~~~~~~~~^
+        id=u.id,
+        ^^^^^^^^
+    ...<9 lines>...
+        last_login=u.last_login,
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pydantic\main.py", line 253, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for DataUserSchema
+company_name
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/string_type
+2025-10-19 08:59:42,823 | ERROR | main | Error stopping Redis event bus: no running event loop
+2025-10-19 09:00:37,057 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-19 09:00:37,061 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-19 09:00:37,061 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-19 09:00:37,062 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-19 09:00:38,577 | INFO | app.configs.database | Database tables created successfully
+2025-10-19 09:00:38,605 | INFO | main | Database tables initialized
+2025-10-19 09:00:38,886 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-19 09:00:38,897 | INFO | main | Redis event bus started
+2025-10-19 09:00:44,289 | INFO | app.controllers | Admin khaerul@gmail.com getting all users (page 1).
+2025-10-21 12:50:31,679 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 12:50:31,682 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 12:50:31,683 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 12:50:31,683 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 12:53:02,833 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 12:53:02,835 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 12:53:02,836 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 12:53:02,836 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 12:53:51,885 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 12:53:51,955 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 12:53:51,987 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 12:53:52,001 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 12:53:54,841 | INFO | app.configs.database | Database tables created successfully
+2025-10-21 12:53:54,846 | INFO | main | Database tables initialized
+2025-10-21 12:53:55,238 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-21 12:53:55,245 | INFO | main | Redis event bus started
+2025-10-21 12:55:20,142 | INFO | app.services.auth_service | User authenticated successfully: khaerul@gmail.com
+2025-10-21 12:55:20,173 | INFO | app.controllers | User is authenticated: email khaerul@gmail.com
+2025-10-21 12:55:28,008 | WARNING | app.middlewares.auth_middleware | Permission denied for role user: khaerul@gmail.com
+2025-10-21 12:56:42,039 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 12:56:42,052 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 12:56:42,157 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 12:56:42,219 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 12:56:45,272 | INFO | app.configs.database | Database tables created successfully
+2025-10-21 12:56:45,459 | INFO | main | Database tables initialized
+2025-10-21 12:56:49,430 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-21 12:56:49,435 | INFO | main | Redis event bus started
+2025-10-21 12:56:57,089 | INFO | app.services.user_service | [request_id=f3d7ed58-02a6-449d-8581-b2c56720f13e] Admin getting all users
+2025-10-21 12:58:10,541 | INFO | app.services.auth_service | User authenticated successfully: khaerul@gmail.com
+2025-10-21 12:58:10,616 | INFO | app.controllers | User is authenticated: email khaerul@gmail.com
+2025-10-21 12:58:20,348 | INFO | app.services.user_service | [request_id=fd531bf0-6a25-4236-a200-459bb68af540] Admin getting all users
+2025-10-21 13:01:08,994 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 13:01:08,997 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 13:01:08,997 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 13:01:08,999 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 13:01:10,346 | INFO | app.configs.database | Database tables created successfully
+2025-10-21 13:01:10,361 | INFO | main | Database tables initialized
+2025-10-21 13:01:10,465 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-21 13:01:10,467 | INFO | main | Redis event bus started
+2025-10-21 13:01:17,869 | INFO | app.services.user_service | [request_id=b037bfbf-8858-4c0f-8051-f4a9920b53ca] Admin getting all users
+2025-10-21 13:02:49,763 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 13:02:49,771 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 13:02:49,774 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 13:02:49,798 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 13:02:50,520 | INFO | app.configs.database | Database tables created successfully
+2025-10-21 13:02:50,524 | INFO | main | Database tables initialized
+2025-10-21 13:02:50,624 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-21 13:02:50,626 | INFO | main | Redis event bus started
+2025-10-21 13:02:58,179 | INFO | app.services.user_service | [request_id=6c13864f-a873-469b-b871-dc3dccb55b1e] Admin getting all users
+2025-10-21 13:06:39,094 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 13:06:39,098 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 13:06:39,099 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 13:06:39,125 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 13:06:42,106 | INFO | app.configs.database | Database tables created successfully
+2025-10-21 13:06:42,110 | INFO | main | Database tables initialized
+2025-10-21 13:06:42,234 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-21 13:06:42,236 | INFO | main | Redis event bus started
+2025-10-21 13:06:52,890 | INFO | app.services.user_service | [request_id=3935839a-038b-4625-ab7a-ab9e4dc9ac25] Admin getting all users
+2025-10-21 13:07:43,351 | INFO | main | Redis event bus stopped
+2025-10-21 13:07:53,753 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 13:07:53,755 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 13:07:53,756 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 13:07:53,756 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 13:07:54,404 | INFO | app.configs.database | Database tables created successfully
+2025-10-21 13:07:54,407 | INFO | main | Database tables initialized
+2025-10-21 13:07:54,479 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-21 13:07:54,480 | INFO | main | Redis event bus started
+2025-10-21 13:08:08,782 | INFO | app.services.user_service | [request_id=44dd96e9-4ce0-49cb-857c-3930da810b36] Admin getting all users
+2025-10-21 13:14:05,224 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 13:14:05,228 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 13:14:05,230 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 13:14:05,231 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 13:14:08,258 | INFO | app.configs.database | Database tables created successfully
+2025-10-21 13:14:08,277 | INFO | main | Database tables initialized
+2025-10-21 13:14:08,782 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-21 13:14:08,789 | INFO | main | Redis event bus started
+2025-10-21 13:14:29,975 | INFO | app.services.user_service | [request_id=9576bdd4-0ff8-4775-926e-de6d28cb30af] Admin getting all users
+2025-10-21 13:14:56,596 | INFO | main | Redis event bus stopped
+2025-10-21 13:16:09,301 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 13:16:09,307 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 13:16:09,347 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 13:16:09,363 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 13:16:11,016 | INFO | app.configs.database | Database tables created successfully
+2025-10-21 13:16:11,019 | INFO | main | Database tables initialized
+2025-10-21 13:16:11,141 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-21 13:16:11,142 | INFO | main | Redis event bus started
+2025-10-21 13:16:26,779 | INFO | app.services.user_service | [request_id=e3f08e07-ecf4-4444-ad7a-7b0ff704b05f] Admin getting all users
+2025-10-21 13:20:54,019 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 13:20:54,028 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 13:20:54,029 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 13:20:54,031 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 13:20:56,446 | INFO | app.configs.database | Database tables created successfully
+2025-10-21 13:20:56,454 | INFO | main | Database tables initialized
+2025-10-21 13:20:56,588 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-21 13:20:56,591 | INFO | main | Redis event bus started
+2025-10-21 13:21:04,654 | INFO | main | Redis event bus stopped
+2025-10-21 13:22:01,802 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 13:22:01,806 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 13:22:01,807 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 13:22:01,913 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 13:22:03,665 | INFO | app.configs.database | Database tables created successfully
+2025-10-21 13:22:03,672 | INFO | main | Database tables initialized
+2025-10-21 13:22:03,907 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-21 13:22:03,911 | INFO | main | Redis event bus started
+2025-10-21 13:22:13,281 | INFO | app.services.user_service | [request_id=269115c7-631a-4f8c-b95b-8679328da571] Admin getting all users
+2025-10-21 13:22:13,875 | ERROR | main | Unhandled exception: CurrentContext.clear() missing 1 required positional argument: 'cls'
+  + Exception Group Traceback (most recent call last):
+  |   File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_utils.py", line 79, in collapse_excgroups
+  |     yield
+  |   File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 183, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |                ~~~~~~~~~~~~~~~~~~~~~~~^^
+  |   File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 772, in __aexit__
+  |     raise BaseExceptionGroup(
+  |         "unhandled errors in a TaskGroup", self._exceptions
+  |     ) from None
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 182, in __call__
+    |     with recv_stream, send_stream, collapse_excgroups():
+    |                                    ~~~~~~~~~~~~~~~~~~^^
+    |   File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    |     self.gen.throw(value)
+    |     ~~~~~~~~~~~~~~^^^^^^^
+    |   File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_utils.py", line 85, in collapse_excgroups
+    |     raise exc
+    |   File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 184, in __call__
+    |     response = await self.dispatch_func(request, call_next)
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "D:\Saas_Project\Backend\app\middlewares\context_middleware.py", line 23, in dispatch
+    |     CurrentContext.clear()
+    |     ~~~~~~~~~~~~~~~~~~~~^^
+    | TypeError: CurrentContext.clear() missing 1 required positional argument: 'cls'
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 182, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+                                   ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\starb\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_utils.py", line 85, in collapse_excgroups
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 184, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\app\middlewares\context_middleware.py", line 23, in dispatch
+    CurrentContext.clear()
+    ~~~~~~~~~~~~~~~~~~~~^^
+TypeError: CurrentContext.clear() missing 1 required positional argument: 'cls'
+2025-10-21 13:25:55,223 | INFO | main | Redis event bus stopped
+2025-10-21 13:26:09,087 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 13:26:09,090 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 13:26:09,091 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 13:26:09,092 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 13:26:11,152 | INFO | app.configs.database | Database tables created successfully
+2025-10-21 13:26:11,157 | INFO | main | Database tables initialized
+2025-10-21 13:26:11,241 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-21 13:26:11,244 | INFO | main | Redis event bus started
+2025-10-21 13:26:21,207 | INFO | app.services.user_service | [request_id=753bc133-c927-48a2-a7a2-ae1be8cdced0] Admin getting all users
+2025-10-21 13:29:52,650 | INFO | main | Redis event bus stopped
+2025-10-21 13:30:05,223 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 13:30:05,270 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 13:30:05,295 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 13:30:05,309 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 13:30:08,143 | INFO | app.configs.database | Database tables created successfully
+2025-10-21 13:30:08,160 | INFO | main | Database tables initialized
+2025-10-21 13:30:10,758 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-21 13:30:10,760 | INFO | main | Redis event bus started
+2025-10-21 13:30:16,396 | ERROR | app.middlewares.error_handler | Unexpected error: type object '_contextvars.ContextVar' has no attribute 'get_current_user'
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\app\routes\user_route.py", line 26, in getAllUsers
+    print(f"Context: {ContextVar.get_current_user()}")
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object '_contextvars.ContextVar' has no attribute 'get_current_user'
+2025-10-21 13:31:30,713 | INFO | main | Redis event bus stopped
+2025-10-21 13:31:58,575 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 13:31:58,580 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 13:31:58,582 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 13:31:58,605 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 13:31:59,637 | INFO | app.configs.database | Database tables created successfully
+2025-10-21 13:31:59,660 | INFO | main | Database tables initialized
+2025-10-21 13:32:00,816 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-21 13:32:00,818 | INFO | main | Redis event bus started
+2025-10-21 13:32:21,145 | INFO | app.services.user_service | [request_id=17ae99ba-4cb9-40de-a4d8-bee2f03cae2f] Admin getting all users
+2025-10-21 13:37:04,053 | INFO | main | Redis event bus stopped
+2025-10-21 20:44:30,548 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 20:44:30,551 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 20:44:30,552 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 20:44:30,552 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 20:44:31,974 | INFO | app.configs.database | Database tables created successfully
+2025-10-21 20:44:31,978 | INFO | main | Database tables initialized
+2025-10-21 20:44:36,060 | ERROR | main | Error during startup: Error 22 connecting to localhost:6379. The remote computer refused the network connection.
+2025-10-21 20:46:23,071 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 20:46:23,074 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 20:46:23,075 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 20:46:23,076 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 20:46:23,820 | INFO | app.configs.database | Database tables created successfully
+2025-10-21 20:46:23,823 | INFO | main | Database tables initialized
+2025-10-21 20:46:23,897 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-21 20:46:23,906 | INFO | main | Redis event bus started
+2025-10-21 20:48:00,707 | INFO | app.services.auth_service | User authenticated successfully: khaerul@gmail.com
+2025-10-21 20:48:01,029 | INFO | app.controllers | User is authenticated: email khaerul@gmail.com
+2025-10-21 20:48:45,691 | INFO | app.services.user_service | [request_id=00f0d5d0-cc04-4b91-82f3-6658da37fb5d] Admin getting all users
+2025-10-21 20:51:17,690 | INFO | main | Redis event bus stopped
+2025-10-21 20:51:29,573 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 20:51:29,574 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 20:51:29,575 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 20:51:29,576 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 20:51:30,722 | INFO | app.configs.database | Database tables created successfully
+2025-10-21 20:51:30,726 | INFO | main | Database tables initialized
+2025-10-21 20:51:30,810 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-21 20:51:30,812 | INFO | main | Redis event bus started
+2025-10-21 20:51:41,427 | INFO | app.services.user_service | [request_id=f8f9eae1-fcc8-4b16-9165-05f741fe93bd] Admin getting all users
+2025-10-21 20:51:58,596 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 20:51:58,597 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 20:51:58,598 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 20:51:58,599 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 20:51:59,273 | INFO | app.configs.database | Database tables created successfully
+2025-10-21 20:51:59,276 | INFO | main | Database tables initialized
+2025-10-21 20:51:59,322 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-21 20:51:59,325 | INFO | main | Redis event bus started
+2025-10-21 20:52:04,141 | INFO | app.services.user_service | [request_id=2f3a9e3b-34b1-46b7-94a0-3fe633c15672] Admin getting all users
+2025-10-21 20:55:21,845 | INFO | main | Redis event bus stopped
+2025-10-21 20:55:30,095 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 20:55:30,096 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 20:55:30,097 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 20:55:30,097 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 20:55:31,509 | INFO | app.configs.database | Database tables created successfully
+2025-10-21 20:55:31,515 | INFO | main | Database tables initialized
+2025-10-21 20:55:31,622 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-21 20:55:31,623 | INFO | main | Redis event bus started
+2025-10-21 20:55:40,707 | INFO | app.services.user_service | [request_id=73801307-7333-4a40-9a0a-916f0d9861ab] Admin getting all users
+2025-10-21 20:56:25,478 | INFO | main | Redis event bus stopped
+2025-10-21 20:56:30,409 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 20:56:30,410 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 20:56:30,410 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 20:56:30,411 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 20:56:31,099 | INFO | app.configs.database | Database tables created successfully
+2025-10-21 20:56:31,251 | INFO | main | Database tables initialized
+2025-10-21 20:56:32,228 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-21 20:56:32,235 | INFO | main | Redis event bus started
+2025-10-21 20:56:35,955 | INFO | app.services.user_service | [request_id=120313cf-22d8-474a-8f95-6d02bfca0e91] Admin getting all users
+2025-10-21 21:00:18,283 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 21:00:18,285 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 21:00:18,285 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 21:00:18,285 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 21:00:19,202 | INFO | app.configs.database | Database tables created successfully
+2025-10-21 21:00:19,218 | INFO | main | Database tables initialized
+2025-10-21 21:00:19,320 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-21 21:00:19,325 | INFO | main | Redis event bus started
+2025-10-21 21:00:27,694 | INFO | app.services.user_service | [request_id=4b4398e7-3286-4bb6-b231-9d2d44fed056] Admin getting all users
+2025-10-21 21:04:55,888 | INFO | main | Redis event bus stopped
+2025-10-21 21:05:02,874 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 21:05:02,875 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 21:05:02,878 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 21:05:02,879 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 21:05:03,947 | INFO | app.configs.database | Database tables created successfully
+2025-10-21 21:05:03,949 | INFO | main | Database tables initialized
+2025-10-21 21:05:04,047 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-21 21:05:04,050 | INFO | main | Redis event bus started
+2025-10-21 21:05:12,932 | INFO | app.services.user_service | [request_id=85a8ef78-9be0-4a3d-9afa-eaa508b89bda] [user=khaerul@gmail.com] Admin getting all users
+2025-10-21 21:05:38,215 | INFO | main | Redis event bus stopped
+2025-10-21 21:17:42,276 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-21 21:17:42,278 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-21 21:17:42,279 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-21 21:17:42,281 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-21 21:17:43,452 | INFO | app.configs.database | Database tables created successfully
+2025-10-21 21:17:43,456 | INFO | main | Database tables initialized
+2025-10-21 21:17:43,572 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-21 21:17:43,573 | INFO | main | Redis event bus started
+2025-10-21 21:17:54,473 | INFO | app.services.user_service | [request_id=7e3f73b9-9e7f-4da3-8144-8714218b2459] [user=khaerul@gmail.com] Admin getting all users
+2025-10-21 21:18:54,154 | INFO | main | Redis event bus stopped

@@ -1,9 +1,11 @@
 from typing import Optional
 
-from fastapi import Cookie, Depends, HTTPException, status
+from fastapi import Cookie, Depends, HTTPException, Request, status
+
+from app.core.context import CurrentContext
 
 # ambil user dari cookie (JWT)
-from app.dependencies.logger import get_logger
+from app.core.logger import get_logger
 from app.utils.security import JWTHandler
 
 
@@ -12,7 +14,7 @@ class RBAC:
         self.jwt = JWTHandler()
         self.logger = get_logger(__name__)
 
-    def get_current_user(self, access_token: Optional[str] = Cookie(None)):
+    def get_current_user(self, request: Request, access_token: Optional[str] = Cookie(None)):
         if not access_token:
             self.logger.warning("Access attempt without token")
             raise HTTPException(
@@ -27,6 +29,10 @@ class RBAC:
                     status_code=status.HTTP_401_UNAUTHORIZED,
                     detail="Invalid token payload",
                 )
+            # Set di ContextVar dan request state
+            CurrentContext.set_current_user(payload)
+            request.state.current_user = payload
+            print(f"Auth Middleware - Set user: {CurrentContext.get_current_user()}")
             return payload
         except Exception as e:
             self.logger.error(f"Unexpected error while decode token: {e}")

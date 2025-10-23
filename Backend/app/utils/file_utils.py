@@ -5,7 +5,7 @@ File operations utilities for agent tasks
 import os
 from typing import Dict, Optional, Tuple, List
 
-from app.dependencies.logger import get_logger
+from app.core.logger import get_logger
 
 logger = get_logger(__name__)
 

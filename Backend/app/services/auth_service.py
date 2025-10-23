@@ -4,9 +4,7 @@ from fastapi import Response
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.dependencies.logger import get_logger
-from app.exceptions import (
-    DatabaseException,
+from app.exceptions.auth_exceptions import (
     EmailAlreadyExistsException,
     EmailNotFoundException,
     InvalidCredentialsException,
@@ -15,20 +13,22 @@ from app.exceptions import (
     RemoveTokenError,
     ValidationException,
 )
+from app.exceptions.database_exceptions import DatabaseException
 from app.repository.user_repository import UserRepository
 from app.schema.auth_schema import AuthOutData, LoginIn, RegisterIn
+from app.services import BaseService
 from app.utils.hash import HashingPassword
 from app.utils.security import JWTHandler
 from app.utils.validation import validate_register_data
 
 
-class AuthService:
+class AuthService(BaseService):
     def __init__(self, db: AsyncSession):
+        super().__init__(__name__)
         self.db = db
         self.user_repo = UserRepository(self.db)
         self.jwt = JWTHandler()
         self.hash = HashingPassword()
-        self.logger = get_logger(__name__)
         self.key = "access_token"
         self.httponly = True
         self.secure = False
@@ -81,13 +81,6 @@ class AuthService:
 
             self.logger.info(f"New user registered successfully: {email}")
             return AuthOutData(name=str(new_user.name), email=str(new_user.email))
-            # return {
-            #     "id": new_user.id,
-            #     "name": new_user.name,
-            #     "email": new_user.email,
-            #     "plan": new_user.plan,
-            # }
-
         except EmailAlreadyExistsException as e:
             # Email already exists
             self.logger.debug(f"Email already exists: {type(e).__name__}")
@@ -102,16 +95,11 @@ class AuthService:
             raise
         except DatabaseException as e:
             # Database errors
-            self.logger.debug(f"Database error: {type(e).__name__}")
-            raise
+            self.handle_database_error(e)
         except SQLAlchemyError as e:
-            self.logger.error(f"SQLAlchemy error during user registration: {str(e)}")
-            raise DatabaseException("user creation", str(e))
+            self.handle_sqlalchemy_error("Get user", e)
         except Exception as e:
-            self.logger.error(f"Unexpected error during user registration: {str(e)}")
-            self.logger.error(f"Exception type: {type(e).__name__}")
-            self.logger.error(f"Exception args: {e.args}")
-            raise DatabaseException("user creation", "An unexpected error occurred")
+            self.handle_unexpected_error("Register new user", e)
 
     async def authenticate_user(
         self, response: Response, payload: LoginIn
@@ -164,13 +152,9 @@ class AuthService:
             # Re-raise custom exceptions
             raise
         except SQLAlchemyError as e:
-            self.logger.error(f"Database error during user authentication: {str(e)}")
-            raise DatabaseException("user authentication", str(e))
+            self.handle_sqlalchemy_error("Get user", e)
         except Exception as e:
-            self.logger.error(f"Unexpected error during user authentication: {str(e)}")
-            raise DatabaseException(
-                "user authentication", "An unexpected error occurred"
-            )
+            self.handle_unexpected_error("Authenticate user", e)
 
     def remove_access_token(self, response: Response, current_user: dict):
         try:

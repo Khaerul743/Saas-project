@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from app.tasks import celery_app
 from app.middlewares.auth_dependencies import role_required
-from app.dependencies.logger import get_logger
+from app.core.logger import get_logger
 
 logger = get_logger(__name__)
 router = APIRouter(prefix="/api/tasks", tags=["tasks"])

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, Response, status
 
 from app.controllers.auth_controller import AuthController
-from app.dependencies.factory import controller_factory
+from app.core.factory import controller_factory
 from app.middlewares.auth_middleware import role_based_access_control
 from app.schema.auth_schema import AuthOut, LoginIn, RegisterIn
 from app.utils.response import success_response

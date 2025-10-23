@@ -5,7 +5,7 @@ from typing import Any, Dict, Optional
 import jwt
 
 from app.configs.config import settings
-from app.dependencies.logger import get_logger
+from app.core.logger import get_logger
 
 logger = get_logger(__name__)
 

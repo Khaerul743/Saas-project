@@ -6,7 +6,7 @@
 # from typing import Optional
 
 from app.events.redis_event import Event, EventType, event_bus
-from app.dependencies.logger import get_logger
+from app.core.logger import get_logger
 from app.events.loop_manager import run_async
 from typing import Optional
 

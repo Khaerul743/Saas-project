@@ -12,7 +12,7 @@ from app.models.integration.integration_entity import Integration
 from app.models.integration.integration_model import CreateIntegration, IntegrationOut
 from app.models.platform.platform_entity import Platform
 from app.services.telegram import set_webhook
-from app.dependencies.logger import get_logger
+from app.core.logger import get_logger
 from app.utils.validation_utils import validate_agent_exists_and_owned
 from app.utils.agent_utils import generate_api_key, validate_api_key
 from app.services.telegram import delete_webhook

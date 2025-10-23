@@ -24,7 +24,7 @@ from app.tasks import celery_app
 from app.tasks.test_task import create_simple_rag_agent_task
 from app.utils.document_utils import write_document
 from app.utils.error_utils import handle_database_error, handle_user_not_found
-from app.dependencies.logger import get_logger
+from app.core.logger import get_logger
 from app.utils.validation_utils import validate_agent_exists_and_owned
 
 logger = get_logger(__name__)

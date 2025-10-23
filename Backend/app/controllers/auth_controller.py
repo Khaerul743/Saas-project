@@ -3,9 +3,7 @@ from fastapi import Response
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.controllers import BaseController
-from app.exceptions import (
-    AuthException,
-    DatabaseException,
+from app.exceptions.auth_exceptions import (
     EmailAlreadyExistsException,
     EmailNotFoundException,
     InvalidCredentialsException,
@@ -14,6 +12,7 @@ from app.exceptions import (
     RemoveTokenError,
     ValidationException,
 )
+from app.exceptions.database_exceptions import DatabaseException
 from app.schema.auth_schema import AuthOutData, LoginIn, RegisterIn
 from app.services.auth_service import AuthService
 
@@ -67,10 +66,10 @@ class AuthController(BaseController):
             self.logger.error(f"Registration failed - database error: {str(e.detail)}")
             raise e
 
-        except AuthException as e:
-            # Other auth-related errors
-            self.logger.error(f"Registration failed - auth error: {str(e.detail)}")
-            raise e
+        # except AuthException as e:
+        #     # Other auth-related errors
+        #     self.logger.error(f"Registration failed - auth error: {str(e.detail)}")
+        #     raise e
 
         except Exception as e:
             self.handle_unexpected_error(e)
@@ -86,10 +85,10 @@ class AuthController(BaseController):
             # Re-raise custom exceptions
             self.logger.warning(f"Email not found: {payload.email}")
             raise
-        except AuthException as e:
-            # Other auth-related errors
-            self.logger.error(f"login failed - auth error: {str(e.detail)}")
-            raise e
+        # except AuthException as e:
+        #     # Other auth-related errors
+        #     self.logger.error(f"login failed - auth error: {str(e.detail)}")
+        #     raise e
         except Exception as e:
             # Unexpected errors - 500 Internal Server Error
             self.handle_unexpected_error(e)
