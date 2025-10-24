@@ -12,7 +12,7 @@ class BaseService:
         self.request = request
         # Jangan ambil context di __init__ karena timing issue
         # Context akan diambil saat dibutuhkan via property
-    
+
     @property
     def current_user(self) -> Optional[dict]:
         """Lazy loading untuk current_user dari context atau request state"""
@@ -21,20 +21,25 @@ class BaseService:
         if user is not None:
             print(f"BaseService - Getting current_user from ContextVar: {user}")
             return user
-        
+
         # Fallback ke request state
-        if self.request and hasattr(self.request.state, 'current_user'):
+        if self.request and hasattr(self.request.state, "current_user"):
             user = self.request.state.current_user
             print(f"BaseService - Getting current_user from request state: {user}")
             return user
-        
-        print(f"BaseService - Getting current_user: None")
+
+        print("BaseService - Getting current_user: None")
         return None
-    
+
     @property
     def request_id(self):
         """Lazy loading untuk request_id dari context"""
         return CurrentContext.get_request_id()
+
+    def current_user_email(self):
+        if self.current_user is not None:
+            return self.current_user.get("email", None)
+        return None
 
     def log_context(self, message: str, level: str = "info"):
         """
@@ -68,4 +73,4 @@ class BaseService:
         self.logger.error(f"Unexpected error during {field}: {str(e)}")
         self.logger.error(f"Exception type: {type(e).__name__}")
         self.logger.error(f"Exception args: {e.args}")
-        raise DatabaseException("user creation", "An unexpected error occurred")
+        raise

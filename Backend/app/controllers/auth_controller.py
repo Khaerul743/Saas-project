@@ -66,11 +66,6 @@ class AuthController(BaseController):
             self.logger.error(f"Registration failed - database error: {str(e.detail)}")
             raise e
 
-        # except AuthException as e:
-        #     # Other auth-related errors
-        #     self.logger.error(f"Registration failed - auth error: {str(e.detail)}")
-        #     raise e
-
         except Exception as e:
             self.handle_unexpected_error(e)
 
@@ -85,10 +80,6 @@ class AuthController(BaseController):
             # Re-raise custom exceptions
             self.logger.warning(f"Email not found: {payload.email}")
             raise
-        # except AuthException as e:
-        #     # Other auth-related errors
-        #     self.logger.error(f"login failed - auth error: {str(e.detail)}")
-        #     raise e
         except Exception as e:
             # Unexpected errors - 500 Internal Server Error
             self.handle_unexpected_error(e)

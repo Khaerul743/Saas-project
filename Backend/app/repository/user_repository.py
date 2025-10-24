@@ -51,3 +51,43 @@ class UserRepository:
         await self.db.commit()
         await self.db.refresh(new_user)
         return new_user
+
+    async def get_user_by_id(self, user_id: int):
+        query = select(User).where(User.id == user_id)
+        result = await self.db.execute(query)
+        return result.scalar_one_or_none()
+
+    async def update_user(self, user_id: int, name: str | None = None, company_name: str | None = None, job_role: str | None = None):
+        user = await self.get_user_by_id(user_id)
+        if not user:
+            return None
+        
+        if name is not None:
+            user.name = name
+        if company_name is not None:
+            user.company_name = company_name
+        if job_role is not None:
+            user.job_role = job_role
+        
+        await self.db.commit()
+        await self.db.refresh(user)
+        return user
+
+    async def update_user_plan(self, user_id: int, plan: str):
+        user = await self.get_user_by_id(user_id)
+        if not user:
+            return None
+        
+        user.plan = plan
+        await self.db.commit()
+        await self.db.refresh(user)
+        return user
+
+    async def delete_user(self, user_id: int):
+        user = await self.get_user_by_id(user_id)
+        if not user:
+            return None
+        
+        await self.db.delete(user)
+        await self.db.commit()
+        return user

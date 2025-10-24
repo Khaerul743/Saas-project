@@ -104,3 +104,12 @@ class RemoveTokenError(BaseCustomeException):
                 "message": message,
             },
         )
+
+
+class NotAuthenticateException(BaseCustomeException):
+    def __init__(self, field: str, message: str, value: Optional[str] = None):
+        detail = {"error": "NOT_AUTHENTICATED", "message": message, "field": field}
+        if value is not None:
+            detail["value"] = value
+
+        super().__init__(status_code=status.HTTP_401_UNAUTHORIZED, detail=detail)
