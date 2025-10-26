@@ -5442,3 +5442,179 @@ app.exceptions.user_exceptions.EmailNotFoundException: 404: {'error': 'EMAIL_NOT
 2025-10-24 08:28:49,045 | INFO | main | Redis event bus started
 2025-10-24 08:28:54,049 | WARNING | app.services.user_service | User not found for deletion: 10
 2025-10-24 08:29:01,456 | INFO | app.services.user_service | [request_id=ee24628e-2a74-448c-80b4-f8ac7accb930] [user=khaerul@gmail.com] Deleted user: khaerullutfi@gmail.com
+2025-10-24 09:52:58,382 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-24 09:52:58,384 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-24 09:52:58,385 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-24 09:52:58,386 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-24 09:53:26,509 | INFO | app.configs.database | Database tables created successfully
+2025-10-24 09:53:26,513 | INFO | main | Database tables initialized
+2025-10-24 09:53:26,725 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-24 09:53:26,726 | INFO | main | Redis event bus started
+2025-10-25 11:12:39,696 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-25 11:12:39,990 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-25 11:12:39,992 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-25 11:12:39,993 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-25 11:13:07,599 | INFO | app.configs.database | Database tables created successfully
+2025-10-25 11:13:07,629 | INFO | main | Database tables initialized
+2025-10-25 11:13:07,789 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-25 11:13:07,793 | INFO | main | Redis event bus started
+2025-10-25 11:14:31,553 | INFO | app.services.auth_service | User authenticated successfully: khaerul@gmail.com
+2025-10-25 11:14:32,332 | INFO | app.controllers | User is authenticated: email khaerul@gmail.com
+2025-10-25 11:14:58,332 | INFO | app.services.user_service | [request_id=22b76527-690f-455d-8b86-3a2c66e42de2] [user=khaerul@gmail.com] Admin getting all users
+2025-10-25 11:15:15,268 | ERROR | app.services.agent_service | Unexpected error during getting all agents: create_at
+2025-10-25 11:15:15,487 | ERROR | app.services.agent_service | Exception type: AttributeError
+2025-10-25 11:15:15,966 | ERROR | app.services.agent_service | Exception args: ('create_at',)
+2025-10-25 11:15:16,684 | ERROR | app.controllers | Unexpected error: create_at
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\result.py", line 199, in _key_not_found
+    self._key_fallback(key, None)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\result.py", line 138, in _key_fallback
+    raise KeyError(key) from err
+KeyError: 'create_at'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\controllers\agent_controller.py", line 60, in get_all_agents
+    data_agents = await self.agent_service.get_all_agents(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        page=page, limit=limit
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\app\services\agent_service.py", line 49, in get_all_agents
+    self.handle_unexpected_error("getting all agents", e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\app\services\agent_service.py", line 33, in get_all_agents
+    created_at=agent.create_at,
+               ^^^^^^^^^^^^^^^
+  File "lib/sqlalchemy/cyextension/resultproxy.pyx", line 66, in sqlalchemy.cyextension.resultproxy.BaseRow.__getattr__
+  File "lib/sqlalchemy/cyextension/resultproxy.pyx", line 63, in sqlalchemy.cyextension.resultproxy.BaseRow._get_by_key_impl
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\result.py", line 201, in _key_not_found
+    raise AttributeError(ke.args[0]) from ke
+AttributeError: create_at
+2025-10-25 11:18:21,151 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-25 11:18:21,401 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-25 11:18:21,401 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-25 11:18:21,402 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-25 11:19:29,395 | INFO | app.configs.database | Database tables created successfully
+2025-10-25 11:19:29,398 | INFO | main | Database tables initialized
+2025-10-25 11:19:32,948 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-25 11:19:33,192 | INFO | main | Redis event bus started
+2025-10-25 11:19:38,814 | ERROR | app.services.agent_service | Unexpected error during getting all agents: 1 validation error for AgentPaginate
+created_at
+  Input should be a valid string [type=string_type, input_value=datetime.datetime(2025, 10, 7, 13, 38, 23), input_type=datetime]
+    For further information visit https://errors.pydantic.dev/2.11/v/string_type
+2025-10-25 11:19:38,815 | ERROR | app.services.agent_service | Exception type: ValidationError
+2025-10-25 11:19:39,063 | ERROR | app.services.agent_service | Exception args: ()
+2025-10-25 11:19:39,464 | ERROR | app.controllers | Unexpected error: 1 validation error for AgentPaginate
+created_at
+  Input should be a valid string [type=string_type, input_value=datetime.datetime(2025, 10, 7, 13, 38, 23), input_type=datetime]
+    For further information visit https://errors.pydantic.dev/2.11/v/string_type
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\controllers\agent_controller.py", line 60, in get_all_agents
+    data_agents = await self.agent_service.get_all_agents(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        page=page, limit=limit
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\app\services\agent_service.py", line 49, in get_all_agents
+    self.handle_unexpected_error("getting all agents", e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\app\services\agent_service.py", line 20, in get_all_agents
+    AgentPaginate(
+    ~~~~~~~~~~~~~^
+        id=agent.id,
+        ^^^^^^^^^^^^
+    ...<11 lines>...
+        created_at=agent.created_at,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pydantic\main.py", line 253, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for AgentPaginate
+created_at
+  Input should be a valid string [type=string_type, input_value=datetime.datetime(2025, 10, 7, 13, 38, 23), input_type=datetime]
+    For further information visit https://errors.pydantic.dev/2.11/v/string_type
+2025-10-25 11:21:25,876 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-25 11:21:25,883 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-25 11:21:26,002 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-25 11:21:26,018 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-25 11:21:54,944 | INFO | app.configs.database | Database tables created successfully
+2025-10-25 11:21:54,963 | INFO | main | Database tables initialized
+2025-10-25 11:21:55,288 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-25 11:21:55,447 | INFO | main | Redis event bus started
+2025-10-25 11:22:22,164 | ERROR | app.services.agent_service | Unexpected error during getting all agents: 1 validation error for AgentPaginate
+avatar
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/string_type
+2025-10-25 11:22:22,300 | ERROR | app.services.agent_service | Exception type: ValidationError
+2025-10-25 11:22:22,500 | ERROR | app.services.agent_service | Exception args: ()
+2025-10-25 11:22:22,776 | ERROR | app.controllers | Unexpected error: 1 validation error for AgentPaginate
+avatar
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/string_type
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\app\controllers\agent_controller.py", line 60, in get_all_agents
+    data_agents = await self.agent_service.get_all_agents(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        page=page, limit=limit
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\app\services\agent_service.py", line 49, in get_all_agents
+    self.handle_unexpected_error("getting all agents", e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\app\services\agent_service.py", line 20, in get_all_agents
+    AgentPaginate(
+    ~~~~~~~~~~~~~^
+        id=agent.id,
+        ^^^^^^^^^^^^
+    ...<11 lines>...
+        created_at=agent.created_at,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pydantic\main.py", line 253, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for AgentPaginate
+avatar
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/string_type
+2025-10-25 11:24:16,502 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-25 11:24:16,506 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-25 11:24:16,555 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-25 11:24:16,560 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-25 11:24:34,403 | INFO | app.configs.database | Database tables created successfully
+2025-10-25 11:24:34,427 | INFO | main | Database tables initialized
+2025-10-25 11:24:34,737 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-25 11:24:34,779 | INFO | main | Redis event bus started
+2025-10-25 11:24:42,259 | INFO | app.services.agent_service | [request_id=3fe0ba0f-87cb-45a4-938e-1bb52fe76953] [user=khaerul@gmail.com] admin getting all agents paginate
+2025-10-25 11:25:17,121 | INFO | app.services.agent_service | [request_id=db0c36e8-845c-41e9-9c47-9eb657003db6] [user=khaerul@gmail.com] admin getting all agents paginate
+2025-10-25 11:25:31,234 | INFO | app.services.agent_service | [request_id=862a5a8e-cb4c-45c7-ab55-e8056aae4462] [user=khaerul@gmail.com] admin getting all agents paginate
+2025-10-25 11:28:12,590 | INFO | app.services.agent_service | [request_id=ac235a25-3710-41f1-abf2-b2daabca9a36] [user=khaerul@gmail.com] admin getting all agents paginate
+2025-10-25 11:28:26,385 | INFO | app.services.agent_service | [request_id=0d15a162-74fc-402d-b1ae-e6db436fca55] [user=khaerul@gmail.com] admin getting all agents paginate
+2025-10-25 11:52:43,514 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-25 11:52:43,911 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-25 11:52:43,978 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-25 11:52:44,154 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-25 11:53:20,782 | INFO | app.configs.database | Database tables created successfully
+2025-10-25 11:53:20,935 | INFO | main | Database tables initialized
+2025-10-25 11:53:26,217 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-25 11:53:26,711 | INFO | main | Redis event bus started
+2025-10-25 11:54:30,803 | INFO | app.services.agent_service | [request_id=35cdaad5-97ec-436a-b9c6-7eb7ab05d902] [user=khaerul@gmail.com] Successfully retrieved agents for user 1
+2025-10-25 21:49:14,864 | INFO | app.events.redis_event | Subscribe event type event.agent.progress
+2025-10-25 21:49:14,884 | INFO | app.events.redis_event | Subscribe event type event.agent.success
+2025-10-25 21:49:14,886 | INFO | app.events.redis_event | Subscribe event type event.agent.failure
+2025-10-25 21:49:14,888 | INFO | app.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-25 21:49:44,260 | INFO | app.configs.database | Database tables created successfully
+2025-10-25 21:49:44,267 | INFO | main | Database tables initialized
+2025-10-25 21:49:44,370 | INFO | app.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-25 21:49:44,374 | INFO | main | Redis event bus started
+2025-10-25 21:51:20,890 | INFO | app.services.auth_service | User authenticated successfully: khaerul@gmail.com
+2025-10-25 21:51:20,916 | INFO | app.controllers | User is authenticated: email khaerul@gmail.com
+2025-10-25 21:51:42,870 | INFO | app.services.agent_service | [request_id=e9e936bc-eb96-4f55-8a43-afdb4b21e887] [user=khaerul@gmail.com] admin getting all agents paginate
+2025-10-25 21:52:08,073 | INFO | app.services.agent_service | [request_id=5ce6cc35-2fc3-4a8d-8979-4b150bd85ef2] [user=khaerul@gmail.com] Fetched 74 user agents for user_id=1

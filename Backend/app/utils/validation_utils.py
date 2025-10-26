@@ -4,6 +4,8 @@ Utility functions for data validation and user operations.
 
 from typing import Optional
 from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
 
 from app.models.user.user_entity import User
 from app.models.agent.agent_entity import Agent
@@ -58,7 +60,7 @@ def validate_agent_exists_and_owned(db: Session, agent_id: str, user_id: int, us
     return agent
 
 
-def validate_agent_exists(db: Session, agent_id: int, user_email: str) -> Agent:
+def validate_agent_exists(db: Session, agent_id: str, user_email: str) -> Agent:
     """
     Validate that agent exists in database.
     
@@ -75,5 +77,29 @@ def validate_agent_exists(db: Session, agent_id: int, user_email: str) -> Agent:
     """
     agent = db.query(Agent).filter(Agent.id == agent_id).first()
     if not agent:
-        raise handle_agent_not_found(agent_id, user_email)
+        raise handle_agent_not_found(str(agent_id), user_email)
     return agent
+
+
+async def validate_user_exists_async(db: AsyncSession, user_id: int, user_email: Optional[str]) -> User:
+    """
+    Async version: Validate that user exists in database.
+    
+    Args:
+        db: Async database session
+        user_id: User ID to validate
+        user_email: User email for error logging
+        
+    Returns:
+        User object if found
+        
+    Raises:
+        HTTPException: If user not found
+    """
+    stmt = select(User).filter(User.id == user_id)
+    result = await db.execute(stmt)
+    user = result.scalar_one_or_none()
+    
+    if not user:
+        raise handle_user_not_found(user_email or "unknown")
+    return user

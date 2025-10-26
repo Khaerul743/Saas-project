@@ -12,39 +12,84 @@ from fastapi import (
     UploadFile,
     status,
 )
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.models.agent.agent_model import AgentInvoke
 from app.configs.database import get_db
 from app.configs.limiter import limiter
-from app.controllers.agent_controller import (
-    delete_agent,
-    get_all_user_agent,
-    get_all_agents,
-    invoke_agent,
+from app.controllers.agent_controller import AgentController
+from app.middlewares.auth_middleware import role_based_access_control
+from app.schema.agent_schema import (
+    AgentDeleteResponse,
+    AgentDetailResponse,
+    AgentPaginateResponse,
+    UserAgentResponse,
 )
-from app.controllers.document_controller import document_store
-from app.middlewares.auth_dependencies import role_required
-from app.models.agent.agent_model import CreateAgent, ResponseAPI, UpdateAgent
 from app.utils.response import success_response
-from app.models.agent.agent_model import AgentInvoke
 
 router = APIRouter(prefix="/api/agents", tags=["agents"])
 
 
-@router.get("", status_code=status.HTTP_200_OK)
+@router.get("", response_model=AgentPaginateResponse, status_code=status.HTTP_200_OK)
 @limiter.limit("10/minute")
-def getAllAgent(
+async def getAllAgent(
     request: Request,
-    current_user: dict = Depends(role_required(["admin", "user"])),
-    db: Session = Depends(get_db),
+    page: int = Query(1, ge=1),
+    limit: int = Query(50, le=100),
+    current_user: dict = Depends(
+        role_based_access_control.role_required(["admin", "user"])
+    ),
+    db: AsyncSession = Depends(get_db),
 ):
-    try:
-        agents = get_all_agents(db, current_user)
-        return success_response("Getting all agents is successfully", agents)
-    except Exception as e:
-        # This will be handled by the global error handler middleware
-        raise
+    controller = AgentController(db, request)
+    agents = await controller.get_all_agents(page, limit)
+    return success_response("Getting all agents paginate is successfully", agents)
+
+
+@router.get(
+    "/details", response_model=AgentDetailResponse, status_code=status.HTTP_200_OK
+)
+@limiter.limit("10/minute")
+async def getAllAgentWithDetails(
+    request: Request,
+    current_user: dict = Depends(
+        role_based_access_control.role_required(["admin", "user"])
+    ),
+    db: AsyncSession = Depends(get_db),
+):
+    controller = AgentController(db, request)
+    agents = await controller.get_all_agent_and_detail(current_user)
+    return success_response("Getting all agents with details is successfully", agents)
+
+
+@router.delete(
+    "/{agent_id}", response_model=AgentDeleteResponse, status_code=status.HTTP_200_OK
+)
+@limiter.limit("10/minute")
+async def deleteAgent(
+    request: Request,
+    agent_id: str,
+    current_user: dict = Depends(
+        role_based_access_control.role_required(["admin", "user"])
+    ),
+    db: AsyncSession = Depends(get_db),
+):
+    controller = AgentController(db, request)
+    agent = await controller.delete_agent(agent_id)
+    return success_response("Delete agent has successfully", agent)
+
+
+@router.get("/users", response_model=UserAgentResponse, status_code=status.HTTP_200_OK)
+@limiter.limit("10/minute")
+async def getAllUserAgent(
+    request: Request,
+    current_user: dict = Depends(
+        role_based_access_control.role_required(["admin", "user"])
+    ),
+    db: AsyncSession = Depends(get_db),
+):
+    controller = AgentController(db, request)
+    result = await controller.get_all_user_agent(current_user)
+    return success_response("Get all user agents is successfully", result)
 
 
 # Note: Create agent endpoint has been moved to specific agent type routes
@@ -87,44 +132,15 @@ def getAllAgent(
 #         # This will be handled by the global error handler middleware
 #         raise
 
-
-@router.delete("/{agent_id}", status_code=status.HTTP_200_OK)
-@limiter.limit("10/minute")
-def deleteAgent(
-    request: Request,
-    agent_id: str,
-    current_user: dict = Depends(role_required(["admin", "user"])),
-    db: Session = Depends(get_db),
-):
-    try:
-        response = delete_agent(agent_id, current_user, db)
-        return success_response(response.get("message"))
-    except Exception as e:
-        # This will be handled by the global error handler middleware
-        raise
-
-
-@router.get("/users", status_code=status.HTTP_200_OK)
-def getAllUserAgent(
-    current_user: dict = Depends(role_required(["user", "admin"])),
-    db: Session = Depends(get_db),
-):
-    try:
-        get_history = get_all_user_agent(current_user, db)
-        return success_response("Get all history is successfully", get_history)
-    except:
-        raise
-
-
-@router.post("/invoke/{agent_id}")
-async def invokeAgent(
-    agent_id: str,
-    agent_invoke: AgentInvoke,
-    current_user: dict = Depends(role_required(["admin", "user"])),
-    db: Session = Depends(get_db),
-):
-    try:
-        response = await invoke_agent(agent_id, agent_invoke, current_user, db)
-        return success_response("Invoke agent is successfully", response)
-    except:
-        raise
+# @router.post("/invoke/{agent_id}")
+# async def invokeAgent(
+#     agent_id: str,
+#     agent_invoke: AgentInvoke,
+#     current_user: dict = Depends(role_required(["admin", "user"])),
+#     db: Session = Depends(get_db),
+# ):
+#     try:
+#         response = await invoke_agent(agent_id, agent_invoke, current_user, db)
+#         return success_response("Invoke agent is successfully", response)
+#     except:
+#         raise

@@ -23,7 +23,7 @@ from app.models import *  # noqa: F401, F403
 
 # Import routes
 from app.routes import (
-    # agent_route,
+    agent_route,
     auth_route,
     # company_information_route,
     # customer_service_route,
@@ -83,7 +83,7 @@ app.add_exception_handler(RateLimitExceeded, rate_limit_exceeded_handler)
 # Routes
 app.include_router(user_route.router)
 app.include_router(auth_route.router)
-# app.include_router(agent_route.router)  # General agent routes (get all, etc.)
+app.include_router(agent_route.router)  # General agent routes (get all, etc.)
 # app.include_router(simple_rag_route.router)  # Simple RAG Agent specific routes
 # app.include_router(
 #     customer_service_route.router

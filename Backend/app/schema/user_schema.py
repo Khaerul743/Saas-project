@@ -3,7 +3,7 @@ from typing import List, Literal, Optional
 
 from pydantic import BaseModel, EmailStr
 
-from app.schema.base import BaseSchemaOut
+from app.schema.base import BasePaginateOut, BaseSchemaOut
 
 
 class BaseUserSchema(BaseModel):
@@ -23,11 +23,8 @@ class DataUserSchema(BaseUserSchema):
     last_login: Optional[datetime] = None
 
 
-class UserPaginate(BaseModel):
+class UserPaginate(BasePaginateOut):
     data_users: List[DataUserSchema]
-    total: int
-    page: int
-    limit: int
 
 
 class UserOutPaginate(BaseSchemaOut):
