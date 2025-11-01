@@ -7,36 +7,23 @@ from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from app.configs.config import settings
-from app.configs.database import create_tables
-from app.configs.limiter import limiter
-from app.core.logger import get_logger
-from app.events import event_handler
-from app.events.redis_event import event_bus
-from app.middlewares.context_middleware import ContextMiddleware
-from app.middlewares.error_handler import ErrorHandlerMiddleware
-from app.middlewares.limiter_handler import rate_limit_exceeded_handler
+from app.utils.response import error_response
+from src.app.middlewares.context_middleware import ContextMiddleware
+from src.app.middlewares.error_handler import ErrorHandlerMiddleware
+from src.app.middlewares.limiter_handler import rate_limit_exceeded_handler
+
+# Import routes
+from src.app.routes import agent_route, auth_route, simple_rag_route, user_route
+from src.config.config import settings
+from src.config.database import create_tables
+from src.config.limiter import limiter
+from src.core.utils.logger import get_logger
+from src.domain.events import event_handler
+from src.domain.events.redis_event import event_bus
 
 # Import all models to ensure they are registered with SQLAlchemy metadata
 # This ensures all tables are created during database initialization
-from app.models import *  # noqa: F401, F403
-
-# Import routes
-from app.routes import (
-    agent_route,
-    auth_route,
-    # company_information_route,
-    # customer_service_route,
-    # dashboard_route,
-    # document_route,
-    # history_route,
-    # integration_route,
-    # platform_route,
-    # simple_rag_route,
-    # task_route,
-    user_route,
-)
-from app.utils.response import error_response
+from src.domain.models import *  # noqa: F401, F403
 
 # from app.websocket import ws_route
 
@@ -84,7 +71,7 @@ app.add_exception_handler(RateLimitExceeded, rate_limit_exceeded_handler)
 app.include_router(user_route.router)
 app.include_router(auth_route.router)
 app.include_router(agent_route.router)  # General agent routes (get all, etc.)
-# app.include_router(simple_rag_route.router)  # Simple RAG Agent specific routes
+app.include_router(simple_rag_route.router)  # Simple RAG Agent specific routes
 # app.include_router(
 #     customer_service_route.router
 # )  # Customer Service Agent specific routes

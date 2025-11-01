@@ -5,9 +5,9 @@
 # from datetime import datetime
 # from typing import Optional
 
-from app.events.redis_event import Event, EventType, event_bus
-from app.core.logger import get_logger
-from app.events.loop_manager import run_async
+from src.domain.events.redis_event import Event, EventType, event_bus
+from src.core.utils.logger import get_logger
+from src.core.utils.loop_manager import run_async
 from typing import Optional
 
 logger = get_logger(__name__)

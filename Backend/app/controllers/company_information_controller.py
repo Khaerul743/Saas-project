@@ -2,10 +2,10 @@ from typing import List
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session, joinedload
 
-from app.models.agent.agent_entity import Agent
-from app.models.company_information.company_entity import CompanyInformation
+from src.domain.models.agent_entity import Agent
+from src.domain.models.company_entity import CompanyInformation
 from app.models.company_information.company_model import UpdateCompanyInformation
-from app.core.logger import get_logger
+from src.core.utils.logger import get_logger
 from app.utils.error_utils import (
     handle_database_error,
     handle_user_not_found,

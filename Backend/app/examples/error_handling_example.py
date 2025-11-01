@@ -6,7 +6,7 @@ File ini menunjukkan bagaimana error handling bekerja dalam berbagai skenario.
 from fastapi import FastAPI, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.exceptions import (
+from src.core.exceptions import (
     EmailAlreadyExistsException,
     InvalidEmailFormatException,
     PasswordTooWeakException,
@@ -14,7 +14,7 @@ from app.exceptions import (
     DatabaseException,
 )
 from app.models.auth.auth_model import RegisterModel
-from app.services.auth_service import AuthService
+from src.domain.service.auth_service import AuthService
 
 
 async def example_register_handler(db: AsyncSession, payload: RegisterModel):
@@ -24,28 +24,32 @@ async def example_register_handler(db: AsyncSession, payload: RegisterModel):
     try:
         auth = AuthService(db)
         new_user = await auth.register_user(payload)
-        
+
         return {
             "status": "success",
             "message": "User registered successfully",
-            "data": new_user
+            "data": new_user,
         }
-        
+
     except EmailAlreadyExistsException as e:
         # Error 400: Email sudah ada
         # Response: {"status": "error", "error": "EMAIL_ALREADY_EXISTS", "message": "Email is already registered", "field": "email", "value": "user@example.com"}
         raise e
-        
-    except (InvalidEmailFormatException, PasswordTooWeakException, ValidationException) as e:
+
+    except (
+        InvalidEmailFormatException,
+        PasswordTooWeakException,
+        ValidationException,
+    ) as e:
         # Error 400/422: Validasi gagal
         # Response: {"status": "error", "error": "INVALID_EMAIL_FORMAT", "message": "Invalid email format", "field": "email", "value": "invalid-email"}
         raise e
-        
+
     except DatabaseException as e:
         # Error 500: Database error
         # Response: {"status": "error", "error": "DATABASE_ERROR", "message": "Database user creation failed: Connection timeout", "field": "database"}
         raise e
-        
+
     except Exception as e:
         # Error 500: Unexpected error
         # Response: {"status": "error", "error": "INTERNAL_SERVER_ERROR", "message": "An unexpected error occurred. Please try again later.", "field": "server"}
@@ -55,8 +59,8 @@ async def example_register_handler(db: AsyncSession, payload: RegisterModel):
                 "status": "error",
                 "error": "INTERNAL_SERVER_ERROR",
                 "message": "An unexpected error occurred. Please try again later.",
-                "field": "server"
-            }
+                "field": "server",
+            },
         )
 
 

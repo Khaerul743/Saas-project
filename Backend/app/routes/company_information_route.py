@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, Request, status
 from sqlalchemy.orm import Session
 
-from app.configs.database import get_db
-from app.configs.limiter import limiter
+from src.config.database import get_db
+from src.config.limiter import limiter
 from app.controllers.company_information_controller import (
     get_all_company_information,
     get_company_information_by_agent_id,

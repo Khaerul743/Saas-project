@@ -7,9 +7,9 @@ from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 
 from app.AI.customer_service.tools import AgentTools
 from app.AI.customer_service.workflow import Workflow
-from app.AI.document_store.RAG import RAGSystem
 from app.models.company_information.company_model import CreateCompanyInformation
-from app.core.logger import get_logger
+from src.core.utils.logger import get_logger
+from src.infrastructure.vector_store.chroma_db import RAGSystem
 
 logger = get_logger(__name__)
 

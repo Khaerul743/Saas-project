@@ -1,8 +1,9 @@
-from app.configs.database import SessionLocal
-from app.models.integration.integration_entity import Integration
+from src.config.database import SessionLocal
+from src.domain.models.integration_entity import Integration
 from app.services.telegram import set_webhook
-from app.models.platform.platform_entity import Platform
+from src.domain.models.platform_entity import Platform
 from app.utils.agent_utils import generate_api_key
+
 
 def add_integration(agent_id: str, platform: str, status: str):
     with SessionLocal() as db:
@@ -14,7 +15,10 @@ def add_integration(agent_id: str, platform: str, status: str):
         db.refresh(new_integration)
         return new_integration
 
-async def platform_integration(agent_id: str, user_id: int, integration_id: int, platform_type: str, api_key: str):
+
+async def platform_integration(
+    agent_id: str, user_id: int, integration_id: int, platform_type: str, api_key: str
+):
     with SessionLocal() as db:
         try:
             if platform_type == "telegram":

@@ -5,7 +5,7 @@ Validation utilities for input data.
 import re
 from typing import Optional
 
-from app.exceptions.auth_exceptions import (
+from src.core.exceptions.auth_exceptions import (
     InvalidEmailFormatException,
     PasswordTooWeakException,
     ValidationException,

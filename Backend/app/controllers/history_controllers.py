@@ -3,13 +3,13 @@ import os
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session, joinedload
 
-from app.models.agent.agent_entity import Agent
-from app.models.history_message.history_entity import HistoryMessage
+from src.domain.models.agent_entity import Agent
+from src.domain.models.history_entity import HistoryMessage
 from app.models.history_message.history_model import HistoryOut
-from app.models.history_message.metadata_entity import Metadata
-from app.models.user.user_entity import User
-from app.models.user_agent.user_agent_entity import UserAgent
-from app.core.logger import get_logger
+from src.domain.models.metadata_entity import Metadata
+from src.domain.models.user_entity import User
+from src.domain.models.user_agent_entity import UserAgent
+from src.core.utils.logger import get_logger
 
 logger = get_logger(__name__)
 

@@ -14,8 +14,8 @@ from fastapi import (
 )
 from sqlalchemy.orm import Session
 
-from app.configs.database import get_db
-from app.configs.limiter import limiter
+from src.config.database import get_db
+from src.config.limiter import limiter
 from app.controllers.customer_service_controller import (
     create_customer_service_agent,
     delete_customer_service_agent,

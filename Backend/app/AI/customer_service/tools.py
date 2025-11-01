@@ -1,4 +1,5 @@
-from app.AI.document_store.RAG import RAGSystem
+from src.infrastructure.vector_store.chroma_db import RAGSystem
+
 
 class AgentTools:
     def __init__(self, chromadb_path: str, collection_name: str):

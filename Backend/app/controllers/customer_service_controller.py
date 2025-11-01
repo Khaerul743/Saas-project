@@ -10,8 +10,8 @@ from sqlalchemy.orm import Session
 from app.AI import customer_service as AI
 from app.AI.utils import dataset
 from app.controllers.document_controller import agents
-from app.dependencies.redis_storage import redis_storage
-from app.models.agent.agent_entity import Agent
+from src.infrastructure.redis.redis_storage import redis_storage
+from src.domain.models.agent_entity import Agent
 from app.models.agent.customer_service_model import (
     CreateCustomerServiceAgent,
     CustomerServiceAgentAsyncResponse,
@@ -19,14 +19,14 @@ from app.models.agent.customer_service_model import (
     DatasetDescription,
     UpdateCustomerServiceAgent,
 )
-from app.models.company_information.company_entity import CompanyInformation
+from src.domain.models.company_entity import CompanyInformation
 from app.models.company_information.company_model import CreateCompanyInformation
-from app.models.document.document_entity import Document
+from src.domain.models.document_entity import Document
 from app.utils.agent_utils import generate_agent_id
 from app.utils.document_utils import write_document
 from app.utils.error_utils import handle_database_error, handle_user_not_found
 from app.utils.file_utils import create_agent_directory, get_content_type, process_file
-from app.core.logger import get_logger
+from src.core.utils.logger import get_logger
 from app.utils.validation_utils import validate_agent_exists_and_owned
 
 logger = get_logger(__name__)

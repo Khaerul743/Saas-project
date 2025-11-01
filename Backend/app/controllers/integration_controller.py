@@ -7,12 +7,12 @@ from fastapi import HTTPException, Response, status
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, joinedload
 
-from app.models.agent.agent_entity import Agent
-from app.models.integration.integration_entity import Integration
+from src.domain.models.agent_entity import Agent
+from src.domain.models.integration_entity import Integration
 from app.models.integration.integration_model import CreateIntegration, IntegrationOut
-from app.models.platform.platform_entity import Platform
+from src.domain.models.platform_entity import Platform
 from app.services.telegram import set_webhook
-from app.core.logger import get_logger
+from src.core.utils.logger import get_logger
 from app.utils.validation_utils import validate_agent_exists_and_owned
 from app.utils.agent_utils import generate_api_key, validate_api_key
 from app.services.telegram import delete_webhook

@@ -5618,3 +5618,1594 @@ avatar
 2025-10-25 21:51:20,916 | INFO | app.controllers | User is authenticated: email khaerul@gmail.com
 2025-10-25 21:51:42,870 | INFO | app.services.agent_service | [request_id=e9e936bc-eb96-4f55-8a43-afdb4b21e887] [user=khaerul@gmail.com] admin getting all agents paginate
 2025-10-25 21:52:08,073 | INFO | app.services.agent_service | [request_id=5ce6cc35-2fc3-4a8d-8979-4b150bd85ef2] [user=khaerul@gmail.com] Fetched 74 user agents for user_id=1
+2025-10-26 09:32:30,028 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-10-26 09:32:30,033 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-10-26 09:32:30,041 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-10-26 09:32:30,048 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-26 09:32:33,934 | INFO | src.config.database | Database tables created successfully
+2025-10-26 09:32:33,938 | INFO | main | Database tables initialized
+2025-10-26 09:32:37,980 | ERROR | main | Error during startup: Error 22 connecting to localhost:6379. The remote computer refused the network connection.
+2025-10-26 13:43:32,705 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-10-26 13:43:32,801 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-10-26 13:43:32,856 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-10-26 13:43:32,919 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-26 13:43:34,633 | INFO | src.config.database | Database tables created successfully
+2025-10-26 13:43:34,700 | INFO | main | Database tables initialized
+2025-10-26 13:43:35,570 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-26 13:43:35,573 | INFO | main | Redis event bus started
+2025-10-26 13:45:25,106 | INFO | src.domain.service.auth_service | User authenticated successfully: khaerul@gmail.com
+2025-10-26 13:45:25,158 | INFO | app.controllers | User is authenticated: email khaerul@gmail.com
+2025-10-26 13:45:44,306 | INFO | src.domain.service.user_service | [request_id=b2e22784-6b07-4125-a905-3f9d1755cda7] [user=khaerul@gmail.com] Admin getting all users
+2025-10-26 13:45:56,494 | INFO | src.domain.service.user_service | [request_id=f232af63-1401-4306-9ad8-55f1be44fcc6] [user=khaerul@gmail.com] Show user profile
+2025-10-26 13:46:13,205 | INFO | src.domain.service.agent_service | [request_id=b14ff6f4-1a83-4325-974f-09f253787e87] [user=khaerul@gmail.com] admin getting all agents paginate
+2025-10-26 13:46:26,570 | INFO | src.domain.service.agent_service | [request_id=16ad2f81-9a6e-48c2-9507-51ed4240dd47] [user=khaerul@gmail.com] Successfully retrieved agents for user 1
+2025-10-26 13:47:02,951 | INFO | src.domain.service.agent_service | [request_id=c6398cd3-1a1e-4a7f-8b57-04b543ffd117] [user=khaerul@gmail.com] Fetched 74 user agents for user_id=1
+2025-10-26 13:47:41,096 | INFO | src.domain.service.user_service | [request_id=44ab407d-ba6b-4cb5-af16-30c29be27265] [user=khaerul@gmail.com] Admin getting all users
+2025-10-26 14:40:53,998 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-10-26 14:40:54,007 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-10-26 14:40:54,008 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-10-26 14:40:54,010 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-26 14:41:00,706 | INFO | src.config.database | Database tables created successfully
+2025-10-26 14:41:00,918 | INFO | main | Database tables initialized
+2025-10-26 14:41:05,837 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-26 14:41:05,997 | INFO | main | Redis event bus started
+2025-10-26 14:41:39,951 | INFO | src.domain.service.auth_service | User authenticated successfully: khaerul@gmail.com
+2025-10-26 14:41:40,227 | INFO | app.controllers | User is authenticated: email khaerul@gmail.com
+2025-10-26 14:42:00,216 | INFO | src.domain.service.agent_service | [request_id=4e527963-f091-40c0-997b-287de4ae2875] [user=khaerul@gmail.com] admin getting all agents paginate
+2025-10-26 14:42:26,564 | INFO | src.domain.service.agent_service | [request_id=4ec6f1d8-c9f0-4a3b-989a-dbfaa1f25153] [user=khaerul@gmail.com] Successfully retrieved agents for user 1
+2025-10-26 14:42:41,339 | INFO | src.domain.service.agent_service | [request_id=9665d6c9-c333-4708-91ab-704e888c9984] [user=khaerul@gmail.com] Fetched 74 user agents for user_id=1
+2025-10-28 17:46:23,178 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-10-28 17:46:23,191 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-10-28 17:46:23,192 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-10-28 17:46:23,193 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-28 17:46:24,383 | INFO | src.config.database | Database tables created successfully
+2025-10-28 17:46:24,392 | INFO | main | Database tables initialized
+2025-10-28 17:46:28,562 | ERROR | main | Error during startup: Error 22 connecting to localhost:6379. The remote computer refused the network connection.
+2025-10-28 17:50:17,206 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-10-28 17:50:17,208 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-10-28 17:50:17,209 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-10-28 17:50:17,209 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-28 17:50:18,382 | INFO | src.config.database | Database tables created successfully
+2025-10-28 17:50:18,386 | INFO | main | Database tables initialized
+2025-10-28 17:50:18,426 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-28 17:50:18,439 | INFO | main | Redis event bus started
+2025-10-28 17:51:24,739 | INFO | app.controllers | User registration successful: pelerrii@gmail.com
+2025-10-28 17:51:37,467 | WARNING | src.domain.service.auth_service | Validation error: Email is already in use
+2025-10-28 17:51:37,637 | WARNING | app.controllers | Registration failed - email already exists: pelerrii@gmail.com
+2025-10-28 17:52:03,697 | WARNING | src.domain.service.auth_service | Validation error: Password must be at least 6 characters long
+2025-10-28 17:52:03,751 | WARNING | app.controllers | Registration failed - validation error: {'error': 'PASSWORD_TOO_WEAK', 'message': 'Password must be at least 6 characters long', 'field': 'password'}
+2025-10-28 17:54:22,841 | INFO | main | Redis event bus stopped
+2025-10-28 17:54:56,657 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-10-28 17:54:56,659 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-10-28 17:54:56,661 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-10-28 17:54:56,663 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-28 17:54:57,450 | INFO | src.config.database | Database tables created successfully
+2025-10-28 17:54:57,454 | INFO | main | Database tables initialized
+2025-10-28 17:54:57,599 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-28 17:54:57,602 | INFO | main | Redis event bus started
+2025-10-28 17:55:04,994 | WARNING | src.domain.service.auth_service | Validation error: Password must be at least 6 characters long
+2025-10-28 17:55:05,000 | WARNING | app.controllers | Registration failed - validation error: {'error': 'PASSWORD_TOO_WEAK', 'message': 'Password must be at least 6 characters long', 'field': 'password'}
+2025-10-28 17:55:16,969 | INFO | main | Redis event bus stopped
+2025-10-28 17:56:32,648 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-10-28 17:56:32,649 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-10-28 17:56:32,650 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-10-28 17:56:32,650 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-28 17:56:32,973 | INFO | src.config.database | Database tables created successfully
+2025-10-28 17:56:32,976 | INFO | main | Database tables initialized
+2025-10-28 17:56:33,020 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-28 17:56:33,024 | INFO | main | Redis event bus started
+2025-10-28 17:56:38,476 | WARNING | src.domain.service.auth_service | Validation error: Email is already in use
+2025-10-28 17:56:38,480 | WARNING | app.controllers | Registration failed - email already exists: pelerrii@gmail.com
+2025-10-28 17:56:54,679 | WARNING | src.domain.service.auth_service | Validation error: name must be at least 2 characters long
+2025-10-28 17:56:54,680 | WARNING | app.controllers | Registration failed - validation error: {'error': 'VALIDATION_ERROR', 'message': 'name must be at least 2 characters long', 'field': 'name'}
+2025-10-28 17:57:18,554 | WARNING | src.domain.service.auth_service | Validation error: Validation error in name: Name cannot be empty
+2025-10-28 17:57:18,561 | WARNING | app.controllers | Registration failed - validation error: {'error': 'VALIDATION_ERROR', 'message': 'Validation error in name: Name cannot be empty', 'field': ''}
+2025-10-28 17:57:36,885 | WARNING | src.domain.service.auth_service | Validation error: name must be at least 2 characters long
+2025-10-28 17:57:36,901 | WARNING | app.controllers | Registration failed - validation error: {'error': 'VALIDATION_ERROR', 'message': 'name must be at least 2 characters long', 'field': 'name'}
+2025-10-28 17:57:53,678 | INFO | main | Redis event bus stopped
+2025-10-28 21:56:15,253 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-10-28 21:56:15,256 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-10-28 21:56:15,257 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-10-28 21:56:15,258 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-28 21:56:17,072 | INFO | src.config.database | Database tables created successfully
+2025-10-28 21:56:17,075 | INFO | main | Database tables initialized
+2025-10-28 21:56:17,290 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-28 21:56:17,292 | INFO | main | Redis event bus started
+2025-10-28 21:56:55,777 | WARNING | src.domain.service.auth_service | khaerul@gmail.com login failed: Wrong password
+2025-10-28 21:56:55,779 | WARNING | app.controllers | Email not found: khaerul@gmail.com
+2025-10-28 21:57:07,315 | INFO | app.controllers | User is authenticated: email khaerul@gmail.com
+2025-10-28 21:57:15,084 | WARNING | src.domain.service.auth_service | khaeul@gmail.com login failed: User not found
+2025-10-28 21:57:15,136 | WARNING | app.controllers | Email not found: khaeul@gmail.com
+2025-10-28 21:57:22,860 | INFO | app.controllers | User is authenticated: email khaerul@gmail.com
+2025-10-29 08:37:17,249 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-10-29 08:37:17,254 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-10-29 08:37:17,291 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-10-29 08:37:17,311 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-29 08:37:19,391 | INFO | src.config.database | Database tables created successfully
+2025-10-29 08:37:19,397 | INFO | main | Database tables initialized
+2025-10-29 08:37:23,695 | ERROR | main | Error during startup: Error 22 connecting to localhost:6379. The remote computer refused the network connection.
+2025-10-29 08:39:28,682 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-10-29 08:39:28,684 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-10-29 08:39:28,687 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-10-29 08:39:28,692 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-29 08:39:29,405 | INFO | src.config.database | Database tables created successfully
+2025-10-29 08:39:29,409 | INFO | main | Database tables initialized
+2025-10-29 08:39:29,462 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-29 08:39:29,470 | INFO | main | Redis event bus started
+2025-10-29 08:40:41,426 | INFO | app.controllers | User is authenticated: email khaerul@gmail.com
+2025-10-29 08:40:54,100 | INFO | src.domain.service.user_service | [request_id=0d975c3e-6a39-4a2d-a39b-ee28c5a0c0dc] [user=khaerul@gmail.com] Admin getting all users
+2025-10-29 18:16:35,484 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-10-29 18:16:35,495 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-10-29 18:16:35,499 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-10-29 18:16:35,501 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-29 18:16:36,827 | INFO | src.config.database | Database tables created successfully
+2025-10-29 18:16:36,832 | INFO | main | Database tables initialized
+2025-10-29 18:16:36,894 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-29 18:16:36,898 | INFO | main | Redis event bus started
+2025-10-29 18:18:04,446 | INFO | app.controllers | User is authenticated: email khaerul@gmail.com
+2025-10-29 20:44:52,322 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-10-29 20:44:53,965 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-10-29 20:44:53,966 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-10-29 20:44:53,967 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-29 20:45:18,260 | INFO | src.config.database | Database tables created successfully
+2025-10-29 20:45:18,266 | INFO | main | Database tables initialized
+2025-10-29 20:45:39,958 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-29 20:45:40,152 | INFO | main | Redis event bus started
+2025-10-29 20:46:22,068 | INFO | app.controllers | User is authenticated: email khaerul@gmail.com
+2025-10-29 20:46:31,319 | INFO | src.domain.service.user_service | [request_id=5ac5a10d-1f69-4121-8362-20512fc67332] [user=khaerul@gmail.com] Show user profile
+2025-10-29 20:47:13,707 | WARNING | src.app.middlewares.auth_middleware | Permission denied for role user: khaerul@gmail.com
+2025-10-29 20:49:38,611 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-10-29 20:49:38,623 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-10-29 20:49:38,681 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-10-29 20:49:38,770 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-29 20:49:40,046 | INFO | src.config.database | Database tables created successfully
+2025-10-29 20:49:40,058 | INFO | main | Database tables initialized
+2025-10-29 20:49:40,265 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-29 20:49:40,270 | INFO | main | Redis event bus started
+2025-10-29 20:49:47,943 | INFO | src.domain.service.user_service | [request_id=8abfa0ce-73a9-45e1-92a6-ad142de8411f] [user=khaerul@gmail.com] Updated user plan: khaerul@gmail.com -> free
+2025-10-29 20:52:05,759 | INFO | src.domain.service.user_service | [request_id=a5dd2d1f-ef03-47fc-9eed-b051e86979d2] [user=khaerul@gmail.com] Show user profile
+2025-10-29 20:52:18,852 | INFO | src.domain.service.user_service | [request_id=5c916b51-761b-4096-bd96-8ec6bc10ccfe] [user=khaerul@gmail.com] Updated user profile
+2025-10-29 20:52:29,222 | WARNING | src.domain.service.user_service | User not found for plan update: 10 code=NOT_FOUND
+2025-10-29 20:52:46,492 | WARNING | src.domain.service.user_service | User not found for deletion: 2 code=NOT_FOUND
+2025-10-30 21:09:28,554 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-10-30 21:09:28,556 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-10-30 21:09:28,557 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-10-30 21:09:28,559 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-30 21:09:29,452 | INFO | src.config.database | Database tables created successfully
+2025-10-30 21:09:29,456 | INFO | main | Database tables initialized
+2025-10-30 21:09:33,554 | ERROR | main | Error during startup: Error 22 connecting to localhost:6379. The remote computer refused the network connection.
+2025-10-30 21:12:37,304 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-10-30 21:12:37,305 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-10-30 21:12:37,306 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-10-30 21:12:37,307 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-30 21:12:37,871 | INFO | src.config.database | Database tables created successfully
+2025-10-30 21:12:37,887 | INFO | main | Database tables initialized
+2025-10-30 21:12:37,944 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-30 21:12:37,947 | INFO | main | Redis event bus started
+2025-10-30 21:14:42,709 | INFO | app.controllers | User is authenticated: email khaerul@gmail.com
+2025-10-30 21:17:51,723 | ERROR | src.app.middlewares.error_handler | Unexpected error: [TypeError("'coroutine' object is not iterable"), TypeError('vars() argument must have __dict__ attribute')]
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\encoders.py", line 324, in jsonable_encoder
+    data = dict(obj)
+TypeError: 'coroutine' object is not iterable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\encoders.py", line 329, in jsonable_encoder
+    data = vars(obj)
+TypeError: vars() argument must have __dict__ attribute
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 328, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 202, in serialize_response
+    return jsonable_encoder(response_content)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\encoders.py", line 289, in jsonable_encoder
+    encoded_value = jsonable_encoder(
+        value,
+    ...<4 lines>...
+        sqlalchemy_safe=sqlalchemy_safe,
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\encoders.py", line 332, in jsonable_encoder
+    raise ValueError(errors) from e
+ValueError: [TypeError("'coroutine' object is not iterable"), TypeError('vars() argument must have __dict__ attribute')]
+2025-10-30 21:20:36,267 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-10-30 21:20:36,268 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-10-30 21:20:36,270 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-10-30 21:20:36,271 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-30 21:20:37,431 | INFO | src.config.database | Database tables created successfully
+2025-10-30 21:20:37,435 | INFO | main | Database tables initialized
+2025-10-30 21:20:37,528 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-30 21:20:37,532 | INFO | main | Redis event bus started
+2025-10-30 21:20:44,515 | INFO | src.core.utils.save_file | Created directory: documents/user_1/agent_pppp
+2025-10-30 21:20:44,557 | INFO | src.core.utils.save_file | Saved file: documents/user_1/agent_pppp\Khaerul Lutfi.pdf (type: pdf)
+2025-10-30 21:20:45,010 | ERROR | src.domain.service.simple_rag_agent_service | Unexpected error during Document process: (pymysql.err.DataError) (1265, "Data truncated for column 'content_type' at row 1")
+[SQL: INSERT INTO documents (agent_id, file_name, content_type) VALUES (%s, %s, %s)]
+[parameters: ('pppp', 'Khaerul Lutfi.pdf', 'application/pdf')]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2025-10-30 21:20:45,076 | ERROR | src.domain.service.simple_rag_agent_service | Exception type: DataError
+2025-10-30 21:20:45,392 | ERROR | src.domain.service.simple_rag_agent_service | Exception args: ('(pymysql.err.DataError) (1265, "Data truncated for column \'content_type\' at row 1")',)
+2025-10-30 21:20:45,973 | ERROR | src.app.middlewares.error_handler | Database error: (pymysql.err.DataError) (1265, "Data truncated for column 'content_type' at row 1")
+[SQL: INSERT INTO documents (agent_id, file_name, content_type) VALUES (%s, %s, %s)]
+[parameters: ('pppp', 'Khaerul Lutfi.pdf', 'application/pdf')]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 951, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 192, in execute
+    self._adapt_connection._handle_exception(error)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 330, in _handle_exception
+    raise error.with_traceback(exc_info[2])
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 190, in execute
+    return self.await_(self._execute_async(operation, parameters))
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 213, in _execute_async
+    result = await self._cursor.execute(operation, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 239, in execute
+    await self._query(query)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 457, in _query
+    await conn.query(q)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 469, in query
+    await self._read_query_result(unbuffered=unbuffered)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 683, in _read_query_result
+    await result.read()
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 1164, in read
+    first_packet = await self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 652, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.DataError: (1265, "Data truncated for column 'content_type' at row 1")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\routes\simple_rag_route.py", line 47, in test
+    document = await controller.test(agent_id, file)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\controllers\simple_rag_controller.py", line 42, in test
+    document_process = await self.user_service.test(agent_id, file)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\domain\service\simple_rag_agent_service.py", line 36, in test
+    self.handle_unexpected_error("Document process", e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\domain\service\simple_rag_agent_service.py", line 30, in test
+    raise get_exception
+  File "D:\Saas_Project\Backend\src\domain\use_cases\agent\document\uploaded_document.py", line 51, in execute
+    add_document = await self.document_repository.add_document(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\repositories\document_repository.py", line 16, in add_document
+    await self.db.flush()
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\ext\asyncio\session.py", line 801, in flush
+    await greenlet_spawn(self.sync_session.flush, objects=objects)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 203, in greenlet_spawn
+    result = context.switch(value)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4345, in flush
+    self._flush(objects)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4480, in _flush
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4441, in _flush
+    flush_context.execute()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+    ~~~~~~~~~~~^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.mapper,
+        ^^^^^^^^^^^^
+        uow.states_for_mapper_hierarchy(self.mapper, False, False),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        uow,
+        ^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        base_mapper,
+        ^^^^^^^^^^^^
+    ...<3 lines>...
+        insert,
+        ^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+        statement,
+        params,
+        execution_options=execution_options,
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 951, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 192, in execute
+    self._adapt_connection._handle_exception(error)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 330, in _handle_exception
+    raise error.with_traceback(exc_info[2])
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 190, in execute
+    return self.await_(self._execute_async(operation, parameters))
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 213, in _execute_async
+    result = await self._cursor.execute(operation, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 239, in execute
+    await self._query(query)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 457, in _query
+    await conn.query(q)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 469, in query
+    await self._read_query_result(unbuffered=unbuffered)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 683, in _read_query_result
+    await result.read()
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 1164, in read
+    first_packet = await self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 652, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.DataError: (pymysql.err.DataError) (1265, "Data truncated for column 'content_type' at row 1")
+[SQL: INSERT INTO documents (agent_id, file_name, content_type) VALUES (%s, %s, %s)]
+[parameters: ('pppp', 'Khaerul Lutfi.pdf', 'application/pdf')]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2025-10-30 21:26:47,726 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-10-30 21:26:47,728 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-10-30 21:26:47,729 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-10-30 21:26:47,731 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-30 21:26:48,094 | INFO | src.config.database | Database tables created successfully
+2025-10-30 21:26:48,096 | INFO | main | Database tables initialized
+2025-10-30 21:26:48,190 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-30 21:26:48,192 | INFO | main | Redis event bus started
+2025-10-30 21:27:01,752 | INFO | src.core.utils.save_file | Created directory: documents/user_1/agent_pppp
+2025-10-30 21:27:01,786 | INFO | src.core.utils.save_file | Saved file: documents/user_1/agent_pppp\Khaerul Lutfi.pdf (type: pdf)
+2025-10-30 21:27:02,215 | ERROR | src.domain.service.simple_rag_agent_service | Unexpected error during Document process: (pymysql.err.IntegrityError) (1452, 'Cannot add or update a child row: a foreign key constraint fails (`saas`.`documents`, CONSTRAINT `documents_ibfk_1` FOREIGN KEY (`agent_id`) REFERENCES `agents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)')
+[SQL: INSERT INTO documents (agent_id, file_name, content_type) VALUES (%s, %s, %s)]
+[parameters: ('pppp', 'Khaerul Lutfi.pdf', 'pdf')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-10-30 21:27:02,224 | ERROR | src.domain.service.simple_rag_agent_service | Exception type: IntegrityError
+2025-10-30 21:27:02,259 | ERROR | src.domain.service.simple_rag_agent_service | Exception args: ("(pymysql.err.IntegrityError) (1452, 'Cannot add or update a child row: a foreign key constraint fails (`saas`.`documents`, CONSTRAINT `documents_ibfk_1` FOREIGN KEY (`agent_id`) REFERENCES `agents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)')",)
+2025-10-30 21:27:02,366 | ERROR | src.app.middlewares.error_handler | Database error: (pymysql.err.IntegrityError) (1452, 'Cannot add or update a child row: a foreign key constraint fails (`saas`.`documents`, CONSTRAINT `documents_ibfk_1` FOREIGN KEY (`agent_id`) REFERENCES `agents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)')
+[SQL: INSERT INTO documents (agent_id, file_name, content_type) VALUES (%s, %s, %s)]
+[parameters: ('pppp', 'Khaerul Lutfi.pdf', 'pdf')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 951, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 192, in execute
+    self._adapt_connection._handle_exception(error)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 330, in _handle_exception
+    raise error.with_traceback(exc_info[2])
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 190, in execute
+    return self.await_(self._execute_async(operation, parameters))
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 213, in _execute_async
+    result = await self._cursor.execute(operation, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 239, in execute
+    await self._query(query)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 457, in _query
+    await conn.query(q)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 469, in query
+    await self._read_query_result(unbuffered=unbuffered)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 683, in _read_query_result
+    await result.read()
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 1164, in read
+    first_packet = await self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 652, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.IntegrityError: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`saas`.`documents`, CONSTRAINT `documents_ibfk_1` FOREIGN KEY (`agent_id`) REFERENCES `agents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\routes\simple_rag_route.py", line 47, in test
+    document = await controller.test(agent_id, file)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\controllers\simple_rag_controller.py", line 42, in test
+    document_process = await self.user_service.test(agent_id, file)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\domain\service\simple_rag_agent_service.py", line 36, in test
+    self.handle_unexpected_error("Document process", e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\domain\service\simple_rag_agent_service.py", line 30, in test
+    raise get_exception
+  File "D:\Saas_Project\Backend\src\domain\use_cases\agent\document\uploaded_document.py", line 53, in execute
+    add_document = await self.document_repository.add_document(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\repositories\document_repository.py", line 16, in add_document
+    await self.db.flush()
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\ext\asyncio\session.py", line 801, in flush
+    await greenlet_spawn(self.sync_session.flush, objects=objects)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 203, in greenlet_spawn
+    result = context.switch(value)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4345, in flush
+    self._flush(objects)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4480, in _flush
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4441, in _flush
+    flush_context.execute()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+    ~~~~~~~~~~~^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.mapper,
+        ^^^^^^^^^^^^
+        uow.states_for_mapper_hierarchy(self.mapper, False, False),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        uow,
+        ^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        base_mapper,
+        ^^^^^^^^^^^^
+    ...<3 lines>...
+        insert,
+        ^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+        statement,
+        params,
+        execution_options=execution_options,
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 951, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 192, in execute
+    self._adapt_connection._handle_exception(error)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 330, in _handle_exception
+    raise error.with_traceback(exc_info[2])
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 190, in execute
+    return self.await_(self._execute_async(operation, parameters))
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 213, in _execute_async
+    result = await self._cursor.execute(operation, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 239, in execute
+    await self._query(query)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 457, in _query
+    await conn.query(q)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 469, in query
+    await self._read_query_result(unbuffered=unbuffered)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 683, in _read_query_result
+    await result.read()
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 1164, in read
+    first_packet = await self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 652, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.IntegrityError: (pymysql.err.IntegrityError) (1452, 'Cannot add or update a child row: a foreign key constraint fails (`saas`.`documents`, CONSTRAINT `documents_ibfk_1` FOREIGN KEY (`agent_id`) REFERENCES `agents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)')
+[SQL: INSERT INTO documents (agent_id, file_name, content_type) VALUES (%s, %s, %s)]
+[parameters: ('pppp', 'Khaerul Lutfi.pdf', 'pdf')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-10-30 21:28:09,639 | INFO | src.domain.service.agent_service | [request_id=fb9cf569-709d-4cb3-b4f3-31c64c6ad655] [user=khaerul@gmail.com] admin getting all agents paginate
+2025-10-30 21:28:24,459 | INFO | src.core.utils.save_file | Created directory: documents/user_1/agent_00913
+2025-10-30 21:28:24,506 | INFO | src.core.utils.save_file | Saved file: documents/user_1/agent_00913\Khaerul Lutfi.pdf (type: pdf)
+2025-10-30 21:30:09,775 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-10-30 21:30:09,779 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-10-30 21:30:09,786 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-10-30 21:30:09,808 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-30 21:30:10,715 | INFO | src.config.database | Database tables created successfully
+2025-10-30 21:30:10,719 | INFO | main | Database tables initialized
+2025-10-30 21:30:10,799 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-30 21:30:10,801 | INFO | main | Redis event bus started
+2025-10-30 21:30:20,934 | INFO | src.core.utils.save_file | Created directory: documents/user_1/agent_0091
+2025-10-30 21:30:20,965 | INFO | src.core.utils.save_file | Saved file: documents/user_1/agent_0091\Khaerul Lutfi.pdf (type: pdf)
+2025-10-30 21:30:21,285 | INFO | src.core.utils.save_file | Rollback: Removed file documents/user_1/agent_0091\Khaerul Lutfi.pdf
+2025-10-30 21:30:21,299 | ERROR | src.domain.service.simple_rag_agent_service | Unexpected error during Document process: (pymysql.err.IntegrityError) (1452, 'Cannot add or update a child row: a foreign key constraint fails (`saas`.`documents`, CONSTRAINT `documents_ibfk_1` FOREIGN KEY (`agent_id`) REFERENCES `agents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)')
+[SQL: INSERT INTO documents (agent_id, file_name, content_type) VALUES (%s, %s, %s)]
+[parameters: ('0091', 'Khaerul Lutfi.pdf', 'pdf')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-10-30 21:30:21,687 | ERROR | src.domain.service.simple_rag_agent_service | Exception type: IntegrityError
+2025-10-30 21:30:21,766 | ERROR | src.domain.service.simple_rag_agent_service | Exception args: ("(pymysql.err.IntegrityError) (1452, 'Cannot add or update a child row: a foreign key constraint fails (`saas`.`documents`, CONSTRAINT `documents_ibfk_1` FOREIGN KEY (`agent_id`) REFERENCES `agents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)')",)
+2025-10-30 21:30:22,622 | ERROR | src.app.middlewares.error_handler | Database error: (pymysql.err.IntegrityError) (1452, 'Cannot add or update a child row: a foreign key constraint fails (`saas`.`documents`, CONSTRAINT `documents_ibfk_1` FOREIGN KEY (`agent_id`) REFERENCES `agents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)')
+[SQL: INSERT INTO documents (agent_id, file_name, content_type) VALUES (%s, %s, %s)]
+[parameters: ('0091', 'Khaerul Lutfi.pdf', 'pdf')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 951, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 192, in execute
+    self._adapt_connection._handle_exception(error)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 330, in _handle_exception
+    raise error.with_traceback(exc_info[2])
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 190, in execute
+    return self.await_(self._execute_async(operation, parameters))
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 213, in _execute_async
+    result = await self._cursor.execute(operation, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 239, in execute
+    await self._query(query)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 457, in _query
+    await conn.query(q)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 469, in query
+    await self._read_query_result(unbuffered=unbuffered)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 683, in _read_query_result
+    await result.read()
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 1164, in read
+    first_packet = await self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 652, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.IntegrityError: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`saas`.`documents`, CONSTRAINT `documents_ibfk_1` FOREIGN KEY (`agent_id`) REFERENCES `agents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\routes\simple_rag_route.py", line 47, in test
+    document = await controller.test(agent_id, file)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\controllers\simple_rag_controller.py", line 42, in test
+    document_process = await self.user_service.test(agent_id, file)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\domain\service\simple_rag_agent_service.py", line 36, in test
+    self.handle_unexpected_error("Document process", e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\domain\service\simple_rag_agent_service.py", line 30, in test
+    raise get_exception
+  File "D:\Saas_Project\Backend\src\domain\use_cases\agent\document\uploaded_document.py", line 53, in execute
+    add_document = await self.document_repository.add_document(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\repositories\document_repository.py", line 16, in add_document
+    await self.db.flush()
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\ext\asyncio\session.py", line 801, in flush
+    await greenlet_spawn(self.sync_session.flush, objects=objects)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 203, in greenlet_spawn
+    result = context.switch(value)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4345, in flush
+    self._flush(objects)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4480, in _flush
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4441, in _flush
+    flush_context.execute()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+    ~~~~~~~~~~~^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.mapper,
+        ^^^^^^^^^^^^
+        uow.states_for_mapper_hierarchy(self.mapper, False, False),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        uow,
+        ^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        base_mapper,
+        ^^^^^^^^^^^^
+    ...<3 lines>...
+        insert,
+        ^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+        statement,
+        params,
+        execution_options=execution_options,
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 951, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 192, in execute
+    self._adapt_connection._handle_exception(error)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 330, in _handle_exception
+    raise error.with_traceback(exc_info[2])
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 190, in execute
+    return self.await_(self._execute_async(operation, parameters))
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 213, in _execute_async
+    result = await self._cursor.execute(operation, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 239, in execute
+    await self._query(query)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 457, in _query
+    await conn.query(q)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 469, in query
+    await self._read_query_result(unbuffered=unbuffered)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 683, in _read_query_result
+    await result.read()
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 1164, in read
+    first_packet = await self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 652, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.IntegrityError: (pymysql.err.IntegrityError) (1452, 'Cannot add or update a child row: a foreign key constraint fails (`saas`.`documents`, CONSTRAINT `documents_ibfk_1` FOREIGN KEY (`agent_id`) REFERENCES `agents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)')
+[SQL: INSERT INTO documents (agent_id, file_name, content_type) VALUES (%s, %s, %s)]
+[parameters: ('0091', 'Khaerul Lutfi.pdf', 'pdf')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-10-31 20:15:24,432 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-10-31 20:15:24,435 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-10-31 20:15:24,436 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-10-31 20:15:24,437 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-31 20:15:25,570 | INFO | src.config.database | Database tables created successfully
+2025-10-31 20:15:25,573 | INFO | main | Database tables initialized
+2025-10-31 20:15:29,630 | ERROR | main | Error during startup: Error 22 connecting to localhost:6379. The remote computer refused the network connection.
+2025-10-31 20:19:06,905 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-10-31 20:19:06,922 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-10-31 20:19:06,932 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-10-31 20:19:06,938 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-31 20:19:07,684 | INFO | src.config.database | Database tables created successfully
+2025-10-31 20:19:07,689 | INFO | main | Database tables initialized
+2025-10-31 20:19:07,763 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-31 20:19:07,766 | INFO | main | Redis event bus started
+2025-10-31 20:21:03,853 | INFO | app.controllers | User is authenticated: email khaerul@gmail.com
+2025-10-31 20:21:15,474 | INFO | src.domain.service.agent_service | [request_id=a5d13b40-5104-41b0-9443-6fbb2bdfd52e] [user=khaerul@gmail.com] admin getting all agents paginate
+2025-10-31 20:21:43,951 | INFO | src.core.utils.save_file | Created directory: documents/user_1/agent_00913
+2025-10-31 20:21:43,959 | INFO | src.core.utils.save_file | Saved file: documents/user_1/agent_00913\Khaerul Lutfi.pdf (type: pdf)
+2025-10-31 20:21:44,037 | INFO | src.core.utils.save_file | Rollback: Removed file documents/user_1/agent_00913\Khaerul Lutfi.pdf
+2025-10-31 20:21:44,048 | ERROR | src.domain.service.simple_rag_agent_service | Unexpected error during Document process: UploadedDocumentOutput.__init__() missing 1 required positional argument: 'directory_path'
+2025-10-31 20:21:44,049 | ERROR | src.domain.service.simple_rag_agent_service | Exception type: TypeError
+2025-10-31 20:21:44,050 | ERROR | src.domain.service.simple_rag_agent_service | Exception args: ("UploadedDocumentOutput.__init__() missing 1 required positional argument: 'directory_path'",)
+2025-10-31 20:21:44,059 | ERROR | src.app.middlewares.error_handler | Unexpected error: UploadedDocumentOutput.__init__() missing 1 required positional argument: 'directory_path'
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\routes\simple_rag_route.py", line 47, in test
+    document = await controller.test(agent_id, file)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\controllers\simple_rag_controller.py", line 42, in test
+    document_process = await self.user_service.test(agent_id, file)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\domain\service\simple_rag_agent_service.py", line 57, in test
+    self.handle_unexpected_error("Document process", e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\domain\service\simple_rag_agent_service.py", line 43, in test
+    raise get_exception
+  File "D:\Saas_Project\Backend\src\domain\use_cases\agent\document\uploaded_document.py", line 61, in execute
+    UploadedDocumentOutput(
+    ~~~~~~~~~~~~~~~~~~~~~~^
+        document_id=add_document.id,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        content_type=content_type,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+TypeError: UploadedDocumentOutput.__init__() missing 1 required positional argument: 'directory_path'
+2025-10-31 20:23:44,298 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-10-31 20:23:44,407 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-10-31 20:23:44,495 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-10-31 20:23:44,522 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-10-31 20:23:45,346 | INFO | src.config.database | Database tables created successfully
+2025-10-31 20:23:45,351 | INFO | main | Database tables initialized
+2025-10-31 20:23:45,435 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-10-31 20:23:45,437 | INFO | main | Redis event bus started
+2025-10-31 20:24:05,179 | INFO | src.core.utils.save_file | Created directory: documents/user_1/agent_00913
+2025-10-31 20:24:05,183 | INFO | src.core.utils.save_file | Saved file: documents/user_1/agent_00913\Khaerul Lutfi.pdf (type: pdf)
+2025-10-31 20:24:07,024 | INFO | src.infrastructure.vector_store.chroma_db | Successfully loaded document: Khaerul Lutfi.pdf
+2025-11-01 11:49:30,169 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-01 11:49:30,171 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-01 11:49:30,172 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-01 11:49:30,173 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-01 11:49:31,572 | INFO | src.config.database | Database tables created successfully
+2025-11-01 11:49:31,577 | INFO | main | Database tables initialized
+2025-11-01 11:49:35,642 | ERROR | main | Error during startup: Error 22 connecting to localhost:6379. The remote computer refused the network connection.
+2025-11-01 11:51:38,954 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-01 11:51:38,956 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-01 11:51:38,958 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-01 11:51:38,959 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-01 11:51:39,722 | INFO | src.config.database | Database tables created successfully
+2025-11-01 11:51:39,731 | INFO | main | Database tables initialized
+2025-11-01 11:51:39,785 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-01 11:51:39,787 | INFO | main | Redis event bus started
+2025-11-01 11:53:30,179 | INFO | app.controllers | User is authenticated: email khaerul@gmail.com
+2025-11-01 11:56:56,773 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-01 11:56:56,775 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-01 11:56:56,781 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-01 11:56:56,785 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-01 11:56:57,850 | INFO | src.config.database | Database tables created successfully
+2025-11-01 11:56:57,855 | INFO | main | Database tables initialized
+2025-11-01 11:56:58,144 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-01 11:56:58,146 | INFO | main | Redis event bus started
+2025-11-01 11:57:14,099 | ERROR | src.domain.service.simple_rag_agent_service | Error while creating simple rag agent: Unexpected error while create agent entity: AgentRepository.create_agent() got an unexpected keyword argument 'name'
+2025-11-01 11:57:14,102 | ERROR | src.domain.service.simple_rag_agent_service | Unexpected error while create simple rag agent: AgentRepository.create_agent() got an unexpected keyword argument 'name'
+2025-11-01 11:57:14,106 | ERROR | src.app.middlewares.error_handler | Unexpected error: AgentRepository.create_agent() got an unexpected keyword argument 'name'
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\slowapi\extension.py", line 734, in async_wrapper
+    response = await func(*args, **kwargs)  # type: ignore
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\routes\simple_rag_route.py", line 93, in createSimpleRAGAgent
+    agent = await controller.create_agent(parsed_data, file)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\controllers\simple_rag_controller.py", line 85, in create_agent
+    raise e
+  File "D:\Saas_Project\Backend\src\app\controllers\simple_rag_controller.py", line 63, in create_agent
+    await self.simple_rag_agent_service.create_simple_rag_agent(
+        agent_data, file
+    )
+  File "D:\Saas_Project\Backend\src\domain\service\simple_rag_agent_service.py", line 69, in create_simple_rag_agent
+    raise e
+  File "D:\Saas_Project\Backend\src\domain\service\simple_rag_agent_service.py", line 61, in create_simple_rag_agent
+    raise get_exception
+  File "D:\Saas_Project\Backend\src\domain\use_cases\agent\create_agent_entity.py", line 53, in execute
+    agent_entity = await self.agent_repository.create_agent(
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        input_data.user_id, **input_data.agent_data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+TypeError: AgentRepository.create_agent() got an unexpected keyword argument 'name'
+2025-11-01 12:02:15,425 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-01 12:02:15,427 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-01 12:02:15,428 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-01 12:02:15,429 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-01 12:02:15,942 | INFO | src.config.database | Database tables created successfully
+2025-11-01 12:02:15,945 | INFO | main | Database tables initialized
+2025-11-01 12:02:16,024 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-01 12:02:16,028 | INFO | main | Redis event bus started
+2025-11-01 12:02:35,444 | ERROR | src.domain.service.simple_rag_agent_service | Error while creating simple rag agent: Unexpected error while create agent entity: AgentRepository.create_agent() got an unexpected keyword argument 'name'
+2025-11-01 12:02:35,451 | ERROR | src.domain.service.simple_rag_agent_service | Unexpected error while create simple rag agent: AgentRepository.create_agent() got an unexpected keyword argument 'name'
+2025-11-01 12:02:35,454 | ERROR | src.app.middlewares.error_handler | Unexpected error: AgentRepository.create_agent() got an unexpected keyword argument 'name'
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\slowapi\extension.py", line 734, in async_wrapper
+    response = await func(*args, **kwargs)  # type: ignore
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\routes\simple_rag_route.py", line 93, in createSimpleRAGAgent
+    agent = await controller.create_agent(parsed_data, file)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\controllers\simple_rag_controller.py", line 85, in create_agent
+    raise e
+  File "D:\Saas_Project\Backend\src\app\controllers\simple_rag_controller.py", line 63, in create_agent
+    await self.simple_rag_agent_service.create_simple_rag_agent(
+        agent_data, file
+    )
+  File "D:\Saas_Project\Backend\src\domain\service\simple_rag_agent_service.py", line 70, in create_simple_rag_agent
+    raise e
+  File "D:\Saas_Project\Backend\src\domain\service\simple_rag_agent_service.py", line 62, in create_simple_rag_agent
+    raise get_exception
+  File "D:\Saas_Project\Backend\src\domain\use_cases\agent\create_agent_entity.py", line 53, in execute
+    agent_entity = await self.agent_repository.create_agent(
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        input_data.user_id, **input_data.agent_data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+TypeError: AgentRepository.create_agent() got an unexpected keyword argument 'name'
+2025-11-01 12:17:01,777 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-01 12:17:01,779 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-01 12:17:01,781 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-01 12:17:01,782 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-01 12:17:02,362 | INFO | src.config.database | Database tables created successfully
+2025-11-01 12:17:02,367 | INFO | main | Database tables initialized
+2025-11-01 12:17:02,528 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-01 12:17:02,537 | INFO | main | Redis event bus started
+2025-11-01 12:17:35,640 | ERROR | src.domain.service.simple_rag_agent_service | Error while creating simple rag agent: unexpected error while create simple rag agent: cannot access local variable 'file_path' where it is not associated with a value
+2025-11-01 12:17:35,748 | ERROR | src.domain.service.simple_rag_agent_service | Unexpected error while create simple rag agent: cannot access local variable 'file_path' where it is not associated with a value
+2025-11-01 12:17:35,981 | ERROR | src.app.middlewares.error_handler | Unexpected error: cannot access local variable 'file_path' where it is not associated with a value
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\slowapi\extension.py", line 734, in async_wrapper
+    response = await func(*args, **kwargs)  # type: ignore
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\routes\simple_rag_route.py", line 93, in createSimpleRAGAgent
+    agent = await controller.create_agent(parsed_data, file)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\controllers\simple_rag_controller.py", line 85, in create_agent
+    raise e
+  File "D:\Saas_Project\Backend\src\app\controllers\simple_rag_controller.py", line 63, in create_agent
+    await self.simple_rag_agent_service.create_simple_rag_agent(
+        agent_data, file
+    )
+  File "D:\Saas_Project\Backend\src\domain\service\simple_rag_agent_service.py", line 72, in create_simple_rag_agent
+    raise e
+  File "D:\Saas_Project\Backend\src\domain\service\simple_rag_agent_service.py", line 62, in create_simple_rag_agent
+    raise get_exception
+  File "D:\Saas_Project\Backend\src\domain\use_cases\agent\simple_rag\create_simple_rag_agent.py", line 57, in execute
+    document_process = await self.uploaded_document_handler.execute(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        UploadedDocumentInput(input_data.user_id, agent_id, input_data.file)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\use_cases\agent\document\uploaded_document.py", line 74, in execute
+    self.save_file.cleanup_file_on_error(file_path)
+                                         ^^^^^^^^^
+UnboundLocalError: cannot access local variable 'file_path' where it is not associated with a value
+2025-11-01 12:20:28,288 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-01 12:20:28,290 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-01 12:20:28,291 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-01 12:20:28,292 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-01 12:20:28,674 | INFO | src.config.database | Database tables created successfully
+2025-11-01 12:20:28,677 | INFO | main | Database tables initialized
+2025-11-01 12:20:28,748 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-01 12:20:28,752 | INFO | main | Redis event bus started
+2025-11-01 12:20:45,127 | ERROR | src.domain.service.simple_rag_agent_service | Error while creating simple rag agent: Unexpected error in uploaded document handler: 'NoneType' object has no attribute 'read'
+2025-11-01 12:20:45,163 | ERROR | src.domain.service.simple_rag_agent_service | Unexpected error while create simple rag agent: 'NoneType' object has no attribute 'read'
+2025-11-01 12:20:45,213 | ERROR | src.app.middlewares.error_handler | Unexpected error: 'NoneType' object has no attribute 'read'
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\slowapi\extension.py", line 734, in async_wrapper
+    response = await func(*args, **kwargs)  # type: ignore
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\routes\simple_rag_route.py", line 93, in createSimpleRAGAgent
+    agent = await controller.create_agent(parsed_data, file)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\controllers\simple_rag_controller.py", line 85, in create_agent
+    raise e
+  File "D:\Saas_Project\Backend\src\app\controllers\simple_rag_controller.py", line 63, in create_agent
+    await self.simple_rag_agent_service.create_simple_rag_agent(
+        agent_data, file
+    )
+  File "D:\Saas_Project\Backend\src\domain\service\simple_rag_agent_service.py", line 72, in create_simple_rag_agent
+    raise e
+  File "D:\Saas_Project\Backend\src\domain\service\simple_rag_agent_service.py", line 62, in create_simple_rag_agent
+    raise get_exception
+  File "D:\Saas_Project\Backend\src\domain\use_cases\agent\document\uploaded_document.py", line 42, in execute
+    file_hex = await self.save_file.convert_to_hex(input_data.file)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\core\utils\save_file.py", line 25, in convert_to_hex
+    file_content = await file.read()
+                         ^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'read'
+2025-11-01 12:25:12,270 | INFO | src.core.utils.save_file | Created directory: documents/user_1/agent_hA045
+2025-11-01 12:25:12,305 | INFO | src.core.utils.save_file | Saved file: documents/user_1/agent_hA045\Khaerul_lutfi.pdf (type: pdf)
+2025-11-01 12:25:17,324 | INFO | src.infrastructure.vector_store.chroma_db | Successfully loaded document: Khaerul_lutfi.pdf
+2025-11-01 12:32:16,349 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-01 12:32:16,352 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-01 12:32:16,353 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-01 12:32:16,355 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-01 12:32:16,934 | INFO | src.config.database | Database tables created successfully
+2025-11-01 12:32:16,938 | INFO | main | Database tables initialized
+2025-11-01 12:32:17,070 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-01 12:32:17,082 | INFO | main | Redis event bus started
+2025-11-01 12:33:25,238 | INFO | main | Redis event bus stopped
+2025-11-01 15:08:40,965 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-01 15:08:40,977 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-01 15:08:40,978 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-01 15:08:40,978 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-01 15:08:43,865 | INFO | src.config.database | Database tables created successfully
+2025-11-01 15:08:43,871 | INFO | main | Database tables initialized
+2025-11-01 15:08:44,106 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-01 15:08:44,113 | INFO | main | Redis event bus started
+2025-11-01 15:08:46,479 | INFO | main | Redis event bus stopped
+2025-11-01 19:58:49,659 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-01 19:58:49,690 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-01 19:58:49,691 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-01 19:58:49,693 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-01 19:58:51,290 | INFO | src.config.database | Database tables created successfully
+2025-11-01 19:58:51,295 | INFO | main | Database tables initialized
+2025-11-01 19:58:51,339 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-01 19:58:51,341 | INFO | main | Redis event bus started
+2025-11-01 19:59:39,621 | WARNING | src.app.middlewares.auth_middleware | Access attempt without token
+2025-11-01 19:59:51,692 | INFO | app.controllers | User is authenticated: email khaerul@gmail.com
+2025-11-01 20:00:23,871 | ERROR | src.app.middlewares.error_handler | Unexpected error: CreateSimpleRagAgent.__init__() missing 1 required positional argument: 'store_agent_obj'
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\slowapi\extension.py", line 734, in async_wrapper
+    response = await func(*args, **kwargs)  # type: ignore
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\routes\simple_rag_route.py", line 92, in createSimpleRAGAgent
+    controller = SimpleRAGController(db, request)
+  File "D:\Saas_Project\Backend\src\app\controllers\simple_rag_controller.py", line 42, in __init__
+    self.simple_rag_agent_service = SimpleRagAgentService(db, request)
+                                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\domain\service\simple_rag_agent_service.py", line 36, in __init__
+    self.create_simple_rag_handler = CreateSimpleRagAgent(
+                                     ~~~~~~~~~~~~~~~~~~~~^
+        self.uploaded_document_handler,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.add_document_to_agent,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.create_agent_entity,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+TypeError: CreateSimpleRagAgent.__init__() missing 1 required positional argument: 'store_agent_obj'
+2025-11-01 20:05:06,603 | INFO | main | Redis event bus stopped
+2025-11-01 20:05:31,479 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-01 20:05:31,481 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-01 20:05:31,481 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-01 20:05:31,482 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-01 20:05:32,228 | INFO | src.config.database | Database tables created successfully
+2025-11-01 20:05:32,232 | INFO | main | Database tables initialized
+2025-11-01 20:05:32,388 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-01 20:05:32,393 | INFO | main | Redis event bus started
+2025-11-01 20:05:50,172 | INFO | src.infrastructure.redis.redis_storage | Agent vO924 stored in Redis
+2025-11-01 20:06:05,256 | INFO | main | Redis event bus stopped
+2025-11-01 20:06:37,822 | INFO | src.infrastructure.redis.redis_storage | Agent vO924 retrieved from Redis

@@ -13,23 +13,23 @@ from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 from app.AI import customer_service as CustomerServiceAI
-from app.AI import simple_RAG_agent as SimpleRAGAI
+from infrastructure.ai import simple_rag_agent as SimpleRAGAI
 from app.controllers.document_controller import agents
-from app.dependencies.redis_storage import redis_storage
-from app.models.agent.agent_entity import Agent
+from src.infrastructure.redis.redis_storage import redis_storage
+from src.domain.models.agent_entity import Agent
 from app.models.agent.simple_rag_model import CreateSimpleRAGAgent
-from app.models.company_information.company_entity import CompanyInformation
+from src.domain.models.company_entity import CompanyInformation
 from app.models.company_information.company_model import CreateCompanyInformation
-from app.models.document.document_entity import Document
-from app.models.history_message.history_entity import HistoryMessage
-from app.models.history_message.metadata_entity import Metadata
-from app.models.integration.integration_entity import Integration
-from app.models.platform.platform_entity import Platform
-from app.models.user.api_key_entity import ApiKey
-from app.models.user.user_entity import User
-from app.models.user_agent.user_agent_entity import UserAgent
-from app.core.logger import get_logger
-from app.websocket.manager import ws_manager
+from src.domain.models.document_entity import Document
+from src.domain.models.history_entity import HistoryMessage
+from src.domain.models.metadata_entity import Metadata
+from src.domain.models.integration_entity import Integration
+from src.domain.models.platform_entity import Platform
+from src.domain.models.api_key_entity import ApiKey
+from src.domain.models.user_entity import User
+from src.domain.models.user_agent_entity import UserAgent
+from src.core.utils.logger import get_logger
+from src.infrastructure.websocket.manager import ws_manager
 
 logger = get_logger(__name__)
 
@@ -322,7 +322,7 @@ def add_document_to_agent(
     """
 
     agent_id_str = str(agent_id)
-    from app.AI.document_store.RAG import RAGSystem
+    from infrastructure.vector_store.chroma_db import RAGSystem
 
     rag = RAGSystem(
         chroma_directiory="chroma_db", collection_name=f"agent_{agent_id_str}"
@@ -522,7 +522,7 @@ def generate_api_key(db: Session, user_id: int, agent_id: str) -> str:
     Returns:
         str: Generated API key
     """
-    from app.models.user.api_key_entity import ApiKey
+    from src.domain.models.api_key_entity import ApiKey
 
     # Generate a secure random API key
     alphabet = string.ascii_letters + string.digits
@@ -555,7 +555,7 @@ def validate_api_key(api_key: str, db: Session, agent_id: str) -> bool:
     Returns:
         bool: True if API key is valid, False otherwise
     """
-    from app.models.user.api_key_entity import ApiKey
+    from src.domain.models.api_key_entity import ApiKey
 
     try:
         # ORM validation: match api_key and agent_id, and not expired

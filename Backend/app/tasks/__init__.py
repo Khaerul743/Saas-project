@@ -1,6 +1,6 @@
 from celery import Celery
 
-from app.configs.config import settings
+from src.config.config import settings
 
 celery_app = Celery(
     "saas_backend",

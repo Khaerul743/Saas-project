@@ -2,11 +2,11 @@ from typing import Optional, List
 
 from sqlalchemy.orm import Session
 
-from app.configs.database import SessionLocal
-from app.events.loop_manager import run_async
-from app.events.redis_event import Event, EventType, event_bus
+from src.config.database import SessionLocal
+from src.core.utils.loop_manager import run_async
+from src.domain.events.redis_event import Event, EventType, event_bus
 from app.tasks import celery_app
-from app.core.logger import get_logger
+from src.core.utils.logger import get_logger
 from app.utils.event_utils import publish_agent_event
 from app.utils.agent_utils import (
     add_document_to_agent,
@@ -21,20 +21,20 @@ from app.utils.file_utils import (
 )
 
 from app.utils.file_utils import create_agent_directory
-from app.models.document.document_entity import Document
+from src.domain.models.document_entity import Document
 from app.models.agent.simple_rag_model import CreateSimpleRAGAgent
-from app.models.agent.agent_entity import Agent
-from app.models.company_information.company_entity import CompanyInformation  # noqa: F401
-from app.models.document.document_entity import Document  # noqa: F401
-from app.models.history_message.history_entity import HistoryMessage  # noqa: F401
-from app.models.history_message.metadata_entity import Metadata  # noqa: F401
-from app.models.integration.integration_entity import Integration  # noqa: F401
-from app.models.platform.platform_entity import Platform  # noqa: F401
-from app.models.user.api_key_entity import ApiKey  # noqa: F401
-from app.models.user.user_entity import User  # noqa: F401
-from app.models.user_agent.user_agent_entity import UserAgent  # noqa: F401
-from app.dependencies.redis_storage import redis_storage
-from app.events.loop_manager import run_async
+from src.domain.models.agent_entity import Agent
+from src.domain.models.company_entity import CompanyInformation  # noqa: F401
+from src.domain.models.document_entity import Document  # noqa: F401
+from src.domain.models.history_entity import HistoryMessage  # noqa: F401
+from src.domain.models.metadata_entity import Metadata  # noqa: F401
+from src.domain.models.integration_entity import Integration  # noqa: F401
+from src.domain.models.platform_entity import Platform  # noqa: F401
+from src.domain.models.api_key_entity import ApiKey  # noqa: F401
+from src.domain.models.user_entity import User  # noqa: F401
+from src.domain.models.user_agent_entity import UserAgent  # noqa: F401
+from src.infrastructure.redis.redis_storage import redis_storage
+from src.core.utils.loop_manager import run_async
 
 
 logger = get_logger(__name__)
@@ -320,7 +320,7 @@ def create_customer_service_agent_task(
             EventType.AGENT_CREATION_PROGRESS, user_id, agent_data_obj.id, progress
         )
 
-        from app.models.company_information.company_entity import CompanyInformation
+        from src.domain.models.company_entity import CompanyInformation
 
         new_company_information = CompanyInformation(
             agent_id=agent_data_obj.id,

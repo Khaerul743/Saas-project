@@ -1,8 +1,8 @@
 from fastapi import HTTPException, status
 from sqlalchemy.exc import SQLAlchemyError
 
-from app.core.logger import get_logger
-from app.exceptions.database_exceptions import DatabaseException
+from src.core.utils.logger import get_logger
+from src.core.exceptions.database_exceptions import DatabaseException
 
 
 class BaseController:

@@ -7,10 +7,10 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from starlette.concurrency import run_in_threadpool
 
-from app.AI import simple_RAG_agent as AI
-from app.models.agent.agent_entity import Agent
-from app.models.document.document_entity import Document
-from app.core.logger import get_logger
+from infrastructure.ai import simple_rag_agent as AI
+from src.domain.models.agent_entity import Agent
+from src.domain.models.document_entity import Document
+from src.core.utils.logger import get_logger
 from app.utils.validation_utils import validate_agent_exists_and_owned
 
 logger = get_logger(__name__)

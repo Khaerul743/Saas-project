@@ -3,13 +3,13 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, joinedload
 
 from app.controllers.document_controller import agents
-from app.models.history_message.history_entity import HistoryMessage
-from app.models.history_message.metadata_entity import Metadata
-from app.models.integration.integration_entity import Integration
-from app.models.platform.platform_entity import Platform
-from app.models.user_agent.user_agent_entity import UserAgent
+from src.domain.models.history_entity import HistoryMessage
+from src.domain.models.metadata_entity import Metadata
+from src.domain.models.integration_entity import Integration
+from src.domain.models.platform_entity import Platform
+from src.domain.models.user_agent_entity import UserAgent
 from app.services.telegram import send_message
-from app.core.logger import get_logger
+from src.core.utils.logger import get_logger
 from app.utils.message_utils import safe_message_length
 from app.utils.agent_utils import validate_api_key
 from app.utils.agent_utils import invoke_agent_logic
