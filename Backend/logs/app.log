@@ -7209,3 +7209,18 @@ TypeError: CreateSimpleRagAgent.__init__() missing 1 required positional argumen
 2025-11-01 20:05:50,172 | INFO | src.infrastructure.redis.redis_storage | Agent vO924 stored in Redis
 2025-11-01 20:06:05,256 | INFO | main | Redis event bus stopped
 2025-11-01 20:06:37,822 | INFO | src.infrastructure.redis.redis_storage | Agent vO924 retrieved from Redis
+2025-11-02 11:50:38,329 | INFO | src.infrastructure.ai.agents.base | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-02 11:52:18,027 | INFO | src.infrastructure.ai.agents.base | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-02 15:26:42,187 | INFO | src.infrastructure.ai.agents.base | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-02 15:26:42,196 | ERROR | src.infrastructure.ai.agents.base | Error while invoking LLM: Invalid input type <class 'langchain_core.messages.human.HumanMessage'>. Must be a PromptValue, str, or list of BaseMessages.
+2025-11-02 15:27:52,064 | INFO | src.infrastructure.ai.agents.base | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-02 15:32:13,248 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-02 15:32:13,285 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-02 15:32:13,288 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-02 15:32:13,293 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-02 15:32:14,370 | INFO | src.config.database | Database tables created successfully
+2025-11-02 15:32:14,374 | INFO | main | Database tables initialized
+2025-11-02 15:32:18,493 | ERROR | main | Error during startup: Error 22 connecting to localhost:6379. The remote computer refused the network connection.
+2025-11-02 15:32:49,655 | INFO | src.infrastructure.ai.agents.base | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-02 15:32:58,535 | INFO | src.infrastructure.ai.agents.base | Initialized memory is success
+2025-11-02 15:38:34,259 | INFO | src.infrastructure.ai.agents.base | Initialized memory is success

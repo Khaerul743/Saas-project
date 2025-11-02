@@ -1,4 +1,4 @@
 from .base import BaseWorkflow
-from .simple_rag_agent import Agent, Workflow
+from .simple_rag_agent import SimpleRagAgent
 
-__all__ = ["Workflow", "Agent", "BaseWorkflow"]
+__all__ = ["SimpleRagAgent", "BaseWorkflow"]

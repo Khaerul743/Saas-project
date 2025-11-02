@@ -3,16 +3,16 @@ import time
 from typing import Any, Dict, Optional
 
 from fastapi import WebSocket
-from infrastructure.ai.simple_rag_agent.workflow import Workflow
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 
 # from src.infrastructure.redis.redis_storage import redis_storage
 from src.core.utils.logger import get_logger
+from .workflow import Workflow
 
 logger = get_logger(__name__)
 
 
-class Agent:
+class SimpleRagAgent:
     def __init__(
         self,
         base_prompt: str,
