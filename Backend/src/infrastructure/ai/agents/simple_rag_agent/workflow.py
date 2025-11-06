@@ -1,188 +1,105 @@
-import os
 from typing import Any, Dict, Optional
 
 from dotenv import load_dotenv
 from langchain_core.messages import AIMessage, HumanMessage
-from langchain_openai import ChatOpenAI
-from langgraph.checkpoint.redis import RedisSaver
+from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.graph import END, START, StateGraph
 from langgraph.prebuilt import ToolNode
 
-from src.core.utils.loop_manager import run_async
-from src.infrastructure.redis.redis_storage import RedisStorage
-from src.infrastructure.vector_store.chroma_db import RAGSystem
-from src.infrastructure.websocket.manager import ws_manager
-
 from ...components.tools import RetrieveDocumentTool
-from .models import AgentState
-from .prompts import AgentPromptControl
+from ..base_workflow import BaseWorkflow
+from .models import SimpleRagState
+from .prompts import SimpleRagPrompt
 
 load_dotenv()
 
 
-class Workflow:
+class SimpleRagWorkflow(BaseWorkflow):
     def __init__(
         self,
-        directory_path: str,
         retrieve_document_tool: RetrieveDocumentTool,
-        state_saver: RedisStorage,
-        model_llm: str,
-        base_prompt: str,
-        tone: str,
-        include_memory: bool = False,
-        short_memory: bool = False,
+        state_saver: BaseCheckpointSaver,
+        prompt: SimpleRagPrompt,
+        llm_provider: str = "openai",
+        llm_model: str = "gpt-3.5-turbo",
+        include_short_memory: bool = False,
+        include_long_memory: bool = False,
     ):
-        self.base_prompt = base_prompt
-        self.tone = tone
-        self.llm_for_reasoning = ChatOpenAI(model=model_llm)
-        self.llm_for_explanation = ChatOpenAI(model="gpt-3.5-turbo")
-        self.memory_provider = os.environ.get("MEMORY_PROVIDER")
-        self.provider_host = os.environ.get("PROVIDER_HOST")
-        self.provider_port = os.environ.get("PROVIDER_PORT")
-        self.prompts = AgentPromptControl(
-            is_include_memory=include_memory,
-            memory_provider=self.memory_provider,
-            provider_host=self.provider_host,
-            provider_port=self.provider_port,
+        super().__init__(
+            llm_model, llm_provider, include_long_memory, include_short_memory
         )
-        self.state_saver = RedisSaver(redis_url=state_saver.redis_url)
-        self.short_memory = short_memory
-        self.retreive_document_tool = retrieve_document_tool
+        self.retrieve_document_tool = retrieve_document_tool
+        # Use MemorySaver for now since RedisSaver has async issues
+        # Can be replaced with RedisSaver when async support is fully implemented
+        # self.checkpointer = MemorySaver() if state_saver is None else MemorySaver()
+        self.checkpointer = state_saver
+        self.prompts = prompt
         self.build = self._build_workflow()
-        self.directiory_path = directory_path
 
     def _build_workflow(self):
-        graph = StateGraph(AgentState)
+        graph = StateGraph(SimpleRagState)
         graph.add_node("main_agent", self._main_agent)
         graph.add_node(
-            "read_document", ToolNode(tools=[self.retreive_document_tool.read_document])
+            "read_document", ToolNode(tools=[self.retrieve_document_tool.read_document])
         )
-        graph.add_node("answer_rag_question", self._agent_answer_rag_question)
+        graph.add_node("answer_by_rag", self._answer_by_rag)
         graph.add_edge(START, "main_agent")
         graph.add_conditional_edges(
             "main_agent",
-            self._should_continue,
+            self.conditional_tool_call,
             {"tool_call": "read_document", "end": END},
         )
-        graph.add_edge("read_document", "answer_rag_question")
-        graph.add_edge("answer_rag_question", END)
 
-        return graph.compile(checkpointer=self.state_saver)
+        graph.add_edge("read_document", "answer_by_rag")
+        graph.add_edge("answer_by_rag", END)
 
-    def _checking_message_type(self, state: AgentState):
-        if state.is_include_document and os.path.exists(
-            f"{self.directiory_path}/{state.document_name}"
-        ):
-            return "describe_document"
-        return "main_agent"
+        return graph.compile(checkpointer=self.checkpointer)
 
-    def _formatted_message(self, messages):
-        formatted = []
-        for message in messages:
-            data = {}
-            if isinstance(message, HumanMessage):
-                data["role"] = "user"
-                data["content"] = message.content
-                formatted.append(data)
-            elif isinstance(message, AIMessage):
-                data["role"] = "assistant"
-                data["content"] = message.content
-                formatted.append(data)
-        return formatted
+    def _main_agent(self, state: SimpleRagState) -> Dict[str, Any]:
+        prompt = self.prompts.main_agent(state.user_message)
+        all_previous_messages = self.get_all_previous_messages(state.messages)
+        messages: list[Any] = [prompt[0]] + list(all_previous_messages) + [prompt[1]]
 
-    def _send_ws_message(
-        self, include_ws: bool, message: Dict[str, Any], user_id: Optional[str] = None
-    ):
-        if include_ws:
-            if user_id:
-                run_async(
-                    ws_manager.send_to_user(f"invoke_agent_{user_id}", message=message)
-                )
-
-    def _main_agent(self, state: AgentState) -> Dict[str, Any]:
-        prompt = self.prompts.main_agent(
-            state.user_message, self.base_prompt, self.tone
+        response = self.call_llm_with_tool(
+            messages, [self.retrieve_document_tool.read_document]
         )
-        all_previous_messages = []
-        if self.short_memory:
-            all_previous_messages = state.messages
-        messages = [prompt[0]] + all_previous_messages + [prompt[1]]
-        # print(messages)
-        llm = self.llm_for_reasoning.bind_tools(
-            [self.retreive_document_tool.read_document]
-        )
-        response = llm.invoke(messages)
-        if self.prompts.is_include_memory:
+
+        # response = self.call_llm(messages)
+        if self.is_include_long_memory():
             message = [
                 HumanMessage(content=state.user_message),
                 AIMessage(content=response.content),
             ]
-            formatted_message = self._formatted_message(message)
-            print(formatted_message)
-            self.prompts.memory.add_context(formatted_message, self.prompts.memory_id)
-        total_tokens = response.usage_metadata["total_tokens"]
 
-        # print(f"AI: {response.content}")
-        self._send_ws_message(
-            state.include_ws,
-            {
-                "type": "reasoning",
-                "message": "Agent is reasoning...",
-            },
-            state.user_id,
-        )
+            self.memory.add_context(message)
+
+        self.estimate_total_tokens(prompt, state.user_message, response.content)
 
         return {
-            "messages": state.messages
+            "messages": list(state.messages)
             + [HumanMessage(content=state.user_message)]
             + [response],
             "response": response.content,
-            "total_token": state.total_token + total_tokens,
         }
 
-    def _should_continue(self, state: AgentState):
-        last_message = state.messages[-1]
-        if isinstance(last_message, AIMessage) and last_message.tool_calls:
-            self._send_ws_message(
-                state.include_ws,
-                {
-                    "type": "reasoning",
-                    "message": "Agent using the tool...",
-                },
-                state.user_id,
-            )
-            return "tool_call"
-        return "end"
-
-    def _agent_answer_rag_question(self, state: AgentState):
-        tool_message = state.messages[-1].content
+    def _answer_by_rag(self, state: SimpleRagState):
+        tool_message = self.get_content_state_last_message(state.messages)
+        print(f"TOOL MESSAGE: {tool_message}")
+        # llm prompt
         prompt = self.prompts.agent_answer_rag_question(
             state.user_message, tool_message
         )
-        llm = self.llm_for_explanation
-        response = llm.invoke([prompt[0]] + state.messages + [prompt[1]])
-        total_tokens = response.usage_metadata["total_tokens"]
-        # print(f"response: {response.content}")
+        all_previous_messages = self.get_all_previous_messages(state.messages)
+        messages: list[Any] = [prompt[0]] + list(all_previous_messages) + [prompt[1]]
+        response = self.call_llm(messages)
+
         return {
-            "messages": state.messages + [response],
+            "messages": list(state.messages) + [response],
             "response": response.content,
-            "total_token": state.total_token + total_tokens,
         }
 
-    def run(self, state: Dict, thread_id: str):
+    def run(self, state: SimpleRagState, thread_id: str):
         return self.build.invoke(
             state,
             config={"configurable": {"thread_id": thread_id}},
         )
-
-
-# if __name__ == "__main__":
-#     agent = Workflow("docs", "data", "my_collections")
-
-#     while True:
-#         user_input = input("Human: ")
-#         if user_input == "exit":
-#             print("bye bye")
-#             break
-#         result = agent.run(state={"user_message": user_input}, thread_id="thread_123")
-#     print(result)

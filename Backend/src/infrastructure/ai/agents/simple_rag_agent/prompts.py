@@ -1,50 +1,32 @@
-from typing import Optional
+from typing import Literal, Optional
 
 from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage, SystemMessage
 
-from app.AI.memory.memory import MemoryControl
 from app.AI.utils.tone import get_tone
 
 load_dotenv()
 
 
-class AgentPromptControl:
+class SimpleRagPrompt:
     def __init__(
         self,
-        is_include_memory: bool = False,
-        memory_provider: Optional[str] = "",
-        provider_host: Optional[str] = "",
-        provider_port: Optional[str] = "",
-        memory_id: Optional[str] = "default",
+        tone: Literal["friendly", "formal", "casual", "profesional"],
+        base_prompt: Optional[str] = None,
     ):
-        self.is_include_memory = is_include_memory
-        if self.is_include_memory:
-            self.memory = MemoryControl(
-                memory_provider=memory_provider,
-                provider_host=provider_host,
-                provider_port=provider_port,
-            )
-            self.memory_id = memory_id
+        self.base_prompt = base_prompt
+        self.tone = tone
 
-    def main_agent(self, user_message: str, base_prompt: str, tone: str):
-        previous_context = "tidak ada."
-        if self.is_include_memory:
-            previous_context = self.memory.get_context(
-                query=user_message, memory_id=self.memory_id
-            )
-            print(f"===========PREVIOUS CONTEXT=============\n{previous_context}")
-        
+    def main_agent(self, user_message: str, previous_context: Optional[str] = None):
         # Get tone-based personality and communication style
-        tone_prompt = get_tone(tone)
-        
+        tone_prompt = get_tone(self.tone)
         return [
             SystemMessage(
                 content=f"""
 Kamu adalah AI Assistant yang memiliki kepribadian dan gaya komunikasi tertentu.
 
 BASE PROMPT (Tugas Utama):
-{base_prompt}
+{self.base_prompt}
 
 KEPRIBADIAN DAN GAYA KOMUNIKASI:
 {tone_prompt}
@@ -64,7 +46,7 @@ INSTRUKSI UTAMA:
 5. Gunakan tool seperlunya saja.
 
 PERCAKAPAN SEBELUMNYA:
-{previous_context}
+{previous_context if previous_context else "Belum ada percakapan sebelumnya"}
 
 Sekarang, jawablah pertanyaan pengguna dengan konsisten mengikuti kepribadian dan gaya komunikasi yang telah ditentukan.
 """
@@ -72,8 +54,8 @@ Sekarang, jawablah pertanyaan pengguna dengan konsisten mengikuti kepribadian da
             HumanMessage(content=user_message),
         ]
 
-    def agent_describe_document(self, user_message: str, document: str, tone: str = "formal"):
-        tone_prompt = get_tone(tone)
+    def agent_describe_document(self, user_message: str, document: str):
+        tone_prompt = get_tone(self.tone)
         return [
             SystemMessage(
                 content=f"""
@@ -99,8 +81,8 @@ Berikut adalah isi dokumen yang harus kamu deskripsikan:
             ),
         ]
 
-    def agent_answer_rag_question(self, user_message: str, tool_message: str, tone: str = "formal"):
-        tone_prompt = get_tone(tone)
+    def agent_answer_rag_question(self, user_message: str, tool_message):
+        tone_prompt = get_tone(self.tone)
         return [
             SystemMessage(
                 content=f"""
@@ -125,10 +107,12 @@ INSTRUKSI:
         ]
 
 
-if __name__ == "__main__":
-    prompt = AgentPromptControl(is_include_memory=False)
-    print(prompt.main_agent(
-        user_message="siapakah nama saya?", 
-        base_prompt="Kamu adalah asisten yang membantu pengguna", 
-        tone="friendly"
-    ))
+# if __name__ == "__main__":
+#     prompt = AgentPromptControl(is_include_memory=False)
+#     print(
+#         prompt.main_agent(
+#             user_message="siapakah nama saya?",
+#             base_prompt="Kamu adalah asisten yang membantu pengguna",
+#             tone="friendly",
+#         )
+#     )

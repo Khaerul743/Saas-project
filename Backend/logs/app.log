@@ -7224,3 +7224,115 @@ TypeError: CreateSimpleRagAgent.__init__() missing 1 required positional argumen
 2025-11-02 15:32:49,655 | INFO | src.infrastructure.ai.agents.base | Initialized LLM provider: openai (gpt-3.5-turbo)
 2025-11-02 15:32:58,535 | INFO | src.infrastructure.ai.agents.base | Initialized memory is success
 2025-11-02 15:38:34,259 | INFO | src.infrastructure.ai.agents.base | Initialized memory is success
+2025-11-03 10:08:06,934 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-03 10:08:08,355 | WARNING | src.infrastructure.ai.agents.base_workflow | Error estimating tokens: expected string or buffer
+2025-11-06 20:00:06,401 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-06 20:00:09,571 | WARNING | src.infrastructure.ai.agents.base_workflow | Error estimating tokens: expected string or buffer
+2025-11-06 20:13:07,874 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-06 20:13:07,886 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-06 20:13:07,886 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-06 20:13:07,890 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-06 20:13:09,354 | INFO | src.config.database | Database tables created successfully
+2025-11-06 20:13:09,358 | INFO | main | Database tables initialized
+2025-11-06 20:13:09,503 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-06 20:13:09,504 | INFO | main | Redis event bus started
+2025-11-06 20:13:11,509 | INFO | main | Redis event bus stopped
+2025-11-06 20:13:37,528 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-06 20:16:03,327 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-06 20:16:34,294 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-06 21:03:37,260 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-06 21:06:32,783 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-06 21:06:32,786 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-06 21:06:32,786 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-06 21:06:32,787 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-06 21:06:33,249 | INFO | src.config.database | Database tables created successfully
+2025-11-06 21:06:33,252 | INFO | main | Database tables initialized
+2025-11-06 21:06:33,409 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-06 21:06:33,410 | INFO | main | Redis event bus started
+2025-11-06 21:07:24,227 | INFO | app.controllers | User is authenticated: email khaerul@gmail.com
+2025-11-06 21:08:34,123 | INFO | src.core.utils.save_file | Created directory: documents/user_1/agent_ns965
+2025-11-06 21:08:34,135 | INFO | src.core.utils.save_file | Saved file: documents/user_1/agent_ns965\Khaerul_lutfi.pdf (type: pdf)
+2025-11-06 21:08:36,886 | INFO | src.infrastructure.vector_store.chroma_db | Successfully loaded document: Khaerul_lutfi.pdf
+2025-11-06 21:08:52,665 | ERROR | src.infrastructure.redis.redis_storage | Error while storing agent ns965 in Redis: Object of type AddDocumentToAgentOutput is not JSON serializable
+2025-11-06 21:08:53,646 | ERROR | src.domain.service.simple_rag_agent_service | Error while creating simple rag agent: Store agent obj is failed
+2025-11-06 21:08:53,931 | ERROR | src.domain.service.simple_rag_agent_service | Unexpected error while create simple rag agent: Store agent obj is failed
+2025-11-06 21:08:54,096 | ERROR | src.app.middlewares.error_handler | Unexpected error: Store agent obj is failed
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\slowapi\extension.py", line 734, in async_wrapper
+    response = await func(*args, **kwargs)  # type: ignore
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\routes\simple_rag_route.py", line 93, in createSimpleRAGAgent
+    agent = await controller.create_agent(parsed_data, file)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\controllers\simple_rag_controller.py", line 85, in create_agent
+    raise e
+  File "D:\Saas_Project\Backend\src\app\controllers\simple_rag_controller.py", line 63, in create_agent
+    await self.simple_rag_agent_service.create_simple_rag_agent(
+        agent_data, file
+    )
+  File "D:\Saas_Project\Backend\src\domain\service\simple_rag_agent_service.py", line 82, in create_simple_rag_agent
+    raise e
+  File "D:\Saas_Project\Backend\src\domain\service\simple_rag_agent_service.py", line 72, in create_simple_rag_agent
+    raise get_exception
+RuntimeError: Store agent obj is failed
+2025-11-06 21:14:57,328 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-06 21:14:57,330 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-06 21:14:57,331 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-06 21:14:57,332 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-06 21:14:57,940 | INFO | src.config.database | Database tables created successfully
+2025-11-06 21:14:57,942 | INFO | main | Database tables initialized
+2025-11-06 21:14:58,050 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-06 21:14:58,053 | INFO | main | Redis event bus started
+2025-11-06 21:15:29,878 | INFO | main | Redis event bus stopped
+2025-11-06 21:17:06,628 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-06 21:20:48,781 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-06 21:24:02,348 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)

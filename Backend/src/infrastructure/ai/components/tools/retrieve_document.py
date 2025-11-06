@@ -3,7 +3,7 @@ from src.infrastructure.vector_store.chroma_db import RAGSystem
 
 class RetrieveDocumentTool:
     def __init__(self, chromadb_path: str, collection_name: str):
-        self.chromadb_path = chromadb_path
+        self.chromadb_path: str = chromadb_path
         self.collection_name = collection_name
         self.rag = RAGSystem(self.chromadb_path)
         self.rag.initial_collection(collection_name)

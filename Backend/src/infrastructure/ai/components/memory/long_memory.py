@@ -1,6 +1,6 @@
-from typing import Any, Dict, List
+from typing import Any, Dict, Sequence
 
-from langchain_core.messages import AIMessage, HumanMessage
+from langchain_core.messages import AIMessage, BaseMessage, HumanMessage
 from mem0 import Memory
 
 
@@ -48,7 +48,7 @@ class LongTermMemory:
         except Exception as e:
             raise e
 
-    def add_context(self, list_messages) -> Dict[str, Any]:
+    def add_context(self, list_messages: Sequence[BaseMessage]) -> Dict[str, Any]:
         """
         Add context to memory.
 
