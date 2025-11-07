@@ -22,6 +22,7 @@ class RedisStorage(IStorageAgentObj):
 
     async def store_agent(self, agent_id: str, agent_obj: Dict[str, Any]) -> bool:
         try:
+            print(f"OBJJJJJ: {agent_obj}")
             key = f"agent:{agent_id}"
             await self.redis_client.set(key, json.dumps(agent_obj))
             logger.info(f"Agent {agent_id} stored in Redis")

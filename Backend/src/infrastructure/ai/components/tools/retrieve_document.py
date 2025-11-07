@@ -9,10 +9,11 @@ class RetrieveDocumentTool:
         self.rag.initial_collection(collection_name)
 
     def read_document(self, query: str):
-        """Gunakan tool untuk mencari informasi dokumen yang telah diberikan oleh pengguna."""
+        """Gunakan tool untuk mencari informasi dokumen yang telah diberikan oleh pengguna. Pastikan kamu memasukan keyword yang sesuai dan sesuai konteks yang diminta oleh pengguna"""
         print("agent menggunakan tool get_document")
         try:
-            get_document = self.rag.ask(query)
+            # get_document = self.rag.ask(query)
+            get_document = None
             if not get_document:
                 get_document = self.rag.similarity_search(query)
 

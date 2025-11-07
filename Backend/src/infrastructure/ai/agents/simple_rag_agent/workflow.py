@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 from dotenv import load_dotenv
 from langchain_core.messages import AIMessage, HumanMessage
@@ -93,6 +93,7 @@ class SimpleRagWorkflow(BaseWorkflow):
         messages: list[Any] = [prompt[0]] + list(all_previous_messages) + [prompt[1]]
         response = self.call_llm(messages)
 
+        self.estimate_total_tokens(prompt, state.user_message, response.content)
         return {
             "messages": list(state.messages) + [response],
             "response": response.content,

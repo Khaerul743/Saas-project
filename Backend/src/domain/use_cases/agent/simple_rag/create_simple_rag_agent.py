@@ -26,7 +26,7 @@ class CreateSimpleRagAgentInput:
 
 
 class CreateSimpleRagAgent(
-    BaseUseCase[CreateAgentEntityInput, CreateAgentEntityOutput]
+    BaseUseCase[CreateSimpleRagAgentInput, CreateAgentEntityOutput]
 ):
     def __init__(
         self,
@@ -83,12 +83,14 @@ class CreateSimpleRagAgent(
                 if not add_to_chroma_db.is_success():
                     return self._return_exception(add_to_chroma_db)
 
-                collection_name = add_to_chroma_db.get_data()
-                if not collection_name:
+                get_data_collection_name = add_to_chroma_db.get_data()
+                if not get_data_collection_name:
                     return UseCaseResult.error_result(
                         "Collection name is empty",
                         RuntimeError("Collection name empty"),
                     )
+
+                collection_name = get_data_collection_name.collection_name
 
             # Store agent obj
             agent_obj = {
@@ -111,6 +113,9 @@ class CreateSimpleRagAgent(
 
             return UseCaseResult.success_result(get_data_agent)
         except Exception as e:
+            self.uploaded_document_handler.save_file.cleanup_file_on_error(
+                directory_path
+            )
             return UseCaseResult.error_result(
                 f"unexpected error while create simple rag agent: {str(e)}", e
             )

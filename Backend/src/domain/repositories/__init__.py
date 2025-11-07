@@ -1,5 +1,13 @@
-from src.domain.repositories.agent_repository import AgentRepository
-from src.domain.repositories.document_repository import DocumentRepository
-from src.domain.repositories.user_repository import UserRepository
+from .agent_repository import AgentRepository
+from .document_repository import DocumentRepository
+from .history_message_repository import HistoryMessageRepository
+from .user_agent_repository import UserAgentRepository
+from .user_repository import UserRepository
 
-__all__ = ["UserRepository", "AgentRepository", "DocumentRepository"]
+__all__ = [
+    "UserRepository",
+    "AgentRepository",
+    "DocumentRepository",
+    "UserAgentRepository",
+    "HistoryMessageRepository",
+]
