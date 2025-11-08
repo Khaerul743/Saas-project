@@ -1,6 +1,6 @@
 from typing import Annotated, Any, Optional, Sequence
 
-from ..base_model import BaseAgentStateModel
+from .. import BaseAgentStateModel
 
 
 class SimpleRagState(BaseAgentStateModel):

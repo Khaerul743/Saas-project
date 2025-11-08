@@ -25,11 +25,17 @@ class CreateUserAgent(BaseUseCase[CreateUserAgentInput, CreateUserAgentOutput]):
     async def execute(
         self, input_data: CreateUserAgentInput
     ) -> UseCaseResult[CreateUserAgentOutput]:
-        id = input_data.agent_id + input_data.unique_id
+        try:
+            id = input_data.agent_id + input_data.unique_id
 
-        # create agent entity
-        await self.user_agent_repository.create_user_agent(
-            id, input_data.agent_id, input_data.username, input_data.user_platform
-        )
+            # create agent entity
+            await self.user_agent_repository.create_user_agent(
+                id, input_data.agent_id, input_data.username, input_data.user_platform
+            )
 
-        return UseCaseResult.success_result(CreateUserAgentOutput(id=id))
+            return UseCaseResult.success_result(CreateUserAgentOutput(id=id))
+
+        except Exception as e:
+            return UseCaseResult.error_result(
+                f"Something wrong at create user agent: {str(e)}", e
+            )

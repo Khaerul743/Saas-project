@@ -1,7 +1,17 @@
 import asyncio
 import time
 from abc import ABC, abstractmethod
-from typing import Any, Awaitable, Callable, List, Optional, Sequence, TypeVar, Union
+from typing import (
+    Any,
+    Awaitable,
+    Callable,
+    Dict,
+    List,
+    Optional,
+    Sequence,
+    TypeVar,
+    Union,
+)
 
 import tiktoken
 from langchain_anthropic import ChatAnthropic
@@ -43,7 +53,7 @@ class BaseWorkflow(ABC):
             self.tokenizer = tiktoken.get_encoding("cl100k_base")
 
     @abstractmethod
-    def run(self, state, thread_id: str):
+    def run(self, state, thread_id: str) -> Dict[str, Any] | Any:
         pass
 
     @property

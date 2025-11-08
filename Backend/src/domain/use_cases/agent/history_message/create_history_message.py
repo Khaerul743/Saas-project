@@ -25,12 +25,19 @@ class CreateHistoryMessage(
     async def execute(
         self, input_data: CreateHistoryMessageInput
     ) -> UseCaseResult[CreateHistoryMessageOutput]:
-        # create new history message
-        new_history_message = (
-            await self.history_message_repository.create_history_message(
-                input_data.user_agent_id, input_data.user_message, input_data.response
+        try:
+            # create new history message
+            new_history_message = (
+                await self.history_message_repository.create_history_message(
+                    input_data.user_agent_id,
+                    input_data.user_message,
+                    input_data.response,
+                )
             )
-        )
-        return UseCaseResult.success_result(
-            CreateHistoryMessageOutput(new_history_message.id)
-        )
+            return UseCaseResult.success_result(
+                CreateHistoryMessageOutput(new_history_message.id)
+            )
+        except Exception as e:
+            return UseCaseResult.error_result(
+                f"Something wrong at create history message: {str(e)}", e
+            )

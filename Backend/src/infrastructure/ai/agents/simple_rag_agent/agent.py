@@ -6,7 +6,7 @@ from langgraph.checkpoint.redis import RedisSaver
 from src.infrastructure.redis.redis_storage import RedisStorage
 
 from ...components.tools import RetrieveDocumentTool
-from ..base_agent import BaseAgent
+from .. import BaseAgent
 from .prompts import SimpleRagPrompt
 from .workflow import SimpleRagWorkflow
 

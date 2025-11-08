@@ -43,8 +43,15 @@ from .get_user_agents_use_case import (
     GetUserAgentsOutput,
     GetUserAgentsUseCase,
 )
+from .history_message import (
+    CreateHistoryMessage,
+    CreateHistoryMessageInput,
+    CreateMetadata,
+    CreateMetadataInput,
+)
 from .simple_rag import CreateSimpleRagAgent, CreateSimpleRagAgentInput
 from .store_agent_obj import StoreAgentObj, StoreAgentObjInput
+from .user_agent import CreateUserAgent, CreateUserAgentInput
 
 __all__ = [
     "AddDocumentToAgent",
@@ -79,4 +86,10 @@ __all__ = [
     "CreateSimpleRagAgentInput",
     "StoreAgentObjInput",
     "StoreAgentObj",
+    "CreateUserAgent",
+    "CreateUserAgentInput",
+    "CreateHistoryMessage",
+    "CreateHistoryMessageInput",
+    "CreateMetadata",
+    "CreateMetadataInput",
 ]
