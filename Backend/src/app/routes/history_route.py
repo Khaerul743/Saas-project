@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends, Request, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.utils.response import success_response
 from src.app.controllers.history_controller import HistoryController
 from src.app.middlewares.auth_middleware import role_based_access_control
 from src.app.validators.history_schema import HistoryResponse
 from src.config.database import get_db
 from src.config.limiter import limiter
+from src.core.utils.response import success_response
 
 router = APIRouter(prefix="/api/history", tags=["history"])
 

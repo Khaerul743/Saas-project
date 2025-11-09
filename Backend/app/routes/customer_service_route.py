@@ -1,6 +1,7 @@
 import json
 from typing import List
 
+from app.middlewares.auth_dependencies import role_required
 from fastapi import (
     APIRouter,
     BackgroundTasks,
@@ -14,15 +15,12 @@ from fastapi import (
 )
 from sqlalchemy.orm import Session
 
-from src.config.database import get_db
-from src.config.limiter import limiter
 from app.controllers.customer_service_controller import (
     create_customer_service_agent,
     delete_customer_service_agent,
     get_customer_service_agent_by_id,
     update_customer_service_agent,
 )
-from app.middlewares.auth_dependencies import role_required
 from app.models.agent.customer_service_model import (
     CreateCustomerServiceAgent,
     CustomerServiceAgentAsyncResponse,
@@ -30,7 +28,9 @@ from app.models.agent.customer_service_model import (
     DatasetDescription,
     UpdateCustomerServiceAgent,
 )
-from app.utils.response import success_response
+from core.utils.response import success_response
+from src.config.database import get_db
+from src.config.limiter import limiter
 
 router = APIRouter(
     prefix="/api/agents/customer-service", tags=["customer-service-agents"]

@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, Response, status
 
 from src.app.controllers.auth_controller import AuthController
-from src.core.utils.factory import controller_factory
 from src.app.middlewares.auth_middleware import role_based_access_control
 from src.app.validators.auth_schema import AuthOut, LoginIn, RegisterIn
-from app.utils.response import success_response
+from src.core.utils.factory import controller_factory
+from src.core.utils.response import success_response
 
 router = APIRouter(prefix="/api", tags=["auth"])
 

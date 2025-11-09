@@ -1,6 +1,7 @@
 from .agent_repository import AgentRepository
 from .document_repository import DocumentRepository
 from .history_message_repository import HistoryMessageRepository
+from .metadata_repository import MetadataRepository
 from .user_agent_repository import UserAgentRepository
 from .user_repository import UserRepository
 
@@ -10,4 +11,5 @@ __all__ = [
     "DocumentRepository",
     "UserAgentRepository",
     "HistoryMessageRepository",
+    "MetadataRepository",
 ]

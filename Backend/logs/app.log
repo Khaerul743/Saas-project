@@ -7620,3 +7620,37 @@ TypeError: InvokeAgentInput.__init__() missing 1 required positional argument: '
 2025-11-09 16:55:26,507 | WARNING | src.domain.service.history_service | Failed to get history messages: User agent not found code=NOT_FOUND
 2025-11-09 16:55:26,567 | WARNING | src.domain.service.history_service | User agent not found: 00913
 2025-11-09 17:00:00,147 | INFO | main | Redis event bus stopped
+2025-11-09 19:02:30,676 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-09 19:02:30,679 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-09 19:02:30,679 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-09 19:02:30,680 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-09 19:02:32,242 | INFO | src.config.database | Database tables created successfully
+2025-11-09 19:02:32,247 | INFO | main | Database tables initialized
+2025-11-09 19:02:32,343 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-09 19:02:32,487 | INFO | main | Redis event bus started
+2025-11-09 19:04:55,518 | WARNING | src.domain.service.auth_service | peleriii@gmail.com login failed: User not found
+2025-11-09 19:04:55,674 | WARNING | src.app.controllers.base | Email not found: peleriii@gmail.com
+2025-11-09 19:05:06,814 | INFO | src.app.controllers.base | User is authenticated: email pelerii@gmail.com
+2025-11-09 19:05:50,765 | INFO | src.infrastructure.redis.redis_storage | Agent 4U228 stored in Redis
+2025-11-09 19:05:56,018 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: 4U228
+2025-11-09 19:06:25,140 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-09 19:06:49,069 | INFO | src.domain.service.agent_service | [request_id=e42df49b-ef4a-44d0-af40-0a582ab208fa] [user=pelerii@gmail.com] Fetched 1 user agents for user_id=6
+2025-11-09 19:07:35,446 | WARNING | src.domain.service.history_service | Failed to get history messages: User agent not found code=NOT_FOUND
+2025-11-09 19:07:35,448 | WARNING | src.domain.service.history_service | User agent not found: 4U228
+2025-11-09 19:10:09,882 | INFO | src.domain.service.agent_service | [request_id=31ae533f-e6f6-48a5-b347-9dd7716e970a] [user=pelerii@gmail.com] Fetched 1 user agents for user_id=6
+2025-11-09 19:19:28,068 | INFO | src.domain.service.user_service | [request_id=fecba904-69b2-49d7-a6d9-e3e4291dc5d8] [user=pelerii@gmail.com] Admin getting all users
+2025-11-09 19:19:37,956 | INFO | src.domain.service.user_service | [request_id=34754e67-8716-4f4d-ae11-ad51ae856d7c] [user=pelerii@gmail.com] Show user profile
+2025-11-09 19:19:55,088 | INFO | src.domain.service.agent_service | [request_id=cc125b7b-7d0d-4a20-a4a4-1b071d8a91e8] [user=pelerii@gmail.com] admin getting all agents paginate
+2025-11-09 19:20:02,579 | INFO | src.domain.service.agent_service | [request_id=b76e96e1-43b0-4949-9633-777afc15a74b] [user=pelerii@gmail.com] Successfully retrieved agents for user 6
+2025-11-09 19:21:00,716 | INFO | src.domain.service.agent_service | [request_id=900ec751-8683-46dc-a2f1-8274ea8e0244] [user=pelerii@gmail.com] Fetched 1 user agents for user_id=6
+2025-11-09 20:21:51,393 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-09 20:21:51,455 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-09 20:21:51,705 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-09 20:21:51,706 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-09 20:21:53,093 | INFO | src.config.database | Database tables created successfully
+2025-11-09 20:21:53,099 | INFO | main | Database tables initialized
+2025-11-09 20:21:53,308 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-09 20:21:53,322 | INFO | main | Redis event bus started
+2025-11-09 20:22:29,094 | WARNING | src.app.middlewares.auth_middleware | Access attempt without token
+2025-11-09 20:22:46,360 | INFO | src.app.controllers.base | User is authenticated: email pelerii@gmail.com
+2025-11-09 20:23:56,787 | INFO | main | Redis event bus stopped

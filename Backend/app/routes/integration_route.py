@@ -1,5 +1,6 @@
 import os
 
+from app.middlewares.auth_dependencies import role_required
 from fastapi import (
     APIRouter,
     BackgroundTasks,
@@ -12,14 +13,14 @@ from fastapi import (
 )
 from sqlalchemy.orm import Session
 
+from app.controllers.base import integration_controller as ic
+from app.models.integration.integration_model import (
+    CreateIntegration,
+    UpdateIntegration,
+)
+from core.utils.response import success_response
 from src.config.database import get_db
 from src.config.limiter import limiter
-from app.controllers.base import integration_controller as ic
-from app.middlewares.auth_dependencies import role_required
-from app.models.integration.integration_model import CreateIntegration
-from app.utils.response import success_response
-from app.models.integration.integration_model import UpdateIntegration
-
 
 router = APIRouter(prefix="/api/integrations", tags=["integrations"])
 

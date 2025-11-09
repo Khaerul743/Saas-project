@@ -1,8 +1,7 @@
+from app.middlewares.auth_dependencies import role_required
 from fastapi import APIRouter, Depends, Request, status
 from sqlalchemy.orm import Session
 
-from src.config.database import get_db
-from src.config.limiter import limiter
 from app.controllers.company_information_controller import (
     get_all_company_information,
     get_company_information_by_agent_id,
@@ -10,9 +9,10 @@ from app.controllers.company_information_controller import (
     update_company_information,
     update_company_information_by_agent_id,
 )
-from app.middlewares.auth_dependencies import role_required
 from app.models.company_information.company_model import UpdateCompanyInformation
-from app.utils.response import success_response
+from core.utils.response import success_response
+from src.config.database import get_db
+from src.config.limiter import limiter
 
 router = APIRouter(
     prefix="/api/agent/company-information", tags=["company-information"]

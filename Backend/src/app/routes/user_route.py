@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends, Query, Request, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.utils.response import success_response
 from src.app.controllers.user_controller import UserController
 from src.app.middlewares.auth_middleware import role_based_access_control
 from src.app.validators.user_schema import (
@@ -16,6 +15,7 @@ from src.config.database import get_db
 from src.config.limiter import limiter
 from src.core.utils.context import CurrentContext
 from src.core.utils.factory import controller_factory
+from src.core.utils.response import success_response
 
 # get_user_controller = controller_factory(UserController)
 router = APIRouter(prefix="/api/users", tags=["users"])

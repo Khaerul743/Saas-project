@@ -13,10 +13,12 @@ from src.app.validators.agent_schema import (
 )
 from src.core.exceptions.agent_exceptions import AgentNotFoundException
 from src.core.exceptions.database_exceptions import DatabaseException
-from src.domain.repositories.agent_repository import AgentRepository
-from src.domain.repositories.history_message_repository import HistoryMessageRepository
-from src.domain.repositories.metadata_repository import MetadataRepository
-from src.domain.repositories.user_agent_repository import UserAgentRepository
+from src.domain.repositories import (
+    AgentRepository,
+    HistoryMessageRepository,
+    MetadataRepository,
+    UserAgentRepository,
+)
 from src.domain.service.base import BaseService
 from src.domain.use_cases.agent import (
     CalculateAgentStatsUseCase,
@@ -218,6 +220,7 @@ class AgentService(BaseService):
             if not get_data_response:
                 raise RuntimeError("Agent response data is empty")
 
+            await self.db.commit()
             return get_data_response
 
         except AgentNotFoundException as e:

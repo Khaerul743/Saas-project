@@ -3,8 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.core.exceptions.database_exceptions import DatabaseException
 from src.core.exceptions.user_exceptions import UserAgentNotFoundException
-from src.domain.repositories.history_message_repository import HistoryMessageRepository
-from src.domain.repositories.user_agent_repository import UserAgentRepository
+from src.domain.repositories import HistoryMessageRepository, UserAgentRepository
 from src.domain.service.base import BaseService
 from src.domain.use_cases.agent.history_message import (
     GetHistoryMessagesByUserAgentId,
@@ -86,6 +85,8 @@ class HistoryService(BaseService):
             self.handle_sqlalchemy_error("getting history messages", e)
             raise
         except Exception as e:
-            self.logger.error(f"Unexpected error while getting history messages: {str(e)}")
+            self.logger.error(
+                f"Unexpected error while getting history messages: {str(e)}"
+            )
             self.handle_unexpected_error("getting history messages", e)
             raise

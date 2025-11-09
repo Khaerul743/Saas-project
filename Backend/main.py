@@ -7,7 +7,6 @@ from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from app.utils.response import error_response
 from src.app.middlewares.context_middleware import ContextMiddleware
 from src.app.middlewares.error_handler import ErrorHandlerMiddleware
 from src.app.middlewares.limiter_handler import rate_limit_exceeded_handler
@@ -16,6 +15,7 @@ from src.app.middlewares.limiter_handler import rate_limit_exceeded_handler
 from src.app.routes import (
     agent_route,
     auth_route,
+    dashboard_route,
     history_route,
     simple_rag_route,
     user_route,
@@ -24,6 +24,7 @@ from src.config.config import settings
 from src.config.database import create_tables
 from src.config.limiter import limiter
 from src.core.utils.logger import get_logger
+from src.core.utils.response import error_response
 from src.domain.events import event_handler
 from src.domain.events.redis_event import event_bus
 
@@ -79,6 +80,7 @@ app.include_router(auth_route.router)
 app.include_router(agent_route.router)  # General agent routes (get all, etc.)
 app.include_router(simple_rag_route.router)  # Simple RAG Agent specific routes
 app.include_router(history_route.router)
+app.include_router(dashboard_route.router)
 # app.include_router(
 #     customer_service_route.router
 # )  # Customer Service Agent specific routes
@@ -86,7 +88,6 @@ app.include_router(history_route.router)
 # app.include_router(document_route.router)
 # app.include_router(integration_route.router)
 # app.include_router(platform_route.router)
-# app.include_router(dashboard_route.router)
 # app.include_router(task_route.router)
 
 # WebSocket routes

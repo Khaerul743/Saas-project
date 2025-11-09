@@ -24,12 +24,12 @@ from app.models.agent.simple_rag_model import (
     SimpleRAGAgentResponse,
     UpdateSimpleRAGAgent,
 )
-from app.utils.response import success_response
 from src.app.controllers.simple_rag_controller import SimpleRAGController
 from src.app.middlewares.auth_middleware import role_based_access_control
 from src.app.validators.agent_schema import CreateAgent, CreateAgentResponse
 from src.config.database import get_db
 from src.config.limiter import limiter
+from src.core.utils.response import success_response
 
 router = APIRouter(prefix="/api/agents/simple-rag", tags=["simple-rag-agents"])
 
