@@ -1,7 +1,7 @@
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.controllers import BaseController
+from src.app.controllers.base import BaseController
 from src.app.validators.user_schema import (
     DataUserSchema,
     ShowUserProfile,

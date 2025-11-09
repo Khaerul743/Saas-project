@@ -19,7 +19,7 @@ from src.core.exceptions.database_exceptions import DatabaseException
 from src.core.utils.hash import PasswordHashed
 from src.core.utils.security import JWTHandler
 from src.domain.repositories import UserRepository
-from src.domain.service import BaseService
+from src.domain.service.base import BaseService
 from src.domain.use_cases.auth import (
     AuthenticateInput,
     AuthenticateUser,

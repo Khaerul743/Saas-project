@@ -2,7 +2,7 @@
 from fastapi import Response
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.controllers import BaseController
+from src.app.controllers.base import BaseController
 from src.app.validators.auth_schema import AuthOutData, LoginIn, RegisterIn
 from src.core.exceptions.auth_exceptions import (
     EmailAlreadyExistsException,

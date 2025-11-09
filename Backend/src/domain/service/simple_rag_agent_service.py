@@ -7,7 +7,7 @@ from src.app.validators.agent_schema import CreateAgent
 from src.core.exceptions.user_exceptions import UserNotFoundException
 from src.core.utils.save_file import SaveFileHandler
 from src.domain.repositories import AgentRepository, DocumentRepository
-from src.domain.service import BaseService
+from src.domain.service.base import BaseService
 from src.domain.use_cases.agent import (
     AddDocumentToAgent,
     CreateAgentEntity,

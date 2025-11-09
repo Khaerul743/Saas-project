@@ -7602,3 +7602,21 @@ TypeError: InvokeAgentInput.__init__() missing 1 required positional argument: '
 2025-11-09 11:52:43,171 | WARNING | src.domain.service.agent_service | Agent invocation failed: Agent not found or you dont have access to this agent
 2025-11-09 11:52:43,173 | WARNING | src.domain.service.agent_service | Agent not found: gd145
 2025-11-09 12:08:57,806 | INFO | main | Redis event bus stopped
+2025-11-09 16:53:48,421 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-09 16:53:48,426 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-09 16:53:48,431 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-09 16:53:48,437 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-09 16:53:51,699 | INFO | src.config.database | Database tables created successfully
+2025-11-09 16:53:51,709 | INFO | main | Database tables initialized
+2025-11-09 16:53:52,078 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-09 16:53:52,085 | INFO | main | Redis event bus started
+2025-11-09 16:54:06,284 | INFO | src.app.controllers.base | User is authenticated: email pelerrii@gmail.com
+2025-11-09 16:54:21,823 | WARNING | src.domain.service.history_service | Failed to get history messages: User agent not found code=NOT_FOUND
+2025-11-09 16:54:21,839 | WARNING | src.domain.service.history_service | User agent not found: 6j014
+2025-11-09 16:54:42,750 | INFO | src.app.controllers.base | User is authenticated: email khaerul@gmail.com
+2025-11-09 16:54:56,785 | WARNING | src.domain.service.history_service | Failed to get history messages: User agent not found code=NOT_FOUND
+2025-11-09 16:54:56,908 | WARNING | src.domain.service.history_service | User agent not found: 6j014
+2025-11-09 16:55:13,415 | INFO | src.domain.service.agent_service | [request_id=edd81b4e-c7c3-4213-b947-fc7f04a80083] [user=khaerul@gmail.com] Fetched 83 user agents for user_id=1
+2025-11-09 16:55:26,507 | WARNING | src.domain.service.history_service | Failed to get history messages: User agent not found code=NOT_FOUND
+2025-11-09 16:55:26,567 | WARNING | src.domain.service.history_service | User agent not found: 00913
+2025-11-09 17:00:00,147 | INFO | main | Redis event bus stopped

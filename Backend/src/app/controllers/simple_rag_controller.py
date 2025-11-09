@@ -31,7 +31,7 @@ from typing import Optional
 from fastapi import UploadFile
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.controllers import BaseController
+from src.app.controllers.base import BaseController
 from src.app.validators.agent_schema import CreateAgent, CreateAgentOut
 from src.domain.service.simple_rag_agent_service import SimpleRagAgentService
 

@@ -8,6 +8,13 @@ from .create_message_metadata import (
     CreateMetadataInput,
     CreateMetadataOutput,
 )
+from .get_history_messages import (
+    GetHistoryMessagesByUserAgentId,
+    GetHistoryMessagesInput,
+    GetHistoryMessagesOutput,
+    HistoryMessageData,
+    HistoryStats,
+)
 
 __all__ = [
     "CreateHistoryMessageInput",
@@ -16,4 +23,9 @@ __all__ = [
     "CreateMetadata",
     "CreateMetadataInput",
     "CreateMetadataOutput",
+    "GetHistoryMessagesByUserAgentId",
+    "GetHistoryMessagesInput",
+    "GetHistoryMessagesOutput",
+    "HistoryMessageData",
+    "HistoryStats",
 ]

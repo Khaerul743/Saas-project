@@ -17,7 +17,7 @@ from src.domain.repositories.agent_repository import AgentRepository
 from src.domain.repositories.history_message_repository import HistoryMessageRepository
 from src.domain.repositories.metadata_repository import MetadataRepository
 from src.domain.repositories.user_agent_repository import UserAgentRepository
-from src.domain.service import BaseService
+from src.domain.service.base import BaseService
 from src.domain.use_cases.agent import (
     CalculateAgentStatsUseCase,
     CreateHistoryMessage,

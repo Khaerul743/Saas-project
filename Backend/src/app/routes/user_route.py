@@ -17,7 +17,7 @@ from src.config.limiter import limiter
 from src.core.utils.context import CurrentContext
 from src.core.utils.factory import controller_factory
 
-get_user_controller = controller_factory(UserController)
+# get_user_controller = controller_factory(UserController)
 router = APIRouter(prefix="/api/users", tags=["users"])
 
 

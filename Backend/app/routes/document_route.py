@@ -14,7 +14,7 @@ from sqlalchemy.orm import Session
 
 from src.config.database import get_db
 from src.config.limiter import limiter
-from app.controllers import document_controller as dc
+from app.controllers.base import document_controller as dc
 from app.middlewares.auth_dependencies import role_required
 from app.utils.response import success_response
 

@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 # from sqlalchemy.orm import Session, joinedload
 # from sqlalchemy.orm.query import Query
 # from app.AI import simple_RAG_agent as AI
-from app.controllers import BaseController
+from src.app.controllers.base import BaseController
 
 # from app.controllers.document_controller import agents
 # from app.models.agent.agent_model import (

@@ -10,3 +10,9 @@ class IHistoryMessageRepository(ABC):
         self, user_agent_id: str, user_message: str, response: str
     ) -> HistoryMessage:
         pass
+
+    @abstractmethod
+    async def get_history_messages_by_user_agent_id(
+        self, user_agent_id: str
+    ) -> Sequence[HistoryMessage]:
+        pass

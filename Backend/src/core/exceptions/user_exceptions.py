@@ -28,3 +28,16 @@ class UserNotFoundException(BaseCustomeException):
                 "value": id,
             },
         )
+
+
+class UserAgentNotFoundException(BaseCustomeException):
+    def __init__(self, user_agent_id: str):
+        super().__init__(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "error": "USER_AGENT_NOT_FOUND",
+                "message": "User agent not found",
+                "field": "user_agent_id",
+                "value": user_agent_id,
+            },
+        )

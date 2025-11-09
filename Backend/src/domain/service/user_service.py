@@ -15,7 +15,7 @@ from src.core.exceptions.user_exceptions import (
     UserNotFoundException,
 )
 from src.domain.repositories.user_repository import UserRepository
-from src.domain.service import BaseService
+from src.domain.service.base import BaseService
 from src.domain.use_cases.user import (
     DeleteUser,
     DeleteUserInput,

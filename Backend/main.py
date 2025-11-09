@@ -13,7 +13,13 @@ from src.app.middlewares.error_handler import ErrorHandlerMiddleware
 from src.app.middlewares.limiter_handler import rate_limit_exceeded_handler
 
 # Import routes
-from src.app.routes import agent_route, auth_route, simple_rag_route, user_route
+from src.app.routes import (
+    agent_route,
+    auth_route,
+    history_route,
+    simple_rag_route,
+    user_route,
+)
 from src.config.config import settings
 from src.config.database import create_tables
 from src.config.limiter import limiter
@@ -72,6 +78,7 @@ app.include_router(user_route.router)
 app.include_router(auth_route.router)
 app.include_router(agent_route.router)  # General agent routes (get all, etc.)
 app.include_router(simple_rag_route.router)  # Simple RAG Agent specific routes
+app.include_router(history_route.router)
 # app.include_router(
 #     customer_service_route.router
 # )  # Customer Service Agent specific routes
@@ -79,7 +86,6 @@ app.include_router(simple_rag_route.router)  # Simple RAG Agent specific routes
 # app.include_router(document_route.router)
 # app.include_router(integration_route.router)
 # app.include_router(platform_route.router)
-# app.include_router(history_route.router)
 # app.include_router(dashboard_route.router)
 # app.include_router(task_route.router)
 
