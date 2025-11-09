@@ -7443,3 +7443,162 @@ RuntimeError: Store agent obj is failed
 2025-11-07 09:18:28,336 | ERROR | src.infrastructure.ai.agents.base_workflow | Error while invoking LLM with tools: "Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted"
 2025-11-07 09:20:43,066 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
 2025-11-07 09:25:05,626 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-08 20:29:52,574 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-08 20:29:52,576 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-08 20:29:52,577 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-08 20:29:52,578 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-08 20:29:54,470 | INFO | src.config.database | Database tables created successfully
+2025-11-08 20:29:54,472 | INFO | main | Database tables initialized
+2025-11-08 20:29:58,533 | ERROR | main | Error during startup: Error 22 connecting to localhost:6379. The remote computer refused the network connection.
+2025-11-08 20:31:31,274 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-08 20:31:31,276 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-08 20:31:31,277 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-08 20:31:31,278 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-08 20:31:31,693 | INFO | src.config.database | Database tables created successfully
+2025-11-08 20:31:31,696 | INFO | main | Database tables initialized
+2025-11-08 20:31:31,711 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-08 20:31:31,715 | INFO | main | Redis event bus started
+2025-11-08 20:36:59,042 | INFO | app.controllers | User is authenticated: email khaerul@gmail.com
+2025-11-08 20:41:59,101 | INFO | src.core.utils.save_file | Created directory: documents/user_1/agent_wX657
+2025-11-08 20:41:59,169 | INFO | src.core.utils.save_file | Saved file: documents/user_1/agent_wX657\Khaerul_lutfi.pdf (type: pdf)
+2025-11-08 20:42:01,322 | INFO | src.infrastructure.vector_store.chroma_db | Successfully loaded document: Khaerul_lutfi.pdf
+2025-11-08 20:44:28,782 | INFO | src.infrastructure.redis.redis_storage | Agent wX657 stored in Redis
+2025-11-08 20:47:32,961 | WARNING | src.domain.service.agent_service | Agent invocation failed: Agent not found
+2025-11-08 20:47:32,963 | WARNING | src.domain.service.agent_service | Agent not found: wX657
+2025-11-08 20:48:27,749 | INFO | main | Redis event bus stopped
+2025-11-08 20:51:42,041 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: mmk
+2025-11-08 20:54:04,971 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: mmk
+2025-11-08 20:54:38,517 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-08 20:54:38,530 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-08 20:54:38,546 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-08 20:54:38,547 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-08 20:54:39,749 | INFO | src.config.database | Database tables created successfully
+2025-11-08 20:54:39,752 | INFO | main | Database tables initialized
+2025-11-08 20:54:39,902 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-08 20:54:39,903 | INFO | main | Redis event bus started
+2025-11-08 20:55:35,448 | INFO | src.infrastructure.redis.redis_storage | Agent 1S822 stored in Redis
+2025-11-08 20:55:39,590 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: 1S822
+2025-11-08 20:56:16,559 | WARNING | src.domain.service.agent_service | Agent invocation failed: Agent not found
+2025-11-08 20:56:16,561 | WARNING | src.domain.service.agent_service | Agent not found: 1S822
+2025-11-08 21:04:00,163 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-08 21:04:00,165 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-08 21:04:00,167 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-08 21:04:00,168 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-08 21:04:00,999 | INFO | src.config.database | Database tables created successfully
+2025-11-08 21:04:01,003 | INFO | main | Database tables initialized
+2025-11-08 21:04:01,080 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-08 21:04:01,083 | INFO | main | Redis event bus started
+2025-11-08 21:04:37,680 | INFO | src.infrastructure.redis.redis_storage | Agent MX416 stored in Redis
+2025-11-08 21:04:43,250 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: MX416
+2025-11-08 21:05:19,729 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-08 21:08:53,132 | INFO | src.core.utils.save_file | Created directory: documents/user_1/agent_fe051
+2025-11-08 21:08:53,160 | INFO | src.core.utils.save_file | Saved file: documents/user_1/agent_fe051\Khaerul_lutfi.pdf (type: pdf)
+2025-11-08 21:08:57,599 | INFO | src.infrastructure.vector_store.chroma_db | Successfully loaded document: Khaerul_lutfi.pdf
+2025-11-08 21:09:16,892 | INFO | src.infrastructure.redis.redis_storage | Agent fe051 stored in Redis
+2025-11-08 21:09:41,168 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: fe051
+2025-11-08 21:10:34,264 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-09 11:10:00,813 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-09 11:10:01,706 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-09 11:10:01,707 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-09 11:10:01,709 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-09 11:10:03,263 | INFO | src.config.database | Database tables created successfully
+2025-11-09 11:10:03,267 | INFO | main | Database tables initialized
+2025-11-09 11:10:03,304 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-09 11:10:03,309 | INFO | main | Redis event bus started
+2025-11-09 11:11:47,918 | WARNING | src.app.middlewares.auth_middleware | Access attempt without token
+2025-11-09 11:12:01,805 | INFO | app.controllers | User is authenticated: email khaerul@gmail.com
+2025-11-09 11:12:15,523 | WARNING | src.domain.service.agent_service | Agent invocation failed: Agent not found
+2025-11-09 11:12:15,548 | WARNING | src.domain.service.agent_service | Agent not found: fe051
+2025-11-09 11:16:24,306 | INFO | main | Redis event bus stopped
+2025-11-09 11:17:31,808 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-09 11:17:31,812 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-09 11:17:31,814 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-09 11:17:31,828 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-09 11:17:32,991 | INFO | src.config.database | Database tables created successfully
+2025-11-09 11:17:32,997 | INFO | main | Database tables initialized
+2025-11-09 11:17:33,053 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-09 11:17:33,058 | INFO | main | Redis event bus started
+2025-11-09 11:17:54,513 | INFO | src.infrastructure.redis.redis_storage | Agent gd145 stored in Redis
+2025-11-09 11:17:59,784 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: gd145
+2025-11-09 11:18:18,748 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-09 11:18:46,827 | INFO | main | Redis event bus stopped
+2025-11-09 11:19:08,143 | INFO | src.infrastructure.redis.redis_storage | Agent gd145 retrieved from Redis
+2025-11-09 11:20:01,004 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-09 11:20:01,005 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-09 11:20:01,013 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-09 11:20:01,021 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-09 11:20:01,460 | INFO | src.config.database | Database tables created successfully
+2025-11-09 11:20:01,463 | INFO | main | Database tables initialized
+2025-11-09 11:20:01,487 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-09 11:20:01,498 | INFO | main | Redis event bus started
+2025-11-09 11:20:07,413 | INFO | src.infrastructure.redis.redis_storage | Agent gd145 retrieved from Redis
+2025-11-09 11:20:16,642 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: None
+2025-11-09 11:20:18,488 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-09 11:20:50,410 | INFO | main | Redis event bus stopped
+2025-11-09 11:22:41,814 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-09 11:22:41,819 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-09 11:22:41,823 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-09 11:22:41,825 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-09 11:22:42,241 | INFO | src.config.database | Database tables created successfully
+2025-11-09 11:22:42,244 | INFO | main | Database tables initialized
+2025-11-09 11:22:42,337 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-09 11:22:42,341 | INFO | main | Redis event bus started
+2025-11-09 11:22:59,643 | INFO | src.domain.service.user_service | [request_id=68956ec1-6f71-4bcd-868e-35c0d2da097d] [user=khaerul@gmail.com] Admin getting all users
+2025-11-09 11:23:15,431 | INFO | src.domain.service.user_service | [request_id=dd242af3-3028-4b77-87c7-90e53d465bfb] [user=khaerul@gmail.com] Show user profile
+2025-11-09 11:23:26,381 | INFO | src.domain.service.agent_service | [request_id=b6c53c4c-2d27-489c-9086-263682011f39] [user=khaerul@gmail.com] admin getting all agents paginate
+2025-11-09 11:23:41,461 | INFO | src.domain.service.agent_service | [request_id=11182d78-a071-4a92-ae63-39423e92a349] [user=khaerul@gmail.com] admin getting all agents paginate
+2025-11-09 11:23:57,204 | INFO | src.domain.service.agent_service | [request_id=9af186a9-7ed2-43c9-bbbb-7564c57d0852] [user=khaerul@gmail.com] Successfully retrieved agents for user 1
+2025-11-09 11:25:21,584 | INFO | src.domain.service.agent_service | [request_id=32a326aa-d6f3-48ac-b211-abfb22e5cc76] [user=khaerul@gmail.com] Fetched 83 user agents for user_id=1
+2025-11-09 11:29:11,699 | INFO | src.domain.service.agent_service | [request_id=9ad8523e-c81d-44af-a61e-0b8ad863da7b] [user=khaerul@gmail.com] Fetched 83 user agents for user_id=1
+2025-11-09 11:48:30,164 | INFO | app.controllers | User is authenticated: email pelerrii@gmail.com
+2025-11-09 11:48:52,533 | INFO | src.domain.service.agent_service | [request_id=cd26b28d-7e75-4566-9775-675053350f73] [user=pelerrii@gmail.com] Fetched 0 user agents for user_id=7
+2025-11-09 11:49:08,972 | INFO | src.infrastructure.redis.redis_storage | Agent gd145 retrieved from Redis
+2025-11-09 11:49:42,698 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: None
+2025-11-09 11:49:47,679 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-09 11:49:59,845 | INFO | main | Redis event bus stopped
+2025-11-09 11:50:36,782 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-09 11:50:36,783 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-09 11:50:36,785 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-09 11:50:36,787 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-09 11:50:37,324 | INFO | src.config.database | Database tables created successfully
+2025-11-09 11:50:37,347 | INFO | main | Database tables initialized
+2025-11-09 11:50:37,451 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-09 11:50:37,464 | INFO | main | Redis event bus started
+2025-11-09 11:50:41,145 | ERROR | src.domain.service.agent_service | Unexpected error while invoked the agent: InvokeAgentInput.__init__() missing 1 required positional argument: 'state_input'
+2025-11-09 11:50:41,162 | ERROR | src.domain.service.agent_service | Unexpected error during invoking agent: InvokeAgentInput.__init__() missing 1 required positional argument: 'state_input'
+2025-11-09 11:50:41,180 | ERROR | src.domain.service.agent_service | Exception type: TypeError
+2025-11-09 11:50:41,209 | ERROR | src.domain.service.agent_service | Exception args: ("InvokeAgentInput.__init__() missing 1 required positional argument: 'state_input'",)
+2025-11-09 11:50:41,277 | ERROR | app.controllers | Unexpected error: InvokeAgentInput.__init__() missing 1 required positional argument: 'state_input'
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\controllers\agent_controller.py", line 163, in invoke_agent
+    result = await self.agent_service.invoke_agent(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\service\agent_service.py", line 225, in invoke_agent
+    self.handle_unexpected_error("invoking agent", e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\domain\service\agent_service.py", line 190, in invoke_agent
+    InvokeAgentInput(
+    ~~~~~~~~~~~~~~~~^
+        agent_id,
+        ^^^^^^^^^
+    ...<3 lines>...
+        BaseAgentStateModel(messages=[], user_message=user_message),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+TypeError: InvokeAgentInput.__init__() missing 1 required positional argument: 'state_input'
+2025-11-09 11:52:04,683 | INFO | main | Redis event bus stopped
+2025-11-09 11:52:39,208 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-09 11:52:39,211 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-09 11:52:39,212 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-09 11:52:39,213 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-09 11:52:39,757 | INFO | src.config.database | Database tables created successfully
+2025-11-09 11:52:39,761 | INFO | main | Database tables initialized
+2025-11-09 11:52:39,874 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-09 11:52:39,897 | INFO | main | Redis event bus started
+2025-11-09 11:52:43,171 | WARNING | src.domain.service.agent_service | Agent invocation failed: Agent not found or you dont have access to this agent
+2025-11-09 11:52:43,173 | WARNING | src.domain.service.agent_service | Agent not found: gd145
+2025-11-09 12:08:57,806 | INFO | main | Redis event bus stopped

@@ -29,6 +29,10 @@ class IAgentRepository(ABC):
         pass
 
     @abstractmethod
+    async def get_agent_by_user_id(self, user_id: int, agent_id: str) -> Agent | None:
+        pass
+
+    @abstractmethod
     async def get_agents_paginated(
         self, offset: int, limit: int
     ) -> Tuple[List[Agent], int]:

@@ -22,6 +22,8 @@ from src.app.validators.agent_schema import (
     AgentDeleteResponse,
     AgentDetailResponse,
     AgentPaginateResponse,
+    InvokeAgentRequest,
+    InvokeAgentResponse,
     UserAgentResponse,
 )
 from app.utils.response import success_response
@@ -90,6 +92,39 @@ async def getAllUserAgent(
     controller = AgentController(db, request)
     result = await controller.get_all_user_agent(current_user)
     return success_response("Get all user agents is successfully", result)
+
+
+@router.post(
+    "/invoke/{agent_id}",
+    response_model=InvokeAgentResponse,
+    status_code=status.HTTP_200_OK,
+)
+@limiter.limit("30/minute")
+async def invokeAgent(
+    request: Request,
+    agent_id: str,
+    invoke_request: InvokeAgentRequest,
+    current_user: dict = Depends(
+        role_based_access_control.role_required(["admin", "user"])
+    ),
+    db: AsyncSession = Depends(get_db),
+):
+    """
+    Invoke an agent with a user message.
+
+    Args:
+        request: FastAPI request object
+        agent_id: ID of the agent to invoke
+        invoke_request: Request body containing message, username, and platform
+        current_user: Current authenticated user (from JWT token)
+        db: Database session
+
+    Returns:
+        ResponseAPI: Success response with agent response and metadata
+    """
+    controller = AgentController(db, request)
+    result = await controller.invoke_agent(agent_id, invoke_request, current_user)
+    return success_response("Invoke agent is successfully", result)
 
 
 # Note: Create agent endpoint has been moved to specific agent type routes

@@ -34,8 +34,13 @@ from app.controllers import BaseController
 #     validate_agent_exists_and_owned,
 #     validate_user_exists,
 # )
-from src.app.validators.agent_schema import BaseAgentSchema
+from src.app.validators.agent_schema import (
+    BaseAgentSchema,
+    InvokeAgentRequest,
+    InvokeAgentResponseData,
+)
 from src.core.exceptions.agent_exceptions import AgentNotFoundException
+from src.core.exceptions.database_exceptions import DatabaseException
 from src.core.exceptions.user_exceptions import UserNotFoundException
 
 # from src.core.utils.logger import get_logger
@@ -126,6 +131,55 @@ class AgentController(BaseController):
             return result
         except Exception as e:
             self.handle_unexpected_error(e)
+
+    async def invoke_agent(
+        self, agent_id: str, invoke_request: InvokeAgentRequest, current_user: dict
+    ) -> InvokeAgentResponseData:
+        """
+        Invoke an agent with a user message.
+
+        Args:
+            agent_id: ID of the agent to invoke
+            invoke_request: Request containing message, username, and platform
+            current_user: Current authenticated user from JWT
+
+        Returns:
+            InvokeAgentResponseData with agent response and metadata
+
+        Raises:
+            AgentNotFoundException: If agent is not found
+            UserNotFoundException: If user is not found
+            DatabaseException: If database operation fails
+        """
+        try:
+            # Get username from request or use email from current_user
+            username = invoke_request.username
+
+            # Invoke agent using service
+            result = await self.agent_service.invoke_agent(
+                agent_id=agent_id,
+                username=username,
+                user_platform="api",
+                user_message=invoke_request.message,
+            )
+
+            # Map result to response schema
+            return InvokeAgentResponseData(
+                user_message=result.user_message,
+                response=result.response,
+                total_tokens=result.total_tokens,
+                response_time=result.response_time,
+            )
+
+        except AgentNotFoundException as e:
+            raise e
+        except UserNotFoundException as e:
+            raise e
+        except DatabaseException as e:
+            raise e
+        except Exception as e:
+            self.handle_unexpected_error(e)
+            raise
 
 
 # Old function removed - logic moved to service layer

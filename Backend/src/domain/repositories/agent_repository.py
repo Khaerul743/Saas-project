@@ -18,6 +18,11 @@ class AgentRepository(IAgentRepository):
     def __init__(self, db: AsyncSession):
         self.db = db
 
+    async def get_agent_by_user_id(self, user_id: int, agent_id: str):
+        query = select(Agent).where(Agent.user_id == user_id, Agent.id == agent_id)
+        result = await self.db.execute(query)
+        return result.scalar_one_or_none()
+
     async def get_agent_by_id(self, agent_id: str):
         query = select(Agent).where(Agent.id == agent_id)
         result = await self.db.execute(query)

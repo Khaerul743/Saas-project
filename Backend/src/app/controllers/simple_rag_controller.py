@@ -49,6 +49,7 @@ class SimpleRAGController(BaseController):
                     avatar=agent_data.get("avatar", None),
                     model=agent_data.get("model"),
                     role=agent_data.get("role"),
+                    llm_provider=agent_data.get("llm_provider"),
                     description=agent_data.get("description", None),
                     status=agent_data.get("status"),
                     short_term_memory=agent_data.get("short_term_memory", False),

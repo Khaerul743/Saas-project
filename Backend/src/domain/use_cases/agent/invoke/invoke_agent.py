@@ -1,14 +1,20 @@
 from dataclasses import dataclass
 from typing import Literal
 
+from src.core.exceptions.agent_exceptions import AgentNotFoundException
 from src.domain.use_cases.base import BaseUseCase, UseCaseResult
-from src.infrastructure.ai.agents import BaseAgent, BaseAgentStateModel
+from src.domain.use_cases.interfaces import IAgentRepository, IStorageAgentObj
+from src.infrastructure.ai.agents import BaseAgentStateModel
+from src.infrastructure.data import AgentManager
 
-from .. import (
+from ..history_message import (
     CreateHistoryMessage,
     CreateHistoryMessageInput,
     CreateMetadata,
     CreateMetadataInput,
+)
+from ..initial_agent_again import InitialAgentAgain, InitialAgentAgainInput
+from ..user_agent import (
     CreateUserAgent,
     CreateUserAgentInput,
 )
@@ -16,6 +22,7 @@ from .. import (
 
 @dataclass
 class InvokeAgentInput:
+    user_id: int
     agent_id: str
     unique_id: str
     username: str
@@ -34,15 +41,21 @@ class InvokeAgentOutput:
 class InvokeAgent(BaseUseCase[InvokeAgentInput, InvokeAgentOutput]):
     def __init__(
         self,
+        agent_repository: IAgentRepository,
         create_user_agent: CreateUserAgent,
         create_history_message: CreateHistoryMessage,
         create_metadata: CreateMetadata,
-        agent: BaseAgent,
+        agent_manager: AgentManager,
+        storage_agent_obj: IStorageAgentObj,
+        initial_agent_again: InitialAgentAgain,
     ):
+        self.agent_repository = agent_repository
         self.create_user_agent = create_user_agent
         self.create_history_message = create_history_message
         self.create_metadata = create_metadata
-        self.agent = agent
+        self.agent_manager = agent_manager
+        self.store_agent_obj = storage_agent_obj
+        self.initial_agent_again = initial_agent_again
 
     async def execute(
         self, input_data: InvokeAgentInput
@@ -57,7 +70,7 @@ class InvokeAgent(BaseUseCase[InvokeAgentInput, InvokeAgentOutput]):
                     input_data.user_platform,
                 )
             )
-            if new_user_agent.is_success():
+            if not new_user_agent.is_success():
                 return self._return_exception(new_user_agent)
 
             user_agent_data = new_user_agent.get_data()
@@ -68,10 +81,45 @@ class InvokeAgent(BaseUseCase[InvokeAgentInput, InvokeAgentOutput]):
 
             user_agent_id = user_agent_data.id
 
-            self.agent.execute(input_data.state_input, user_agent_id)
+            # Get agent in agent manager
+            agent = self.agent_manager.get_agent_in_memory(input_data.agent_id)
+            if not agent:
+                print("AGENT DOESNT EXISTTTT")
+                # if agent doens't exist, get agent from storage obj
+                get_agent_from_storage_obj = await self.store_agent_obj.get_agent(
+                    input_data.agent_id
+                )
+
+                if not get_agent_from_storage_obj:
+                    return UseCaseResult.error_result(
+                        "Agent not found", AgentNotFoundException(input_data.agent_id)
+                    )
+
+                # Initial the agent again
+                role = get_agent_from_storage_obj.get("role")
+                if not role:
+                    return UseCaseResult.error_result(
+                        "Role agent obj is empty", ValueError("Role agent obj is empty")
+                    )
+
+                initial_agent = self.initial_agent_again.execute(
+                    InitialAgentAgainInput(role, get_agent_from_storage_obj)
+                )
+                if not initial_agent.is_success():
+                    self._return_exception(initial_agent)
+
+                get_agent = initial_agent.get_data()
+                if not get_agent:
+                    return UseCaseResult.error_result(
+                        "Agent is empty", RuntimeError("Agent is empty")
+                    )
+
+                agent = get_agent.agent
+
+            agent.execute(input_data.state_input, user_agent_id)
 
             # get agent response
-            response = self.agent.get_response()
+            response = agent.get_response()
 
             if response is None:
                 return UseCaseResult.error_result(
@@ -80,13 +128,13 @@ class InvokeAgent(BaseUseCase[InvokeAgentInput, InvokeAgentOutput]):
                 )
 
             # get agent token usage
-            total_tokens = self.agent.get_response_time()
+            total_tokens = agent.get_token_usage()
 
             # get agent response time
-            response_time = self.agent.get_response_time()
+            response_time = agent.get_response_time()
 
             # get agent llm model
-            llm_model = self.agent.get_llm_model()
+            llm_model = agent.get_llm_model()
 
             # Save history message
             new_history_message = await self.create_history_message.execute(
@@ -94,7 +142,7 @@ class InvokeAgent(BaseUseCase[InvokeAgentInput, InvokeAgentOutput]):
                     user_agent_id, input_data.state_input.user_message, response
                 )
             )
-            if not new_history_message:
+            if not new_history_message.is_success():
                 return self._return_exception(new_history_message)
 
             history_message_data = new_history_message.get_data()
@@ -110,7 +158,7 @@ class InvokeAgent(BaseUseCase[InvokeAgentInput, InvokeAgentOutput]):
                     history_message_data.id, total_tokens, response_time, llm_model
                 )
             )
-            if not new_metadata:
+            if not new_metadata.is_success():
                 return self._return_exception(new_metadata)
 
             return UseCaseResult.success_result(

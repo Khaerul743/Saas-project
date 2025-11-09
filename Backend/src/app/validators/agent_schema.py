@@ -27,6 +27,8 @@ class BaseAgentSchema(BaseModel):
 
 
 class CreateAgent(BaseAgentSchema):
+    llm_provider: str
+
     class Config:
         orm_mode = True
 
@@ -103,3 +105,28 @@ class AgentStatsSchema(BaseModel):
 
 class UserAgentResponse(BaseSchemaOut):
     data: dict
+
+
+class InvokeAgentRequest(BaseModel):
+    message: str
+    username: str
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "message": "Hello, how can you help me?",
+                "username": "john_doe",
+                "user_platform": "api",
+            }
+        }
+
+
+class InvokeAgentResponseData(BaseModel):
+    user_message: str
+    response: str
+    total_tokens: int | float
+    response_time: int | float
+
+
+class InvokeAgentResponse(BaseSchemaOut):
+    data: InvokeAgentResponseData

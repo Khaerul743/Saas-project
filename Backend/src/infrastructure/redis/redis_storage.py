@@ -31,7 +31,7 @@ class RedisStorage(IStorageAgentObj):
             logger.error(f"Error while storing agent {agent_id} in Redis: {str(e)}")
             return False
 
-    async def get_agent(self, agent_id: str):
+    async def get_agent(self, agent_id: str) -> dict | None:
         try:
             key = f"agent:{agent_id}"
             data = await self.redis_client.get(key)

@@ -4,21 +4,21 @@ from fastapi import UploadFile
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.app.validators.agent_schema import CreateAgent
-from src.core.exceptions.auth_exceptions import NotAuthenticateException
 from src.core.exceptions.user_exceptions import UserNotFoundException
 from src.core.utils.save_file import SaveFileHandler
 from src.domain.repositories import AgentRepository, DocumentRepository
 from src.domain.service import BaseService
 from src.domain.use_cases.agent import (
     AddDocumentToAgent,
-    AddDocumentToAgentInput,
     CreateAgentEntity,
     CreateSimpleRagAgent,
     CreateSimpleRagAgentInput,
+    InitialSimpleRagAgent,
+    StoreAgentInMemory,
     StoreAgentObj,
     UploadedDocumentHandler,
-    UploadedDocumentInput,
 )
+from src.infrastructure.data import AgentManager, agent_manager
 from src.infrastructure.redis.redis_storage import RedisStorage
 
 
@@ -30,6 +30,7 @@ class SimpleRagAgentService(BaseService):
         self.chroma_db_path = "chroma_db"
         self.document_repository = DocumentRepository(db)
         self.agent_repository = AgentRepository(db)
+        self.agent_manager = agent_manager
         self.save_file = SaveFileHandler()
         self.uploaded_document_handler = UploadedDocumentHandler(
             self.document_repository, self.save_file
@@ -37,11 +38,17 @@ class SimpleRagAgentService(BaseService):
         self.add_document_to_agent = AddDocumentToAgent(self.chroma_db_path)
         self.create_agent_entity = CreateAgentEntity(self.agent_repository)
         self.store_agent_obj = StoreAgentObj(self.storage_agent_obj)
+
+        self.store_agent_in_memory = StoreAgentInMemory(self.agent_manager)
+        self.initial_simple_rag_agent = InitialSimpleRagAgent(
+            self.store_agent_in_memory
+        )
         self.create_simple_rag_handler = CreateSimpleRagAgent(
             self.uploaded_document_handler,
             self.add_document_to_agent,
             self.create_agent_entity,
             self.store_agent_obj,
+            self.initial_simple_rag_agent,
         )
 
     async def create_simple_rag_agent(
@@ -58,7 +65,11 @@ class SimpleRagAgentService(BaseService):
             # Create simple rag agent process
             agent = await self.create_simple_rag_handler.execute(
                 CreateSimpleRagAgentInput(
-                    get_user_id, agent_data_dict, self.chroma_db_path, file
+                    get_user_id,
+                    agent_data.llm_provider,
+                    agent_data_dict,
+                    self.chroma_db_path,
+                    file,
                 )
             )
 

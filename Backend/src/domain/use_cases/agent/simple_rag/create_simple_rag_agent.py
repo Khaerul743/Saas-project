@@ -15,11 +15,16 @@ from ..document.uploaded_document import (
     UploadedDocumentInput,
 )
 from ..store_agent_obj import StoreAgentObj, StoreAgentObjInput
+from .initial_simple_rag_agent import (
+    InitialSimpleRagAgent,
+    InitialSimpleRagAgentInput,
+)
 
 
 @dataclass
 class CreateSimpleRagAgentInput:
     user_id: int
+    llm_provider: str
     agent_data: dict
     chroma_db_path: str
     file: Optional[UploadFile] = None
@@ -34,11 +39,13 @@ class CreateSimpleRagAgent(
         document_store: AddDocumentToAgent,
         create_agent_entity: CreateAgentEntity,
         store_agent_obj: StoreAgentObj,
+        initial_simple_rag_agent: InitialSimpleRagAgent,
     ):
         self.uploaded_document_handler = uploaded_document_handler
         self.document_store = document_store
         self.create_agent_entity = create_agent_entity
         self.store_agent_obj = store_agent_obj
+        self.initial_simple_rag_agent = initial_simple_rag_agent
 
     async def execute(
         self, input_data: CreateSimpleRagAgentInput
@@ -99,6 +106,7 @@ class CreateSimpleRagAgent(
                 "directory_path": directory_path,
                 "chromadb_path": input_data.chroma_db_path,
                 "collection_name": collection_name,
+                "llm_provider": input_data.llm_provider,
                 "model_llm": get_data_agent.model,
                 "short_memory": get_data_agent.short_term_memory,
                 "long_memory": get_data_agent.long_term_memory,
@@ -110,6 +118,21 @@ class CreateSimpleRagAgent(
 
             if not store_agent_obj_result.is_success():
                 return self._return_exception(store_agent_obj_result)
+
+            # Initial simple rag agent
+            self.initial_simple_rag_agent.execute(
+                InitialSimpleRagAgentInput(
+                    agent_id,
+                    input_data.chroma_db_path,
+                    collection_name or "default",
+                    input_data.llm_provider,
+                    get_data_agent.model,
+                    get_data_agent.tone,
+                    get_data_agent.base_prompt,
+                    get_data_agent.short_term_memory,
+                    get_data_agent.long_term_memory,
+                )
+            )
 
             return UseCaseResult.success_result(get_data_agent)
         except Exception as e:
