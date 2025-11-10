@@ -7654,3 +7654,32 @@ TypeError: InvokeAgentInput.__init__() missing 1 required positional argument: '
 2025-11-09 20:22:29,094 | WARNING | src.app.middlewares.auth_middleware | Access attempt without token
 2025-11-09 20:22:46,360 | INFO | src.app.controllers.base | User is authenticated: email pelerii@gmail.com
 2025-11-09 20:23:56,787 | INFO | main | Redis event bus stopped
+2025-11-09 20:41:10,748 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-09 20:41:10,753 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-09 20:41:10,757 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-09 20:41:10,759 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-09 20:41:11,803 | INFO | src.config.database | Database tables created successfully
+2025-11-09 20:41:11,814 | INFO | main | Database tables initialized
+2025-11-09 20:41:12,141 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-09 20:41:12,145 | INFO | main | Redis event bus started
+2025-11-09 20:42:27,618 | WARNING | main | Validation error: [{'type': 'datetime_from_date_parsing', 'loc': ('query', 'start_date'), 'msg': 'Input should be a valid datetime or date, input is too short', 'input': '2025-11-8', 'ctx': {'error': 'input is too short'}}]
+2025-11-09 20:43:01,518 | WARNING | main | Validation error: [{'type': 'datetime_from_date_parsing', 'loc': ('query', 'start_date'), 'msg': 'Input should be a valid datetime or date, input is too short', 'input': '2025-10-8', 'ctx': {'error': 'input is too short'}}]
+2025-11-10 10:09:30,640 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-10 10:09:30,643 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-10 10:09:30,643 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-10 10:09:30,644 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-10 10:09:31,540 | INFO | src.config.database | Database tables created successfully
+2025-11-10 10:09:31,545 | INFO | main | Database tables initialized
+2025-11-10 10:09:31,574 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-10 10:09:31,577 | INFO | main | Redis event bus started
+2025-11-10 10:10:16,201 | INFO | src.app.controllers.base | User is authenticated: email pelerii@gmail.com
+2025-11-10 10:12:44,835 | INFO | main | Redis event bus stopped
+2025-11-10 10:13:56,043 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-10 10:13:56,055 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-10 10:13:56,056 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-10 10:13:56,057 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-10 10:13:57,233 | INFO | src.config.database | Database tables created successfully
+2025-11-10 10:13:57,239 | INFO | main | Database tables initialized
+2025-11-10 10:13:57,368 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-10 10:13:57,371 | INFO | main | Redis event bus started
+2025-11-10 10:14:22,344 | INFO | main | Redis event bus stopped

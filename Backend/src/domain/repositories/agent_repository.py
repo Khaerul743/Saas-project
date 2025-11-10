@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Any, Optional, Sequence
 
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -188,3 +188,28 @@ class AgentRepository(IAgentRepository):
         await self.db.flush()
         await self.db.refresh(agent)
         return agent
+
+    async def get_total_tokens_per_agent(self, user_id: int) -> Sequence[Any]:
+        """
+        Get total tokens aggregated per agent for a user.
+
+        Note: We join:
+          Agent -> UserAgent -> HistoryMessage -> Metadata
+        """
+        stmt = (
+            select(
+                Agent.id.label("agent_id"),
+                Agent.name.label("agent_name"),
+                func.coalesce(func.sum(Metadata.total_tokens), 0).label("total_tokens"),
+            )
+            .select_from(Agent)
+            .join(UserAgent, UserAgent.agent_id == Agent.id)
+            .join(HistoryMessage, HistoryMessage.user_agent_id == UserAgent.id)
+            .join(Metadata, Metadata.history_message_id == HistoryMessage.id)
+            .where(Agent.user_id == user_id)
+            .group_by(Agent.id, Agent.name)
+            .order_by(Agent.id)
+        )
+
+        result = await self.db.execute(stmt)
+        return result.all()

@@ -3,7 +3,7 @@ Repository interface for Agent domain operations.
 """
 
 from abc import ABC, abstractmethod
-from typing import List, Optional, Tuple
+from typing import Any, List, Optional, Sequence, Tuple
 
 from src.domain.models.agent_entity import Agent
 from src.domain.models.user_entity import User
@@ -124,5 +124,18 @@ class IAgentRepository(ABC):
 
         Returns:
             The updated agent entity if found, None otherwise
+        """
+        pass
+
+    @abstractmethod
+    async def get_total_tokens_per_agent(self, user_id: int) -> Sequence[Any]:
+        """
+        Get total tokens aggregated per agent for a user.
+
+        Args:
+            user_id: ID of the user
+
+        Returns:
+            Sequence of query results with agent_id, agent_name, and total_tokens
         """
         pass
