@@ -9,12 +9,17 @@ from src.app.validators.agent_schema import (
     AgentPaginateOut,
     AgentStatsSchema,
     BaseAgentSchema,
+    InvokeAgentApiRequest,
     UserAgentSchema,
 )
-from src.core.exceptions.agent_exceptions import AgentNotFoundException
+from src.core.exceptions.agent_exceptions import (
+    AgentNotFoundException,
+    InvalidApiKeyException,
+)
 from src.core.exceptions.database_exceptions import DatabaseException
 from src.domain.repositories import (
     AgentRepository,
+    ApiKeyRepository,
     HistoryMessageRepository,
     MetadataRepository,
     UserAgentRepository,
@@ -33,6 +38,8 @@ from src.domain.use_cases.agent import (
     InitialAgentAgain,
     InitialSimpleRagAgent,
     InvokeAgent,
+    InvokeAgentApi,
+    InvokeAgentApiInput,
     InvokeAgentInput,
     StoreAgentInMemory,
 )
@@ -49,8 +56,8 @@ class AgentService(BaseService):
         self.user_agent_repo = UserAgentRepository(db)
         self.history_message_repo = HistoryMessageRepository(db)
         self.metadata_repo = MetadataRepository(db)
+        self.apikey_repo = ApiKeyRepository(db)
         self.storage_agent_obj = RedisStorage()
-        self.agent_manager = agent_manager
 
         # Initialize use cases
         self.format_agent_data_use_case = FormatAgentDataUseCase()
@@ -67,7 +74,7 @@ class AgentService(BaseService):
         self.delete_agent_use_case = DeleteAgentUseCase(self.agent_repo)
 
         # Invoke agent
-        self.store_agent_in_memory = StoreAgentInMemory(self.agent_manager)
+        self.store_agent_in_memory = StoreAgentInMemory(agent_manager)
         self.initial_simple_rag_agent = InitialSimpleRagAgent(
             self.store_agent_in_memory
         )
@@ -79,12 +86,18 @@ class AgentService(BaseService):
 
         self.invoke_agent_use_case = InvokeAgent(
             self.agent_repo,
+            self.user_agent_repo,
             self.create_user_agent,
             self.create_history_message,
             self.create_metadata,
-            self.agent_manager,
+            agent_manager,
             self.storage_agent_obj,
             self.initial_agent_again,
+        )
+
+        # Invoke agent with api key
+        self.invoke_agent_apikey_usecase = InvokeAgentApi(
+            self.apikey_repo, self.invoke_agent_use_case
         )
 
     async def get_all_agents(self, page: int, limit: int) -> AgentPaginateOut:
@@ -160,7 +173,7 @@ class AgentService(BaseService):
             self.handle_unexpected_error("deleting agent", e)
             raise
 
-    async def invoke_agent(
+    async def invoke_agent_in_playground(
         self,
         agent_id: str,
         username: str,
@@ -198,7 +211,6 @@ class AgentService(BaseService):
 
             invoked_agent = await self.invoke_agent_use_case.execute(
                 InvokeAgentInput(
-                    current_user_id,
                     agent_id,
                     unique_id,
                     username,
@@ -236,6 +248,46 @@ class AgentService(BaseService):
             self.logger.error(f"Unexpected error while invoked the agent: {str(e)}")
             self.handle_unexpected_error("invoking agent", e)
             raise
+
+    async def invoke_agent_api(
+        self, agent_id: str, api_key: str, payload: InvokeAgentApiRequest
+    ):
+        try:
+            # Invoke agent with api key
+            invoke_agent = await self.invoke_agent_apikey_usecase.execute(
+                InvokeAgentApiInput(
+                    agent_id,
+                    payload.unique_id,
+                    payload.username,
+                    payload.message,
+                    api_key,
+                    BaseAgentStateModel(messages=[], user_message=payload.message),
+                )
+            )
+            if not invoke_agent.is_success():
+                get_exception = invoke_agent.get_exception()
+                if get_exception:
+                    raise get_exception
+
+            response_data = invoke_agent.get_data()
+            if response_data is None:
+                raise RuntimeError("Invoke agent is not returned response")
+
+            return response_data
+
+        except InvalidApiKeyException as e:
+            self.logger.warning(f"Invalid api key: {str(e)}")
+            raise e
+        except RuntimeError as e:
+            self.logger.error(
+                f"Run time error while invoke agent with api key: {str(e)}"
+            )
+            raise e
+        except Exception as e:
+            self.logger.error(
+                f"Unexpected error while invoke agent with api key: {str(e)}"
+            )
+            raise e
 
     async def get_user_agents_with_statistics(self, user_id: int) -> dict:
         """Get user agents with statistics using use case."""

@@ -21,4 +21,5 @@ class PlatformRepository(IPlatformReporitory):
         )
         self.db.add(new_platform)
         await self.db.flush()
+        await self.db.refresh(new_platform)
         return new_platform

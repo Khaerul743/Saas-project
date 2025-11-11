@@ -3,7 +3,7 @@ from typing import Literal
 
 from src.domain.use_cases.base import BaseUseCase, UseCaseResult
 
-from .create_integration import CreateIntegration, CreateIntegrationInput
+from ..create_integration import CreateIntegration, CreateIntegrationInput
 from .generate_api_key import GenerateApiKey, GenerateApiKeyInput
 
 
@@ -15,13 +15,13 @@ class ApiIntegrationInput:
 
 
 @dataclass
-class ApiIntegrationOutput:
+class IntegrationOutput:
     integration_id: int
     platform_id: int
-    api_key_id: int
+    api_key: str
 
 
-class ApiIntegration(BaseUseCase[ApiIntegrationInput, ApiIntegrationOutput]):
+class ApiIntegration(BaseUseCase[ApiIntegrationInput, IntegrationOutput]):
     def __init__(
         self,
         generate_api_key_usecase: GenerateApiKey,
@@ -32,7 +32,7 @@ class ApiIntegration(BaseUseCase[ApiIntegrationInput, ApiIntegrationOutput]):
 
     async def execute(
         self, input_data: ApiIntegrationInput
-    ) -> UseCaseResult[ApiIntegrationOutput]:
+    ) -> UseCaseResult[IntegrationOutput]:
         try:
             generate_api_key = await self.generate_api_key.execute(
                 GenerateApiKeyInput(
@@ -50,7 +50,6 @@ class ApiIntegration(BaseUseCase[ApiIntegrationInput, ApiIntegrationOutput]):
                     "Generate api key is not returned",
                     RuntimeError("Generate api key is not returned"),
                 )
-
             new_integration = await self.create_integration.execute(
                 CreateIntegrationInput(
                     input_data.agent_id,
@@ -64,7 +63,6 @@ class ApiIntegration(BaseUseCase[ApiIntegrationInput, ApiIntegrationOutput]):
                 return self._return_exception(new_integration)
 
             new_integration_data = new_integration.get_data()
-
             if new_integration_data is None:
                 return UseCaseResult.error_result(
                     "New integration use case is not returned",
@@ -72,10 +70,10 @@ class ApiIntegration(BaseUseCase[ApiIntegrationInput, ApiIntegrationOutput]):
                 )
 
             return UseCaseResult.success_result(
-                ApiIntegrationOutput(
+                IntegrationOutput(
                     new_integration_data.integration_id,
                     new_integration_data.platform_id,
-                    get_api_key_data.api_key_id,
+                    get_api_key_data.api_key,
                 )
             )
         except Exception as e:

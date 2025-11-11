@@ -3,7 +3,11 @@ from typing import Literal
 
 from src.core.exceptions.agent_exceptions import AgentNotFoundException
 from src.domain.use_cases.base import BaseUseCase, UseCaseResult
-from src.domain.use_cases.interfaces import IAgentRepository, IStorageAgentObj
+from src.domain.use_cases.interfaces import (
+    IAgentRepository,
+    IStorageAgentObj,
+    IUserAgentRepository,
+)
 from src.infrastructure.ai.agents import BaseAgentStateModel
 from src.infrastructure.data import AgentManager
 
@@ -22,7 +26,6 @@ from ..user_agent import (
 
 @dataclass
 class InvokeAgentInput:
-    user_id: int
     agent_id: str
     unique_id: str
     username: str
@@ -42,6 +45,7 @@ class InvokeAgent(BaseUseCase[InvokeAgentInput, InvokeAgentOutput]):
     def __init__(
         self,
         agent_repository: IAgentRepository,
+        user_agent_repository: IUserAgentRepository,
         create_user_agent: CreateUserAgent,
         create_history_message: CreateHistoryMessage,
         create_metadata: CreateMetadata,
@@ -50,6 +54,7 @@ class InvokeAgent(BaseUseCase[InvokeAgentInput, InvokeAgentOutput]):
         initial_agent_again: InitialAgentAgain,
     ):
         self.agent_repository = agent_repository
+        self.user_agent_repository = user_agent_repository
         self.create_user_agent = create_user_agent
         self.create_history_message = create_history_message
         self.create_metadata = create_metadata
@@ -61,35 +66,47 @@ class InvokeAgent(BaseUseCase[InvokeAgentInput, InvokeAgentOutput]):
         self, input_data: InvokeAgentInput
     ) -> UseCaseResult[InvokeAgentOutput]:
         try:
-            # Create user agent
-            new_user_agent = await self.create_user_agent.execute(
-                CreateUserAgentInput(
-                    input_data.agent_id,
-                    input_data.unique_id,
-                    input_data.username,
-                    input_data.user_platform,
-                )
+            # Is user agent exist
+
+            user_agent_id = input_data.agent_id + input_data.unique_id
+            user_agent_data = await self.user_agent_repository.get_user_agent_by_id(
+                user_agent_id
             )
-            if not new_user_agent.is_success():
-                return self._return_exception(new_user_agent)
-
-            user_agent_data = new_user_agent.get_data()
             if not user_agent_data:
-                return UseCaseResult.error_result(
-                    "User agent data is empty", RuntimeError("User agent data is empty")
+                print("USER AGENT KAGA ADA")
+                # Create user agent
+                new_user_agent = await self.create_user_agent.execute(
+                    CreateUserAgentInput(
+                        input_data.agent_id,
+                        input_data.unique_id,
+                        input_data.username,
+                        input_data.user_platform,
+                    )
                 )
 
-            user_agent_id = user_agent_data.id
+                if not new_user_agent.is_success():
+                    return self._return_exception(new_user_agent)
+
+                user_agent_data = new_user_agent.get_data()
+                if not user_agent_data:
+                    return UseCaseResult.error_result(
+                        "User agent data is empty",
+                        RuntimeError("User agent data is empty"),
+                    )
+
+                user_agent_id = user_agent_data.id
 
             # Get agent in agent manager
             agent = self.agent_manager.get_agent_in_memory(input_data.agent_id)
+            print(
+                f"ALL AGENTS IN MEMORY: {self.agent_manager.get_all_agents_in_memory()}"
+            )
             if not agent:
                 print("AGENT DOESNT EXISTTTT")
                 # if agent doens't exist, get agent from storage obj
                 get_agent_from_storage_obj = await self.store_agent_obj.get_agent(
                     input_data.agent_id
                 )
-
                 if not get_agent_from_storage_obj:
                     return UseCaseResult.error_result(
                         "Agent not found", AgentNotFoundException(input_data.agent_id)
@@ -103,7 +120,9 @@ class InvokeAgent(BaseUseCase[InvokeAgentInput, InvokeAgentOutput]):
                     )
 
                 initial_agent = self.initial_agent_again.execute(
-                    InitialAgentAgainInput(role, get_agent_from_storage_obj)
+                    InitialAgentAgainInput(
+                        input_data.agent_id, role, get_agent_from_storage_obj
+                    )
                 )
                 if not initial_agent.is_success():
                     self._return_exception(initial_agent)

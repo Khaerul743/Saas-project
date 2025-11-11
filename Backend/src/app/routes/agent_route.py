@@ -20,6 +20,7 @@ from src.app.validators.agent_schema import (
     AgentDeleteResponse,
     AgentDetailResponse,
     AgentPaginateResponse,
+    InvokeAgentApiRequest,
     InvokeAgentRequest,
     InvokeAgentResponse,
     UserAgentResponse,
@@ -95,7 +96,7 @@ async def getAllUserAgent(
 
 
 @router.post(
-    "/invoke/{agent_id}",
+    "/playground/invoke/{agent_id}",
     response_model=InvokeAgentResponse,
     status_code=status.HTTP_200_OK,
 )
@@ -123,7 +124,30 @@ async def invokeAgent(
         ResponseAPI: Success response with agent response and metadata
     """
     controller = AgentController(db, request)
-    result = await controller.invoke_agent(agent_id, invoke_request, current_user)
+    result = await controller.invoke_agent_in_playground(
+        agent_id, invoke_request, current_user
+    )
+    return success_response("Invoke agent is successfully", result)
+
+
+@router.post(
+    "/invoke/{agent_id}",
+    response_model=InvokeAgentResponse,
+    status_code=status.HTTP_200_OK,
+)
+@limiter.limit("30/minute")
+async def invokeAgentApiKey(
+    request: Request,
+    agent_id: str,
+    api_key: str,
+    payload: InvokeAgentApiRequest,
+    current_user: dict = Depends(
+        role_based_access_control.role_required(["admin", "user"])
+    ),
+    db: AsyncSession = Depends(get_db),
+):
+    controller = AgentController(db, request)
+    result = await controller.invoke_agent_with_api_key(agent_id, api_key, payload)
     return success_response("Invoke agent is successfully", result)
 
 

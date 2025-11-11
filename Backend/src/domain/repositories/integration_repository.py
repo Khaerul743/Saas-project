@@ -2,7 +2,7 @@ from typing import Literal
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from domain.models.integration_entity import Integration
+from src.domain.models.integration_entity import Integration
 from src.domain.use_cases.interfaces import IIntergrationRepository
 
 
@@ -20,5 +20,6 @@ class IntegrationRepository(IIntergrationRepository):
             agent_id=agent_id, platform=platform, status=status
         )
         self.db.add(new_integration)
-        await self.db.flush(new_integration)
+        await self.db.flush()
+        await self.db.refresh(new_integration)
         return new_integration

@@ -1,63 +1,21 @@
-# import os
-# import shutil
-from typing import List, Optional
+from typing import Optional
 
-# from fastapi import BackgroundTasks, Form, HTTPException, UploadFile, status
-# from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
 
-# from sqlalchemy.orm import Session, joinedload
-# from sqlalchemy.orm.query import Query
-# from app.AI import simple_RAG_agent as AI
 from src.app.controllers.base import BaseController
-
-# from app.controllers.document_controller import agents
-# from app.models.agent.agent_model import (
-#     AgentInvoke,
-#     AgentOut,
-#     CreateAgent,
-#     GettingAllAgents,
-#     UpdateAgent,
-# )
-# from app.utils.agent_utils import (
-#     calculate_agent_statistics,
-#     format_user_agents_data,
-#     get_default_stats_response,
-# )
-# from app.utils.document_utils import write_document
-# from app.utils.error_utils import (
-#     handle_agent_not_found,
-#     handle_database_error,
-#     handle_user_not_found,
-# )
-# from app.utils.validation_utils import (
-#     validate_agent_exists_and_owned,
-#     validate_user_exists,
-# )
 from src.app.validators.agent_schema import (
     BaseAgentSchema,
+    InvokeAgentApiRequest,
     InvokeAgentRequest,
     InvokeAgentResponseData,
 )
-from src.core.exceptions.agent_exceptions import AgentNotFoundException
+from src.core.exceptions.agent_exceptions import (
+    AgentNotFoundException,
+    InvalidApiKeyException,
+)
 from src.core.exceptions.database_exceptions import DatabaseException
 from src.core.exceptions.user_exceptions import UserNotFoundException
-
-# from src.core.utils.logger import get_logger
-# from src.domain.events.redis_event import Event, EventType, event_bus
-# # from app.controllers.document_controller import agents
-# from src.domain.models.agent_entity import Agent
-# from src.domain.models.company_entity import CompanyInformation
-# from src.domain.models.document_entity import Document
-# from src.domain.models.history_entity import HistoryMessage
-# from src.domain.models.integration_entity import Integration
-# from src.domain.models.metadata_entity import Metadata
-# from src.domain.models.platform_entity import Platform
-# from src.domain.models.user_agent_entity import UserAgent
-# from src.domain.models.user_entity import User
 from src.domain.service.agent_service import AgentService
-
-# from src.infrastructure.redis.redis_storage import redis_storage
 
 
 class AgentController(BaseController):
@@ -132,7 +90,7 @@ class AgentController(BaseController):
         except Exception as e:
             self.handle_unexpected_error(e)
 
-    async def invoke_agent(
+    async def invoke_agent_in_playground(
         self, agent_id: str, invoke_request: InvokeAgentRequest, current_user: dict
     ) -> InvokeAgentResponseData:
         """
@@ -156,7 +114,7 @@ class AgentController(BaseController):
             username = invoke_request.username
 
             # Invoke agent using service
-            result = await self.agent_service.invoke_agent(
+            result = await self.agent_service.invoke_agent_in_playground(
                 agent_id=agent_id,
                 username=username,
                 user_platform="api",
@@ -176,6 +134,27 @@ class AgentController(BaseController):
         except UserNotFoundException as e:
             raise e
         except DatabaseException as e:
+            raise e
+        except Exception as e:
+            self.handle_unexpected_error(e)
+            raise
+
+    async def invoke_agent_with_api_key(
+        self, agent_id: str, api_key: str, payload: InvokeAgentApiRequest
+    ):
+        try:
+            invoke_agent = await self.agent_service.invoke_agent_api(
+                agent_id, api_key, payload
+            )
+            return InvokeAgentResponseData(
+                user_message=payload.message,
+                response=invoke_agent.response,
+                total_tokens=invoke_agent.total_tokens,
+                response_time=invoke_agent.response_time,
+            )
+        except InvalidApiKeyException as e:
+            raise e
+        except RuntimeError as e:
             raise e
         except Exception as e:
             self.handle_unexpected_error(e)

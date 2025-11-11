@@ -7683,3 +7683,1182 @@ TypeError: InvokeAgentInput.__init__() missing 1 required positional argument: '
 2025-11-10 10:13:57,368 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
 2025-11-10 10:13:57,371 | INFO | main | Redis event bus started
 2025-11-10 10:14:22,344 | INFO | main | Redis event bus stopped
+2025-11-10 22:06:03,309 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-10 22:06:03,318 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-10 22:06:03,322 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-10 22:06:03,331 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-10 22:06:04,785 | INFO | src.config.database | Database tables created successfully
+2025-11-10 22:06:04,790 | INFO | main | Database tables initialized
+2025-11-10 22:06:05,002 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-10 22:06:05,009 | INFO | main | Redis event bus started
+2025-11-10 22:06:43,649 | INFO | src.app.controllers.base | User is authenticated: email pelerii@gmail.com
+2025-11-10 22:07:24,250 | INFO | src.infrastructure.redis.redis_storage | Agent Sh054 stored in Redis
+2025-11-10 22:07:29,845 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: Sh054
+2025-11-10 22:08:01,933 | ERROR | src.domain.service.integration_service | Run time error while create integration: Create integration is not returned data
+2025-11-10 22:08:01,958 | ERROR | src.app.middlewares.error_handler | Unexpected error: Create integration is not returned data
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\routes\integration_route.py", line 32, in createIntegration
+    create_integration = await controller.create_integration(agent_id, payload)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 25, in create_integration
+    raise e
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 18, in create_integration
+    new_integration = await self.integration_service.create_integration(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        agent_id, payload
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 68, in create_integration
+    raise e
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 58, in create_integration
+    raise RuntimeError("Create integration is not returned data")
+RuntimeError: Create integration is not returned data
+2025-11-10 22:11:25,524 | INFO | main | Redis event bus stopped
+2025-11-10 22:11:56,022 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-10 22:11:56,024 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-10 22:11:56,025 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-10 22:11:56,027 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-10 22:11:57,327 | INFO | src.config.database | Database tables created successfully
+2025-11-10 22:11:57,342 | INFO | main | Database tables initialized
+2025-11-10 22:11:57,444 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-10 22:11:57,449 | INFO | main | Redis event bus started
+2025-11-10 22:12:05,323 | ERROR | src.domain.service.integration_service | Run time error while create integration: Create integration is not returned data
+2025-11-10 22:12:05,389 | ERROR | src.app.middlewares.error_handler | Unexpected error: Create integration is not returned data
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\routes\integration_route.py", line 32, in createIntegration
+    create_integration = await controller.create_integration(agent_id, payload)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 25, in create_integration
+    raise e
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 18, in create_integration
+    new_integration = await self.integration_service.create_integration(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        agent_id, payload
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 68, in create_integration
+    raise e
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 58, in create_integration
+    raise RuntimeError("Create integration is not returned data")
+RuntimeError: Create integration is not returned data
+2025-11-10 22:16:04,301 | INFO | main | Redis event bus stopped
+2025-11-10 22:16:38,469 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-10 22:16:38,472 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-10 22:16:38,473 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-10 22:16:38,504 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-10 22:16:39,160 | INFO | src.config.database | Database tables created successfully
+2025-11-10 22:16:39,274 | INFO | main | Database tables initialized
+2025-11-10 22:16:39,624 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-10 22:16:39,638 | INFO | main | Redis event bus started
+2025-11-10 22:16:44,666 | ERROR | src.domain.service.integration_service | Run time error while create integration: Create integration is not returned data
+2025-11-10 22:16:44,680 | ERROR | src.app.middlewares.error_handler | Unexpected error: Create integration is not returned data
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\routes\integration_route.py", line 32, in createIntegration
+    create_integration = await controller.create_integration(agent_id, payload)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 25, in create_integration
+    raise e
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 18, in create_integration
+    new_integration = await self.integration_service.create_integration(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        agent_id, payload
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 71, in create_integration
+    raise e
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 61, in create_integration
+    raise RuntimeError("Create integration is not returned data")
+RuntimeError: Create integration is not returned data
+2025-11-10 22:19:16,222 | INFO | main | Redis event bus stopped
+2025-11-10 22:19:46,830 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-10 22:19:46,837 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-10 22:19:46,840 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-10 22:19:46,854 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-10 22:19:47,786 | INFO | src.config.database | Database tables created successfully
+2025-11-10 22:19:47,812 | INFO | main | Database tables initialized
+2025-11-10 22:19:47,895 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-10 22:19:47,917 | INFO | main | Redis event bus started
+2025-11-10 22:19:52,038 | ERROR | src.domain.service.integration_service | Run time error while create integration: Create integration is not returned data
+2025-11-10 22:19:52,045 | ERROR | src.app.middlewares.error_handler | Unexpected error: Create integration is not returned data
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\routes\integration_route.py", line 32, in createIntegration
+    create_integration = await controller.create_integration(agent_id, payload)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 25, in create_integration
+    raise e
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 18, in create_integration
+    new_integration = await self.integration_service.create_integration(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        agent_id, payload
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 69, in create_integration
+    raise e
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 59, in create_integration
+    raise RuntimeError("Create integration is not returned data")
+RuntimeError: Create integration is not returned data
+2025-11-10 22:20:03,041 | INFO | main | Redis event bus stopped
+2025-11-11 08:47:07,026 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 08:47:07,160 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 08:47:07,232 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 08:47:07,376 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 08:47:09,181 | INFO | src.config.database | Database tables created successfully
+2025-11-11 08:47:09,202 | INFO | main | Database tables initialized
+2025-11-11 08:47:09,733 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 08:47:09,736 | INFO | main | Redis event bus started
+2025-11-11 08:47:58,467 | INFO | src.app.controllers.base | User is authenticated: email pelerii@gmail.com
+2025-11-11 08:48:06,134 | ERROR | src.domain.service.integration_service | Run time error while create integration: Create integration is not returned data
+2025-11-11 08:48:06,372 | ERROR | src.app.middlewares.error_handler | Unexpected error: Create integration is not returned data
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\routes\integration_route.py", line 32, in createIntegration
+    create_integration = await controller.create_integration(agent_id, payload)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 25, in create_integration
+    raise e
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 18, in create_integration
+    new_integration = await self.integration_service.create_integration(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        agent_id, payload
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 68, in create_integration
+    raise e
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 58, in create_integration
+    raise RuntimeError("Create integration is not returned data")
+RuntimeError: Create integration is not returned data
+2025-11-11 08:49:04,044 | INFO | main | Redis event bus stopped
+2025-11-11 08:49:38,476 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 08:49:38,536 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 08:49:38,595 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 08:49:38,629 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 08:49:39,517 | INFO | src.config.database | Database tables created successfully
+2025-11-11 08:49:39,540 | INFO | main | Database tables initialized
+2025-11-11 08:49:39,721 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 08:49:39,723 | INFO | main | Redis event bus started
+2025-11-11 08:49:48,534 | ERROR | src.domain.service.integration_service | Run time error while create integration: Create integration is not returned data
+2025-11-11 08:49:48,606 | ERROR | src.app.middlewares.error_handler | Unexpected error: Create integration is not returned data
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\routes\integration_route.py", line 32, in createIntegration
+    create_integration = await controller.create_integration(agent_id, payload)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 25, in create_integration
+    raise e
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 18, in create_integration
+    new_integration = await self.integration_service.create_integration(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        agent_id, payload
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 68, in create_integration
+    raise e
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 58, in create_integration
+    raise RuntimeError("Create integration is not returned data")
+RuntimeError: Create integration is not returned data
+2025-11-11 08:50:49,841 | INFO | main | Redis event bus stopped
+2025-11-11 08:51:11,089 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 08:51:11,090 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 08:51:11,091 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 08:51:11,093 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 08:51:12,180 | INFO | src.config.database | Database tables created successfully
+2025-11-11 08:51:12,184 | INFO | main | Database tables initialized
+2025-11-11 08:51:12,219 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 08:51:12,227 | INFO | main | Redis event bus started
+2025-11-11 08:51:17,131 | ERROR | src.domain.service.integration_service | Run time error while create integration: Create integration is not returned data
+2025-11-11 08:51:17,138 | ERROR | src.app.middlewares.error_handler | Unexpected error: Create integration is not returned data
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\routes\integration_route.py", line 32, in createIntegration
+    create_integration = await controller.create_integration(agent_id, payload)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 25, in create_integration
+    raise e
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 18, in create_integration
+    new_integration = await self.integration_service.create_integration(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        agent_id, payload
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 68, in create_integration
+    raise e
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 58, in create_integration
+    raise RuntimeError("Create integration is not returned data")
+RuntimeError: Create integration is not returned data
+2025-11-11 08:51:42,076 | INFO | main | Redis event bus stopped
+2025-11-11 08:52:00,879 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 08:52:00,881 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 08:52:00,882 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 08:52:00,883 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 08:52:01,539 | INFO | src.config.database | Database tables created successfully
+2025-11-11 08:52:01,542 | INFO | main | Database tables initialized
+2025-11-11 08:52:01,597 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 08:52:01,602 | INFO | main | Redis event bus started
+2025-11-11 08:52:06,045 | ERROR | src.domain.service.integration_service | Run time error while create integration: Create integration is not returned data
+2025-11-11 08:52:06,073 | ERROR | src.app.middlewares.error_handler | Unexpected error: Create integration is not returned data
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\routes\integration_route.py", line 32, in createIntegration
+    create_integration = await controller.create_integration(agent_id, payload)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 25, in create_integration
+    raise e
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 18, in create_integration
+    new_integration = await self.integration_service.create_integration(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        agent_id, payload
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 68, in create_integration
+    raise e
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 58, in create_integration
+    raise RuntimeError("Create integration is not returned data")
+RuntimeError: Create integration is not returned data
+2025-11-11 08:54:12,615 | INFO | main | Redis event bus stopped
+2025-11-11 08:54:39,942 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 08:54:39,954 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 08:54:39,956 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 08:54:39,957 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 08:54:41,734 | INFO | src.config.database | Database tables created successfully
+2025-11-11 08:54:41,738 | INFO | main | Database tables initialized
+2025-11-11 08:54:41,840 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 08:54:41,842 | INFO | main | Redis event bus started
+2025-11-11 08:54:46,701 | ERROR | src.domain.service.integration_service | Run time error while create integration: Create integration is not returned data
+2025-11-11 08:54:46,756 | ERROR | src.app.middlewares.error_handler | Unexpected error: Create integration is not returned data
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\routes\integration_route.py", line 32, in createIntegration
+    create_integration = await controller.create_integration(agent_id, payload)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 25, in create_integration
+    raise e
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 18, in create_integration
+    new_integration = await self.integration_service.create_integration(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        agent_id, payload
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 68, in create_integration
+    raise e
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 58, in create_integration
+    raise RuntimeError("Create integration is not returned data")
+RuntimeError: Create integration is not returned data
+2025-11-11 08:55:08,813 | INFO | main | Redis event bus stopped
+2025-11-11 08:55:28,521 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 08:55:28,522 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 08:55:28,523 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 08:55:28,524 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 08:55:28,923 | INFO | src.config.database | Database tables created successfully
+2025-11-11 08:55:28,925 | INFO | main | Database tables initialized
+2025-11-11 08:55:28,941 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 08:55:28,950 | INFO | main | Redis event bus started
+2025-11-11 08:55:36,554 | ERROR | src.domain.service.integration_service | Run time error while create integration: Create integration is not returned data
+2025-11-11 08:55:36,791 | ERROR | src.app.middlewares.error_handler | Unexpected error: Create integration is not returned data
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\routes\integration_route.py", line 32, in createIntegration
+    create_integration = await controller.create_integration(agent_id, payload)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 25, in create_integration
+    raise e
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 18, in create_integration
+    new_integration = await self.integration_service.create_integration(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        agent_id, payload
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 68, in create_integration
+    raise e
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 58, in create_integration
+    raise RuntimeError("Create integration is not returned data")
+RuntimeError: Create integration is not returned data
+2025-11-11 08:55:48,418 | INFO | main | Redis event bus stopped
+2025-11-11 08:56:43,357 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 08:56:43,359 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 08:56:43,360 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 08:56:43,361 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 08:56:43,811 | INFO | src.config.database | Database tables created successfully
+2025-11-11 08:56:43,814 | INFO | main | Database tables initialized
+2025-11-11 08:56:43,861 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 08:56:43,864 | INFO | main | Redis event bus started
+2025-11-11 08:56:50,363 | ERROR | src.domain.service.integration_service | Run time error while create integration: Create integration is not returned data
+2025-11-11 08:56:50,371 | ERROR | src.app.middlewares.error_handler | Unexpected error: Create integration is not returned data
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\anyio\streams\memory.py", line 126, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\middlewares\error_handler.py", line 17, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    raise app_exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\starlette\routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\fastapi\routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\routes\integration_route.py", line 32, in createIntegration
+    create_integration = await controller.create_integration(agent_id, payload)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 25, in create_integration
+    raise e
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 18, in create_integration
+    new_integration = await self.integration_service.create_integration(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        agent_id, payload
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 68, in create_integration
+    raise e
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 58, in create_integration
+    raise RuntimeError("Create integration is not returned data")
+RuntimeError: Create integration is not returned data
+2025-11-11 09:14:38,073 | INFO | main | Redis event bus stopped
+2025-11-11 09:15:04,121 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 09:15:04,136 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 09:15:04,144 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 09:15:04,146 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 09:15:05,743 | INFO | src.config.database | Database tables created successfully
+2025-11-11 09:15:05,746 | INFO | main | Database tables initialized
+2025-11-11 09:15:05,830 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 09:15:05,833 | INFO | main | Redis event bus started
+2025-11-11 09:21:00,280 | INFO | main | Redis event bus stopped
+2025-11-11 09:21:26,561 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 09:21:26,565 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 09:21:26,566 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 09:21:26,578 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 09:21:27,096 | INFO | src.config.database | Database tables created successfully
+2025-11-11 09:21:27,102 | INFO | main | Database tables initialized
+2025-11-11 09:21:27,173 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 09:21:27,177 | INFO | main | Redis event bus started
+2025-11-11 09:23:06,451 | INFO | main | Redis event bus stopped
+2025-11-11 09:23:30,018 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 09:23:30,020 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 09:23:30,021 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 09:23:30,022 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 09:23:30,565 | INFO | src.config.database | Database tables created successfully
+2025-11-11 09:23:30,569 | INFO | main | Database tables initialized
+2025-11-11 09:23:30,668 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 09:23:30,679 | INFO | main | Redis event bus started
+2025-11-11 09:23:35,100 | WARNING | main | Validation error: [{'type': 'missing', 'loc': ('body', 'message'), 'msg': 'Field required', 'input': {'username': 'peler', 'unique_id': 12, 'user_message': 'hai'}}, {'type': 'string_type', 'loc': ('body', 'unique_id'), 'msg': 'Input should be a valid string', 'input': 12}]
+2025-11-11 09:24:00,405 | WARNING | main | Validation error: [{'type': 'missing', 'loc': ('body', 'message'), 'msg': 'Field required', 'input': {'username': 'peler', 'unique_id': '12', 'user_message': 'hai'}}]
+2025-11-11 09:24:09,765 | INFO | src.infrastructure.redis.redis_storage | Agent Sh054 retrieved from Redis
+2025-11-11 09:24:21,498 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: None
+2025-11-11 09:24:24,308 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-11 09:24:47,717 | WARNING | src.domain.service.agent_service | Invalid api key: 400: {'error': 'INVALID_API_KEY', 'message': 'Invalid api key, please enter the correct apikey', 'field': 'apikey', 'value': 'XzQXKE51z7yWZI1hoTlDXtjCgmIaa3y'}
+2025-11-11 09:25:08,842 | INFO | src.infrastructure.redis.redis_storage | Agent Sh054 retrieved from Redis
+2025-11-11 09:25:12,680 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-11 09:25:29,152 | INFO | src.infrastructure.redis.redis_storage | Agent Sh054 retrieved from Redis
+2025-11-11 09:25:33,205 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-11 09:34:04,126 | INFO | main | Redis event bus stopped
+2025-11-11 09:34:32,834 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 09:34:32,955 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 09:34:33,127 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 09:34:33,137 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 09:34:33,638 | INFO | src.config.database | Database tables created successfully
+2025-11-11 09:34:33,646 | INFO | main | Database tables initialized
+2025-11-11 09:34:33,720 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 09:34:33,739 | INFO | main | Redis event bus started
+2025-11-11 09:34:43,544 | INFO | src.infrastructure.redis.redis_storage | Agent Sh054 retrieved from Redis
+2025-11-11 09:34:53,967 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: None
+2025-11-11 09:34:56,514 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-11 09:35:12,550 | INFO | src.infrastructure.redis.redis_storage | Agent Sh054 retrieved from Redis
+2025-11-11 09:35:19,485 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-11 09:37:31,698 | INFO | main | Redis event bus stopped
+2025-11-11 09:38:06,372 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 09:38:06,395 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 09:38:06,410 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 09:38:06,432 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 09:38:10,505 | INFO | src.config.database | Database tables created successfully
+2025-11-11 09:38:10,541 | INFO | main | Database tables initialized
+2025-11-11 09:39:27,117 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 09:39:27,118 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 09:39:27,119 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 09:39:27,120 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 09:39:27,508 | INFO | src.config.database | Database tables created successfully
+2025-11-11 09:39:27,510 | INFO | main | Database tables initialized
+2025-11-11 09:39:27,574 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 09:39:27,579 | INFO | main | Redis event bus started
+2025-11-11 09:39:32,746 | INFO | src.infrastructure.redis.redis_storage | Agent Sh054 retrieved from Redis
+2025-11-11 09:39:41,539 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: None
+2025-11-11 09:39:43,560 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-11 09:41:51,413 | INFO | main | Redis event bus stopped
+2025-11-11 09:43:51,667 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 09:43:51,670 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 09:43:51,672 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 09:43:51,673 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 09:43:52,240 | INFO | src.config.database | Database tables created successfully
+2025-11-11 09:43:52,245 | INFO | main | Database tables initialized
+2025-11-11 09:43:52,328 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 09:43:52,330 | INFO | main | Redis event bus started
+2025-11-11 09:45:33,904 | INFO | src.infrastructure.redis.redis_storage | Agent Sh054 retrieved from Redis
+2025-11-11 09:45:47,123 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: Sh054
+2025-11-11 09:45:49,610 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-11 09:48:53,824 | WARNING | src.app.middlewares.auth_middleware | Access attempt without token
+2025-11-11 09:49:04,868 | INFO | src.app.controllers.base | User is authenticated: email pelerii@gmail.com
+2025-11-11 09:49:10,023 | WARNING | src.domain.service.agent_service | Invalid api key: 400: {'error': 'INVALID_API_KEY', 'message': 'Invalid api key, please enter the correct apikey', 'field': 'apikey', 'value': 'XzQXKE51z7yWZI1hoTlDXtjCgmIaa3y'}
+2025-11-11 09:49:25,295 | WARNING | src.domain.service.agent_service | Invalid api key: 400: {'error': 'INVALID_API_KEY', 'message': 'Invalid api key, please enter the correct apikey', 'field': 'apikey', 'value': 'XzQXKE51z7yWZI1hoTlDXtjCgmIaa3y0'}
+2025-11-11 09:49:35,482 | WARNING | src.domain.service.agent_service | Invalid api key: 400: {'error': 'INVALID_API_KEY', 'message': 'Invalid api key, please enter the correct apikey', 'field': 'apikey', 'value': 'XzQXKE51z7yWZI1hoTlDXtjCgmIaa3y0'}
+2025-11-11 09:50:25,853 | ERROR | src.domain.service.agent_service | Unexpected error while invoked the agent: InvokeAgentInput.__init__() takes 6 positional arguments but 7 were given
+2025-11-11 09:50:25,858 | ERROR | src.domain.service.agent_service | Unexpected error during invoking agent: InvokeAgentInput.__init__() takes 6 positional arguments but 7 were given
+2025-11-11 09:50:25,879 | ERROR | src.domain.service.agent_service | Exception type: TypeError
+2025-11-11 09:50:25,891 | ERROR | src.domain.service.agent_service | Exception args: ('InvokeAgentInput.__init__() takes 6 positional arguments but 7 were given',)
+2025-11-11 09:50:25,893 | ERROR | src.app.controllers.base | Unexpected error: InvokeAgentInput.__init__() takes 6 positional arguments but 7 were given
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\controllers\agent_controller.py", line 117, in invoke_agent_in_playground
+    result = await self.agent_service.invoke_agent_in_playground(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\service\agent_service.py", line 250, in invoke_agent_in_playground
+    self.handle_unexpected_error("invoking agent", e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\domain\service\agent_service.py", line 213, in invoke_agent_in_playground
+    InvokeAgentInput(
+    ~~~~~~~~~~~~~~~~^
+        current_user_id,
+        ^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        BaseAgentStateModel(messages=[], user_message=user_message),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+TypeError: InvokeAgentInput.__init__() takes 6 positional arguments but 7 were given
+2025-11-11 09:53:20,726 | INFO | main | Redis event bus stopped
+2025-11-11 09:53:56,406 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 09:53:56,409 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 09:53:56,410 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 09:53:56,411 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 09:53:57,171 | INFO | src.config.database | Database tables created successfully
+2025-11-11 09:53:57,231 | INFO | main | Database tables initialized
+2025-11-11 09:53:57,372 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 09:53:57,387 | INFO | main | Redis event bus started
+2025-11-11 09:54:02,103 | INFO | src.infrastructure.redis.redis_storage | Agent Sh054 retrieved from Redis
+2025-11-11 09:54:13,389 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: Sh054
+2025-11-11 09:54:15,423 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-11 09:54:33,603 | WARNING | src.domain.service.agent_service | Agent invocation failed: Something wrong at create user agent: (pymysql.err.IntegrityError) (1062, "Duplicate entry 'Sh0546' for key 'user_agents.PRIMARY'")
+[SQL: INSERT INTO user_agents (id, agent_id, username, user_platform) VALUES (%s, %s, %s, %s)]
+[parameters: ('Sh0546', 'Sh054', 'Joe', 'api')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-11-11 09:54:33,971 | ERROR | src.domain.service.agent_service | SQLAlchemy error: (pymysql.err.IntegrityError) (1062, "Duplicate entry 'Sh0546' for key 'user_agents.PRIMARY'")
+[SQL: INSERT INTO user_agents (id, agent_id, username, user_platform) VALUES (%s, %s, %s, %s)]
+[parameters: ('Sh0546', 'Sh054', 'Joe', 'api')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-11-11 09:55:28,083 | WARNING | src.domain.service.agent_service | Agent invocation failed: Something wrong at create user agent: (pymysql.err.IntegrityError) (1062, "Duplicate entry 'Sh0546' for key 'user_agents.PRIMARY'")
+[SQL: INSERT INTO user_agents (id, agent_id, username, user_platform) VALUES (%s, %s, %s, %s)]
+[parameters: ('Sh0546', 'Sh054', 'Joe', 'api')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-11-11 09:55:28,084 | ERROR | src.domain.service.agent_service | SQLAlchemy error: (pymysql.err.IntegrityError) (1062, "Duplicate entry 'Sh0546' for key 'user_agents.PRIMARY'")
+[SQL: INSERT INTO user_agents (id, agent_id, username, user_platform) VALUES (%s, %s, %s, %s)]
+[parameters: ('Sh0546', 'Sh054', 'Joe', 'api')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-11-11 10:07:29,202 | INFO | main | Redis event bus stopped
+2025-11-11 10:09:01,662 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 10:09:01,665 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 10:09:01,667 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 10:09:01,668 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 10:09:02,135 | INFO | src.config.database | Database tables created successfully
+2025-11-11 10:09:02,138 | INFO | main | Database tables initialized
+2025-11-11 10:09:02,417 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 10:09:02,420 | INFO | main | Redis event bus started
+2025-11-11 10:09:12,391 | INFO | src.infrastructure.redis.redis_storage | Agent Sh054 retrieved from Redis
+2025-11-11 10:09:31,875 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: Sh054
+2025-11-11 10:09:35,205 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-11 10:11:27,357 | INFO | main | Redis event bus stopped
+2025-11-11 19:49:02,986 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 19:49:03,667 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 19:49:03,703 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 19:49:03,730 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 19:49:04,788 | INFO | src.config.database | Database tables created successfully
+2025-11-11 19:49:04,818 | INFO | main | Database tables initialized
+2025-11-11 19:49:05,632 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 19:49:05,639 | INFO | main | Redis event bus started
+2025-11-11 19:49:28,756 | INFO | src.app.controllers.base | User is authenticated: email pelerii@gmail.com
+2025-11-11 19:49:55,603 | WARNING | src.domain.service.integration_service | Telegram api key not found
+2025-11-11 19:52:52,932 | ERROR | src.domain.service.integration_service | Unexpected error while Create integration: 'Sh054'
+2025-11-11 19:52:52,945 | ERROR | src.domain.service.integration_service | Unexpected error during Create integration: 'Sh054'
+2025-11-11 19:52:52,947 | ERROR | src.domain.service.integration_service | Exception type: KeyError
+2025-11-11 19:52:52,963 | ERROR | src.domain.service.integration_service | Exception args: ('Sh054',)
+2025-11-11 19:52:52,990 | ERROR | src.app.controllers.base | Unexpected error: 'Sh054'
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 19, in create_integration
+    new_integration = await self.integration_service.create_integration(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        agent_id, payload
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 103, in create_integration
+    self.handle_unexpected_error("Create integration", e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 75, in create_integration
+    raise get_exception
+  File "D:\Saas_Project\Backend\src\domain\use_cases\agent\integration\telegram_integration.py", line 57, in execute
+    await self.telegram_manager.set_webhook(
+        input_data.api_key, input_data.agent_id
+    )
+  File "D:\Saas_Project\Backend\src\infrastructure\telegram\telegram_handler.py", line 35, in set_webhook
+    raise e
+  File "D:\Saas_Project\Backend\src\infrastructure\telegram\telegram_handler.py", line 26, in set_webhook
+    self._list_telegram_user[agent_id]["api_key"] = api_key
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+KeyError: 'Sh054'
+2025-11-11 19:57:59,092 | INFO | main | Redis event bus stopped
+2025-11-11 19:58:52,099 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 19:58:52,138 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 19:58:52,153 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 19:58:52,218 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 19:58:53,785 | INFO | src.config.database | Database tables created successfully
+2025-11-11 19:58:53,792 | INFO | main | Database tables initialized
+2025-11-11 19:58:54,048 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 19:58:54,051 | INFO | main | Redis event bus started
+2025-11-11 20:02:56,715 | INFO | main | Redis event bus stopped
+2025-11-11 20:03:52,687 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 20:03:52,689 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 20:03:52,691 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 20:03:52,693 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 20:03:53,760 | INFO | src.config.database | Database tables created successfully
+2025-11-11 20:03:53,788 | INFO | main | Database tables initialized
+2025-11-11 20:03:54,039 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 20:03:54,042 | INFO | main | Redis event bus started
+2025-11-11 20:06:50,281 | INFO | main | Redis event bus stopped
+2025-11-11 20:07:19,132 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 20:07:19,135 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 20:07:19,137 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 20:07:19,139 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 20:07:19,736 | INFO | src.config.database | Database tables created successfully
+2025-11-11 20:07:19,757 | INFO | main | Database tables initialized
+2025-11-11 20:07:19,898 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 20:07:19,900 | INFO | main | Redis event bus started
+2025-11-11 20:08:37,965 | INFO | main | Redis event bus stopped
+2025-11-11 20:09:04,875 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 20:09:04,880 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 20:09:04,881 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 20:09:04,885 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 20:09:05,333 | INFO | src.config.database | Database tables created successfully
+2025-11-11 20:09:05,337 | INFO | main | Database tables initialized
+2025-11-11 20:09:05,425 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 20:09:05,428 | INFO | main | Redis event bus started
+2025-11-11 20:12:26,166 | INFO | main | Redis event bus stopped
+2025-11-11 20:12:56,318 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 20:12:56,320 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 20:12:56,321 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 20:12:56,322 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 20:12:57,231 | INFO | src.config.database | Database tables created successfully
+2025-11-11 20:12:57,234 | INFO | main | Database tables initialized
+2025-11-11 20:12:57,310 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 20:12:57,314 | INFO | main | Redis event bus started
+2025-11-11 20:14:31,966 | INFO | main | Redis event bus stopped
+2025-11-11 20:14:59,085 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 20:14:59,097 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 20:14:59,099 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 20:14:59,100 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 20:15:00,034 | INFO | src.config.database | Database tables created successfully
+2025-11-11 20:15:00,083 | INFO | main | Database tables initialized
+2025-11-11 20:15:04,065 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 20:15:04,066 | INFO | main | Redis event bus started
+2025-11-11 20:16:42,172 | INFO | main | Redis event bus stopped
+2025-11-11 20:17:12,677 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 20:17:12,679 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 20:17:12,680 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 20:17:12,681 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 20:17:13,457 | INFO | src.config.database | Database tables created successfully
+2025-11-11 20:17:13,460 | INFO | main | Database tables initialized
+2025-11-11 20:17:13,524 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 20:17:13,526 | INFO | main | Redis event bus started
+2025-11-11 20:17:22,743 | INFO | src.infrastructure.redis.redis_storage | Agent Sh054 retrieved from Redis
+2025-11-11 20:17:33,230 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: Sh054
+2025-11-11 20:17:34,525 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-11 20:17:36,403 | ERROR | src.domain.service.webhook_service | Error while sending telegram message: Unexpected error while sending telegram message: Multiple rows were found when one or none was required
+2025-11-11 20:17:36,407 | ERROR | src.domain.service.webhook_service | Server error, but sending success to telegram webhook
+2025-11-11 20:22:07,581 | INFO | main | Redis event bus stopped
+2025-11-11 20:22:35,717 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 20:22:35,719 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 20:22:35,720 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 20:22:35,721 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 20:22:36,122 | INFO | src.config.database | Database tables created successfully
+2025-11-11 20:22:36,125 | INFO | main | Database tables initialized
+2025-11-11 20:22:36,198 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 20:22:36,201 | INFO | main | Redis event bus started
+2025-11-11 20:24:39,191 | INFO | src.infrastructure.redis.redis_storage | Agent Sh054 retrieved from Redis
+2025-11-11 20:24:48,958 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: Sh054
+2025-11-11 20:24:50,422 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-11 20:24:58,277 | ERROR | src.domain.service.webhook_service | Error while sending telegram message: Failed to send telegram message
+2025-11-11 20:24:58,279 | ERROR | src.domain.service.webhook_service | Server error, but sending success to telegram webhook
+2025-11-11 20:28:45,159 | INFO | main | Redis event bus stopped
+2025-11-11 20:29:26,929 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 20:29:26,931 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 20:29:26,933 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 20:29:26,933 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 20:29:27,529 | INFO | src.config.database | Database tables created successfully
+2025-11-11 20:29:27,534 | INFO | main | Database tables initialized
+2025-11-11 20:29:27,664 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 20:29:27,668 | INFO | main | Redis event bus started
+2025-11-11 20:29:36,741 | INFO | src.infrastructure.redis.redis_storage | Agent Sh054 retrieved from Redis
+2025-11-11 20:29:42,723 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: Sh054
+2025-11-11 20:29:44,625 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-11 20:29:47,566 | ERROR | src.domain.service.webhook_service | Error while sending telegram message: Failed to send telegram message
+2025-11-11 20:29:47,568 | ERROR | src.domain.service.webhook_service | Server error, but sending success to telegram webhook
+2025-11-11 20:33:55,710 | INFO | main | Redis event bus stopped
+2025-11-11 20:35:05,027 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 20:35:05,099 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 20:35:05,213 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 20:35:05,359 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 20:35:06,947 | INFO | src.config.database | Database tables created successfully
+2025-11-11 20:35:06,996 | INFO | main | Database tables initialized
+2025-11-11 20:35:09,296 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 20:35:09,302 | INFO | main | Redis event bus started
+2025-11-11 20:35:17,022 | INFO | src.infrastructure.redis.redis_storage | Agent Sh054 retrieved from Redis
+2025-11-11 20:35:39,015 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: Sh054
+2025-11-11 20:35:40,497 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-11 20:39:51,964 | INFO | main | Redis event bus stopped
+2025-11-11 20:40:25,569 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-11 20:40:25,617 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-11 20:40:25,622 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-11 20:40:25,707 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-11 20:40:26,577 | INFO | src.config.database | Database tables created successfully
+2025-11-11 20:40:26,580 | INFO | main | Database tables initialized
+2025-11-11 20:40:26,663 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-11 20:40:26,665 | INFO | main | Redis event bus started
+2025-11-11 20:40:44,610 | INFO | src.infrastructure.redis.redis_storage | Agent Sh054 retrieved from Redis
+2025-11-11 20:40:50,820 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: Sh054
+2025-11-11 20:40:52,055 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-11 20:42:16,271 | INFO | src.core.utils.save_file | Created directory: documents/user_6/agent_oV228
+2025-11-11 20:42:16,445 | INFO | src.core.utils.save_file | Saved file: documents/user_6/agent_oV228\Khaerul_lutfi.pdf (type: pdf)
+2025-11-11 20:42:20,453 | INFO | src.infrastructure.vector_store.chroma_db | Successfully loaded document: Khaerul_lutfi.pdf
+2025-11-11 20:42:27,586 | INFO | src.infrastructure.redis.redis_storage | Agent oV228 stored in Redis
+2025-11-11 20:42:35,390 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: oV228
+2025-11-11 20:44:24,615 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-11 20:53:02,705 | INFO | main | Redis event bus stopped

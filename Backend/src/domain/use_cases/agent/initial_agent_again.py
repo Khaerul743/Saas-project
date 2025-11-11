@@ -12,6 +12,7 @@ from .simple_rag.initial_simple_rag_agent import (
 
 @dataclass
 class InitialAgentAgainInput:
+    agent_id: str
     role: Literal["simple RAG agent"]
     agent_obj: Dict[str, Any]
 
@@ -33,7 +34,7 @@ class InitialAgentAgain(BaseUseCase[InitialAgentAgainInput, InitialAgentAgainOut
             if input_data.role == "simple RAG agent":
                 initial_agent = self.initial_simple_rag_agent.execute(
                     InitialSimpleRagAgentInput(
-                        input_data.agent_obj.get("id"),
+                        input_data.agent_id,
                         input_data.agent_obj.get("chromadb_path"),
                         input_data.agent_obj.get("collection_name"),
                         input_data.agent_obj.get("llm_provider"),

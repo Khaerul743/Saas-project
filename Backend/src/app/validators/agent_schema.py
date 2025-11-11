@@ -121,6 +121,12 @@ class InvokeAgentRequest(BaseModel):
         }
 
 
+class InvokeAgentApiRequest(BaseModel):
+    message: str
+    username: str
+    unique_id: str
+
+
 class InvokeAgentResponseData(BaseModel):
     user_message: str
     response: str

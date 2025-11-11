@@ -50,7 +50,25 @@ from .history_message import (
     CreateMetadataInput,
 )
 from .initial_agent_again import InitialAgentAgain, InitialAgentAgainInput
-from .invoke import InvokeAgent, InvokeAgentInput, InvokeAgentOutput
+from .integration import (
+    ApiIntegration,
+    ApiIntegrationInput,
+    CreateIntegration,
+    CreateIntegrationInput,
+    GenerateApiKey,
+    GenerateApiKeyInput,
+    SendTelegramUserMessage,
+    SendTelegramUserMessageInput,
+    TelegramIntegration,
+    TelegramIntegrationInput,
+)
+from .invoke import (
+    InvokeAgent,
+    InvokeAgentApi,
+    InvokeAgentApiInput,
+    InvokeAgentInput,
+    InvokeAgentOutput,
+)
 from .simple_rag import (
     CreateSimpleRagAgent,
     CreateSimpleRagAgentInput,
@@ -109,4 +127,16 @@ __all__ = [
     "InvokeAgentOutput",
     "InitialAgentAgain",
     "InitialAgentAgainInput",
+    "ApiIntegration",
+    "ApiIntegrationInput",
+    "CreateIntegration",
+    "CreateIntegrationInput",
+    "GenerateApiKey",
+    "GenerateApiKeyInput",
+    "InvokeAgentApi",
+    "InvokeAgentApiInput",
+    "TelegramIntegration",
+    "TelegramIntegrationInput",
+    "SendTelegramUserMessageInput",
+    "SendTelegramUserMessage",
 ]

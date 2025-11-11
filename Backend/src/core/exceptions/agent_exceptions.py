@@ -14,3 +14,16 @@ class AgentNotFoundException(BaseCustomeException):
                 "value": id,
             },
         )
+
+
+class InvalidApiKeyException(BaseCustomeException):
+    def __init__(self, api_key: str):
+        super().__init__(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "INVALID_API_KEY",
+                "message": "Invalid api key, please enter the correct apikey",
+                "field": "apikey",
+                "value": api_key,
+            },
+        )

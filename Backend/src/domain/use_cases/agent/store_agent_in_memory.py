@@ -29,6 +29,7 @@ class StoreAgentInMemory(
             self.agent_obj_manager.store_agent_in_memory(
                 input_data.agent_id, input_data.agent
             )
+
             return UseCaseResult.success_result(
                 StoreAgentInMemoryOutput(agent_id=input_data.agent_id)
             )

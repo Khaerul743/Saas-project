@@ -15,3 +15,11 @@ class IApiKeyRepository(ABC):
         expires_at: Optional[datetime] = None,
     ) -> ApiKey:
         pass
+
+    @abstractmethod
+    async def get_active_api_key(self, agent_id: str, api_key: str) -> ApiKey | None:
+        pass
+
+    @abstractmethod
+    async def get_telegram_api_key_by_agent_id(self, agent_id: str) -> str | None:
+        pass

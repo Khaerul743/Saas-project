@@ -17,8 +17,10 @@ from src.app.routes import (
     auth_route,
     dashboard_route,
     history_route,
+    integration_route,
     simple_rag_route,
     user_route,
+    webhook_route,
 )
 from src.config.config import settings
 from src.config.database import create_tables
@@ -81,13 +83,13 @@ app.include_router(agent_route.router)  # General agent routes (get all, etc.)
 app.include_router(simple_rag_route.router)  # Simple RAG Agent specific routes
 app.include_router(history_route.router)
 app.include_router(dashboard_route.router)
+app.include_router(integration_route.router)
+app.include_router(webhook_route.router)
 # app.include_router(
 #     customer_service_route.router
 # )  # Customer Service Agent specific routes
 # app.include_router(company_information_route.router)  # Company Information routes
 # app.include_router(document_route.router)
-# app.include_router(integration_route.router)
-# app.include_router(platform_route.router)
 # app.include_router(task_route.router)
 
 # WebSocket routes

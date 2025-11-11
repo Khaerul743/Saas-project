@@ -1,5 +1,5 @@
 from .agent_repository import AgentRepository
-from .api_key_repository import ApiKey
+from .api_key_repository import ApiKeyRepository
 from .document_repository import DocumentRepository
 from .history_message_repository import HistoryMessageRepository
 from .integration_repository import IntegrationRepository
@@ -17,5 +17,5 @@ __all__ = [
     "MetadataRepository",
     "PlatformRepository",
     "IntegrationRepository",
-    "ApiKey",
+    "ApiKeyRepository",
 ]
