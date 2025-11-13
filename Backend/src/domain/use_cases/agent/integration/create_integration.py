@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Literal
 
+from src.core.exceptions.integration_exceptions import IntegrationIsAlreadyExist
 from src.domain.use_cases.base import BaseUseCase, UseCaseResult
 from src.domain.use_cases.interfaces import IIntergrationRepository, IPlatformReporitory
 
@@ -32,6 +33,15 @@ class CreateIntegration(BaseUseCase[CreateIntegrationInput, CreateIntegrationOut
         self, input_data: CreateIntegrationInput
     ) -> UseCaseResult[CreateIntegrationOutput]:
         try:
+            # Check integration
+            integration = await self.integration_repository.get_by_agent_and_platform(
+                input_data.agent_id, input_data.platform
+            )
+            if integration:
+                return UseCaseResult.error_result(
+                    "Integration is already exist", IntegrationIsAlreadyExist()
+                )
+
             # Add new integration to database
             add_new_integration = await self.integration_repository.add_new_integration(
                 input_data.agent_id, input_data.platform, input_data.status

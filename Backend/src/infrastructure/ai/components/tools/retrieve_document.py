@@ -16,8 +16,9 @@ class RetrieveDocumentTool:
             get_document = None
             if not get_document:
                 get_document = self.rag.similarity_search(query)
+                if get_document == "":
+                    get_document = "Beritahu ke pengguna bahwa saya tidak menemukan adanya dokumen yang dapat dijadikan referensi untuk menjawab pertanyaan tersebut."
 
-                print(get_document)
             return get_document
         except Exception as e:
             print(f"Terjadi kesalahan di tool get_document: {e}")

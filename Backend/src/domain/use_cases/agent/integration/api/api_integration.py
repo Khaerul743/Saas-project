@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Literal
 
+from src.core.exceptions.integration_exceptions import IntegrationIsAlreadyExist
 from src.domain.use_cases.base import BaseUseCase, UseCaseResult
 
 from ..create_integration import CreateIntegration, CreateIntegrationInput
@@ -34,6 +35,16 @@ class ApiIntegration(BaseUseCase[ApiIntegrationInput, IntegrationOutput]):
         self, input_data: ApiIntegrationInput
     ) -> UseCaseResult[IntegrationOutput]:
         try:
+            # Check integration
+            integration = await self.create_integration.integration_repository.get_by_agent_and_platform(
+                input_data.agent_id, "api"
+            )
+
+            if integration:
+                return UseCaseResult.error_result(
+                    "Integration is already exist", IntegrationIsAlreadyExist()
+                )
+
             generate_api_key = await self.generate_api_key.execute(
                 GenerateApiKeyInput(
                     user_id=input_data.user_id,

@@ -21,8 +21,8 @@ class AddDocumentToAgentOutput:
 class AddDocumentToAgent(
     BaseUseCase[AddDocumentToAgentInput, AddDocumentToAgentOutput]
 ):
-    def __init__(self, chroma_db_path: str):
-        self.document_store = RAGSystem(chroma_db_path)
+    def __init__(self, rag_system: RAGSystem):
+        self.document_store = rag_system
 
     def execute(
         self, input_data: AddDocumentToAgentInput

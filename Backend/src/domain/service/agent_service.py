@@ -17,10 +17,12 @@ from src.core.exceptions.agent_exceptions import (
     InvalidApiKeyException,
 )
 from src.core.exceptions.database_exceptions import DatabaseException
+from src.core.exceptions.integration_exceptions import IntegrationNotFoundException
 from src.domain.repositories import (
     AgentRepository,
     ApiKeyRepository,
     HistoryMessageRepository,
+    IntegrationRepository,
     MetadataRepository,
     UserAgentRepository,
 )
@@ -57,6 +59,7 @@ class AgentService(BaseService):
         self.history_message_repo = HistoryMessageRepository(db)
         self.metadata_repo = MetadataRepository(db)
         self.apikey_repo = ApiKeyRepository(db)
+        self.integration_repo = IntegrationRepository(db)
         self.storage_agent_obj = RedisStorage()
 
         # Initialize use cases
@@ -253,6 +256,16 @@ class AgentService(BaseService):
         self, agent_id: str, api_key: str, payload: InvokeAgentApiRequest
     ):
         try:
+            # Check integration is exist
+            integration = await self.integration_repo.get_by_agent_and_platform(
+                agent_id, "api"
+            )
+
+            if not integration:
+                raise IntegrationNotFoundException(
+                    "Make sure the agent is integration with api"
+                )
+
             # Invoke agent with api key
             invoke_agent = await self.invoke_agent_apikey_usecase.execute(
                 InvokeAgentApiInput(
@@ -273,8 +286,11 @@ class AgentService(BaseService):
             if response_data is None:
                 raise RuntimeError("Invoke agent is not returned response")
 
+            await self.db.commit()
             return response_data
 
+        except IntegrationNotFoundException as e:
+            raise e
         except InvalidApiKeyException as e:
             self.logger.warning(f"Invalid api key: {str(e)}")
             raise e

@@ -7,6 +7,10 @@ from src.domain.models.api_key_entity import ApiKey
 
 class IApiKeyRepository(ABC):
     @abstractmethod
+    async def get_api_key_by_agent_id(self, agent_id: str) -> ApiKey | None:
+        pass
+
+    @abstractmethod
     async def create_api_key(
         self,
         user_id: int,
@@ -22,4 +26,8 @@ class IApiKeyRepository(ABC):
 
     @abstractmethod
     async def get_telegram_api_key_by_agent_id(self, agent_id: str) -> str | None:
+        pass
+
+    @abstractmethod
+    async def delete_api_key_by_agent_id(self, agent_id: str):
         pass

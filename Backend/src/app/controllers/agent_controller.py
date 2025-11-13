@@ -14,6 +14,7 @@ from src.core.exceptions.agent_exceptions import (
     InvalidApiKeyException,
 )
 from src.core.exceptions.database_exceptions import DatabaseException
+from src.core.exceptions.integration_exceptions import IntegrationNotFoundException
 from src.core.exceptions.user_exceptions import UserNotFoundException
 from src.domain.service.agent_service import AgentService
 
@@ -152,6 +153,9 @@ class AgentController(BaseController):
                 total_tokens=invoke_agent.total_tokens,
                 response_time=invoke_agent.response_time,
             )
+
+        except IntegrationNotFoundException as e:
+            raise e
         except InvalidApiKeyException as e:
             raise e
         except RuntimeError as e:

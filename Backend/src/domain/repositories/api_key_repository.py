@@ -14,6 +14,12 @@ class ApiKeyRepository(IApiKeyRepository):
     def __init__(self, db: AsyncSession):
         self.db = db
 
+    async def get_api_key_by_agent_id(self, agent_id: str) -> ApiKey | None:
+        query = select(ApiKey).where(ApiKey.agent_id == agent_id)
+        result = await self.db.execute(query)
+
+        return result.scalar_one_or_none()
+
     async def create_api_key(
         self,
         user_id: int,
@@ -47,8 +53,17 @@ class ApiKeyRepository(IApiKeyRepository):
         stmt = (
             select(Platform.api_key)
             .join(Integration, Platform.integration_id == Integration.id)
-            .where(Integration.agent_id == agent_id, Platform.platform_type == "telegram")
+            .where(
+                Integration.agent_id == agent_id, Platform.platform_type == "telegram"
+            )
         )
         result = await self.db.execute(stmt)
         api_key: str | None = result.scalar_one_or_none()
+        return api_key
+
+    async def delete_api_key_by_agent_id(self, agent_id: str):
+        api_key = await self.get_api_key_by_agent_id(agent_id)
+        if not api_key:
+            return None
+        await self.db.delete(api_key)
         return api_key

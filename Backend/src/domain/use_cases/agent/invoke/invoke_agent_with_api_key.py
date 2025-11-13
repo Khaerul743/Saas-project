@@ -20,7 +20,9 @@ class InvokeAgentApiInput:
 
 class InvokeAgentApi(BaseUseCase[InvokeAgentApiInput, InvokeAgentOutput]):
     def __init__(
-        self, api_key_repository: IApiKeyRepository, invoke_agent_usecase: InvokeAgent
+        self,
+        api_key_repository: IApiKeyRepository,
+        invoke_agent_usecase: InvokeAgent,
     ):
         self.api_key_repository = api_key_repository
         self.invoke_agent = invoke_agent_usecase

@@ -8862,3 +8862,949 @@ KeyError: 'Sh054'
 2025-11-11 20:42:35,390 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: oV228
 2025-11-11 20:44:24,615 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
 2025-11-11 20:53:02,705 | INFO | main | Redis event bus stopped
+2025-11-12 10:14:56,139 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-12 10:14:56,165 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-12 10:14:56,176 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-12 10:14:56,237 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-12 10:14:57,889 | INFO | src.config.database | Database tables created successfully
+2025-11-12 10:14:57,930 | INFO | main | Database tables initialized
+2025-11-12 10:14:58,190 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-12 10:14:58,245 | INFO | main | Redis event bus started
+2025-11-12 10:15:58,385 | WARNING | src.app.middlewares.auth_middleware | Access attempt without token
+2025-11-12 10:16:13,186 | INFO | src.app.controllers.base | User is authenticated: email pelerii@gmail.com
+2025-11-12 10:16:30,431 | WARNING | main | Validation error: [{'type': 'literal_error', 'loc': ('body', 'platform'), 'msg': "Input should be 'api', 'telegram' or 'whatsapp'", 'input': 'mmek', 'ctx': {'expected': "'api', 'telegram' or 'whatsapp'"}}]
+2025-11-12 10:20:41,811 | WARNING | main | Validation error: [{'type': 'literal_error', 'loc': ('body', 'platform'), 'msg': "Input should be 'api' or 'telegram'", 'input': 'whatsapp', 'ctx': {'expected': "'api' or 'telegram'"}}]
+2025-11-12 10:21:18,694 | INFO | main | Redis event bus stopped
+2025-11-12 10:22:06,800 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-12 10:22:06,824 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-12 10:22:06,838 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-12 10:22:06,841 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-12 10:22:08,237 | INFO | src.config.database | Database tables created successfully
+2025-11-12 10:22:08,246 | INFO | main | Database tables initialized
+2025-11-12 10:22:08,535 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-12 10:22:08,585 | INFO | main | Redis event bus started
+2025-11-12 10:22:33,627 | INFO | src.infrastructure.telegram.telegram_handler | Delete webhook is successfully: {'ok': True, 'result': True, 'description': 'Webhook was deleted'}
+2025-11-12 10:22:47,080 | INFO | src.infrastructure.telegram.telegram_handler | Delete webhook is successfully: {'ok': True, 'result': True, 'description': 'Webhook is already deleted'}
+2025-11-12 10:24:17,992 | INFO | main | Redis event bus stopped
+2025-11-12 10:24:51,516 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-12 10:24:51,589 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-12 10:24:51,660 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-12 10:24:51,710 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-12 10:24:52,909 | INFO | src.config.database | Database tables created successfully
+2025-11-12 10:24:53,104 | INFO | main | Database tables initialized
+2025-11-12 10:24:53,589 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-12 10:24:53,624 | INFO | main | Redis event bus started
+2025-11-12 10:25:03,379 | INFO | src.infrastructure.telegram.telegram_handler | Delete webhook is successfully: {'ok': True, 'result': True, 'description': 'Webhook is already deleted'}
+2025-11-12 10:25:08,102 | WARNING | src.domain.service.integration_service | Integration not found with agent oV228
+2025-11-12 10:25:21,192 | WARNING | src.domain.service.integration_service | Integration not found with agent oV228
+2025-11-12 10:55:30,680 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-12 10:55:30,684 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-12 10:55:30,686 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-12 10:55:30,704 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-12 10:55:31,766 | INFO | src.config.database | Database tables created successfully
+2025-11-12 10:55:31,771 | INFO | main | Database tables initialized
+2025-11-12 10:55:32,042 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-12 10:55:32,356 | INFO | main | Redis event bus started
+2025-11-12 10:57:35,976 | INFO | src.infrastructure.redis.redis_storage | Agent oV228 retrieved from Redis
+2025-11-12 10:58:04,418 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: oV228
+2025-11-12 10:58:07,859 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-12 11:00:26,375 | WARNING | src.domain.service.agent_service | Invalid api key: 400: {'error': 'INVALID_API_KEY', 'message': 'Invalid api key, please enter the correct apikey', 'field': 'apikey', 'value': 'TUKk4vjEWmXle0dxyhBASgeiZXpjUTvv'}
+2025-11-12 11:17:05,072 | INFO | main | Redis event bus stopped
+2025-11-12 11:17:44,366 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-12 11:17:44,369 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-12 11:17:44,371 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-12 11:17:44,372 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-12 11:17:45,259 | INFO | src.config.database | Database tables created successfully
+2025-11-12 11:17:45,267 | INFO | main | Database tables initialized
+2025-11-12 11:17:45,432 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-12 11:17:45,443 | INFO | main | Redis event bus started
+2025-11-12 11:18:04,749 | WARNING | src.app.middlewares.auth_middleware | Access attempt without token
+2025-11-12 11:18:22,692 | INFO | src.app.controllers.base | User is authenticated: email pelerii@gmail.com
+2025-11-12 11:18:35,794 | ERROR | src.app.controllers.base | Unexpected error: cannot access local variable 'e' where it is not associated with a value
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\domain\service\agent_service.py", line 265, in invoke_agent_api
+    raise IntegrationNotFoundException(
+        "Make sure the agent is integration with api"
+    )
+src.core.exceptions.integration_exceptions.IntegrationNotFoundException: 404: {'error': 'INTEGRATION_NOT_FOUND', 'message': 'Platform integration not found, Make sure the agent is integration with api'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\controllers\agent_controller.py", line 147, in invoke_agent_with_api_key
+    invoke_agent = await self.agent_service.invoke_agent_api(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        agent_id, api_key, payload
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\service\agent_service.py", line 292, in invoke_agent_api
+    raise e
+          ^
+UnboundLocalError: cannot access local variable 'e' where it is not associated with a value
+2025-11-12 11:19:03,308 | INFO | main | Redis event bus stopped
+2025-11-12 11:19:46,435 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-12 11:19:46,438 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-12 11:19:46,440 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-12 11:19:46,444 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-12 11:19:47,139 | INFO | src.config.database | Database tables created successfully
+2025-11-12 11:19:47,144 | INFO | main | Database tables initialized
+2025-11-12 11:19:47,245 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-12 11:19:47,252 | INFO | main | Redis event bus started
+2025-11-12 11:20:22,509 | ERROR | src.domain.service.integration_service | SQLAlchemy error: (pymysql.err.IntegrityError) (1062, "Duplicate entry 'oV228' for key 'api_keys.agent_id'")
+[SQL: INSERT INTO api_keys (user_id, agent_id, api_key, expires_at) VALUES (%s, %s, %s, %s)]
+[parameters: (6, 'oV228', 'uhqxn5n7YP8zNBrkhs6y2fc5eHa6ng5p', datetime.datetime(2025, 12, 12, 4, 19, 45, 602017))]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-11-12 11:20:22,512 | ERROR | src.app.controllers.base | Unexpected error: 500: {'error': 'DATABASE_ERROR', 'message': 'Database Create integration failed: (pymysql.err.IntegrityError) (1062, "Duplicate entry \'oV228\' for key \'api_keys.agent_id\'")\n[SQL: INSERT INTO api_keys (user_id, agent_id, api_key, expires_at) VALUES (%s, %s, %s, %s)]\n[parameters: (6, \'oV228\', \'uhqxn5n7YP8zNBrkhs6y2fc5eHa6ng5p\', datetime.datetime(2025, 12, 12, 4, 19, 45, 602017))]\n(Background on this error at: https://sqlalche.me/e/20/gkpj)', 'field': 'database'}
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 951, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 192, in execute
+    self._adapt_connection._handle_exception(error)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 330, in _handle_exception
+    raise error.with_traceback(exc_info[2])
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 190, in execute
+    return self.await_(self._execute_async(operation, parameters))
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 213, in _execute_async
+    result = await self._cursor.execute(operation, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 239, in execute
+    await self._query(query)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 457, in _query
+    await conn.query(q)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 469, in query
+    await self._read_query_result(unbuffered=unbuffered)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 683, in _read_query_result
+    await result.read()
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 1164, in read
+    first_packet = await self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 652, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.IntegrityError: (1062, "Duplicate entry 'oV228' for key 'api_keys.agent_id'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 126, in create_integration
+    raise get_exception
+  File "D:\Saas_Project\Backend\src\domain\use_cases\agent\integration\api\generate_api_key.py", line 38, in execute
+    new_api_key = await self.api_key_repository.create_api_key(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\repositories\api_key_repository.py", line 29, in create_api_key
+    await self.db.flush()
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\ext\asyncio\session.py", line 801, in flush
+    await greenlet_spawn(self.sync_session.flush, objects=objects)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 203, in greenlet_spawn
+    result = context.switch(value)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4345, in flush
+    self._flush(objects)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4480, in _flush
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4441, in _flush
+    flush_context.execute()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+    ~~~~~~~~~~~^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.mapper,
+        ^^^^^^^^^^^^
+        uow.states_for_mapper_hierarchy(self.mapper, False, False),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        uow,
+        ^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        base_mapper,
+        ^^^^^^^^^^^^
+    ...<3 lines>...
+        insert,
+        ^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+        statement,
+        params,
+        execution_options=execution_options,
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 951, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 192, in execute
+    self._adapt_connection._handle_exception(error)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 330, in _handle_exception
+    raise error.with_traceback(exc_info[2])
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 190, in execute
+    return self.await_(self._execute_async(operation, parameters))
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 213, in _execute_async
+    result = await self._cursor.execute(operation, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 239, in execute
+    await self._query(query)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 457, in _query
+    await conn.query(q)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 469, in query
+    await self._read_query_result(unbuffered=unbuffered)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 683, in _read_query_result
+    await result.read()
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 1164, in read
+    first_packet = await self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 652, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.IntegrityError: (pymysql.err.IntegrityError) (1062, "Duplicate entry 'oV228' for key 'api_keys.agent_id'")
+[SQL: INSERT INTO api_keys (user_id, agent_id, api_key, expires_at) VALUES (%s, %s, %s, %s)]
+[parameters: (6, 'oV228', 'uhqxn5n7YP8zNBrkhs6y2fc5eHa6ng5p', datetime.datetime(2025, 12, 12, 4, 19, 45, 602017))]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 38, in create_integration
+    new_integration = await self.integration_service.create_integration(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        agent_id, payload
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 169, in create_integration
+    self.handle_sqlalchemy_error("Create integration", e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\domain\service\base.py", line 75, in handle_sqlalchemy_error
+    raise DatabaseException(operation, str(e))
+src.core.exceptions.database_exceptions.DatabaseException: 500: {'error': 'DATABASE_ERROR', 'message': 'Database Create integration failed: (pymysql.err.IntegrityError) (1062, "Duplicate entry \'oV228\' for key \'api_keys.agent_id\'")\n[SQL: INSERT INTO api_keys (user_id, agent_id, api_key, expires_at) VALUES (%s, %s, %s, %s)]\n[parameters: (6, \'oV228\', \'uhqxn5n7YP8zNBrkhs6y2fc5eHa6ng5p\', datetime.datetime(2025, 12, 12, 4, 19, 45, 602017))]\n(Background on this error at: https://sqlalche.me/e/20/gkpj)', 'field': 'database'}
+2025-11-12 11:28:38,962 | INFO | main | Redis event bus stopped
+2025-11-12 11:29:18,148 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-12 11:29:18,151 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-12 11:29:18,153 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-12 11:29:18,153 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-12 11:29:19,858 | INFO | src.config.database | Database tables created successfully
+2025-11-12 11:29:19,880 | INFO | main | Database tables initialized
+2025-11-12 11:29:20,146 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-12 11:29:20,148 | INFO | main | Redis event bus started
+2025-11-12 11:29:31,051 | ERROR | src.domain.service.integration_service | SQLAlchemy error: (pymysql.err.IntegrityError) (1062, "Duplicate entry 'oV228' for key 'api_keys.agent_id'")
+[SQL: INSERT INTO api_keys (user_id, agent_id, api_key, expires_at) VALUES (%s, %s, %s, %s)]
+[parameters: (6, 'oV228', 'Hm1ZwQfDkKx3dgDYPQpN6kIo0Ei8GdI7', datetime.datetime(2025, 12, 12, 4, 29, 17, 321691))]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-11-12 11:29:31,674 | ERROR | src.app.controllers.base | Unexpected error: 500: {'error': 'DATABASE_ERROR', 'message': 'Database Create integration failed: (pymysql.err.IntegrityError) (1062, "Duplicate entry \'oV228\' for key \'api_keys.agent_id\'")\n[SQL: INSERT INTO api_keys (user_id, agent_id, api_key, expires_at) VALUES (%s, %s, %s, %s)]\n[parameters: (6, \'oV228\', \'Hm1ZwQfDkKx3dgDYPQpN6kIo0Ei8GdI7\', datetime.datetime(2025, 12, 12, 4, 29, 17, 321691))]\n(Background on this error at: https://sqlalche.me/e/20/gkpj)', 'field': 'database'}
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 951, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 192, in execute
+    self._adapt_connection._handle_exception(error)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 330, in _handle_exception
+    raise error.with_traceback(exc_info[2])
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 190, in execute
+    return self.await_(self._execute_async(operation, parameters))
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 213, in _execute_async
+    result = await self._cursor.execute(operation, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 239, in execute
+    await self._query(query)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 457, in _query
+    await conn.query(q)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 469, in query
+    await self._read_query_result(unbuffered=unbuffered)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 683, in _read_query_result
+    await result.read()
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 1164, in read
+    first_packet = await self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 652, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.IntegrityError: (1062, "Duplicate entry 'oV228' for key 'api_keys.agent_id'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 127, in create_integration
+    raise get_exception
+  File "D:\Saas_Project\Backend\src\domain\use_cases\agent\integration\api\generate_api_key.py", line 38, in execute
+    new_api_key = await self.api_key_repository.create_api_key(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\repositories\api_key_repository.py", line 29, in create_api_key
+    await self.db.flush()
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\ext\asyncio\session.py", line 801, in flush
+    await greenlet_spawn(self.sync_session.flush, objects=objects)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 203, in greenlet_spawn
+    result = context.switch(value)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4345, in flush
+    self._flush(objects)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4480, in _flush
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4441, in _flush
+    flush_context.execute()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+    ~~~~~~~~~~~^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.mapper,
+        ^^^^^^^^^^^^
+        uow.states_for_mapper_hierarchy(self.mapper, False, False),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        uow,
+        ^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        base_mapper,
+        ^^^^^^^^^^^^
+    ...<3 lines>...
+        insert,
+        ^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+        statement,
+        params,
+        execution_options=execution_options,
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 951, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 192, in execute
+    self._adapt_connection._handle_exception(error)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 330, in _handle_exception
+    raise error.with_traceback(exc_info[2])
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 190, in execute
+    return self.await_(self._execute_async(operation, parameters))
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 213, in _execute_async
+    result = await self._cursor.execute(operation, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 239, in execute
+    await self._query(query)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 457, in _query
+    await conn.query(q)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 469, in query
+    await self._read_query_result(unbuffered=unbuffered)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 683, in _read_query_result
+    await result.read()
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 1164, in read
+    first_packet = await self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 652, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.IntegrityError: (pymysql.err.IntegrityError) (1062, "Duplicate entry 'oV228' for key 'api_keys.agent_id'")
+[SQL: INSERT INTO api_keys (user_id, agent_id, api_key, expires_at) VALUES (%s, %s, %s, %s)]
+[parameters: (6, 'oV228', 'Hm1ZwQfDkKx3dgDYPQpN6kIo0Ei8GdI7', datetime.datetime(2025, 12, 12, 4, 29, 17, 321691))]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 39, in create_integration
+    new_integration = await self.integration_service.create_integration(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        agent_id, payload
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 171, in create_integration
+    self.handle_sqlalchemy_error("Create integration", e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\domain\service\base.py", line 75, in handle_sqlalchemy_error
+    raise DatabaseException(operation, str(e))
+src.core.exceptions.database_exceptions.DatabaseException: 500: {'error': 'DATABASE_ERROR', 'message': 'Database Create integration failed: (pymysql.err.IntegrityError) (1062, "Duplicate entry \'oV228\' for key \'api_keys.agent_id\'")\n[SQL: INSERT INTO api_keys (user_id, agent_id, api_key, expires_at) VALUES (%s, %s, %s, %s)]\n[parameters: (6, \'oV228\', \'Hm1ZwQfDkKx3dgDYPQpN6kIo0Ei8GdI7\', datetime.datetime(2025, 12, 12, 4, 29, 17, 321691))]\n(Background on this error at: https://sqlalche.me/e/20/gkpj)', 'field': 'database'}
+2025-11-12 11:32:10,118 | INFO | main | Redis event bus stopped
+2025-11-12 11:32:41,106 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-12 11:32:41,116 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-12 11:32:41,144 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-12 11:32:41,150 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-12 11:32:41,975 | INFO | src.config.database | Database tables created successfully
+2025-11-12 11:32:41,981 | INFO | main | Database tables initialized
+2025-11-12 11:32:42,117 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-12 11:32:42,120 | INFO | main | Redis event bus started
+2025-11-12 11:32:50,321 | ERROR | src.domain.service.integration_service | SQLAlchemy error: (pymysql.err.IntegrityError) (1062, "Duplicate entry 'oV228' for key 'api_keys.agent_id'")
+[SQL: INSERT INTO api_keys (user_id, agent_id, api_key, expires_at) VALUES (%s, %s, %s, %s)]
+[parameters: (6, 'oV228', 'jnLZQB7lBP0wL6rLY22Hjwz6ynFCB0II', datetime.datetime(2025, 12, 12, 4, 32, 39, 809037))]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-11-12 11:32:50,528 | ERROR | src.app.controllers.base | Unexpected error: 500: {'error': 'DATABASE_ERROR', 'message': 'Database Create integration failed: (pymysql.err.IntegrityError) (1062, "Duplicate entry \'oV228\' for key \'api_keys.agent_id\'")\n[SQL: INSERT INTO api_keys (user_id, agent_id, api_key, expires_at) VALUES (%s, %s, %s, %s)]\n[parameters: (6, \'oV228\', \'jnLZQB7lBP0wL6rLY22Hjwz6ynFCB0II\', datetime.datetime(2025, 12, 12, 4, 32, 39, 809037))]\n(Background on this error at: https://sqlalche.me/e/20/gkpj)', 'field': 'database'}
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 951, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 192, in execute
+    self._adapt_connection._handle_exception(error)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 330, in _handle_exception
+    raise error.with_traceback(exc_info[2])
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 190, in execute
+    return self.await_(self._execute_async(operation, parameters))
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 213, in _execute_async
+    result = await self._cursor.execute(operation, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 239, in execute
+    await self._query(query)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 457, in _query
+    await conn.query(q)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 469, in query
+    await self._read_query_result(unbuffered=unbuffered)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 683, in _read_query_result
+    await result.read()
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 1164, in read
+    first_packet = await self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 652, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.IntegrityError: (1062, "Duplicate entry 'oV228' for key 'api_keys.agent_id'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 127, in create_integration
+    raise get_exception
+  File "D:\Saas_Project\Backend\src\domain\use_cases\agent\integration\api\generate_api_key.py", line 38, in execute
+    new_api_key = await self.api_key_repository.create_api_key(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\repositories\api_key_repository.py", line 29, in create_api_key
+    await self.db.flush()
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\ext\asyncio\session.py", line 801, in flush
+    await greenlet_spawn(self.sync_session.flush, objects=objects)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 203, in greenlet_spawn
+    result = context.switch(value)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4345, in flush
+    self._flush(objects)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4480, in _flush
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4441, in _flush
+    flush_context.execute()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+    ~~~~~~~~~~~^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.mapper,
+        ^^^^^^^^^^^^
+        uow.states_for_mapper_hierarchy(self.mapper, False, False),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        uow,
+        ^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        base_mapper,
+        ^^^^^^^^^^^^
+    ...<3 lines>...
+        insert,
+        ^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+        statement,
+        params,
+        execution_options=execution_options,
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 951, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 192, in execute
+    self._adapt_connection._handle_exception(error)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 330, in _handle_exception
+    raise error.with_traceback(exc_info[2])
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 190, in execute
+    return self.await_(self._execute_async(operation, parameters))
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\sqlalchemy\connectors\asyncio.py", line 213, in _execute_async
+    result = await self._cursor.execute(operation, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 239, in execute
+    await self._query(query)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\cursors.py", line 457, in _query
+    await conn.query(q)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 469, in query
+    await self._read_query_result(unbuffered=unbuffered)
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 683, in _read_query_result
+    await result.read()
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 1164, in read
+    first_packet = await self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\aiomysql\connection.py", line 652, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.IntegrityError: (pymysql.err.IntegrityError) (1062, "Duplicate entry 'oV228' for key 'api_keys.agent_id'")
+[SQL: INSERT INTO api_keys (user_id, agent_id, api_key, expires_at) VALUES (%s, %s, %s, %s)]
+[parameters: (6, 'oV228', 'jnLZQB7lBP0wL6rLY22Hjwz6ynFCB0II', datetime.datetime(2025, 12, 12, 4, 32, 39, 809037))]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\controllers\integration_controller.py", line 39, in create_integration
+    new_integration = await self.integration_service.create_integration(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        agent_id, payload
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Saas_Project\Backend\src\domain\service\integration_service.py", line 171, in create_integration
+    self.handle_sqlalchemy_error("Create integration", e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\domain\service\base.py", line 75, in handle_sqlalchemy_error
+    raise DatabaseException(operation, str(e))
+src.core.exceptions.database_exceptions.DatabaseException: 500: {'error': 'DATABASE_ERROR', 'message': 'Database Create integration failed: (pymysql.err.IntegrityError) (1062, "Duplicate entry \'oV228\' for key \'api_keys.agent_id\'")\n[SQL: INSERT INTO api_keys (user_id, agent_id, api_key, expires_at) VALUES (%s, %s, %s, %s)]\n[parameters: (6, \'oV228\', \'jnLZQB7lBP0wL6rLY22Hjwz6ynFCB0II\', datetime.datetime(2025, 12, 12, 4, 32, 39, 809037))]\n(Background on this error at: https://sqlalche.me/e/20/gkpj)', 'field': 'database'}
+2025-11-12 11:50:17,275 | INFO | main | Redis event bus stopped
+2025-11-12 11:50:46,805 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-12 11:50:46,807 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-12 11:50:46,808 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-12 11:50:46,809 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-12 11:50:47,606 | INFO | src.config.database | Database tables created successfully
+2025-11-12 11:50:47,618 | INFO | main | Database tables initialized
+2025-11-12 11:50:47,706 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-12 11:50:47,708 | INFO | main | Redis event bus started
+2025-11-12 11:51:54,898 | INFO | main | Redis event bus stopped
+2025-11-12 11:52:28,342 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-12 11:52:28,368 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-12 11:52:28,618 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-12 11:52:28,659 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-12 11:52:29,175 | INFO | src.config.database | Database tables created successfully
+2025-11-12 11:52:29,181 | INFO | main | Database tables initialized
+2025-11-12 11:52:29,237 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-12 11:52:29,239 | INFO | main | Redis event bus started
+2025-11-12 11:53:50,522 | INFO | main | Redis event bus stopped
+2025-11-12 16:02:42,078 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-12 16:02:42,100 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-12 16:02:42,103 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-12 16:02:42,106 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-12 16:02:44,623 | INFO | src.config.database | Database tables created successfully
+2025-11-12 16:02:44,639 | INFO | main | Database tables initialized
+2025-11-12 16:02:46,092 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-12 16:02:46,179 | INFO | main | Redis event bus started
+2025-11-12 16:02:59,208 | INFO | src.app.controllers.base | User is authenticated: email pelerii@gmail.com
+2025-11-12 16:04:24,941 | INFO | main | Redis event bus stopped
+2025-11-12 16:04:57,576 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-12 16:04:57,578 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-12 16:04:57,579 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-12 16:04:57,580 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-12 16:04:58,349 | INFO | src.config.database | Database tables created successfully
+2025-11-12 16:04:58,352 | INFO | main | Database tables initialized
+2025-11-12 16:04:58,415 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-12 16:04:58,421 | INFO | main | Redis event bus started
+2025-11-12 16:05:36,818 | INFO | src.infrastructure.telegram.telegram_handler | Delete webhook is successfully: {'ok': True, 'result': True, 'description': 'Webhook was deleted'}
+2025-11-12 16:06:15,305 | INFO | src.infrastructure.redis.redis_storage | Agent oV228 retrieved from Redis
+2025-11-12 16:06:23,453 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: oV228
+2025-11-12 16:06:24,720 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-12 16:07:43,042 | WARNING | src.domain.service.agent_service | Invalid api key: 400: {'error': 'INVALID_API_KEY', 'message': 'Invalid api key, please enter the correct apikey', 'field': 'apikey', 'value': 'TUKk4vjEWmXle0dxyhBASgeiZXpjUTvv'}
+2025-11-12 16:12:43,821 | INFO | main | Redis event bus stopped
+2025-11-12 16:13:19,602 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-12 16:13:19,638 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-12 16:13:19,700 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-12 16:13:19,709 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-12 16:13:20,660 | INFO | src.config.database | Database tables created successfully
+2025-11-12 16:13:20,667 | INFO | main | Database tables initialized
+2025-11-12 16:13:20,742 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-12 16:13:20,744 | INFO | main | Redis event bus started
+2025-11-12 16:14:02,170 | INFO | src.infrastructure.redis.redis_storage | Agent oV228 retrieved from Redis
+2025-11-12 16:14:21,702 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: oV228
+2025-11-12 16:14:25,373 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-12 16:16:53,207 | INFO | main | Redis event bus stopped
+2025-11-12 16:17:37,497 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-12 16:17:37,507 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-12 16:17:37,512 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-12 16:17:37,516 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-12 16:17:38,407 | INFO | src.config.database | Database tables created successfully
+2025-11-12 16:17:39,130 | INFO | main | Database tables initialized
+2025-11-12 16:17:39,302 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-12 16:17:39,333 | INFO | main | Redis event bus started
+2025-11-12 16:17:53,510 | INFO | src.infrastructure.redis.redis_storage | Agent oV228 retrieved from Redis
+2025-11-12 16:18:07,541 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: oV228
+2025-11-12 16:18:10,755 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-12 16:21:25,351 | INFO | main | Redis event bus stopped
+2025-11-13 11:06:44,492 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-13 11:06:44,495 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-13 11:06:44,497 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-13 11:06:44,498 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-13 11:06:45,680 | INFO | src.config.database | Database tables created successfully
+2025-11-13 11:06:45,683 | INFO | main | Database tables initialized
+2025-11-13 11:06:45,835 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-13 11:06:45,939 | INFO | main | Redis event bus started
+2025-11-13 11:07:16,990 | INFO | main | Redis event bus stopped
+2025-11-13 11:08:31,675 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-13 11:08:31,678 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-13 11:08:31,680 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-13 11:08:31,681 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-13 11:08:33,130 | INFO | src.config.database | Database tables created successfully
+2025-11-13 11:08:33,134 | INFO | main | Database tables initialized
+2025-11-13 11:08:33,243 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-13 11:08:33,247 | INFO | main | Redis event bus started
+2025-11-13 11:09:34,377 | INFO | main | Redis event bus stopped
+2025-11-13 11:10:17,182 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-13 11:10:17,192 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-13 11:10:17,195 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-13 11:10:17,212 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-13 11:10:17,960 | INFO | src.config.database | Database tables created successfully
+2025-11-13 11:10:17,989 | INFO | main | Database tables initialized
+2025-11-13 11:10:18,049 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-13 11:10:18,055 | INFO | main | Redis event bus started
+2025-11-13 11:10:23,522 | WARNING | src.app.middlewares.auth_middleware | Access attempt without token
+2025-11-13 11:10:37,241 | INFO | src.app.controllers.base | User is authenticated: email pelerii@gmail.com
+2025-11-13 11:13:45,992 | ERROR | src.domain.service.document_service | Unexpected error: 500: {'error': 'DELETE_DOCUMENT_FAILED', 'message': 'Failed to delete document'}
+2025-11-13 11:13:46,146 | ERROR | src.app.controllers.base | Unexpected error: 500: {'error': 'DELETE_DOCUMENT_FAILED', 'message': 'Failed to delete document'}
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\infrastructure\vector_store\chroma_db.py", line 68, in collection
+    raise ChromaInitializationException("Please initial collection first")
+src.core.exceptions.document_store_exceptions.ChromaInitializationException: 500: {'error': 'CHROMA_INIT_FAILED', 'message': 'Please initial collection first'}
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\infrastructure\vector_store\chroma_db.py", line 237, in delete_document
+    self.collection().delete(where={"doc_id": doc_id})
+    ~~~~~~~~~~~~~~~^^
+  File "D:\Saas_Project\Backend\src\infrastructure\vector_store\chroma_db.py", line 72, in collection
+    raise ChromaInitializationException(
+        "Failed to initialize ChromaDB client or collection"
+    ) from e
+src.core.exceptions.document_store_exceptions.ChromaInitializationException: 500: {'error': 'CHROMA_INIT_FAILED', 'message': 'Failed to initialize ChromaDB client or collection'}
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Saas_Project\Backend\src\app\controllers\document_controller.py", line 54, in delete_document
+    result = await self.document_service.delete_document(document_id)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\domain\service\document_service.py", line 167, in delete_document
+    raise e
+  File "D:\Saas_Project\Backend\src\domain\service\document_service.py", line 150, in delete_document
+    raise exception
+  File "D:\Saas_Project\Backend\src\domain\use_cases\agent\document\delete_document.py", line 40, in execute
+    self.document_store.delete_document(input_data.document_id)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Saas_Project\Backend\src\infrastructure\vector_store\chroma_db.py", line 242, in delete_document
+    raise DeleteDocumentException("Failed to delete document") from e
+src.core.exceptions.document_store_exceptions.DeleteDocumentException: 500: {'error': 'DELETE_DOCUMENT_FAILED', 'message': 'Failed to delete document'}
+2025-11-13 11:25:22,933 | INFO | main | Redis event bus stopped
+2025-11-13 11:25:53,431 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-13 11:25:53,433 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-13 11:25:53,434 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-13 11:25:53,435 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-13 11:25:54,262 | INFO | src.config.database | Database tables created successfully
+2025-11-13 11:25:54,270 | INFO | main | Database tables initialized
+2025-11-13 11:25:54,381 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-13 11:25:54,384 | INFO | main | Redis event bus started
+2025-11-13 11:26:03,238 | WARNING | main | Validation error: [{'type': 'missing', 'loc': ('query', 'agent_id'), 'msg': 'Field required', 'input': None}]
+2025-11-13 11:28:19,441 | INFO | main | Redis event bus stopped
+2025-11-13 11:28:56,111 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-13 11:28:56,115 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-13 11:28:56,116 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-13 11:28:56,117 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-13 11:28:56,577 | INFO | src.config.database | Database tables created successfully
+2025-11-13 11:28:56,581 | INFO | main | Database tables initialized
+2025-11-13 11:28:56,655 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-13 11:28:56,657 | INFO | main | Redis event bus started
+2025-11-13 11:29:37,159 | WARNING | src.domain.service.document_service | 400: {'error': 'DOCUMENT_NOT_FOUND', 'message': 'Document not found, please enter the correct id', 'document_id': '60'}
+2025-11-13 11:36:23,347 | INFO | main | Redis event bus stopped
+2025-11-13 11:37:15,137 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-13 11:37:15,140 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-13 11:37:15,141 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-13 11:37:15,142 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-13 11:37:15,726 | INFO | src.config.database | Database tables created successfully
+2025-11-13 11:37:15,729 | INFO | main | Database tables initialized
+2025-11-13 11:37:15,805 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-13 11:37:15,807 | INFO | main | Redis event bus started
+2025-11-13 11:37:34,153 | WARNING | src.domain.service.document_service | 400: {'error': 'DOCUMENT_NOT_FOUND', 'message': 'Document not found, please enter the correct id', 'document_id': '60'}
+2025-11-13 11:38:24,673 | INFO | src.core.utils.save_file | Created directory: documents/user_6/agent_oV228
+2025-11-13 11:38:24,781 | INFO | src.core.utils.save_file | Saved file: documents/user_6/agent_oV228\Khaerul_lutfi.pdf (type: pdf)
+2025-11-13 11:38:26,287 | INFO | src.infrastructure.vector_store.chroma_db | Successfully loaded document: Khaerul_lutfi.pdf
+2025-11-13 11:39:53,507 | WARNING | src.domain.service.document_service | 400: {'error': 'DOCUMENT_NOT_FOUND', 'message': 'Document not found, please enter the correct id', 'document_id': '60'}
+2025-11-13 11:40:39,654 | INFO | src.core.utils.save_file | Created directory: documents/user_6/agent_oV228
+2025-11-13 11:40:39,667 | INFO | src.core.utils.save_file | Saved file: documents/user_6/agent_oV228\Khaerul_lutfi.pdf (type: pdf)
+2025-11-13 11:40:40,427 | INFO | src.infrastructure.vector_store.chroma_db | Successfully loaded document: Khaerul_lutfi.pdf
+2025-11-13 11:41:33,043 | INFO | src.domain.service.agent_service | [request_id=344c136c-620f-4c92-9f86-72fe6eb5dc1b] [user=pelerii@gmail.com] admin getting all agents paginate
+2025-11-13 11:42:23,053 | INFO | src.domain.service.agent_service | [request_id=124d5f21-902f-4658-be24-b57a56956f42] [user=pelerii@gmail.com] Successfully retrieved agents for user 6
+2025-11-13 11:43:06,102 | INFO | src.infrastructure.redis.redis_storage | Agent oV228 retrieved from Redis
+2025-11-13 11:43:11,466 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: oV228
+2025-11-13 11:43:13,937 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-13 11:45:27,107 | INFO | main | Redis event bus stopped
+2025-11-13 11:46:09,999 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-13 11:46:10,002 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-13 11:46:10,003 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-13 11:46:10,017 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-13 11:46:10,775 | INFO | src.config.database | Database tables created successfully
+2025-11-13 11:46:10,778 | INFO | main | Database tables initialized
+2025-11-13 11:46:10,830 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-13 11:46:10,832 | INFO | main | Redis event bus started
+2025-11-13 11:46:18,207 | INFO | src.infrastructure.redis.redis_storage | Agent oV228 retrieved from Redis
+2025-11-13 11:46:31,028 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: oV228
+2025-11-13 11:46:34,250 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-13 11:50:51,660 | INFO | main | Redis event bus stopped
+2025-11-13 11:52:03,831 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.progress
+2025-11-13 11:52:03,853 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.success
+2025-11-13 11:52:03,866 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.failure
+2025-11-13 11:52:03,878 | INFO | src.domain.events.redis_event | Subscribe event type event.agent.invoke
+2025-11-13 11:52:04,793 | INFO | src.config.database | Database tables created successfully
+2025-11-13 11:52:04,799 | INFO | main | Database tables initialized
+2025-11-13 11:52:05,001 | INFO | src.domain.events.redis_event | Subscribe to channel: ['event.agent.progress.user:*', 'event.agent.success.user:*', 'event.agent.failure.user:*', 'event.agent.invoke.user:*']
+2025-11-13 11:52:05,005 | INFO | main | Redis event bus started
+2025-11-13 11:52:20,698 | INFO | src.infrastructure.redis.redis_storage | Agent oV228 retrieved from Redis
+2025-11-13 11:52:37,455 | INFO | src.infrastructure.data.agent_obj_manager | Store agent in memory is successfully: oV228
+2025-11-13 11:52:39,949 | INFO | src.infrastructure.ai.agents.base_workflow | Initialized LLM provider: openai (gpt-3.5-turbo)
+2025-11-13 11:56:08,252 | INFO | main | Redis event bus stopped

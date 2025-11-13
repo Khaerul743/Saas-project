@@ -13,3 +13,17 @@ class IIntergrationRepository(ABC):
         status: Literal["active", "non-active"],
     ) -> Integration:
         pass
+
+    @abstractmethod
+    async def get_by_agent_and_platform(
+        self, agent_id: str, platform: Literal["whatsapp", "telegram", "api"]
+    ) -> Integration | None:
+        pass
+
+    @abstractmethod
+    async def delete_by_id(self, integration_id: int) -> bool:
+        pass
+
+    @abstractmethod
+    async def get_all_by_agent_id(self, agent_id: str) -> list[Integration]:
+        pass

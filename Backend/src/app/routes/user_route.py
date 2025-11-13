@@ -109,3 +109,4 @@ async def deleteUser(
         f"User {deleted_user.email} deleted successfully",
         {"email": deleted_user.email, "id": deleted_user.id},
     )
+

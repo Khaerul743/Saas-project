@@ -72,8 +72,8 @@ class InvokeAgent(BaseUseCase[InvokeAgentInput, InvokeAgentOutput]):
             user_agent_data = await self.user_agent_repository.get_user_agent_by_id(
                 user_agent_id
             )
+            print(f"USER_AGENT_DATA: {user_agent_data}")
             if not user_agent_data:
-                print("USER AGENT KAGA ADA")
                 # Create user agent
                 new_user_agent = await self.create_user_agent.execute(
                     CreateUserAgentInput(

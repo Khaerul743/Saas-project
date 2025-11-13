@@ -16,6 +16,7 @@ from src.app.routes import (
     agent_route,
     auth_route,
     dashboard_route,
+    document_route,
     history_route,
     integration_route,
     simple_rag_route,
@@ -85,11 +86,11 @@ app.include_router(history_route.router)
 app.include_router(dashboard_route.router)
 app.include_router(integration_route.router)
 app.include_router(webhook_route.router)
+app.include_router(document_route.router)
 # app.include_router(
 #     customer_service_route.router
 # )  # Customer Service Agent specific routes
 # app.include_router(company_information_route.router)  # Company Information routes
-# app.include_router(document_route.router)
 # app.include_router(task_route.router)
 
 # WebSocket routes

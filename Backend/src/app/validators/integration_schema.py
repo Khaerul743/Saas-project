@@ -13,3 +13,32 @@ class CreateIntegrationSchema(BaseModel):
 
 class CreateIntegrationResponse(BaseSchemaOut):
     data: CreateIntegrationSchema
+
+
+class DeleteIntegrationSchema(BaseModel):
+    platform: Literal["api", "telegram", "whatsapp"]
+
+
+class DeleteIntegrationResult(BaseModel):
+    success: bool
+
+
+class DeleteIntegrationResponse(BaseSchemaOut):
+    data: DeleteIntegrationResult
+
+
+class IntegrationItemSchema(BaseModel):
+    id: int
+    agent_id: str
+    platform: Literal["api", "telegram", "whatsapp"]
+    status: Literal["active", "non-active"]
+    api_key: Optional[str] = None
+    created_at: str
+
+
+class GetAllIntegrationData(BaseModel):
+    integrations: list[IntegrationItemSchema]
+
+
+class GetAllIntegrationResponse(BaseSchemaOut):
+    data: GetAllIntegrationData

@@ -20,6 +20,7 @@ from src.domain.use_cases.agent import (
 )
 from src.infrastructure.data import AgentManager, agent_manager
 from src.infrastructure.redis.redis_storage import RedisStorage
+from src.infrastructure.vector_store.chroma_db import RAGSystem
 
 
 class SimpleRagAgentService(BaseService):
@@ -28,6 +29,7 @@ class SimpleRagAgentService(BaseService):
         self.db = db
         self.storage_agent_obj = RedisStorage()
         self.chroma_db_path = "chroma_db"
+        self.vector_store = RAGSystem("chroma_db")
         self.document_repository = DocumentRepository(db)
         self.agent_repository = AgentRepository(db)
         self.agent_manager = agent_manager
@@ -35,7 +37,7 @@ class SimpleRagAgentService(BaseService):
         self.uploaded_document_handler = UploadedDocumentHandler(
             self.document_repository, self.save_file
         )
-        self.add_document_to_agent = AddDocumentToAgent(self.chroma_db_path)
+        self.add_document_to_agent = AddDocumentToAgent(self.vector_store)
         self.create_agent_entity = CreateAgentEntity(self.agent_repository)
         self.store_agent_obj = StoreAgentObj(self.storage_agent_obj)
 
